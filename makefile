@@ -1,11 +1,16 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=gnu99
 TARGET = autobus_symulacja
+SRCS = main.c ipc_utils.c 
+OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)
 
-$(TARGET): main.c
-	$(CC) $(CFLAGS) -o $(TARGET) main.c
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) *.o
