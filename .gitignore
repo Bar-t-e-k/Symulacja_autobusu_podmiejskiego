@@ -53,3 +53,7 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# temporary files
+.vscode/
+*.swp
