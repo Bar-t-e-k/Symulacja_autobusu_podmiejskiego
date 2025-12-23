@@ -42,10 +42,10 @@ void usun_pamiec(int shmid) {
 
 // --- SEMAFORY ---
 
-int stworz_semafor() {
+int stworz_semafor(int n_sems) {
     key_t key = ftok(SHM_KEY_PATH, SEM_KEY_ID);
-    // Tworzymy 1 semafor w zestawie
-    int semid = semget(key, 1, 0666 | IPC_CREAT);
+    // Tworzenie n_sems semaforów
+    int semid = semget(key, n_sems, 0666 | IPC_CREAT);
     if (semid == -1) {
         perror("Błąd tworzenia semafora");
         exit(1);
@@ -53,17 +53,16 @@ int stworz_semafor() {
     return semid;
 }
 
-void ustaw_semafor(int semid, int wartosc) {
-    // union semun - uproszczona wersja bez definiowania unii
-    if (semctl(semid, 0, SETVAL, wartosc) == -1) {
+void ustaw_semafor(int semid, int sem_num, int wartosc) {
+    if (semctl(semid, sem_num, SETVAL, wartosc) == -1) {
         perror("Błąd ustawiania semafora");
         exit(1);
     }
 }
 
-void zablokuj_semafor(int semid) {
+void zablokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
-    operacja.sem_num = 0;
+    operacja.sem_num = sem_num;
     operacja.sem_op = -1; // Zmniejsz o 1 (Czekaj)
     operacja.sem_flg = 0;
     
@@ -73,9 +72,9 @@ void zablokuj_semafor(int semid) {
     }
 }
 
-void odblokuj_semafor(int semid) {
+void odblokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
-    operacja.sem_num = 0;
+    operacja.sem_num = sem_num;
     operacja.sem_op = 1; // Zwieksz o 1 (Sygnalizuj)
     operacja.sem_flg = 0;
     
