@@ -6,7 +6,7 @@
 #include <errno.h>
 #include "ipc_utils.h"
 
-// --- PAMIEC DZIELONA ---
+// PAMIĘĆ DZIELONA
 
 int stworz_pamiec(int size) {
     key_t key = ftok(SHM_KEY_PATH, SHM_KEY_ID);
@@ -40,7 +40,7 @@ void usun_pamiec(int shmid) {
     }
 }
 
-// --- SEMAFORY ---
+// SEMAFORY
 
 int stworz_semafor(int n_sems) {
     key_t key = ftok(SHM_KEY_PATH, SEM_KEY_ID);
@@ -63,7 +63,7 @@ void ustaw_semafor(int semid, int sem_num, int wartosc) {
 void zablokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
-    operacja.sem_op = -1; // Zmniejsz o 1 (Czekaj)
+    operacja.sem_op = -1;
     operacja.sem_flg = 0;
     
     if (semop(semid, &operacja, 1) == -1) {
@@ -75,7 +75,7 @@ void zablokuj_semafor(int semid, int sem_num) {
 void odblokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
-    operacja.sem_op = 1; // Zwieksz o 1 (Sygnalizuj)
+    operacja.sem_op = 1;
     operacja.sem_flg = 0;
     
     if (semop(semid, &operacja, 1) == -1) {

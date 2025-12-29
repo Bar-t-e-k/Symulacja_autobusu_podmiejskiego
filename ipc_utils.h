@@ -10,10 +10,10 @@ void odlacz_pamiec(SharedData* data);
 void usun_pamiec(int shmid);
 
 // Funkcje Semaforów
-int stworz_semafor(int sem_num);
+int stworz_semafor(int n_sems);
 void ustaw_semafor(int semid, int sem_num, int wartosc);
-void zablokuj_semafor(int semid, int sem_num);   // Czekaj (P)
-void odblokuj_semafor(int semid, int sem_num);   // Zwolnij (V)
+void zablokuj_semafor(int semid, int sem_num);
+void odblokuj_semafor(int semid, int sem_num); 
 void usun_semafor(int semid);
 
 #endif
