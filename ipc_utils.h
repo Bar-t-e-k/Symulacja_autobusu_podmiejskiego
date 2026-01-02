@@ -16,4 +16,11 @@ void zablokuj_semafor(int semid, int sem_num);
 void odblokuj_semafor(int semid, int sem_num); 
 void usun_semafor(int semid);
 
+// Funkcje Kolejki Komunikatów
+int stworz_kolejke();
+void wyslij_komunikat(int msgid, void* msg, int rozmiar);
+void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ);
+void usun_kolejke(int msgid);
+
+
 #endif

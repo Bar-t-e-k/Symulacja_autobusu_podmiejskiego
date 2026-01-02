@@ -15,6 +15,7 @@
 #define SHM_KEY_PATH "."
 #define SHM_KEY_ID 'A'
 #define SEM_KEY_ID 'B'
+#define MSG_KEY_ID 'C'
 
 // SEMAFORY
 #define SEM_MUTEX 0   // Chroni dostęp do pamięci dzielonej
@@ -45,5 +46,14 @@ typedef struct {
     // Ile osób obsłużono łącznie
     int calkowita_liczba_pasazerow;
 } SharedData;
+
+// Kolejka komunikatów
+typedef struct {
+    long mtype;
+    int pid_nadawcy;
+    int typ_pasazera;
+} BiletMsg;
+
+#define KANAL_ZAPYTAN 1 // Kanał dla pasażerów pytających o bilet
 
 #endif

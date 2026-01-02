@@ -89,3 +89,20 @@ void usun_semafor(int semid) {
         perror("Błąd usuwania semafora");
     }
 }
+
+// KOLEJKA KOMUNIKATÓW
+int stworz_kolejke() {
+    key_t key = ftok(SHM_KEY_PATH, MSG_KEY_ID);
+    int msgid = msgget(key, 0666 | IPC_CREAT);
+    if (msgid == -1) {
+        perror("Błąd tworzenia kolejki komunikatów");
+        exit(1);
+    }
+    return msgid;
+}
+
+void usun_kolejke(int msgid) {
+    if (msgctl(msgid, IPC_RMID, NULL) == -1) {
+        perror("Błąd usuwania kolejki komunikatów");
+    }
+}
