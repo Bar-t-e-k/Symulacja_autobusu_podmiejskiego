@@ -3,6 +3,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
+#include <sys/msg.h>
 #include <errno.h>
 #include "ipc_utils.h"
 
@@ -99,6 +100,20 @@ int stworz_kolejke() {
         exit(1);
     }
     return msgid;
+}
+
+void wyslij_komunikat(int msgid, void* msg, int rozmiar) {
+    if (msgsnd(msgid, msg, rozmiar, 0) == -1) {
+        perror("msgsnd"); 
+        exit(1);
+    }
+}
+
+void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
+    if (msgrcv(msgid, msg, rozmiar, typ, 0) == -1) {
+        perror("msgrcv"); 
+        exit(1);
+    }
 }
 
 void usun_kolejke(int msgid) {

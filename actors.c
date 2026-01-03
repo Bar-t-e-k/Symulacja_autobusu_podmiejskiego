@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <sys/msg.h>
 #include "common.h"
 #include "ipc_utils.h"
 
@@ -10,7 +11,28 @@
 #define C_PAS   "\033[1;32m" // Zielony
 #define C_VIP   "\033[1;35m" // Magenta
 #define C_ROW   "\033[1;36m" // Cyjan
+#define C_KASA  "\033[1;31m" // Czerwony
 #define C_RST   "\033[0m"
+
+void kasjer_run(int msgid) {
+    BiletMsg msg;
+    int rozmiar_danych = sizeof(BiletMsg) - sizeof(long);
+
+    printf(C_KASA "[KASA] Otwieram okienko (PID: %d)...\n" C_RST, getpid());
+
+    while(1) {
+        // Odebranie zapytania o bilet
+        odbierz_komunikat(msgid, &msg, rozmiar_danych, KANAL_ZAPYTAN);
+
+        // wyświetlenie informacji o obsługiwanym pasażerze
+        // printf(C_KASA "[KASA] Obsługuję pasażera PID %d...\n" C_RST, msg.pid_nadawcy);
+        
+        // odesłanie biletu
+        msg.mtype = msg.pid_nadawcy; 
+        
+        wyslij_komunikat(msgid, &msg, rozmiar_danych);
+    }
+}
 
 void pasazer_run(int id, int shmid, int semid, int typ) {
     SharedData* data = dolacz_pamiec(shmid);
