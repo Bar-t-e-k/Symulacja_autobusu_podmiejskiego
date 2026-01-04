@@ -34,7 +34,7 @@ void kasjer_run(int msgid) {
     }
 }
 
-void pasazer_run(int id, int shmid, int semid, int typ) {
+void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
     SharedData* data = dolacz_pamiec(shmid);
     srand(time(NULL) ^ (getpid()<<16)); // Unikalne ziarno losowości
 
@@ -52,6 +52,25 @@ void pasazer_run(int id, int shmid, int semid, int typ) {
         kolor = C_ROW; 
         nazwa = "Rower"; 
         moje_drzwi = SEM_DRZWI_ROW;
+    }
+
+    if (typ != TYP_VIP) {
+        printf("%s[Pasażer %d (%s)] Idę do kasy (PID: %d).\n" C_RST, kolor, id, nazwa, getpid());
+        
+        BiletMsg bilet;
+        bilet.mtype = KANAL_ZAPYTAN;
+        bilet.pid_nadawcy = getpid();
+        bilet.typ_pasazera = typ;
+        
+        int rozmiar = sizeof(BiletMsg) - sizeof(long);
+
+        wyslij_komunikat(msgid, &bilet, rozmiar);
+
+        odbierz_komunikat(msgid, &bilet, rozmiar, getpid());
+        
+        // printf("%s[Pasażer %d] Kupiłem bilet! Idę na peron.\n" C_RST, kolor, id);
+    } else {
+        printf("%s[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy.\n" C_RST, kolor, id);
     }
     
     printf("%s[Pasażer %d (%s)] Przychodzę na przystanek.\n" C_RST, kolor, id, nazwa);
