@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <sys/msg.h>
+#include <signal.h>
 #include "common.h"
 #include "ipc_utils.h"
 
@@ -13,6 +14,14 @@
 #define C_ROW   "\033[1;36m" // Cyjan
 #define C_KASA  "\033[1;31m" // Czerwony
 #define C_RST   "\033[0m"
+
+volatile sig_atomic_t wymuszony_odjazd = 0;
+
+// Obsługa sygnału 1 - wymuszony odjazd
+void sygnal_odjazd(int sig) {
+    (void)sig;
+    wymuszony_odjazd = 1;
+}
 
 void kasjer_run(int msgid) {
     BiletMsg msg;
@@ -54,6 +63,15 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
         moje_drzwi = SEM_DRZWI_ROW;
     }
 
+    zablokuj_semafor(semid, SEM_MUTEX);
+    if (data->dworzec_otwarty == 0) {
+        printf("%s[Pasażer %d] Dworzec zamknięty! Nie wchodzę.\n" C_RST, kolor, id);
+        odblokuj_semafor(semid, SEM_MUTEX);
+        odlacz_pamiec(data);
+        exit(0);
+    }
+    odblokuj_semafor(semid, SEM_MUTEX);
+
     if (typ != TYP_VIP) {
         printf("%s[Pasażer %d (%s)] Idę do kasy (PID: %d).\n" C_RST, kolor, id, nazwa, getpid());
         
@@ -88,6 +106,15 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
         zablokuj_semafor(semid, moje_drzwi); // zajęcie drzwi przez odpowiedniego pasażera
 
         zablokuj_semafor(semid, SEM_MUTEX);
+
+        if (data->dworzec_otwarty == 0) {
+            printf("%s[Pasażer %d] Dworzec zamknięty! Wychodzę.\n" C_RST, kolor, id);
+            if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
+            
+            odblokuj_semafor(semid, SEM_MUTEX);
+            odblokuj_semafor(semid, moje_drzwi);
+            break;
+        }
 
         if (data->autobus_obecny == 1) {
             int mozna_wejsc = 0;
@@ -140,24 +167,34 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
 }
 
 void autobus_run(int id, int shmid, int semid) {
+    signal(SIGUSR1, sygnal_odjazd);
+
     SharedData* data = dolacz_pamiec(shmid);
     int nr_kursu = 1;
 
     // Pętla pracy autobusu
     while (1) {
-
         zablokuj_semafor(semid, SEM_MUTEX);
-        if (data->pasazerowie_obsluzeni >= data->limit_pasazerow) {
+        if (data->pasazerowie_obsluzeni >= data->limit_pasazerow || data->dworzec_otwarty == 0) {
             odblokuj_semafor(semid, SEM_MUTEX);
             break;
         }
         odblokuj_semafor(semid, SEM_MUTEX);
 
         // 1. Sprawdzenie czy można podjechać
+        int czy_zamknac = 0;
         while (1) {
             zablokuj_semafor(semid, SEM_MUTEX);
+
+            if (data->dworzec_otwarty == 0) {
+                odblokuj_semafor(semid, SEM_MUTEX);
+                czy_zamknac = 1; 
+                break;
+            }
+
             if (data->autobus_obecny == 0) {
                 data->autobus_obecny = 1;
+                data->pid_obecnego_autobusu = getpid();
                 data->liczba_pasazerow = 0;
                 data->liczba_rowerow = 0;
                 odblokuj_semafor(semid, SEM_MUTEX);
@@ -167,14 +204,28 @@ void autobus_run(int id, int shmid, int semid) {
             usleep(500000); // Czekaj 0.5s i sprawdź znowu
         }
 
+        if (czy_zamknac) {
+            break;
+        }
+
         // 2. Otwieranie drzwi i czekanie
         printf(C_BUS "[Autobus %d] Podjeżdża na peron (Kurs %d).\n" C_RST, id, nr_kursu);
         printf(C_BUS "[Autobus %d] Otwiera drzwi na %d s...\n" C_RST, id, T_ODJAZD);
-        sleep(T_ODJAZD);
+        
+        int czas_pozostaly = sleep(T_ODJAZD);
+        if (wymuszony_odjazd) {
+            if (data->dworzec_otwarty == 0) {
+                printf(C_BUS "\n[Autobus %d] Dworzec zamknięty! Odjazd z pasażerami w środku (Zaoszczędzono %d sekund)\n" C_RST, id, czas_pozostaly);
+            } else {
+                printf(C_BUS "\n[Autobus %d] Wymuszony odjazd przez dyspozytora! (Sygnał 1)\n" C_RST, id);
+            }
+            wymuszony_odjazd = 0; // reset flagi
+        }
 
         // 3. Odjazd
         zablokuj_semafor(semid, SEM_MUTEX);
         data->autobus_obecny = 0; // Zamyka drzwi
+        data->pid_obecnego_autobusu = 0;
         int zabranych = data->liczba_pasazerow;
         int rowery = data->liczba_rowerow;
         odblokuj_semafor(semid, SEM_MUTEX);

@@ -7,9 +7,9 @@
 #define P 10          // Pojemność autobusu
 #define R 4           // Miejsca na rowery
 #define N 3           // Liczba autobusów
-#define T_ODJAZD 5    // Czas oczekiwania
-#define CZAS_PRZEJAZDU 30 // Czas przejazdu
-#define LICZBA_PASAZEROW 40 // Łączna liczba pasażerów do obsłużenia
+#define T_ODJAZD 5   // Czas oczekiwania
+#define CZAS_PRZEJAZDU 10 // Czas przejazdu
+#define LICZBA_PASAZEROW 20 // Łączna liczba pasażerów do obsłużenia
 
 // Klucze do IPC
 #define SHM_KEY_PATH "."
@@ -33,15 +33,16 @@
 typedef struct {
     int liczba_pasazerow;   // Ile osób jest w środku
     int liczba_rowerow;     // Ile rowerów jest w środku
-    int autobus_obecny;     // 1 = jest autobus, 0 = nie ma
-    int odjazd_wymuszony;   // Flaga od dyspozytora
+    int autobus_obecny;     // 1 = jest autobus, 0 = nie ma autobusu
     
     int liczba_vip_oczekujacych;
 
     int limit_pasazerow;
     int pasazerowie_obsluzeni;
     int aktywne_autobusy;
-    int koniec_symulacji;   // Flaga: 1 = koniec kursów
+    
+    pid_t pid_obecnego_autobusu;
+    int dworzec_otwarty;   // Flaga: 1 = Otwarte, 0 = Zamknięte
 
     // Ile osób obsłużono łącznie
     int calkowita_liczba_pasazerow;
