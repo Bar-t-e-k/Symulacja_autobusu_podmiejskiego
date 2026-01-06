@@ -18,14 +18,14 @@ void obsluga_koniec(int sig) {
 
     printf("\n\n[SYSTEM] Otrzymano sygnał kończący (%d). Rozpoczynam procedurę stop.\n", sig);
 
+    if (g_shmid != -1) usun_pamiec(g_shmid);
+    if (g_semid != -1) usun_semafor(g_semid);
+    if (g_msgid != -1) usun_kolejke(g_msgid);
+
     // Zabijanie podprocesy
     kill(0, SIGTERM);
 
     while(wait(NULL) > 0);
-
-    if (g_shmid != -1) usun_pamiec(g_shmid);
-    if (g_semid != -1) usun_semafor(g_semid);
-    if (g_msgid != -1) usun_kolejke(g_msgid);
 
     printf("[SYSTEM] Zasoby zwolnione. Koniec.\n");
     exit(0);
