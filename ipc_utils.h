@@ -21,6 +21,7 @@ int stworz_kolejke();
 void wyslij_komunikat(int msgid, void* msg, int rozmiar);
 void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ);
 void usun_kolejke(int msgid);
+int odbierz_komunikat_bez_blokowania(int msgid, void* msg, int rozmiar, long typ); // NIEBLOKUJĄCE DLA KIEROWCY
 
 
 #endif

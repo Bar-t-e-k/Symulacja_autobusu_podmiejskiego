@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <signal.h>
+#include <string.h>
 #include "common.h"
 #include "ipc_utils.h"
 #include "actors.h"
@@ -24,11 +25,20 @@ int main() {
     g_semid = stworz_semafor(LICZBA_SEMAFOROW);
     g_msgid = stworz_kolejke();
 
+    if (g_shmid == -1 || g_semid == -1 || g_msgid == -1) {
+        fprintf(stderr, "[BŁAD] Nie udało sie utworzyć zasobów IPC!\n");
+        exit(1);
+    }
+
     // 2. Inicjalizacja
     SharedData* data = dolacz_pamiec(g_shmid);
+    if (data == NULL) {
+        perror("[BŁAD] Dołączanie pamięci");
+        obsluga_koniec(0);
+    }
+
     data->liczba_pasazerow = 0;
     data->liczba_rowerow = 0;
-    data->liczba_vip_oczekujacych = 0;
     data->autobus_obecny = 0;
     data->calkowita_liczba_pasazerow = 0;
     data->pasazerowie_obsluzeni = 0;
@@ -43,31 +53,41 @@ int main() {
     ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1);  // Drzwi rowerów
 
     // 3. Kasjer
-    if (fork() == 0) {
+    pid_t pid_kasjer = fork();
+    if (pid_kasjer == 0) {
         signal(SIGINT, SIG_IGN); 
         signal(SIGTERM, SIG_DFL);
         signal(SIGUSR1, SIG_IGN); 
         signal(SIGUSR2, SIG_IGN);
 
         kasjer_run(g_msgid);
+        exit(0);
+    } else if (pid_kasjer < 0) {
+        perror("[BŁAD] Fork Kasjer");
     }
 
     // 4. Autobusy
     for (int b = 1; b <= N; b++) {
-        if (fork() == 0) {
+        pid_t pid_autobus = fork();
+        if (pid_autobus == 0) {
             signal(SIGINT, SIG_IGN); 
             signal(SIGTERM, SIG_DFL);
             signal(SIGUSR2, SIG_IGN);
 
             autobus_run(b, g_shmid, g_semid);
+            exit(0);
+        } else if (pid_autobus < 0) {
+            perror("[BŁAD] Fork Autobus");
         }
     }
 
     // 5. Pasażerowie
-    if (fork() == 0) {
+    pid_t pid_pasazerowie = fork();
+    if (pid_pasazerowie == 0) {
         signal(SIGINT, SIG_IGN); 
         signal(SIGTERM, SIG_DFL);
         srand(time(NULL));
+        int id_gen = 1;
 
         for (int i = 0; i < LICZBA_PASAZEROW; i++) {
             SharedData* d = dolacz_pamiec(g_shmid);
@@ -78,21 +98,44 @@ int main() {
             odlacz_pamiec(d);
 
             int los = rand() % 100;
-            int typ = TYP_ZWYKLY;       
+                 
+            if (los < 20) {
+                pid_t pid_dziecka = fork();
+                if (pid_dziecka == 0) {
+                    signal(SIGINT, SIG_IGN);
+                    pasazer_run(id_gen++, g_shmid, g_semid, g_msgid, TYP_DZIECKO, pid_dziecka);
+                    exit(0);
+                }
 
-            if (los < 20) typ = TYP_VIP;         // 20% VIP
-            else if (los < 50) typ = TYP_ROWER;  // 30% Rower
-                
-            if (fork() == 0) {
-                pasazer_run(i + 1, g_shmid, g_semid, g_msgid, typ);
+                if (fork() == 0) {
+                    signal(SIGINT, SIG_IGN);
+                    pasazer_run(id_gen++, g_shmid, g_semid, g_msgid, TYP_OPIEKUN, pid_dziecka);
+                    exit(0);
+                }
+                id_gen += 2;
+                i++; // Dwa miejsca zajęte
+            } else {
+                if (fork() == 0) {
+                    signal(SIGINT, SIG_IGN);
+                    int typ = TYP_ZWYKLY;
+                    if (los < 50) typ = TYP_ROWER;  // 45% Rower
+                    else if (los > 90) typ = TYP_VIP; // 1% VIP
+
+                    pasazer_run(id_gen++, g_shmid, g_semid, g_msgid, typ, 0);
+                    exit(0);
+                }
+                id_gen++;
             }
-            usleep(200000); // Nowy pasażer co 0.2s
+            usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
         }
         exit(0);
+    } else if (pid_pasazerowie < 0) {
+        perror("[BŁAD] Fork Pasażerowie");
     }
 
     // 6. Dyspozytor
-    if (fork() == 0) {
+    pid_t pid_dyspozytor = fork();
+    if (pid_dyspozytor == 0) {
         signal(SIGINT, SIG_IGN); 
         signal(SIGTERM, SIG_DFL);
         signal(SIGUSR1, SIG_IGN); 
@@ -100,28 +143,48 @@ int main() {
 
         signal(SIGTTIN, SIG_IGN);
 
-        char bufor[10];
+        char bufor[32];
 
         while(1) {
-            if (fgets(bufor, sizeof(bufor), stdin)) {
-                if (bufor[0] == '1') {
-                    kill(getppid(), SIGUSR1);
-                }
-                else if (bufor[0] == '2') {
-                    kill(getppid(), SIGUSR2);
-                }
-                else if (bufor[0] == 'q') {
-                    kill(getppid(), SIGTERM);
-                    exit(0);
-                }
+            if (fgets(bufor, sizeof(bufor), stdin) == NULL) {
+                break;
+            }
+
+            size_t len = strlen(bufor);
+            if (len > 0 && bufor[len - 1] == '\n') {
+                bufor[len - 1] = '\0';
+                len--;
+            }
+
+            if (len == 0) {
+                continue;
+            }
+
+            if (strcmp(bufor, "1") == 0) {
+                kill(getppid(), SIGUSR1);
+            } else if (strcmp(bufor, "2") == 0) {
+                kill(getppid(), SIGUSR2);
+            } else {
+                perror("[DYSPOZYTOR] Nieznana komenda");
             }
         }
         exit(0);
+    } else if (pid_dyspozytor < 0) {
+        perror("[BŁAD] Fork Dyspozytor");
     }
 
-    // Oczekiwanie na zakończenie wszystkich autobusów
+    // Oczekiwanie na zakończenie wszystkich autobusów i pasażerów
     while(1) {
         data = dolacz_pamiec(g_shmid);
+        if (data == NULL) break;
+
+        if (data->calkowita_liczba_pasazerow >= LICZBA_PASAZEROW && data->liczba_oczekujacych == 0) {
+            if (data->dworzec_otwarty == 1) {
+                printf("\n[MAIN] Wszyscy pasażerowie obsłużeni (%d). Zamykam dworzec!\n", data->calkowita_liczba_pasazerow);
+                data->dworzec_otwarty = 0;
+            }
+        }
+
         if (data->aktywne_autobusy == 0) {
             odlacz_pamiec(data);
             printf("\n[MAIN] Wszystkie autobusy zjechały.\n");
@@ -133,9 +196,11 @@ int main() {
 
     // 7. Raport końcowy
     data = dolacz_pamiec(g_shmid);
-    printf("\n--- RAPORT KOŃCOWY ---\n");
-    printf("Łącznie obsłużono pasażerów: %d\n", data->calkowita_liczba_pasazerow);
-    odlacz_pamiec(data);
+    if (data != NULL) {
+        printf("\n--- RAPORT KOŃCOWY ---\n");
+        printf("Łącznie obsłużono pasażerów: %d\n", data->calkowita_liczba_pasazerow);
+        odlacz_pamiec(data);
+    }
 
     // 8. Sprzątanie
     obsluga_koniec(0);

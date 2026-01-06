@@ -23,6 +23,7 @@ int stworz_pamiec(int size) {
 SharedData* dolacz_pamiec(int shmid) {
     SharedData* data = (SharedData*)shmat(shmid, NULL, 0);
     if (data == (void*)-1) {
+        if (errno == EINVAL || errno == EIDRM) exit(0); // Pamięć już została usunięta
         perror("Błąd dolaczania pamieci");
         exit(1);
     }
@@ -31,12 +32,14 @@ SharedData* dolacz_pamiec(int shmid) {
 
 void odlacz_pamiec(SharedData* data) {
     if (shmdt(data) == -1) {
+        if (errno == EINVAL) return; // Już odłączona
         perror("Błąd odlacznia pamieci");
     }
 }
 
 void usun_pamiec(int shmid) {
     if (shmctl(shmid, IPC_RMID, NULL) == -1) {
+        if (errno == EINVAL) return; // Już usunięta
         perror("Błąd usuwania pamieci");
     }
 }
@@ -68,6 +71,9 @@ void zablokuj_semafor(int semid, int sem_num) {
     operacja.sem_flg = 0;
     
     if (semop(semid, &operacja, 1) == -1) {
+        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+            exit(0); // Ciche wyjście
+        }
         perror("Błąd blokowania semafora (P)");
         exit(1);
     }
@@ -80,6 +86,9 @@ void odblokuj_semafor(int semid, int sem_num) {
     operacja.sem_flg = 0;
     
     if (semop(semid, &operacja, 1) == -1) {
+        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+            exit(0); // Ciche wyjście
+        }
         perror("Błąd odblokowania semafora (V)");
         exit(1);
     }
@@ -104,6 +113,9 @@ int stworz_kolejke() {
 
 void wyslij_komunikat(int msgid, void* msg, int rozmiar) {
     if (msgsnd(msgid, msg, rozmiar, 0) == -1) {
+        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+            exit(0); 
+        }
         perror("msgsnd"); 
         exit(1);
     }
@@ -111,6 +123,9 @@ void wyslij_komunikat(int msgid, void* msg, int rozmiar) {
 
 void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
     if (msgrcv(msgid, msg, rozmiar, typ, 0) == -1) {
+        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+            exit(0); 
+        }
         perror("msgrcv"); 
         exit(1);
     }
@@ -118,6 +133,19 @@ void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
 
 void usun_kolejke(int msgid) {
     if (msgctl(msgid, IPC_RMID, NULL) == -1) {
+        if (errno == EINVAL) return; // Już usunięta
         perror("Błąd usuwania kolejki komunikatów");
     }
+}
+
+int odbierz_komunikat_bez_blokowania(int msgid, void* msg, int rozmiar, long typ) {
+    if (msgrcv(msgid, msg, rozmiar, typ, IPC_NOWAIT) == -1) {
+        if (errno == ENOMSG) {
+            return 0;
+        }
+        if (errno == EIDRM || errno == EINVAL || errno == EINTR) exit(0);
+        perror("msgrcv non-blocking");
+        exit(1);
+    }
+    return 1;
 }
