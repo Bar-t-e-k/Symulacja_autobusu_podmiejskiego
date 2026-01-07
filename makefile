@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=gnu99
 TARGET = autobus_symulacja
-SRCS = main.c ipc_utils.c actors.c signals.c
+SRCS = main.c ipc_utils.c actors.c signals.c logs.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)

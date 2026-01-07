@@ -6,6 +6,7 @@
 #include <sys/msg.h>
 #include <errno.h>
 #include "ipc_utils.h"
+#include "logs.h"
 
 // PAMIĘĆ DZIELONA
 
@@ -14,7 +15,7 @@ int stworz_pamiec(int size) {
     // 0666 = odczyt/zapis dla wszystkich
     int shmid = shmget(key, size, 0666 | IPC_CREAT);
     if (shmid == -1) {
-        perror("Błąd tworzenia pamieci dzielonej");
+        loguj_blad("Błąd tworzenia pamieci dzielonej");
         exit(1);
     }
     return shmid;
@@ -24,7 +25,7 @@ SharedData* dolacz_pamiec(int shmid) {
     SharedData* data = (SharedData*)shmat(shmid, NULL, 0);
     if (data == (void*)-1) {
         if (errno == EINVAL || errno == EIDRM) exit(0); // Pamięć już została usunięta
-        perror("Błąd dolaczania pamieci");
+        loguj_blad("Błąd dolaczania pamieci");
         exit(1);
     }
     return data;
@@ -33,14 +34,14 @@ SharedData* dolacz_pamiec(int shmid) {
 void odlacz_pamiec(SharedData* data) {
     if (shmdt(data) == -1) {
         if (errno == EINVAL) return; // Już odłączona
-        perror("Błąd odlacznia pamieci");
+        loguj_blad("Błąd odlacznia pamieci");
     }
 }
 
 void usun_pamiec(int shmid) {
     if (shmctl(shmid, IPC_RMID, NULL) == -1) {
         if (errno == EINVAL) return; // Już usunięta
-        perror("Błąd usuwania pamieci");
+        loguj_blad("Błąd usuwania pamieci");
     }
 }
 
@@ -51,7 +52,7 @@ int stworz_semafor(int n_sems) {
     // Tworzenie n_sems semaforów
     int semid = semget(key, n_sems, 0666 | IPC_CREAT);
     if (semid == -1) {
-        perror("Błąd tworzenia semafora");
+        loguj_blad("Błąd tworzenia semafora");
         exit(1);
     }
     return semid;
@@ -59,7 +60,7 @@ int stworz_semafor(int n_sems) {
 
 void ustaw_semafor(int semid, int sem_num, int wartosc) {
     if (semctl(semid, sem_num, SETVAL, wartosc) == -1) {
-        perror("Błąd ustawiania semafora");
+        loguj_blad("Błąd ustawiania semafora");
         exit(1);
     }
 }
@@ -74,7 +75,7 @@ void zablokuj_semafor(int semid, int sem_num) {
         if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
             exit(0); // Ciche wyjście
         }
-        perror("Błąd blokowania semafora (P)");
+        loguj_blad("Błąd blokowania semafora (P)");
         exit(1);
     }
 }
@@ -89,14 +90,14 @@ void odblokuj_semafor(int semid, int sem_num) {
         if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
             exit(0); // Ciche wyjście
         }
-        perror("Błąd odblokowania semafora (V)");
+        loguj_blad("Błąd odblokowania semafora (V)");
         exit(1);
     }
 }
 
 void usun_semafor(int semid) {
     if (semctl(semid, 0, IPC_RMID) == -1) {
-        perror("Błąd usuwania semafora");
+        loguj_blad("Błąd usuwania semafora");
     }
 }
 
@@ -105,7 +106,7 @@ int stworz_kolejke() {
     key_t key = ftok(SHM_KEY_PATH, MSG_KEY_ID);
     int msgid = msgget(key, 0666 | IPC_CREAT);
     if (msgid == -1) {
-        perror("Błąd tworzenia kolejki komunikatów");
+        loguj_blad("Błąd tworzenia kolejki komunikatów");
         exit(1);
     }
     return msgid;
@@ -116,7 +117,7 @@ void wyslij_komunikat(int msgid, void* msg, int rozmiar) {
         if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
             exit(0); 
         }
-        perror("msgsnd"); 
+        loguj_blad("msgsnd"); 
         exit(1);
     }
 }
@@ -126,7 +127,7 @@ void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
         if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
             exit(0); 
         }
-        perror("msgrcv"); 
+        loguj_blad("msgrcv"); 
         exit(1);
     }
 }
@@ -134,7 +135,7 @@ void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
 void usun_kolejke(int msgid) {
     if (msgctl(msgid, IPC_RMID, NULL) == -1) {
         if (errno == EINVAL) return; // Już usunięta
-        perror("Błąd usuwania kolejki komunikatów");
+        loguj_blad("Błąd usuwania kolejki komunikatów");
     }
 }
 
@@ -144,7 +145,7 @@ int odbierz_komunikat_bez_blokowania(int msgid, void* msg, int rozmiar, long typ
             return 0;
         }
         if (errno == EIDRM || errno == EINVAL || errno == EINTR) exit(0);
-        perror("msgrcv non-blocking");
+        loguj_blad("msgrcv non-blocking");
         exit(1);
     }
     return 1;
