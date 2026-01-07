@@ -59,4 +59,4 @@ dkms.conf
 .vscode/
 *.swp
 core
-.log
+*.log
