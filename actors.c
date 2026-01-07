@@ -8,6 +8,7 @@
 #include <errno.h>
 #include "common.h"
 #include "ipc_utils.h"
+#include "logs.h"
 
 // Kolory
 #define C_BUS   "\033[1;33m" // Żółty
@@ -17,7 +18,6 @@
 #define C_VIP   "\033[1;35m" // Magenta
 #define C_ROW   "\033[1;36m" // Cyjan
 #define C_KASA  "\033[1;31m" // Czerwony
-#define C_RST   "\033[0m"
 
 volatile sig_atomic_t wymuszony_odjazd = 0;
 
@@ -45,14 +45,14 @@ void kasjer_run(int msgid) {
     BiletMsg msg;
     int rozmiar_danych = sizeof(BiletMsg) - sizeof(long);
 
-    printf(C_KASA "[KASA] Otwieram okienko (PID: %d)...\n" C_RST, getpid());
+    loguj(C_KASA, "[KASA] Otwieram okienko (PID: %d)...\n", getpid());
 
     while(1) {
         // Odebranie zapytania o bilet
         odbierz_komunikat(msgid, &msg, rozmiar_danych, KANAL_ZAPYTAN);
 
         // wyświetlenie informacji o obsługiwanym pasażerze
-        // printf(C_KASA "[KASA] Obsługuję pasażera PID %d...\n" C_RST, msg.pid_nadawcy);
+        loguj(C_KASA, "[KASA] Obsługuję pasażera PID %d...\n", msg.pid_nadawcy);
         
         // odesłanie biletu
         msg.mtype = msg.pid_nadawcy; 
@@ -95,7 +95,7 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
 
     zablokuj_semafor(semid, SEM_MUTEX);
     if (data->dworzec_otwarty == 0) {
-        printf("%s[Pasażer %d] Dworzec zamknięty! Nie wchodzę.\n" C_RST, kolor, id);
+        loguj(kolor, "[Pasażer %d] Dworzec zamknięty! Nie wchodzę.\n", id);
         odblokuj_semafor(semid, SEM_MUTEX);
         odlacz_pamiec(data);
         exit(0);
@@ -109,12 +109,12 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
     odblokuj_semafor(semid, SEM_MUTEX);
 
     if (typ == TYP_DZIECKO) {
-        printf("%s[Dziecko %d] Czekam na rodzica...\n" C_RST, kolor, id);
+        loguj(kolor, "[Dziecko %d] Czekam na rodzica...\n", id);
 
         BiletMsg bilet;
         odbierz_komunikat(msgid, &bilet, sizeof(BiletMsg) - sizeof(long), getpid());
     } else if (typ != TYP_VIP) {
-        printf("%s[Pasażer %d (%s)] Idę do kasy (PID: %d).\n" C_RST, kolor, id, nazwa, getpid());
+        loguj(kolor, "[Pasażer %d (%s)] Idę do kasy (PID: %d).\n", id, nazwa, getpid());
 
         int ile_biletow = (typ == TYP_OPIEKUN) ? 2 : 1;
         
@@ -129,11 +129,9 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
             wyslij_komunikat(msgid, &bilet, rozmiar);
 
             odbierz_komunikat(msgid, &bilet, rozmiar, getpid());
-        
-            // printf("%s[Pasażer %d] Kupiłem bilet! Idę na peron.\n" C_RST, kolor, id);
             } 
     } else {
-        printf("%s[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy.\n" C_RST, kolor, id);
+        loguj(kolor, "[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy.\n", id);
     }
 
     if (typ == TYP_OPIEKUN) {
@@ -142,8 +140,8 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
         dla_dziecka.pid_nadawcy = getpid();
         wyslij_komunikat(msgid, &dla_dziecka, sizeof(BiletMsg) - sizeof(long));
     }
-    
-    printf("%s[Pasażer %d (%s)] Przychodzę na przystanek.\n" C_RST, kolor, id, nazwa);
+
+    loguj(kolor, "[Pasażer %d (%s)] Przychodzę na przystanek.\n", id, nazwa);
 
     int wszedlem = 0;
     while (!wszedlem) {
@@ -153,7 +151,7 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
         data = dolacz_pamiec(shmid); // Odświeżenie wskaźnika po możliwej zmianie
 
         if (data->dworzec_otwarty == 0) {
-            printf("%s[Pasażer %d] Dworzec zamknięty! Wychodzę.\n" C_RST, kolor, id);
+            loguj(kolor, "[Pasażer %d] Dworzec zamknięty! Wychodzę.\n", id);
             data->liczba_oczekujacych--;
             if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
 
@@ -171,9 +169,12 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
             
             if (typ != TYP_VIP && typ != TYP_DZIECKO) odblokuj_semafor(semid, moje_drzwi);
             
-            usleep(200000); 
+            usleep(100000); 
             continue;
         }
+
+        int stan_ludzi = 0;
+        int stan_rowerow = 0;
 
         if (data->autobus_obecny == 1) {
             int zgoda = 0;
@@ -181,7 +182,6 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
 
             if (typ == TYP_OPIEKUN) {
                 if (data->liczba_pasazerow + 2 > P) {
-                    //printf("%s[Pasażer %d (Opiekun)] Za mało miejsca dla mnie i dziecka. Czekam na następny autobus.\n" C_RST, kolor, id);
                     czy_probowac = 0;
                 }
             }
@@ -204,18 +204,29 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
 
                     BiletMsg odpowiedz;
 
-                    if (odbierz_z_timeoutem(msgid, &odpowiedz, sizeof(BiletMsg) - sizeof(long), getpid(), 50)) {
+                    if (odbierz_z_timeoutem(msgid, &odpowiedz, sizeof(BiletMsg) - sizeof(long), getpid(), 20)) {
                         if (odpowiedz.pid_nadawcy != -1) {
                             zgoda = 1; // Kierowca zgadza się na wejście
+                            stan_ludzi = odpowiedz.typ_pasazera;
+                            stan_rowerow = odpowiedz.pid_nadawcy;
                         }
                     }
                 }
             }
             if (zgoda) {
                 zablokuj_semafor(semid, SEM_MUTEX);
-                data = dolacz_pamiec(shmid); // Odświeżenie wskaźnika po możliwej zmianie
 
-                printf("%s[Pasażer %d (%s)] Wszedłem do autobusu! (Obecnie w środku: %d osób i %d rowerów)\n" C_RST, kolor, id, nazwa, data->liczba_pasazerow, data->liczba_rowerow);
+                if (typ == TYP_DZIECKO) {
+                    // Dziecko musi doczytać z pamięci (bo nie dostało biletu od kierowcy)
+                    data = dolacz_pamiec(shmid);
+                    stan_ludzi = data->liczba_pasazerow;
+                    stan_rowerow = data->liczba_rowerow;
+                }
+
+                loguj(kolor, "[Pasażer %d (%s)] Wszedłem do autobusu!\n", id, nazwa);
+                loguj(C_BUS, "   -> [Stan Autobusu] Pasażerów: %d/%d (Rowerów: %d/%d)\n", stan_ludzi, P, stan_rowerow, R);
+
+                if (typ != TYP_DZIECKO) data = dolacz_pamiec(shmid);
 
                 data->liczba_oczekujacych--;
                 if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
@@ -250,11 +261,9 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
                         BiletMsg potwierdzenie;
                         odbierz_z_timeoutem(msgid, &potwierdzenie, sizeof(BiletMsg) - sizeof(long), getpid(), 50);
                     } else {
-                        printf(C_KASA "[Opiekun %d] Błąd: Kierowca nie potwierdził wejścia dziecka!\n" C_RST, id);
+                        loguj(C_KASA, "[Opiekun %d] Błąd: Kierowca nie potwierdził wejścia dziecka!\n", id);
                     }
                 }
-            } else {
-                //printf("%s[Pasażer %d (%s)] Kierowca nie pozwolił mi wejść. Czekam na następny autobus.\n" C_RST, kolor, id, nazwa);
             }
         } else {
             odlacz_pamiec(data); odblokuj_semafor(semid, SEM_MUTEX);
@@ -269,15 +278,14 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
     }
 }
 
-void autobus_run(int id, int shmid, int semid) {
+void autobus_run(int id, int shmid, int semid, int msgid) {
     signal(SIGUSR1, sygnal_odjazd);
     
-    int msgid = stworz_kolejke(); 
     SharedData* data;
     
     srand(time(NULL) ^ (getpid() << 16));
 
-    printf(C_BUS "[Autobus %d] Zgłasza gotowość na dworcu. Czekam na wjazd...\n" C_RST, id);
+    loguj(C_BUS, "[Autobus %d] Zgłasza gotowość na dworcu. Czekam na wjazd...\n", id);
 
     while (1) {
         int czy_koniec_pracy = 0;
@@ -316,10 +324,12 @@ void autobus_run(int id, int shmid, int semid) {
             break; 
         }
 
-        printf(C_BUS "[Autobus %d] Podstawiłem się. SPRAWDZAM BILETY!\n" C_RST, id);
+        loguj(C_BUS, "[Autobus %d] Podstawiłem się. SPRAWDZAM BILETY!\n", id);
 
         // ZAŁADUNEK (Aktywny Kierowca)
         time_t start = time(NULL);
+
+        int oczekuje_na_dziecko = 0;
         
         while(time(NULL) - start < T_ODJAZD && !wymuszony_odjazd) {
             BiletMsg bilet;
@@ -337,7 +347,6 @@ void autobus_run(int id, int shmid, int semid) {
                 BiletMsg odp; 
                 memset(&odp, 0, sizeof(BiletMsg));
                 odp.mtype = bilet.pid_nadawcy;
-                odp.pid_nadawcy = getpid();
 
                 if (mozna) {
                     data->liczba_pasazerow++;
@@ -346,9 +355,20 @@ void autobus_run(int id, int shmid, int semid) {
                     data->pasazerowie_obsluzeni++;
                     data->calkowita_liczba_pasazerow++;
 
-                    odp.typ_pasazera = bilet.typ_pasazera;
+                    odp.typ_pasazera = data->liczba_pasazerow;
+                    odp.pid_nadawcy = data->liczba_rowerow;
+
+                    if (bilet.typ_pasazera == TYP_OPIEKUN) {
+                        oczekuje_na_dziecko = 1;
+                    } else {
+                        oczekuje_na_dziecko = 0;
+                    }
                 } else {
                     odp.pid_nadawcy = -1; // Odrzucenie wejścia
+
+                    if (bilet.typ_pasazera == TYP_OPIEKUN) {
+                        oczekuje_na_dziecko = 0; 
+                    }
                 }
                 
                 wyslij_komunikat(msgid, &odp, sizeof(BiletMsg) - sizeof(long));
@@ -361,8 +381,57 @@ void autobus_run(int id, int shmid, int semid) {
         }
 
         if (wymuszony_odjazd) {
-            printf(C_BUS "[Autobus %d] DYSPOZYTOR KAŻE JECHAĆ!\n" C_RST, id);
+            loguj(C_BUS, "[Autobus %d] DYSPOZYTOR KAŻE JECHAĆ!\n", id);
             wymuszony_odjazd = 0;
+        }
+
+        // OSTATNIE SPRAWDZENIE (PO CZASIE)
+        // Odrzucenie wszystkich, chyba że czekamy na dziecko opiekuna, który właśnie wszedł
+        while (1) {
+            BiletMsg bilet;
+            int rozmiar = sizeof(BiletMsg) - sizeof(long);
+            
+            if (odbierz_komunikat_bez_blokowania(msgid, &bilet, rozmiar, KANAL_KONTROLA)) {
+                
+                BiletMsg odp; 
+                memset(&odp, 0, sizeof(BiletMsg));
+                odp.mtype = bilet.pid_nadawcy;
+                odp.pid_nadawcy = getpid();
+                
+                // SPRAWDZENIE WYJĄTKU DLA DZIECKA
+                int wyjatek_dla_dziecka = 0;
+                if (oczekuje_na_dziecko && bilet.typ_pasazera == TYP_DZIECKO) {
+                    wyjatek_dla_dziecka = 1;
+                }
+
+                if (wyjatek_dla_dziecka) {
+                    zablokuj_semafor(semid, SEM_MUTEX);
+                    data = dolacz_pamiec(shmid);
+                    
+                    data->liczba_pasazerow++;
+                    data->pasazerowie_obsluzeni++; 
+                    data->calkowita_liczba_pasazerow++;
+
+                    odp.typ_pasazera = data->liczba_pasazerow;
+                    odp.pid_nadawcy = data->liczba_rowerow;
+                    
+                    loguj(C_BUS, "[Autobus %d] Czas minął, ale doczekałem na Dziecko!\n", id);
+                    
+                    odlacz_pamiec(data); 
+                    odblokuj_semafor(semid, SEM_MUTEX);
+                    
+                    odp.typ_pasazera = bilet.typ_pasazera; // Zgoda
+                    oczekuje_na_dziecko = 0; 
+                } 
+                else {
+                    odp.pid_nadawcy = -1; 
+                }
+                
+                wyslij_komunikat(msgid, &odp, rozmiar);
+                continue; 
+            } else {
+                break;
+            }
         }
 
         // ODJAZD
@@ -376,13 +445,13 @@ void autobus_run(int id, int shmid, int semid) {
         odlacz_pamiec(data);
         odblokuj_semafor(semid, SEM_MUTEX);
 
-        printf(C_BUS "[Autobus %d] ODJAZD z %d pasażerami (%d rowerów).\n" C_RST, id, p, r);
+        loguj(C_BUS, "[Autobus %d] ODJAZD z %d pasażerami (%d rowerów).\n", id, p, r);
 
         // JAZDA (Losowy czas)
         int czas_trasy = 5 + (rand() % 11); 
         sleep(czas_trasy);
 
-        printf(C_BUS "[Autobus %d] WRÓCIŁ Z TRASY po %d s.\n" C_RST, id, czas_trasy);
+        loguj(C_BUS, "[Autobus %d] WRÓCIŁ Z TRASY po %d s.\n", id, czas_trasy);
         
         // Sprawdzenie czy kontynuować po powrocie 
         // W razie gdyby dworzec zamknięto w trakcie jazdy
@@ -401,7 +470,7 @@ void autobus_run(int id, int shmid, int semid) {
     zablokuj_semafor(semid, SEM_MUTEX);
     data = dolacz_pamiec(shmid);
     data->aktywne_autobusy--;
-    printf(C_BUS "[Autobus %d] Zjazd do zajezdni (Koniec pracy).\n" C_RST, id);
+    loguj(C_BUS, "[Autobus %d] Zjazd do zajezdni (Koniec pracy).\n", id);
     odlacz_pamiec(data);
     odblokuj_semafor(semid, SEM_MUTEX);
     

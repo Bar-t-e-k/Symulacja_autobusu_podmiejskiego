@@ -8,7 +8,7 @@
 #define R 4           // Miejsca na rowery
 #define N 3           // Liczba autobusów
 #define T_ODJAZD 30   // Czas oczekiwania
-#define LICZBA_PASAZEROW 20 // Łączna liczba pasażerów do obsłużenia
+#define LICZBA_PASAZEROW 2000 // Łączna liczba pasażerów do obsłużenia
 
 // Klucze do IPC
 #define SHM_KEY_PATH "."

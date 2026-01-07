@@ -1,0 +1,3101 @@
+[17:33:53] Symulacja dworca - 2026-01-07 17:33:53
+[17:33:53] [KASA] Otwieram okienko (PID: 323026)...
+[17:33:53] [Autobus 1] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[17:33:53] [Autobus 1] Podstawiłem się. SPRAWDZAM BILETY!
+[17:33:53] [Autobus 2] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[17:33:53] [Autobus 3] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[17:33:53] [Pasażer 1 (Rower)] Idę do kasy (PID: 323031).
+[17:33:53] [KASA] Obsługuję pasażera PID 323031...
+[17:33:53] [Pasażer 1 (Rower)] Przychodzę na przystanek.
+[17:33:53] [Pasażer 1 (Rower)] Wszedłem do autobusu!
+[17:33:53]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 1/4)
+[17:33:53] [Pasażer 2 (Zwykły)] Idę do kasy (PID: 323033).
+[17:33:53] [KASA] Obsługuję pasażera PID 323033...
+[17:33:53] [Pasażer 2 (Zwykły)] Przychodzę na przystanek.
+[17:33:53] [Pasażer 2 (Zwykły)] Wszedłem do autobusu!
+[17:33:53]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 1/4)
+[17:33:54] [Pasażer 3 (Zwykły)] Idę do kasy (PID: 323034).
+[17:33:54] [KASA] Obsługuję pasażera PID 323034...
+[17:33:54] [Pasażer 3 (Zwykły)] Przychodzę na przystanek.
+[17:33:54] [Pasażer 3 (Zwykły)] Wszedłem do autobusu!
+[17:33:54]    -> [Stan Autobusu] Pasażerów: 3/10 (Rowerów: 1/4)
+[17:33:54] [Dziecko 4] Czekam na rodzica...
+[17:33:54] [Pasażer 4 (Opiekun)] Idę do kasy (PID: 323037).
+[17:33:54] [KASA] Obsługuję pasażera PID 323037...
+[17:33:54] [KASA] Obsługuję pasażera PID 323037...
+[17:33:54] [Pasażer 4 (Opiekun)] Przychodzę na przystanek.
+[17:33:54] [Pasażer 4 (Dziecko)] Przychodzę na przystanek.
+[17:33:54] [Pasażer 4 (Opiekun)] Wszedłem do autobusu!
+[17:33:54]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 1/4)
+[17:33:54] [Pasażer 4 (Dziecko)] Wszedłem do autobusu!
+[17:33:54]    -> [Stan Autobusu] Pasażerów: 5/10 (Rowerów: 1/4)
+[17:33:54] [Pasażer 6 (Rower)] Idę do kasy (PID: 323038).
+[17:33:54] [KASA] Obsługuję pasażera PID 323038...
+[17:33:54] [Pasażer 6 (Rower)] Przychodzę na przystanek.
+[17:33:55] [Pasażer 6 (Rower)] Wszedłem do autobusu!
+[17:33:55]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 2/4)
+[17:33:55] [Pasażer 7 (Zwykły)] Idę do kasy (PID: 323059).
+[17:33:55] [KASA] Obsługuję pasażera PID 323059...
+[17:33:55] [Pasażer 7 (Zwykły)] Przychodzę na przystanek.
+[17:33:55] [Pasażer 8 (Opiekun)] Idę do kasy (PID: 323063).
+[17:33:55] [KASA] Obsługuję pasażera PID 323063...
+[17:33:55] [KASA] Obsługuję pasażera PID 323063...
+[17:33:55] [Pasażer 8 (Opiekun)] Przychodzę na przystanek.
+[17:33:55] [Dziecko 8] Czekam na rodzica...
+[17:33:55] [Pasażer 8 (Dziecko)] Przychodzę na przystanek.
+[17:33:55] [Pasażer 10 (Zwykły)] Idę do kasy (PID: 323064).
+[17:33:55] [KASA] Obsługuję pasażera PID 323064...
+[17:33:55] [Pasażer 10 (Zwykły)] Przychodzę na przystanek.
+[17:33:56] [Pasażer 11 (Zwykły)] Idę do kasy (PID: 323065).
+[17:33:56] [KASA] Obsługuję pasażera PID 323065...
+[17:33:56] [Pasażer 11 (Zwykły)] Przychodzę na przystanek.
+[17:33:56] [Pasażer 12 (Zwykły)] Idę do kasy (PID: 323095).
+[17:33:56] [KASA] Obsługuję pasażera PID 323095...
+[17:33:56] [Pasażer 12 (Zwykły)] Przychodzę na przystanek.
+[17:33:56] [Pasażer 13 (Zwykły)] Idę do kasy (PID: 323096).
+[17:33:56] [KASA] Obsługuję pasażera PID 323096...
+[17:33:56] [Pasażer 13 (Zwykły)] Przychodzę na przystanek.
+[17:33:57] [Pasażer 14 (Zwykły)] Idę do kasy (PID: 323097).
+[17:33:57] [KASA] Obsługuję pasażera PID 323097...
+[17:33:57] [Pasażer 14 (Zwykły)] Przychodzę na przystanek.
+[17:33:57] [Pasażer 15 (Rower)] Idę do kasy (PID: 323098).
+[17:33:57] [KASA] Obsługuję pasażera PID 323098...
+[17:33:57] [Pasażer 15 (Rower)] Przychodzę na przystanek.
+[17:33:57] [Pasażer 15 (Rower)] Wszedłem do autobusu!
+[17:33:57]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 3/4)
+[17:33:57] [Pasażer 16 (Opiekun)] Idę do kasy (PID: 323100).
+[17:33:57] [KASA] Obsługuję pasażera PID 323100...
+[17:33:57] [Dziecko 16] Czekam na rodzica...
+[17:33:57] [KASA] Obsługuję pasażera PID 323100...
+[17:33:57] [Pasażer 16 (Opiekun)] Przychodzę na przystanek.
+[17:33:57] [Pasażer 16 (Dziecko)] Przychodzę na przystanek.
+[17:33:57] [Pasażer 18 (Rower)] Idę do kasy (PID: 323101).
+[17:33:57] [KASA] Obsługuję pasażera PID 323101...
+[17:33:57] [Pasażer 18 (Rower)] Przychodzę na przystanek.
+[17:33:57] [Pasażer 18 (Rower)] Wszedłem do autobusu!
+[17:33:57]    -> [Stan Autobusu] Pasażerów: 8/10 (Rowerów: 4/4)
+[17:33:58] [Pasażer 19 (Zwykły)] Idę do kasy (PID: 323102).
+[17:33:58] [KASA] Obsługuję pasażera PID 323102...
+[17:33:58] [Pasażer 19 (Zwykły)] Przychodzę na przystanek.
+[17:33:58] [Pasażer 20 (Zwykły)] Idę do kasy (PID: 323103).
+[17:33:58] [KASA] Obsługuję pasażera PID 323103...
+[17:33:58] [Pasażer 20 (Zwykły)] Przychodzę na przystanek.
+[17:33:58] [Pasażer 21 (Zwykły)] Idę do kasy (PID: 323105).
+[17:33:58] [KASA] Obsługuję pasażera PID 323105...
+[17:33:58] [Pasażer 21 (Zwykły)] Przychodzę na przystanek.
+[17:33:58] [Dziecko 22] Czekam na rodzica...
+[17:33:58] [Pasażer 22 (Opiekun)] Idę do kasy (PID: 323107).
+[17:33:58] [KASA] Obsługuję pasażera PID 323107...
+[17:33:58] [KASA] Obsługuję pasażera PID 323107...
+[17:33:58] [Pasażer 22 (Dziecko)] Przychodzę na przystanek.
+[17:33:58] [Pasażer 22 (Opiekun)] Przychodzę na przystanek.
+[17:33:59] [Pasażer 24 (Zwykły)] Idę do kasy (PID: 323108).
+[17:33:59] [KASA] Obsługuję pasażera PID 323108...
+[17:33:59] [Pasażer 24 (Zwykły)] Przychodzę na przystanek.
+[17:33:59] [Pasażer 25 (Zwykły)] Idę do kasy (PID: 323109).
+[17:33:59] [KASA] Obsługuję pasażera PID 323109...
+[17:33:59] [Pasażer 25 (Zwykły)] Przychodzę na przystanek.
+[17:33:59] [Pasażer 26 (Zwykły)] Idę do kasy (PID: 323110).
+[17:33:59] [KASA] Obsługuję pasażera PID 323110...
+[17:33:59] [Pasażer 26 (Zwykły)] Przychodzę na przystanek.
+[17:33:59] [Pasażer 7 (Zwykły)] Wszedłem do autobusu!
+[17:33:59]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:34:00] [Pasażer 10 (Zwykły)] Wszedłem do autobusu!
+[17:34:00]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:34:00] [Pasażer 27 (Zwykły)] Idę do kasy (PID: 323111).
+[17:34:00] [KASA] Obsługuję pasażera PID 323111...
+[17:34:00] [Pasażer 27 (Zwykły)] Przychodzę na przystanek.
+[17:34:00] [Pasażer 28 (Rower)] Idę do kasy (PID: 323112).
+[17:34:00] [KASA] Obsługuję pasażera PID 323112...
+[17:34:00] [Pasażer 28 (Rower)] Przychodzę na przystanek.
+[17:34:00] [Pasażer 29 (Rower)] Idę do kasy (PID: 323113).
+[17:34:00] [KASA] Obsługuję pasażera PID 323113...
+[17:34:00] [Pasażer 29 (Rower)] Przychodzę na przystanek.
+[17:34:00] [Pasażer 30 (Zwykły)] Idę do kasy (PID: 323114).
+[17:34:00] [KASA] Obsługuję pasażera PID 323114...
+[17:34:00] [Pasażer 30 (Zwykły)] Przychodzę na przystanek.
+[17:34:01] [Pasażer 31 (Rower)] Idę do kasy (PID: 323115).
+[17:34:01] [KASA] Obsługuję pasażera PID 323115...
+[17:34:01] [Pasażer 31 (Rower)] Przychodzę na przystanek.
+[17:34:01] [Pasażer 32 (Rower)] Idę do kasy (PID: 323116).
+[17:34:01] [KASA] Obsługuję pasażera PID 323116...
+[17:34:01] [Pasażer 32 (Rower)] Przychodzę na przystanek.
+[17:34:01] [Pasażer 33 (Rower)] Idę do kasy (PID: 323117).
+[17:34:01] [KASA] Obsługuję pasażera PID 323117...
+[17:34:01] [Pasażer 33 (Rower)] Przychodzę na przystanek.
+[17:34:02] [Pasażer 34 (Rower)] Idę do kasy (PID: 323120).
+[17:34:02] [KASA] Obsługuję pasażera PID 323120...
+[17:34:02] [Pasażer 34 (Rower)] Przychodzę na przystanek.
+[17:34:02] [Pasażer 35 (Rower)] Idę do kasy (PID: 323121).
+[17:34:02] [KASA] Obsługuję pasażera PID 323121...
+[17:34:02] [Pasażer 35 (Rower)] Przychodzę na przystanek.
+[17:34:02] [Pasażer 36 (Zwykły)] Idę do kasy (PID: 323122).
+[17:34:02] [KASA] Obsługuję pasażera PID 323122...
+[17:34:02] [Pasażer 36 (Zwykły)] Przychodzę na przystanek.
+[17:34:03] [Dziecko 37] Czekam na rodzica...
+[17:34:03] [Pasażer 37 (Opiekun)] Idę do kasy (PID: 323143).
+[17:34:03] [KASA] Obsługuję pasażera PID 323143...
+[17:34:03] [KASA] Obsługuję pasażera PID 323143...
+[17:34:03] [Pasażer 37 (Opiekun)] Przychodzę na przystanek.
+[17:34:03] [Pasażer 37 (Dziecko)] Przychodzę na przystanek.
+[17:34:03] [Pasażer 39 (Zwykły)] Idę do kasy (PID: 323178).
+[17:34:03] [KASA] Obsługuję pasażera PID 323178...
+[17:34:03] [Pasażer 39 (Zwykły)] Przychodzę na przystanek.
+[17:34:03] [Pasażer 40 (Rower)] Idę do kasy (PID: 323179).
+[17:34:03] [KASA] Obsługuję pasażera PID 323179...
+[17:34:03] [Pasażer 40 (Rower)] Przychodzę na przystanek.
+[17:34:04] [Dziecko 41] Czekam na rodzica...
+[17:34:04] [Pasażer 41 (Opiekun)] Idę do kasy (PID: 323181).
+[17:34:04] [KASA] Obsługuję pasażera PID 323181...
+[17:34:04] [KASA] Obsługuję pasażera PID 323181...
+[17:34:04] [Pasażer 41 (Opiekun)] Przychodzę na przystanek.
+[17:34:04] [Pasażer 41 (Dziecko)] Przychodzę na przystanek.
+[17:34:04] [Pasażer 43 (Rower)] Idę do kasy (PID: 323273).
+[17:34:04] [KASA] Obsługuję pasażera PID 323273...
+[17:34:04] [Pasażer 43 (Rower)] Przychodzę na przystanek.
+[17:34:04] [Pasażer 44 (Rower)] Idę do kasy (PID: 323274).
+[17:34:04] [KASA] Obsługuję pasażera PID 323274...
+[17:34:04] [Pasażer 44 (Rower)] Przychodzę na przystanek.
+[17:34:05] [Dziecko 45] Czekam na rodzica...
+[17:34:05] [Pasażer 45 (Opiekun)] Idę do kasy (PID: 323276).
+[17:34:05] [KASA] Obsługuję pasażera PID 323276...
+[17:34:05] [KASA] Obsługuję pasażera PID 323276...
+[17:34:05] [Pasażer 45 (Opiekun)] Przychodzę na przystanek.
+[17:34:05] [Pasażer 45 (Dziecko)] Przychodzę na przystanek.
+[17:34:05] [Pasażer 47 (Rower)] Idę do kasy (PID: 323277).
+[17:34:05] [KASA] Obsługuję pasażera PID 323277...
+[17:34:05] [Pasażer 47 (Rower)] Przychodzę na przystanek.
+[17:34:05] [Dziecko 48] Czekam na rodzica...
+[17:34:05] [Pasażer 48 (Opiekun)] Idę do kasy (PID: 323283).
+[17:34:05] [KASA] Obsługuję pasażera PID 323283...
+[17:34:05] [KASA] Obsługuję pasażera PID 323283...
+[17:34:05] [Pasażer 48 (Opiekun)] Przychodzę na przystanek.
+[17:34:05] [Pasażer 48 (Dziecko)] Przychodzę na przystanek.
+[17:34:06] [Pasażer 50 (Zwykły)] Idę do kasy (PID: 323344).
+[17:34:06] [KASA] Obsługuję pasażera PID 323344...
+[17:34:06] [Pasażer 50 (Zwykły)] Przychodzę na przystanek.
+[17:34:06] [Pasażer 51 (Rower)] Idę do kasy (PID: 323345).
+[17:34:06] [KASA] Obsługuję pasażera PID 323345...
+[17:34:06] [Pasażer 51 (Rower)] Przychodzę na przystanek.
+[17:34:06] [Pasażer 52 (Zwykły)] Idę do kasy (PID: 323346).
+[17:34:06] [KASA] Obsługuję pasażera PID 323346...
+[17:34:06] [Pasażer 52 (Zwykły)] Przychodzę na przystanek.
+[17:34:07] [Pasażer 53 (Zwykły)] Idę do kasy (PID: 323409).
+[17:34:07] [KASA] Obsługuję pasażera PID 323409...
+[17:34:07] [Pasażer 53 (Zwykły)] Przychodzę na przystanek.
+[17:34:07] [Pasażer 54 (Zwykły)] Idę do kasy (PID: 323461).
+[17:34:07] [KASA] Obsługuję pasażera PID 323461...
+[17:34:07] [Pasażer 54 (Zwykły)] Przychodzę na przystanek.
+[17:34:07] [Pasażer 55 (Zwykły)] Idę do kasy (PID: 323462).
+[17:34:07] [KASA] Obsługuję pasażera PID 323462...
+[17:34:07] [Pasażer 55 (Zwykły)] Przychodzę na przystanek.
+[17:34:08] [Pasażer 56 (Zwykły)] Idę do kasy (PID: 323463).
+[17:34:08] [KASA] Obsługuję pasażera PID 323463...
+[17:34:08] [Pasażer 56 (Zwykły)] Przychodzę na przystanek.
+[17:34:08] [Pasażer 57 (Zwykły)] Idę do kasy (PID: 323464).
+[17:34:08] [KASA] Obsługuję pasażera PID 323464...
+[17:34:08] [Pasażer 57 (Zwykły)] Przychodzę na przystanek.
+[17:34:08] [Pasażer 58 (Zwykły)] Idę do kasy (PID: 323465).
+[17:34:08] [KASA] Obsługuję pasażera PID 323465...
+[17:34:08] [Pasażer 58 (Zwykły)] Przychodzę na przystanek.
+[17:34:08] [Dziecko 59] Czekam na rodzica...
+[17:34:08] [Pasażer 59 (Opiekun)] Idę do kasy (PID: 323467).
+[17:34:08] [KASA] Obsługuję pasażera PID 323467...
+[17:34:08] [KASA] Obsługuję pasażera PID 323467...
+[17:34:08] [Pasażer 59 (Dziecko)] Przychodzę na przystanek.
+[17:34:08] [Pasażer 59 (Opiekun)] Przychodzę na przystanek.
+[17:34:09] [Pasażer 61 (Zwykły)] Idę do kasy (PID: 323468).
+[17:34:09] [KASA] Obsługuję pasażera PID 323468...
+[17:34:09] [Pasażer 61 (Zwykły)] Przychodzę na przystanek.
+[17:34:09] [Dziecko 62] Czekam na rodzica...
+[17:34:09] [Pasażer 62 (Opiekun)] Idę do kasy (PID: 323470).
+[17:34:09] [KASA] Obsługuję pasażera PID 323470...
+[17:34:09] [KASA] Obsługuję pasażera PID 323470...
+[17:34:09] [Pasażer 62 (Opiekun)] Przychodzę na przystanek.
+[17:34:09] [Pasażer 62 (Dziecko)] Przychodzę na przystanek.
+[17:34:09] [Pasażer 64 (Zwykły)] Idę do kasy (PID: 323471).
+[17:34:09] [KASA] Obsługuję pasażera PID 323471...
+[17:34:09] [Pasażer 64 (Zwykły)] Przychodzę na przystanek.
+[17:34:09] [Dziecko 65] Czekam na rodzica...
+[17:34:09] [Pasażer 65 (Opiekun)] Idę do kasy (PID: 323473).
+[17:34:09] [KASA] Obsługuję pasażera PID 323473...
+[17:34:09] [KASA] Obsługuję pasażera PID 323473...
+[17:34:09] [Pasażer 65 (Opiekun)] Przychodzę na przystanek.
+[17:34:09] [Pasażer 65 (Dziecko)] Przychodzę na przystanek.
+[17:34:10] [Dziecko 67] Czekam na rodzica...
+[17:34:10] [Pasażer 67 (Opiekun)] Idę do kasy (PID: 323475).
+[17:34:10] [KASA] Obsługuję pasażera PID 323475...
+[17:34:10] [KASA] Obsługuję pasażera PID 323475...
+[17:34:10] [Pasażer 67 (Opiekun)] Przychodzę na przystanek.
+[17:34:10] [Pasażer 67 (Dziecko)] Przychodzę na przystanek.
+[17:34:10] [Pasażer 69 (Rower)] Idę do kasy (PID: 323476).
+[17:34:10] [KASA] Obsługuję pasażera PID 323476...
+[17:34:10] [Pasażer 69 (Rower)] Przychodzę na przystanek.
+[17:34:10] [Pasażer 70 (Zwykły)] Idę do kasy (PID: 323510).
+[17:34:10] [KASA] Obsługuję pasażera PID 323510...
+[17:34:10] [Pasażer 70 (Zwykły)] Przychodzę na przystanek.
+[17:34:11] [Pasażer 71 (Zwykły)] Idę do kasy (PID: 323564).
+[17:34:11] [KASA] Obsługuję pasażera PID 323564...
+[17:34:11] [Pasażer 71 (Zwykły)] Przychodzę na przystanek.
+[17:34:11] [Dziecko 72] Czekam na rodzica...
+[17:34:11] [Pasażer 72 (Opiekun)] Idę do kasy (PID: 323566).
+[17:34:11] [KASA] Obsługuję pasażera PID 323566...
+[17:34:11] [KASA] Obsługuję pasażera PID 323566...
+[17:34:11] [Pasażer 72 (Opiekun)] Przychodzę na przystanek.
+[17:34:11] [Pasażer 72 (Dziecko)] Przychodzę na przystanek.
+[17:34:11] [Dziecko 74] Czekam na rodzica...
+[17:34:11] [Pasażer 74 (Opiekun)] Idę do kasy (PID: 323568).
+[17:34:11] [KASA] Obsługuję pasażera PID 323568...
+[17:34:11] [KASA] Obsługuję pasażera PID 323568...
+[17:34:11] [Pasażer 74 (Opiekun)] Przychodzę na przystanek.
+[17:34:11] [Pasażer 74 (Dziecko)] Przychodzę na przystanek.
+[17:34:12] [Pasażer 76 (Rower)] Idę do kasy (PID: 323668).
+[17:34:12] [KASA] Obsługuję pasażera PID 323668...
+[17:34:12] [Pasażer 76 (Rower)] Przychodzę na przystanek.
+[17:34:12] [Pasażer 77 (Rower)] Idę do kasy (PID: 323727).
+[17:34:12] [KASA] Obsługuję pasażera PID 323727...
+[17:34:12] [Pasażer 77 (Rower)] Przychodzę na przystanek.
+[17:34:13] [Pasażer 78 (Opiekun)] Idę do kasy (PID: 323729).
+[17:34:13] [KASA] Obsługuję pasażera PID 323729...
+[17:34:13] [KASA] Obsługuję pasażera PID 323729...
+[17:34:13] [Pasażer 78 (Opiekun)] Przychodzę na przystanek.
+[17:34:13] [Dziecko 78] Czekam na rodzica...
+[17:34:13] [Pasażer 78 (Dziecko)] Przychodzę na przystanek.
+[17:34:13] [Pasażer 80 (Rower)] Idę do kasy (PID: 323730).
+[17:34:13] [KASA] Obsługuję pasażera PID 323730...
+[17:34:13] [Pasażer 80 (Rower)] Przychodzę na przystanek.
+[17:34:13] [Pasażer 81 (Zwykły)] Idę do kasy (PID: 323731).
+[17:34:13] [KASA] Obsługuję pasażera PID 323731...
+[17:34:13] [Pasażer 81 (Zwykły)] Przychodzę na przystanek.
+[17:34:13] [Dziecko 82] Czekam na rodzica...
+[17:34:13] [Pasażer 82 (Opiekun)] Idę do kasy (PID: 323733).
+[17:34:13] [KASA] Obsługuję pasażera PID 323733...
+[17:34:13] [KASA] Obsługuję pasażera PID 323733...
+[17:34:13] [Pasażer 82 (Opiekun)] Przychodzę na przystanek.
+[17:34:13] [Pasażer 82 (Dziecko)] Przychodzę na przystanek.
+[17:34:14] [Pasażer 84 (Zwykły)] Idę do kasy (PID: 323734).
+[17:34:14] [KASA] Obsługuję pasażera PID 323734...
+[17:34:14] [Pasażer 84 (Zwykły)] Przychodzę na przystanek.
+[17:34:14] [Pasażer 85 (Rower)] Idę do kasy (PID: 323735).
+[17:34:14] [KASA] Obsługuję pasażera PID 323735...
+[17:34:14] [Pasażer 85 (Rower)] Przychodzę na przystanek.
+[17:34:14] [Pasażer 86 (Zwykły)] Idę do kasy (PID: 323736).
+[17:34:14] [KASA] Obsługuję pasażera PID 323736...
+[17:34:14] [Pasażer 86 (Zwykły)] Przychodzę na przystanek.
+[17:34:14] [Pasażer 87 (Zwykły)] Idę do kasy (PID: 323737).
+[17:34:14] [KASA] Obsługuję pasażera PID 323737...
+[17:34:14] [Pasażer 87 (Zwykły)] Przychodzę na przystanek.
+[17:34:15] [Dziecko 88] Czekam na rodzica...
+[17:34:15] [Pasażer 88 (Opiekun)] Idę do kasy (PID: 323739).
+[17:34:15] [KASA] Obsługuję pasażera PID 323739...
+[17:34:15] [KASA] Obsługuję pasażera PID 323739...
+[17:34:15] [Pasażer 88 (Opiekun)] Przychodzę na przystanek.
+[17:34:15] [Pasażer 88 (Dziecko)] Przychodzę na przystanek.
+[17:34:15] [Pasażer 90 (Zwykły)] Idę do kasy (PID: 323740).
+[17:34:15] [KASA] Obsługuję pasażera PID 323740...
+[17:34:15] [Pasażer 90 (Zwykły)] Przychodzę na przystanek.
+[17:34:15] [Pasażer 91 (Rower)] Idę do kasy (PID: 323741).
+[17:34:15] [KASA] Obsługuję pasażera PID 323741...
+[17:34:15] [Pasażer 91 (Rower)] Przychodzę na przystanek.
+[17:34:15] [Pasażer 92 (Rower)] Idę do kasy (PID: 323787).
+[17:34:15] [KASA] Obsługuję pasażera PID 323787...
+[17:34:15] [Pasażer 92 (Rower)] Przychodzę na przystanek.
+[17:34:16] [Dziecko 93] Czekam na rodzica...
+[17:34:16] [Pasażer 93 (Opiekun)] Idę do kasy (PID: 323852).
+[17:34:16] [KASA] Obsługuję pasażera PID 323852...
+[17:34:16] [KASA] Obsługuję pasażera PID 323852...
+[17:34:16] [Pasażer 93 (Opiekun)] Przychodzę na przystanek.
+[17:34:16] [Pasażer 93 (Dziecko)] Przychodzę na przystanek.
+[17:34:16] [Pasażer 95 (Rower)] Idę do kasy (PID: 323853).
+[17:34:16] [KASA] Obsługuję pasażera PID 323853...
+[17:34:16] [Pasażer 95 (Rower)] Przychodzę na przystanek.
+[17:34:16] [Dziecko 96] Czekam na rodzica...
+[17:34:16] [Pasażer 96 (Opiekun)] Idę do kasy (PID: 323855).
+[17:34:16] [KASA] Obsługuję pasażera PID 323855...
+[17:34:16] [KASA] Obsługuję pasażera PID 323855...
+[17:34:16] [Pasażer 96 (Opiekun)] Przychodzę na przystanek.
+[17:34:16] [Pasażer 96 (Dziecko)] Przychodzę na przystanek.
+[17:34:17] [Pasażer 98 (Zwykły)] Idę do kasy (PID: 323857).
+[17:34:17] [KASA] Obsługuję pasażera PID 323857...
+[17:34:17] [Pasażer 98 (Zwykły)] Przychodzę na przystanek.
+[17:34:17] [Pasażer 99 (Zwykły)] Idę do kasy (PID: 323961).
+[17:34:17] [KASA] Obsługuję pasażera PID 323961...
+[17:34:17] [Pasażer 99 (Zwykły)] Przychodzę na przystanek.
+[17:34:17] [Pasażer 100 (Rower)] Idę do kasy (PID: 324059).
+[17:34:17] [KASA] Obsługuję pasażera PID 324059...
+[17:34:17] [Pasażer 100 (Rower)] Przychodzę na przystanek.
+[17:34:18] [Pasażer 101 (Zwykły)] Idę do kasy (PID: 324060).
+[17:34:18] [KASA] Obsługuję pasażera PID 324060...
+[17:34:18] [Pasażer 101 (Zwykły)] Przychodzę na przystanek.
+[17:34:18] [Pasażer 102 (Zwykły)] Idę do kasy (PID: 324061).
+[17:34:18] [KASA] Obsługuję pasażera PID 324061...
+[17:34:18] [Pasażer 102 (Zwykły)] Przychodzę na przystanek.
+[17:34:18] [Pasażer 103 (Rower)] Idę do kasy (PID: 324062).
+[17:34:18] [KASA] Obsługuję pasażera PID 324062...
+[17:34:18] [Pasażer 103 (Rower)] Przychodzę na przystanek.
+[17:34:19] [Pasażer 104 (Zwykły)] Idę do kasy (PID: 324063).
+[17:34:19] [KASA] Obsługuję pasażera PID 324063...
+[17:34:19] [Pasażer 104 (Zwykły)] Przychodzę na przystanek.
+[17:34:19] [Dziecko 105] Czekam na rodzica...
+[17:34:19] [Pasażer 105 (Opiekun)] Idę do kasy (PID: 324065).
+[17:34:19] [KASA] Obsługuję pasażera PID 324065...
+[17:34:19] [KASA] Obsługuję pasażera PID 324065...
+[17:34:19] [Pasażer 105 (Opiekun)] Przychodzę na przystanek.
+[17:34:19] [Pasażer 105 (Dziecko)] Przychodzę na przystanek.
+[17:34:19] [Pasażer 107 (Zwykły)] Idę do kasy (PID: 324066).
+[17:34:19] [KASA] Obsługuję pasażera PID 324066...
+[17:34:19] [Pasażer 107 (Zwykły)] Przychodzę na przystanek.
+[17:34:20] [Pasażer 108 (Rower)] Idę do kasy (PID: 324067).
+[17:34:20] [KASA] Obsługuję pasażera PID 324067...
+[17:34:20] [Pasażer 108 (Rower)] Przychodzę na przystanek.
+[17:34:20] [Pasażer 109 (Zwykły)] Idę do kasy (PID: 324068).
+[17:34:20] [KASA] Obsługuję pasażera PID 324068...
+[17:34:20] [Pasażer 109 (Zwykły)] Przychodzę na przystanek.
+[17:34:20] [Pasażer 110 (Rower)] Idę do kasy (PID: 324069).
+[17:34:20] [KASA] Obsługuję pasażera PID 324069...
+[17:34:20] [Pasażer 110 (Rower)] Przychodzę na przystanek.
+[17:34:20] [Pasażer 111 (Opiekun)] Idę do kasy (PID: 324075).
+[17:34:20] [KASA] Obsługuję pasażera PID 324075...
+[17:34:20] [KASA] Obsługuję pasażera PID 324075...
+[17:34:20] [Pasażer 111 (Opiekun)] Przychodzę na przystanek.
+[17:34:20] [Dziecko 111] Czekam na rodzica...
+[17:34:20] [Pasażer 111 (Dziecko)] Przychodzę na przystanek.
+[17:34:21] [Pasażer 113 (Zwykły)] Idę do kasy (PID: 324151).
+[17:34:21] [KASA] Obsługuję pasażera PID 324151...
+[17:34:21] [Pasażer 113 (Zwykły)] Przychodzę na przystanek.
+[17:34:21] [Pasażer 114 (Zwykły)] Idę do kasy (PID: 324200).
+[17:34:21] [KASA] Obsługuję pasażera PID 324200...
+[17:34:21] [Pasażer 114 (Zwykły)] Przychodzę na przystanek.
+[17:34:21] [Pasażer 115 (Zwykły)] Idę do kasy (PID: 324201).
+[17:34:21] [KASA] Obsługuję pasażera PID 324201...
+[17:34:21] [Pasażer 115 (Zwykły)] Przychodzę na przystanek.
+[17:34:22] [Pasażer 116 (Opiekun)] Idę do kasy (PID: 324203).
+[17:34:22] [KASA] Obsługuję pasażera PID 324203...
+[17:34:22] [Dziecko 116] Czekam na rodzica...
+[17:34:22] [KASA] Obsługuję pasażera PID 324203...
+[17:34:22] [Pasażer 116 (Opiekun)] Przychodzę na przystanek.
+[17:34:22] [Pasażer 116 (Dziecko)] Przychodzę na przystanek.
+[17:34:22] [Pasażer 118 (Zwykły)] Idę do kasy (PID: 324244).
+[17:34:22] [KASA] Obsługuję pasażera PID 324244...
+[17:34:22] [Pasażer 118 (Zwykły)] Przychodzę na przystanek.
+[17:34:22] [Pasażer 119 (Zwykły)] Idę do kasy (PID: 324443).
+[17:34:22] [KASA] Obsługuję pasażera PID 324443...
+[17:34:22] [Pasażer 119 (Zwykły)] Przychodzę na przystanek.
+[17:34:23] [Autobus 3] Podstawiłem się. SPRAWDZAM BILETY!
+[17:34:23] [Autobus 1] ODJAZD z 10 pasażerami (4 rowerów).
+[17:34:23] [Autobus 1] WRÓCIŁ Z TRASY po 12 s.
+[17:34:23] [Pasażer 120 (Rower)] Idę do kasy (PID: 324445).
+[17:34:23] [KASA] Obsługuję pasażera PID 324445...
+[17:34:23] [Pasażer 120 (Rower)] Przychodzę na przystanek.
+[17:34:23] [Pasażer 93 (Opiekun)] Wszedłem do autobusu!
+[17:34:23]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 0/4)
+[17:34:23] [Pasażer 28 (Rower)] Wszedłem do autobusu!
+[17:34:23]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 1/4)
+[17:34:23] [Pasażer 93 (Dziecko)] Wszedłem do autobusu!
+[17:34:23]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 2/4)
+[17:34:23] [Pasażer 34 (Rower)] Wszedłem do autobusu!
+[17:34:23]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 2/4)
+[17:34:23] [Dziecko 121] Czekam na rodzica...
+[17:34:23] [Pasażer 31 (Rower)] Wszedłem do autobusu!
+[17:34:23]    -> [Stan Autobusu] Pasażerów: 5/10 (Rowerów: 3/4)
+[17:34:23] [Pasażer 121 (Opiekun)] Idę do kasy (PID: 324447).
+[17:34:23] [KASA] Obsługuję pasażera PID 324447...
+[17:34:23] [KASA] Obsługuję pasażera PID 324447...
+[17:34:23] [Pasażer 121 (Opiekun)] Przychodzę na przystanek.
+[17:34:23] [Pasażer 121 (Dziecko)] Przychodzę na przystanek.
+[17:34:23] [Pasażer 103 (Rower)] Wszedłem do autobusu!
+[17:34:23]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 4/4)
+[17:34:23] [Pasażer 123 (Rower)] Idę do kasy (PID: 324448).
+[17:34:23] [KASA] Obsługuję pasażera PID 324448...
+[17:34:23] [Pasażer 123 (Rower)] Przychodzę na przystanek.
+[17:34:23] [Pasażer 124 (Rower)] Idę do kasy (PID: 324449).
+[17:34:23] [KASA] Obsługuję pasażera PID 324449...
+[17:34:23] [Pasażer 124 (Rower)] Przychodzę na przystanek.
+[17:34:24] [Pasażer 125 (Zwykły)] Idę do kasy (PID: 324450).
+[17:34:24] [KASA] Obsługuję pasażera PID 324450...
+[17:34:24] [Pasażer 125 (Zwykły)] Przychodzę na przystanek.
+[17:34:24] [Pasażer 126 (Zwykły)] Idę do kasy (PID: 324452).
+[17:34:24] [KASA] Obsługuję pasażera PID 324452...
+[17:34:24] [Pasażer 126 (Zwykły)] Przychodzę na przystanek.
+[17:34:25] [Pasażer 127 (Zwykły)] Idę do kasy (PID: 324453).
+[17:34:25] [KASA] Obsługuję pasażera PID 324453...
+[17:34:25] [Pasażer 127 (Zwykły)] Przychodzę na przystanek.
+[17:34:25] [Dziecko 128] Czekam na rodzica...
+[17:34:25] [Pasażer 128 (Opiekun)] Idę do kasy (PID: 324455).
+[17:34:25] [KASA] Obsługuję pasażera PID 324455...
+[17:34:25] [KASA] Obsługuję pasażera PID 324455...
+[17:34:25] [Pasażer 128 (Opiekun)] Przychodzę na przystanek.
+[17:34:25] [Pasażer 128 (Dziecko)] Przychodzę na przystanek.
+[17:34:25] [Pasażer 130 (Zwykły)] Idę do kasy (PID: 324456).
+[17:34:25] [KASA] Obsługuję pasażera PID 324456...
+[17:34:25] [Pasażer 130 (Zwykły)] Przychodzę na przystanek.
+[17:34:25] [Pasażer 131 (Zwykły)] Idę do kasy (PID: 324500).
+[17:34:25] [KASA] Obsługuję pasażera PID 324500...
+[17:34:25] [Pasażer 131 (Zwykły)] Przychodzę na przystanek.
+[17:34:26] [Pasażer 132 (Rower)] Idę do kasy (PID: 324605).
+[17:34:26] [KASA] Obsługuję pasażera PID 324605...
+[17:34:26] [Pasażer 132 (Rower)] Przychodzę na przystanek.
+[17:34:26] [Dziecko 133] Czekam na rodzica...
+[17:34:26] [Pasażer 133 (Opiekun)] Idę do kasy (PID: 324609).
+[17:34:26] [KASA] Obsługuję pasażera PID 324609...
+[17:34:26] [KASA] Obsługuję pasażera PID 324609...
+[17:34:26] [Pasażer 133 (Opiekun)] Przychodzę na przystanek.
+[17:34:26] [Pasażer 133 (Dziecko)] Przychodzę na przystanek.
+[17:34:26] [Pasażer 135 (Zwykły)] Idę do kasy (PID: 324630).
+[17:34:26] [KASA] Obsługuję pasażera PID 324630...
+[17:34:26] [Pasażer 135 (Zwykły)] Przychodzę na przystanek.
+[17:34:27] [Pasażer 136 (Zwykły)] Idę do kasy (PID: 324642).
+[17:34:27] [KASA] Obsługuję pasażera PID 324642...
+[17:34:27] [Pasażer 136 (Zwykły)] Przychodzę na przystanek.
+[17:34:27] [Dziecko 137] Czekam na rodzica...
+[17:34:27] [Pasażer 137 (Opiekun)] Idę do kasy (PID: 324707).
+[17:34:27] [KASA] Obsługuję pasażera PID 324707...
+[17:34:27] [KASA] Obsługuję pasażera PID 324707...
+[17:34:27] [Pasażer 137 (Opiekun)] Przychodzę na przystanek.
+[17:34:27] [Pasażer 137 (Dziecko)] Przychodzę na przystanek.
+[17:34:27] [Pasażer 139 (Zwykły)] Idę do kasy (PID: 324817).
+[17:34:27] [KASA] Obsługuję pasażera PID 324817...
+[17:34:27] [Pasażer 139 (Zwykły)] Przychodzę na przystanek.
+[17:34:27] [Pasażer 140 (Zwykły)] Idę do kasy (PID: 324928).
+[17:34:27] [KASA] Obsługuję pasażera PID 324928...
+[17:34:27] [Pasażer 140 (Zwykły)] Przychodzę na przystanek.
+[17:34:28] [Pasażer 141 (Zwykły)] Idę do kasy (PID: 324929).
+[17:34:28] [KASA] Obsługuję pasażera PID 324929...
+[17:34:28] [Pasażer 141 (Zwykły)] Przychodzę na przystanek.
+[17:34:28] [Pasażer 105 (Opiekun)] Wszedłem do autobusu!
+[17:34:28]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 4/4)
+[17:34:28] [Pasażer 105 (Dziecko)] Wszedłem do autobusu!
+[17:34:28]    -> [Stan Autobusu] Pasażerów: 8/10 (Rowerów: 4/4)
+[17:34:28] [Dziecko 142] Czekam na rodzica...
+[17:34:28] [Pasażer 142 (Opiekun)] Idę do kasy (PID: 324931).
+[17:34:28] [KASA] Obsługuję pasażera PID 324931...
+[17:34:28] [KASA] Obsługuję pasażera PID 324931...
+[17:34:28] [Pasażer 142 (Opiekun)] Przychodzę na przystanek.
+[17:34:28] [Pasażer 142 (Dziecko)] Przychodzę na przystanek.
+[17:34:28] [Pasażer 144 (Zwykły)] Idę do kasy (PID: 324932).
+[17:34:28] [KASA] Obsługuję pasażera PID 324932...
+[17:34:28] [Pasażer 144 (Zwykły)] Przychodzę na przystanek.
+[17:34:29] [Pasażer 145 (Rower)] Idę do kasy (PID: 324933).
+[17:34:29] [KASA] Obsługuję pasażera PID 324933...
+[17:34:29] [Pasażer 145 (Rower)] Przychodzę na przystanek.
+[17:34:29] [Pasażer 146 (Zwykły)] Idę do kasy (PID: 324934).
+[17:34:29] [KASA] Obsługuję pasażera PID 324934...
+[17:34:29] [Pasażer 146 (Zwykły)] Przychodzę na przystanek.
+[17:34:29] [Pasażer 147 (Zwykły)] Idę do kasy (PID: 324936).
+[17:34:29] [KASA] Obsługuję pasażera PID 324936...
+[17:34:29] [Pasażer 147 (Zwykły)] Przychodzę na przystanek.
+[17:34:29] [Pasażer 148 (Zwykły)] Idę do kasy (PID: 324937).
+[17:34:29] [KASA] Obsługuję pasażera PID 324937...
+[17:34:29] [Pasażer 148 (Zwykły)] Przychodzę na przystanek.
+[17:34:30] [Pasażer 149 (Zwykły)] Idę do kasy (PID: 324938).
+[17:34:30] [KASA] Obsługuję pasażera PID 324938...
+[17:34:30] [Pasażer 149 (Zwykły)] Przychodzę na przystanek.
+[17:34:30] [Dziecko 150] Czekam na rodzica...
+[17:34:30] [Pasażer 150 (Opiekun)] Idę do kasy (PID: 324940).
+[17:34:30] [KASA] Obsługuję pasażera PID 324940...
+[17:34:30] [KASA] Obsługuję pasażera PID 324940...
+[17:34:30] [Pasażer 150 (Opiekun)] Przychodzę na przystanek.
+[17:34:30] [Pasażer 150 (Dziecko)] Przychodzę na przystanek.
+[17:34:30] [Dziecko 152] Czekam na rodzica...
+[17:34:30] [Pasażer 152 (Opiekun)] Idę do kasy (PID: 324948).
+[17:34:30] [KASA] Obsługuję pasażera PID 324948...
+[17:34:30] [KASA] Obsługuję pasażera PID 324948...
+[17:34:30] [Pasażer 152 (Opiekun)] Przychodzę na przystanek.
+[17:34:30] [Pasażer 152 (Dziecko)] Przychodzę na przystanek.
+[17:34:31] [Pasażer 154 (Zwykły)] Idę do kasy (PID: 325006).
+[17:34:31] [KASA] Obsługuję pasażera PID 325006...
+[17:34:31] [Pasażer 154 (Zwykły)] Przychodzę na przystanek.
+[17:34:31] [Pasażer 155 (Zwykły)] Idę do kasy (PID: 325075).
+[17:34:31] [KASA] Obsługuję pasażera PID 325075...
+[17:34:31] [Pasażer 155 (Zwykły)] Przychodzę na przystanek.
+[17:34:31] [Dziecko 156] Czekam na rodzica...
+[17:34:31] [Pasażer 156 (Opiekun)] Idę do kasy (PID: 325114).
+[17:34:31] [KASA] Obsługuję pasażera PID 325114...
+[17:34:31] [KASA] Obsługuję pasażera PID 325114...
+[17:34:31] [Pasażer 156 (Opiekun)] Przychodzę na przystanek.
+[17:34:31] [Pasażer 156 (Dziecko)] Przychodzę na przystanek.
+[17:34:31] [Pasażer 158 (Zwykły)] Idę do kasy (PID: 325115).
+[17:34:31] [KASA] Obsługuję pasażera PID 325115...
+[17:34:31] [Pasażer 158 (Zwykły)] Przychodzę na przystanek.
+[17:34:32] [Pasażer 159 (Rower)] Idę do kasy (PID: 325116).
+[17:34:32] [KASA] Obsługuję pasażera PID 325116...
+[17:34:32] [Pasażer 159 (Rower)] Przychodzę na przystanek.
+[17:34:32] [Pasażer 160 (Zwykły)] Idę do kasy (PID: 325161).
+[17:34:32] [KASA] Obsługuję pasażera PID 325161...
+[17:34:32] [Pasażer 160 (Zwykły)] Przychodzę na przystanek.
+[17:34:32] [Dziecko 161] Czekam na rodzica...
+[17:34:32] [Pasażer 161 (Opiekun)] Idę do kasy (PID: 325227).
+[17:34:32] [KASA] Obsługuję pasażera PID 325227...
+[17:34:32] [KASA] Obsługuję pasażera PID 325227...
+[17:34:32] [Pasażer 161 (Opiekun)] Przychodzę na przystanek.
+[17:34:32] [Pasażer 161 (Dziecko)] Przychodzę na przystanek.
+[17:34:33] [Pasażer 163 (Zwykły)] Idę do kasy (PID: 325270).
+[17:34:33] [KASA] Obsługuję pasażera PID 325270...
+[17:34:33] [Pasażer 163 (Zwykły)] Przychodzę na przystanek.
+[17:34:33] [Pasażer 164 (Zwykły)] Idę do kasy (PID: 325365).
+[17:34:33] [KASA] Obsługuję pasażera PID 325365...
+[17:34:33] [Pasażer 164 (Zwykły)] Przychodzę na przystanek.
+[17:34:33] [Pasażer 20 (Zwykły)] Wszedłem do autobusu!
+[17:34:33]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:34:33] [Pasażer 21 (Zwykły)] Wszedłem do autobusu!
+[17:34:33]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:34:33] [Pasażer 165 (Zwykły)] Idę do kasy (PID: 325443).
+[17:34:33] [KASA] Obsługuję pasażera PID 325443...
+[17:34:33] [Pasażer 165 (Zwykły)] Przychodzę na przystanek.
+[17:34:33] [Pasażer 166 (Zwykły)] Idę do kasy (PID: 325444).
+[17:34:33] [KASA] Obsługuję pasażera PID 325444...
+[17:34:33] [Pasażer 166 (Zwykły)] Przychodzę na przystanek.
+[17:34:34] [Dziecko 167] Czekam na rodzica...
+[17:34:34] [Pasażer 167 (Opiekun)] Idę do kasy (PID: 325446).
+[17:34:34] [KASA] Obsługuję pasażera PID 325446...
+[17:34:34] [KASA] Obsługuję pasażera PID 325446...
+[17:34:34] [Pasażer 167 (Opiekun)] Przychodzę na przystanek.
+[17:34:34] [Pasażer 167 (Dziecko)] Przychodzę na przystanek.
+[17:34:34] [Dziecko 169] Czekam na rodzica...
+[17:34:34] [Pasażer 169 (Opiekun)] Idę do kasy (PID: 325448).
+[17:34:34] [KASA] Obsługuję pasażera PID 325448...
+[17:34:34] [KASA] Obsługuję pasażera PID 325448...
+[17:34:34] [Pasażer 169 (Opiekun)] Przychodzę na przystanek.
+[17:34:34] [Pasażer 169 (Dziecko)] Przychodzę na przystanek.
+[17:34:34] [Pasażer 171 (Zwykły)] Idę do kasy (PID: 325449).
+[17:34:34] [KASA] Obsługuję pasażera PID 325449...
+[17:34:34] [Pasażer 171 (Zwykły)] Przychodzę na przystanek.
+[17:34:34] [Pasażer 172 (Zwykły)] Idę do kasy (PID: 325450).
+[17:34:34] [KASA] Obsługuję pasażera PID 325450...
+[17:34:34] [Pasażer 172 (Zwykły)] Przychodzę na przystanek.
+[17:34:35] [Pasażer 173 (Zwykły)] Idę do kasy (PID: 325451).
+[17:34:35] [KASA] Obsługuję pasażera PID 325451...
+[17:34:35] [Pasażer 173 (Zwykły)] Przychodzę na przystanek.
+[17:34:35] [Pasażer 174 (Rower)] Idę do kasy (PID: 325452).
+[17:34:35] [KASA] Obsługuję pasażera PID 325452...
+[17:34:35] [Pasażer 174 (Rower)] Przychodzę na przystanek.
+[17:34:35] [Pasażer 175 (Zwykły)] Idę do kasy (PID: 325462).
+[17:34:35] [KASA] Obsługuję pasażera PID 325462...
+[17:34:35] [Pasażer 175 (Zwykły)] Przychodzę na przystanek.
+[17:34:36] [Pasażer 176 (Zwykły)] Idę do kasy (PID: 325603).
+[17:34:36] [KASA] Obsługuję pasażera PID 325603...
+[17:34:36] [Pasażer 176 (Zwykły)] Przychodzę na przystanek.
+[17:34:36] [Pasażer 177 (Rower)] Idę do kasy (PID: 325646).
+[17:34:36] [KASA] Obsługuję pasażera PID 325646...
+[17:34:36] [Pasażer 177 (Rower)] Przychodzę na przystanek.
+[17:34:36] [Pasażer 178 (Zwykły)] Idę do kasy (PID: 325647).
+[17:34:36] [KASA] Obsługuję pasażera PID 325647...
+[17:34:36] [Pasażer 178 (Zwykły)] Przychodzę na przystanek.
+[17:34:37] [Pasażer 179 (Rower)] Idę do kasy (PID: 325648).
+[17:34:37] [KASA] Obsługuję pasażera PID 325648...
+[17:34:37] [Pasażer 179 (Rower)] Przychodzę na przystanek.
+[17:34:37] [Pasażer 180 (Zwykły)] Idę do kasy (PID: 325673).
+[17:34:37] [KASA] Obsługuję pasażera PID 325673...
+[17:34:37] [Pasażer 180 (Zwykły)] Przychodzę na przystanek.
+[17:34:37] [Pasażer 181 (Rower)] Idę do kasy (PID: 325756).
+[17:34:37] [KASA] Obsługuję pasażera PID 325756...
+[17:34:37] [Pasażer 181 (Rower)] Przychodzę na przystanek.
+[17:34:37] [Pasażer 182 (Rower)] Idę do kasy (PID: 325831).
+[17:34:37] [KASA] Obsługuję pasażera PID 325831...
+[17:34:37] [Pasażer 182 (Rower)] Przychodzę na przystanek.
+[17:34:37] [Pasażer 183 (Zwykły)] Idę do kasy (PID: 325910).
+[17:34:37] [KASA] Obsługuję pasażera PID 325910...
+[17:34:37] [Pasażer 183 (Zwykły)] Przychodzę na przystanek.
+[17:34:38] [Pasażer 184 (Zwykły)] Idę do kasy (PID: 326020).
+[17:34:38] [KASA] Obsługuję pasażera PID 326020...
+[17:34:38] [Pasażer 184 (Zwykły)] Przychodzę na przystanek.
+[17:34:38] [Pasażer 185 (Rower)] Idę do kasy (PID: 326021).
+[17:34:38] [KASA] Obsługuję pasażera PID 326021...
+[17:34:38] [Pasażer 185 (Rower)] Przychodzę na przystanek.
+[17:34:38] [Pasażer 186 (Zwykły)] Idę do kasy (PID: 326022).
+[17:34:38] [KASA] Obsługuję pasażera PID 326022...
+[17:34:38] [Pasażer 186 (Zwykły)] Przychodzę na przystanek.
+[17:34:39] [Pasażer 187 (Zwykły)] Idę do kasy (PID: 326023).
+[17:34:39] [KASA] Obsługuję pasażera PID 326023...
+[17:34:39] [Pasażer 187 (Zwykły)] Przychodzę na przystanek.
+[17:34:39] [Pasażer 188 (Zwykły)] Idę do kasy (PID: 326024).
+[17:34:39] [KASA] Obsługuję pasażera PID 326024...
+[17:34:39] [Pasażer 188 (Zwykły)] Przychodzę na przystanek.
+[17:34:39] [Pasażer 189 (Rower)] Idę do kasy (PID: 326025).
+[17:34:39] [KASA] Obsługuję pasażera PID 326025...
+[17:34:39] [Pasażer 189 (Rower)] Przychodzę na przystanek.
+[17:34:40] [Pasażer 190 (Zwykły)] Idę do kasy (PID: 326026).
+[17:34:40] [KASA] Obsługuję pasażera PID 326026...
+[17:34:40] [Pasażer 190 (Zwykły)] Przychodzę na przystanek.
+[17:34:40] [Pasażer 191 (Rower)] Idę do kasy (PID: 326027).
+[17:34:40] [KASA] Obsługuję pasażera PID 326027...
+[17:34:40] [Pasażer 191 (Rower)] Przychodzę na przystanek.
+[17:34:40] [Pasażer 192 (Zwykły)] Idę do kasy (PID: 326033).
+[17:34:40] [KASA] Obsługuję pasażera PID 326033...
+[17:34:40] [Pasażer 192 (Zwykły)] Przychodzę na przystanek.
+[17:34:41] [Pasażer 193 (Zwykły)] Idę do kasy (PID: 326088).
+[17:34:41] [KASA] Obsługuję pasażera PID 326088...
+[17:34:41] [Pasażer 193 (Zwykły)] Przychodzę na przystanek.
+[17:34:41] [Pasażer 194 (Opiekun)] Idę do kasy (PID: 326137).
+[17:34:41] [Dziecko 194] Czekam na rodzica...
+[17:34:41] [KASA] Obsługuję pasażera PID 326137...
+[17:34:41] [KASA] Obsługuję pasażera PID 326137...
+[17:34:41] [Pasażer 194 (Opiekun)] Przychodzę na przystanek.
+[17:34:41] [Pasażer 194 (Dziecko)] Przychodzę na przystanek.
+[17:34:41] [Pasażer 196 (Zwykły)] Idę do kasy (PID: 326209).
+[17:34:41] [KASA] Obsługuję pasażera PID 326209...
+[17:34:41] [Pasażer 196 (Zwykły)] Przychodzę na przystanek.
+[17:34:42] [Pasażer 197 (Zwykły)] Idę do kasy (PID: 326244).
+[17:34:42] [KASA] Obsługuję pasażera PID 326244...
+[17:34:42] [Pasażer 197 (Zwykły)] Przychodzę na przystanek.
+[17:34:42] [Pasażer 198 (Zwykły)] Idę do kasy (PID: 326245).
+[17:34:42] [KASA] Obsługuję pasażera PID 326245...
+[17:34:42] [Pasażer 198 (Zwykły)] Przychodzę na przystanek.
+[17:34:42] [Pasażer 199 (Zwykły)] Idę do kasy (PID: 326246).
+[17:34:42] [KASA] Obsługuję pasażera PID 326246...
+[17:34:42] [Pasażer 199 (Zwykły)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 200 (Opiekun)] Idę do kasy (PID: 326341).
+[17:34:43] [Dziecko 200] Czekam na rodzica...
+[17:34:43] [KASA] Obsługuję pasażera PID 326341...
+[17:34:43] [KASA] Obsługuję pasażera PID 326341...
+[17:34:43] [Pasażer 200 (Opiekun)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 200 (Dziecko)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 202 (Rower)] Idę do kasy (PID: 326402).
+[17:34:43] [KASA] Obsługuję pasażera PID 326402...
+[17:34:43] [Pasażer 202 (Rower)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 203 (Opiekun)] Idę do kasy (PID: 326513).
+[17:34:43] [Dziecko 203] Czekam na rodzica...
+[17:34:43] [KASA] Obsługuję pasażera PID 326513...
+[17:34:43] [KASA] Obsługuję pasażera PID 326513...
+[17:34:43] [Pasażer 203 (Opiekun)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 203 (Dziecko)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 205 (Opiekun)] Idę do kasy (PID: 326637).
+[17:34:43] [KASA] Obsługuję pasażera PID 326637...
+[17:34:43] [Dziecko 205] Czekam na rodzica...
+[17:34:43] [KASA] Obsługuję pasażera PID 326637...
+[17:34:43] [Pasażer 205 (Opiekun)] Przychodzę na przystanek.
+[17:34:43] [Pasażer 205 (Dziecko)] Przychodzę na przystanek.
+[17:34:44] [Pasażer 207 (Zwykły)] Idę do kasy (PID: 326657).
+[17:34:44] [KASA] Obsługuję pasażera PID 326657...
+[17:34:44] [Pasażer 207 (Zwykły)] Przychodzę na przystanek.
+[17:34:44] [Pasażer 208 (Zwykły)] Idę do kasy (PID: 326658).
+[17:34:44] [KASA] Obsługuję pasażera PID 326658...
+[17:34:44] [Pasażer 208 (Zwykły)] Przychodzę na przystanek.
+[17:34:44] [Pasażer 209 (Zwykły)] Idę do kasy (PID: 326659).
+[17:34:44] [KASA] Obsługuję pasażera PID 326659...
+[17:34:44] [Pasażer 209 (Zwykły)] Przychodzę na przystanek.
+[17:34:45] [Dziecko 210] Czekam na rodzica...
+[17:34:45] [Pasażer 210 (Opiekun)] Idę do kasy (PID: 326661).
+[17:34:45] [KASA] Obsługuję pasażera PID 326661...
+[17:34:45] [KASA] Obsługuję pasażera PID 326661...
+[17:34:45] [Pasażer 210 (Opiekun)] Przychodzę na przystanek.
+[17:34:45] [Pasażer 210 (Dziecko)] Przychodzę na przystanek.
+[17:34:45] [Pasażer 212 (Rower)] Idę do kasy (PID: 326663).
+[17:34:45] [KASA] Obsługuję pasażera PID 326663...
+[17:34:45] [Pasażer 212 (Rower)] Przychodzę na przystanek.
+[17:34:45] [Dziecko 213] Czekam na rodzica...
+[17:34:45] [Pasażer 213 (Opiekun)] Idę do kasy (PID: 326669).
+[17:34:45] [KASA] Obsługuję pasażera PID 326669...
+[17:34:45] [KASA] Obsługuję pasażera PID 326669...
+[17:34:45] [Pasażer 213 (Opiekun)] Przychodzę na przystanek.
+[17:34:45] [Pasażer 213 (Dziecko)] Przychodzę na przystanek.
+[17:34:46] [Pasażer 215 (Zwykły)] Idę do kasy (PID: 326746).
+[17:34:46] [KASA] Obsługuję pasażera PID 326746...
+[17:34:46] [Pasażer 215 (Zwykły)] Przychodzę na przystanek.
+[17:34:46] [Pasażer 216 (Zwykły)] Idę do kasy (PID: 326815).
+[17:34:46] [KASA] Obsługuję pasażera PID 326815...
+[17:34:46] [Pasażer 216 (Zwykły)] Przychodzę na przystanek.
+[17:34:46] [Pasażer 217 (Zwykły)] Idę do kasy (PID: 326897).
+[17:34:46] [KASA] Obsługuję pasażera PID 326897...
+[17:34:46] [Pasażer 217 (Zwykły)] Przychodzę na przystanek.
+[17:34:47] [Pasażer 218 (Zwykły)] Idę do kasy (PID: 326898).
+[17:34:47] [KASA] Obsługuję pasażera PID 326898...
+[17:34:47] [Pasażer 218 (Zwykły)] Przychodzę na przystanek.
+[17:34:47] [Pasażer 219 (Rower)] Idę do kasy (PID: 326899).
+[17:34:47] [KASA] Obsługuję pasażera PID 326899...
+[17:34:47] [Pasażer 219 (Rower)] Przychodzę na przystanek.
+[17:34:47] [Pasażer 220 (Zwykły)] Idę do kasy (PID: 326948).
+[17:34:47] [KASA] Obsługuję pasażera PID 326948...
+[17:34:47] [Pasażer 220 (Zwykły)] Przychodzę na przystanek.
+[17:34:47] [Pasażer 221 (Zwykły)] Idę do kasy (PID: 327087).
+[17:34:47] [KASA] Obsługuję pasażera PID 327087...
+[17:34:47] [Pasażer 221 (Zwykły)] Przychodzę na przystanek.
+[17:34:48] [Pasażer 222 (Rower)] Idę do kasy (PID: 327240).
+[17:34:48] [KASA] Obsługuję pasażera PID 327240...
+[17:34:48] [Pasażer 222 (Rower)] Przychodzę na przystanek.
+[17:34:48] [Dziecko 223] Czekam na rodzica...
+[17:34:48] [Pasażer 223 (Opiekun)] Idę do kasy (PID: 327347).
+[17:34:48] [KASA] Obsługuję pasażera PID 327347...
+[17:34:48] [KASA] Obsługuję pasażera PID 327347...
+[17:34:48] [Pasażer 223 (Opiekun)] Przychodzę na przystanek.
+[17:34:48] [Pasażer 223 (Dziecko)] Przychodzę na przystanek.
+[17:34:48] [Pasażer 225 (Zwykły)] Idę do kasy (PID: 327348).
+[17:34:48] [KASA] Obsługuję pasażera PID 327348...
+[17:34:48] [Pasażer 225 (Zwykły)] Przychodzę na przystanek.
+[17:34:49] [Pasażer 226 (Zwykły)] Idę do kasy (PID: 327349).
+[17:34:49] [KASA] Obsługuję pasażera PID 327349...
+[17:34:49] [Pasażer 226 (Zwykły)] Przychodzę na przystanek.
+[17:34:49] [Pasażer 227 (Zwykły)] Idę do kasy (PID: 327350).
+[17:34:49] [KASA] Obsługuję pasażera PID 327350...
+[17:34:49] [Pasażer 227 (Zwykły)] Przychodzę na przystanek.
+[17:34:49] [Pasażer 228 (Zwykły)] Idę do kasy (PID: 327351).
+[17:34:49] [KASA] Obsługuję pasażera PID 327351...
+[17:34:49] [Pasażer 228 (Zwykły)] Przychodzę na przystanek.
+[17:34:50] [Pasażer 229 (Zwykły)] Idę do kasy (PID: 327352).
+[17:34:50] [KASA] Obsługuję pasażera PID 327352...
+[17:34:50] [Pasażer 229 (Zwykły)] Przychodzę na przystanek.
+[17:34:50] [Pasażer 230 (Rower)] Idę do kasy (PID: 327353).
+[17:34:50] [KASA] Obsługuję pasażera PID 327353...
+[17:34:50] [Pasażer 230 (Rower)] Przychodzę na przystanek.
+[17:34:50] [Pasażer 231 (Zwykły)] Idę do kasy (PID: 327396).
+[17:34:50] [KASA] Obsługuję pasażera PID 327396...
+[17:34:50] [Pasażer 231 (Zwykły)] Przychodzę na przystanek.
+[17:34:51] [Dziecko 232] Czekam na rodzica...
+[17:34:51] [Pasażer 232 (Opiekun)] Idę do kasy (PID: 327562).
+[17:34:51] [KASA] Obsługuję pasażera PID 327562...
+[17:34:51] [KASA] Obsługuję pasażera PID 327562...
+[17:34:51] [Pasażer 232 (Opiekun)] Przychodzę na przystanek.
+[17:34:51] [Pasażer 232 (Dziecko)] Przychodzę na przystanek.
+[17:34:51] [Pasażer 234 (Opiekun)] Idę do kasy (PID: 327605).
+[17:34:51] [Dziecko 234] Czekam na rodzica...
+[17:34:51] [KASA] Obsługuję pasażera PID 327605...
+[17:34:51] [KASA] Obsługuję pasażera PID 327605...
+[17:34:51] [Pasażer 234 (Opiekun)] Przychodzę na przystanek.
+[17:34:51] [Pasażer 234 (Dziecko)] Przychodzę na przystanek.
+[17:34:51] [Pasażer 236 (Zwykły)] Idę do kasy (PID: 327606).
+[17:34:51] [KASA] Obsługuję pasażera PID 327606...
+[17:34:51] [Pasażer 236 (Zwykły)] Przychodzę na przystanek.
+[17:34:52] [Dziecko 237] Czekam na rodzica...
+[17:34:52] [Pasażer 237 (Opiekun)] Idę do kasy (PID: 327608).
+[17:34:52] [KASA] Obsługuję pasażera PID 327608...
+[17:34:52] [KASA] Obsługuję pasażera PID 327608...
+[17:34:52] [Pasażer 237 (Opiekun)] Przychodzę na przystanek.
+[17:34:52] [Pasażer 237 (Dziecko)] Przychodzę na przystanek.
+[17:34:52] [Dziecko 239] Czekam na rodzica...
+[17:34:52] [Pasażer 239 (Opiekun)] Idę do kasy (PID: 327744).
+[17:34:52] [KASA] Obsługuję pasażera PID 327744...
+[17:34:52] [KASA] Obsługuję pasażera PID 327744...
+[17:34:52] [Pasażer 239 (Dziecko)] Przychodzę na przystanek.
+[17:34:52] [Pasażer 239 (Opiekun)] Przychodzę na przystanek.
+[17:34:52] [Pasażer 241 (Rower)] Idę do kasy (PID: 327891).
+[17:34:52] [KASA] Obsługuję pasażera PID 327891...
+[17:34:52] [Pasażer 241 (Rower)] Przychodzę na przystanek.
+[17:34:53] [Autobus 3] ODJAZD z 10 pasażerami (4 rowerów).
+[17:34:53] [Autobus 3] WRÓCIŁ Z TRASY po 7 s.
+[17:34:53] [Autobus 2] Podstawiłem się. SPRAWDZAM BILETY!
+[17:34:53] [Pasażer 132 (Rower)] Wszedłem do autobusu!
+[17:34:53]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 1/4)
+[17:34:53] [Pasażer 41 (Opiekun)] Wszedłem do autobusu!
+[17:34:53]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 1/4)
+[17:34:53] [Pasażer 242 (Rower)] Idę do kasy (PID: 328002).
+[17:34:53] [KASA] Obsługuję pasażera PID 328002...
+[17:34:53] [Pasażer 242 (Rower)] Przychodzę na przystanek.
+[17:34:53] [Pasażer 51 (Rower)] Wszedłem do autobusu!
+[17:34:53]    -> [Stan Autobusu] Pasażerów: 3/10 (Rowerów: 2/4)
+[17:34:53] [Pasażer 41 (Dziecko)] Wszedłem do autobusu!
+[17:34:53]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 2/4)
+[17:34:53] [Pasażer 177 (Rower)] Wszedłem do autobusu!
+[17:34:53]    -> [Stan Autobusu] Pasażerów: 5/10 (Rowerów: 3/4)
+[17:34:53] [Pasażer 243 (Zwykły)] Idę do kasy (PID: 328092).
+[17:34:53] [KASA] Obsługuję pasażera PID 328092...
+[17:34:53] [Pasażer 243 (Zwykły)] Przychodzę na przystanek.
+[17:34:53] [Pasażer 47 (Rower)] Wszedłem do autobusu!
+[17:34:53]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 4/4)
+[17:34:53] [Pasażer 244 (Zwykły)] Idę do kasy (PID: 328093).
+[17:34:53] [KASA] Obsługuję pasażera PID 328093...
+[17:34:53] [Pasażer 244 (Zwykły)] Przychodzę na przystanek.
+[17:34:54] [Pasażer 245 (Rower)] Idę do kasy (PID: 328094).
+[17:34:54] [KASA] Obsługuję pasażera PID 328094...
+[17:34:54] [Pasażer 245 (Rower)] Przychodzę na przystanek.
+[17:34:54] [Pasażer 246 (Rower)] Idę do kasy (PID: 328095).
+[17:34:54] [KASA] Obsługuję pasażera PID 328095...
+[17:34:54] [Pasażer 246 (Rower)] Przychodzę na przystanek.
+[17:34:54] [Pasażer 247 (Zwykły)] Idę do kasy (PID: 328096).
+[17:34:54] [KASA] Obsługuję pasażera PID 328096...
+[17:34:54] [Pasażer 247 (Zwykły)] Przychodzę na przystanek.
+[17:34:54] [Pasażer 248 (Zwykły)] Idę do kasy (PID: 328097).
+[17:34:54] [KASA] Obsługuję pasażera PID 328097...
+[17:34:54] [Pasażer 248 (Zwykły)] Przychodzę na przystanek.
+[17:34:55] [Dziecko 249] Czekam na rodzica...
+[17:34:55] [Pasażer 249 (Opiekun)] Idę do kasy (PID: 328099).
+[17:34:55] [KASA] Obsługuję pasażera PID 328099...
+[17:34:55] [KASA] Obsługuję pasażera PID 328099...
+[17:34:55] [Pasażer 249 (Dziecko)] Przychodzę na przystanek.
+[17:34:55] [Pasażer 249 (Opiekun)] Przychodzę na przystanek.
+[17:34:55] [Pasażer 251 (Zwykły)] Idę do kasy (PID: 328100).
+[17:34:55] [KASA] Obsługuję pasażera PID 328100...
+[17:34:55] [Pasażer 251 (Zwykły)] Przychodzę na przystanek.
+[17:34:55] [Pasażer 252 (Zwykły)] Idę do kasy (PID: 328126).
+[17:34:55] [KASA] Obsługuję pasażera PID 328126...
+[17:34:55] [Pasażer 252 (Zwykły)] Przychodzę na przystanek.
+[17:34:56] [Pasażer 253 (Rower)] Idę do kasy (PID: 328217).
+[17:34:56] [KASA] Obsługuję pasażera PID 328217...
+[17:34:56] [Pasażer 253 (Rower)] Przychodzę na przystanek.
+[17:34:56] [Pasażer 254 (Zwykły)] Idę do kasy (PID: 328336).
+[17:34:56] [KASA] Obsługuję pasażera PID 328336...
+[17:34:56] [Pasażer 254 (Zwykły)] Przychodzę na przystanek.
+[17:34:56] [Pasażer 255 (Opiekun)] Idę do kasy (PID: 328373).
+[17:34:56] [KASA] Obsługuję pasażera PID 328373...
+[17:34:56] [KASA] Obsługuję pasażera PID 328373...
+[17:34:56] [Pasażer 255 (Opiekun)] Przychodzę na przystanek.
+[17:34:56] [Dziecko 255] Czekam na rodzica...
+[17:34:56] [Pasażer 255 (Dziecko)] Przychodzę na przystanek.
+[17:34:57] [Pasażer 257 (Zwykły)] Idę do kasy (PID: 328374).
+[17:34:57] [KASA] Obsługuję pasażera PID 328374...
+[17:34:57] [Pasażer 257 (Zwykły)] Przychodzę na przystanek.
+[17:34:57] [Pasażer 258 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:34:57] [Pasażer 258 (VIP)] Przychodzę na przystanek.
+[17:34:57] [Pasażer 258 (VIP)] Wszedłem do autobusu!
+[17:34:57]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 4/4)
+[17:34:57] [Pasażer 259 (Zwykły)] Idę do kasy (PID: 328380).
+[17:34:57] [KASA] Obsługuję pasażera PID 328380...
+[17:34:57] [Pasażer 259 (Zwykły)] Przychodzę na przystanek.
+[17:34:57] [Dziecko 260] Czekam na rodzica...
+[17:34:57] [Pasażer 260 (Opiekun)] Idę do kasy (PID: 328460).
+[17:34:57] [KASA] Obsługuję pasażera PID 328460...
+[17:34:57] [KASA] Obsługuję pasażera PID 328460...
+[17:34:57] [Pasażer 260 (Opiekun)] Przychodzę na przystanek.
+[17:34:57] [Pasażer 260 (Dziecko)] Przychodzę na przystanek.
+[17:34:58] [Dziecko 262] Czekam na rodzica...
+[17:34:58] [Pasażer 262 (Opiekun)] Idę do kasy (PID: 328608).
+[17:34:58] [KASA] Obsługuję pasażera PID 328608...
+[17:34:58] [KASA] Obsługuję pasażera PID 328608...
+[17:34:58] [Pasażer 262 (Opiekun)] Przychodzę na przystanek.
+[17:34:58] [Pasażer 262 (Dziecko)] Przychodzę na przystanek.
+[17:34:58] [Pasażer 208 (Zwykły)] Wszedłem do autobusu!
+[17:34:58]    -> [Stan Autobusu] Pasażerów: 8/10 (Rowerów: 4/4)
+[17:34:58] [Pasażer 264 (Zwykły)] Idę do kasy (PID: 328735).
+[17:34:58] [KASA] Obsługuję pasażera PID 328735...
+[17:34:58] [Pasażer 264 (Zwykły)] Przychodzę na przystanek.
+[17:34:58] [Pasażer 104 (Zwykły)] Wszedłem do autobusu!
+[17:34:58]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:34:58] [Pasażer 119 (Zwykły)] Wszedłem do autobusu!
+[17:34:58]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:34:58] [Pasażer 265 (Zwykły)] Idę do kasy (PID: 328903).
+[17:34:58] [KASA] Obsługuję pasażera PID 328903...
+[17:34:58] [Pasażer 265 (Zwykły)] Przychodzę na przystanek.
+[17:34:59] [Pasażer 266 (Rower)] Idę do kasy (PID: 328904).
+[17:34:59] [KASA] Obsługuję pasażera PID 328904...
+[17:34:59] [Pasażer 266 (Rower)] Przychodzę na przystanek.
+[17:34:59] [Pasażer 267 (Opiekun)] Idę do kasy (PID: 328906).
+[17:34:59] [KASA] Obsługuję pasażera PID 328906...
+[17:34:59] [KASA] Obsługuję pasażera PID 328906...
+[17:34:59] [Pasażer 267 (Opiekun)] Przychodzę na przystanek.
+[17:34:59] [Dziecko 267] Czekam na rodzica...
+[17:34:59] [Pasażer 267 (Dziecko)] Przychodzę na przystanek.
+[17:34:59] [Pasażer 269 (Zwykły)] Idę do kasy (PID: 328907).
+[17:34:59] [KASA] Obsługuję pasażera PID 328907...
+[17:34:59] [Pasażer 269 (Zwykły)] Przychodzę na przystanek.
+[17:34:59] [Pasażer 270 (Zwykły)] Idę do kasy (PID: 328908).
+[17:34:59] [KASA] Obsługuję pasażera PID 328908...
+[17:34:59] [Pasażer 270 (Zwykły)] Przychodzę na przystanek.
+[17:35:00] [Pasażer 271 (Rower)] Idę do kasy (PID: 328909).
+[17:35:00] [KASA] Obsługuję pasażera PID 328909...
+[17:35:00] [Pasażer 271 (Rower)] Przychodzę na przystanek.
+[17:35:00] [Dziecko 272] Czekam na rodzica...
+[17:35:00] [Pasażer 272 (Opiekun)] Idę do kasy (PID: 328911).
+[17:35:00] [KASA] Obsługuję pasażera PID 328911...
+[17:35:00] [KASA] Obsługuję pasażera PID 328911...
+[17:35:00] [Pasażer 272 (Opiekun)] Przychodzę na przystanek.
+[17:35:00] [Pasażer 272 (Dziecko)] Przychodzę na przystanek.
+[17:35:00] [Pasażer 274 (Opiekun)] Idę do kasy (PID: 328915).
+[17:35:00] [KASA] Obsługuję pasażera PID 328915...
+[17:35:00] [KASA] Obsługuję pasażera PID 328915...
+[17:35:00] [Pasażer 274 (Opiekun)] Przychodzę na przystanek.
+[17:35:00] [Dziecko 274] Czekam na rodzica...
+[17:35:00] [Pasażer 274 (Dziecko)] Przychodzę na przystanek.
+[17:35:01] [Pasażer 276 (Rower)] Idę do kasy (PID: 328974).
+[17:35:01] [KASA] Obsługuję pasażera PID 328974...
+[17:35:01] [Pasażer 276 (Rower)] Przychodzę na przystanek.
+[17:35:01] [Pasażer 277 (Rower)] Idę do kasy (PID: 329057).
+[17:35:01] [KASA] Obsługuję pasażera PID 329057...
+[17:35:01] [Pasażer 277 (Rower)] Przychodzę na przystanek.
+[17:35:01] [Pasażer 278 (Zwykły)] Idę do kasy (PID: 329129).
+[17:35:01] [KASA] Obsługuję pasażera PID 329129...
+[17:35:01] [Pasażer 278 (Zwykły)] Przychodzę na przystanek.
+[17:35:02] [Dziecko 279] Czekam na rodzica...
+[17:35:02] [Pasażer 279 (Opiekun)] Idę do kasy (PID: 329202).
+[17:35:02] [KASA] Obsługuję pasażera PID 329202...
+[17:35:02] [KASA] Obsługuję pasażera PID 329202...
+[17:35:02] [Pasażer 279 (Opiekun)] Przychodzę na przystanek.
+[17:35:02] [Pasażer 279 (Dziecko)] Przychodzę na przystanek.
+[17:35:02] [Pasażer 281 (Zwykły)] Idę do kasy (PID: 329211).
+[17:35:02] [KASA] Obsługuję pasażera PID 329211...
+[17:35:02] [Pasażer 281 (Zwykły)] Przychodzę na przystanek.
+[17:35:02] [Pasażer 282 (Zwykły)] Idę do kasy (PID: 329212).
+[17:35:02] [KASA] Obsługuję pasażera PID 329212...
+[17:35:02] [Pasażer 282 (Zwykły)] Przychodzę na przystanek.
+[17:35:02] [Pasażer 283 (Zwykły)] Idę do kasy (PID: 329213).
+[17:35:02] [KASA] Obsługuję pasażera PID 329213...
+[17:35:02] [Pasażer 283 (Zwykły)] Przychodzę na przystanek.
+[17:35:03] [Pasażer 284 (Opiekun)] Idę do kasy (PID: 329278).
+[17:35:03] [KASA] Obsługuję pasażera PID 329278...
+[17:35:03] [KASA] Obsługuję pasażera PID 329278...
+[17:35:03] [Pasażer 284 (Opiekun)] Przychodzę na przystanek.
+[17:35:03] [Dziecko 284] Czekam na rodzica...
+[17:35:03] [Pasażer 284 (Dziecko)] Przychodzę na przystanek.
+[17:35:03] [Pasażer 286 (Rower)] Idę do kasy (PID: 329474).
+[17:35:03] [KASA] Obsługuję pasażera PID 329474...
+[17:35:03] [Pasażer 286 (Rower)] Przychodzę na przystanek.
+[17:35:03] [Pasażer 287 (Zwykły)] Idę do kasy (PID: 329629).
+[17:35:03] [KASA] Obsługuję pasażera PID 329629...
+[17:35:03] [Pasażer 287 (Zwykły)] Przychodzę na przystanek.
+[17:35:04] [Pasażer 288 (Rower)] Idę do kasy (PID: 329778).
+[17:35:04] [KASA] Obsługuję pasażera PID 329778...
+[17:35:04] [Pasażer 288 (Rower)] Przychodzę na przystanek.
+[17:35:04] [Pasażer 289 (Opiekun)] Idę do kasy (PID: 329789).
+[17:35:04] [Dziecko 289] Czekam na rodzica...
+[17:35:04] [KASA] Obsługuję pasażera PID 329789...
+[17:35:04] [KASA] Obsługuję pasażera PID 329789...
+[17:35:04] [Pasażer 289 (Opiekun)] Przychodzę na przystanek.
+[17:35:04] [Pasażer 289 (Dziecko)] Przychodzę na przystanek.
+[17:35:04] [Pasażer 291 (Zwykły)] Idę do kasy (PID: 329790).
+[17:35:04] [KASA] Obsługuję pasażera PID 329790...
+[17:35:04] [Pasażer 291 (Zwykły)] Przychodzę na przystanek.
+[17:35:05] [Pasażer 292 (Rower)] Idę do kasy (PID: 329791).
+[17:35:05] [KASA] Obsługuję pasażera PID 329791...
+[17:35:05] [Pasażer 292 (Rower)] Przychodzę na przystanek.
+[17:35:05] [Pasażer 293 (Zwykły)] Idę do kasy (PID: 329792).
+[17:35:05] [KASA] Obsługuję pasażera PID 329792...
+[17:35:05] [Pasażer 293 (Zwykły)] Przychodzę na przystanek.
+[17:35:05] [Pasażer 294 (Zwykły)] Idę do kasy (PID: 329795).
+[17:35:05] [KASA] Obsługuję pasażera PID 329795...
+[17:35:05] [Pasażer 294 (Zwykły)] Przychodzę na przystanek.
+[17:35:06] [Pasażer 295 (Zwykły)] Idę do kasy (PID: 329883).
+[17:35:06] [KASA] Obsługuję pasażera PID 329883...
+[17:35:06] [Pasażer 295 (Zwykły)] Przychodzę na przystanek.
+[17:35:06] [Pasażer 296 (Rower)] Idę do kasy (PID: 329977).
+[17:35:06] [KASA] Obsługuję pasażera PID 329977...
+[17:35:06] [Pasażer 296 (Rower)] Przychodzę na przystanek.
+[17:35:06] [Pasażer 297 (Zwykły)] Idę do kasy (PID: 330091).
+[17:35:06] [KASA] Obsługuję pasażera PID 330091...
+[17:35:06] [Pasażer 297 (Zwykły)] Przychodzę na przystanek.
+[17:35:07] [Pasażer 298 (Zwykły)] Idę do kasy (PID: 330108).
+[17:35:07] [KASA] Obsługuję pasażera PID 330108...
+[17:35:07] [Pasażer 298 (Zwykły)] Przychodzę na przystanek.
+[17:35:07] [Dziecko 299] Czekam na rodzica...
+[17:35:07] [Pasażer 299 (Opiekun)] Idę do kasy (PID: 330110).
+[17:35:07] [KASA] Obsługuję pasażera PID 330110...
+[17:35:07] [KASA] Obsługuję pasażera PID 330110...
+[17:35:07] [Pasażer 299 (Opiekun)] Przychodzę na przystanek.
+[17:35:07] [Pasażer 299 (Dziecko)] Przychodzę na przystanek.
+[17:35:07] [Dziecko 301] Czekam na rodzica...
+[17:35:07] [Pasażer 301 (Opiekun)] Idę do kasy (PID: 330112).
+[17:35:07] [KASA] Obsługuję pasażera PID 330112...
+[17:35:07] [KASA] Obsługuję pasażera PID 330112...
+[17:35:07] [Pasażer 301 (Opiekun)] Przychodzę na przystanek.
+[17:35:07] [Pasażer 301 (Dziecko)] Przychodzę na przystanek.
+[17:35:08] [Pasażer 303 (Opiekun)] Idę do kasy (PID: 330204).
+[17:35:08] [Dziecko 303] Czekam na rodzica...
+[17:35:08] [KASA] Obsługuję pasażera PID 330204...
+[17:35:08] [KASA] Obsługuję pasażera PID 330204...
+[17:35:08] [Pasażer 303 (Opiekun)] Przychodzę na przystanek.
+[17:35:08] [Pasażer 303 (Dziecko)] Przychodzę na przystanek.
+[17:35:08] [Pasażer 305 (Rower)] Idę do kasy (PID: 330391).
+[17:35:08] [KASA] Obsługuję pasażera PID 330391...
+[17:35:08] [Pasażer 305 (Rower)] Przychodzę na przystanek.
+[17:35:08] [Pasażer 306 (Zwykły)] Idę do kasy (PID: 330566).
+[17:35:08] [KASA] Obsługuję pasażera PID 330566...
+[17:35:08] [Pasażer 306 (Zwykły)] Przychodzę na przystanek.
+[17:35:09] [Dziecko 307] Czekam na rodzica...
+[17:35:09] [Pasażer 307 (Opiekun)] Idę do kasy (PID: 330642).
+[17:35:09] [KASA] Obsługuję pasażera PID 330642...
+[17:35:09] [KASA] Obsługuję pasażera PID 330642...
+[17:35:09] [Pasażer 307 (Opiekun)] Przychodzę na przystanek.
+[17:35:09] [Pasażer 307 (Dziecko)] Przychodzę na przystanek.
+[17:35:09] [Pasażer 309 (Zwykły)] Idę do kasy (PID: 330725).
+[17:35:09] [KASA] Obsługuję pasażera PID 330725...
+[17:35:09] [Pasażer 309 (Zwykły)] Przychodzę na przystanek.
+[17:35:09] [Pasażer 310 (Zwykły)] Idę do kasy (PID: 330727).
+[17:35:09] [KASA] Obsługuję pasażera PID 330727...
+[17:35:09] [Pasażer 310 (Zwykły)] Przychodzę na przystanek.
+[17:35:09] [Pasażer 311 (Zwykły)] Idę do kasy (PID: 330728).
+[17:35:09] [KASA] Obsługuję pasażera PID 330728...
+[17:35:09] [Pasażer 311 (Zwykły)] Przychodzę na przystanek.
+[17:35:09] [Pasażer 312 (Zwykły)] Idę do kasy (PID: 330729).
+[17:35:09] [KASA] Obsługuję pasażera PID 330729...
+[17:35:09] [Pasażer 312 (Zwykły)] Przychodzę na przystanek.
+[17:35:10] [Dziecko 313] Czekam na rodzica...
+[17:35:10] [Pasażer 313 (Opiekun)] Idę do kasy (PID: 330731).
+[17:35:10] [KASA] Obsługuję pasażera PID 330731...
+[17:35:10] [KASA] Obsługuję pasażera PID 330731...
+[17:35:10] [Pasażer 313 (Opiekun)] Przychodzę na przystanek.
+[17:35:10] [Pasażer 313 (Dziecko)] Przychodzę na przystanek.
+[17:35:10] [Dziecko 315] Czekam na rodzica...
+[17:35:10] [Pasażer 315 (Opiekun)] Idę do kasy (PID: 330733).
+[17:35:10] [KASA] Obsługuję pasażera PID 330733...
+[17:35:10] [KASA] Obsługuję pasażera PID 330733...
+[17:35:10] [Pasażer 315 (Opiekun)] Przychodzę na przystanek.
+[17:35:10] [Pasażer 315 (Dziecko)] Przychodzę na przystanek.
+[17:35:10] [Pasażer 317 (Zwykły)] Idę do kasy (PID: 330736).
+[17:35:10] [KASA] Obsługuję pasażera PID 330736...
+[17:35:10] [Pasażer 317 (Zwykły)] Przychodzę na przystanek.
+[17:35:11] [Pasażer 318 (Zwykły)] Idę do kasy (PID: 330829).
+[17:35:11] [KASA] Obsługuję pasażera PID 330829...
+[17:35:11] [Pasażer 318 (Zwykły)] Przychodzę na przystanek.
+[17:35:11] [Pasażer 319 (Rower)] Idę do kasy (PID: 330908).
+[17:35:11] [KASA] Obsługuję pasażera PID 330908...
+[17:35:11] [Pasażer 319 (Rower)] Przychodzę na przystanek.
+[17:35:11] [Dziecko 320] Czekam na rodzica...
+[17:35:11] [Pasażer 320 (Opiekun)] Idę do kasy (PID: 331019).
+[17:35:11] [KASA] Obsługuję pasażera PID 331019...
+[17:35:11] [KASA] Obsługuję pasażera PID 331019...
+[17:35:11] [Pasażer 320 (Dziecko)] Przychodzę na przystanek.
+[17:35:11] [Pasażer 320 (Opiekun)] Przychodzę na przystanek.
+[17:35:11] [Pasażer 322 (Rower)] Idę do kasy (PID: 331073).
+[17:35:11] [KASA] Obsługuję pasażera PID 331073...
+[17:35:11] [Pasażer 322 (Rower)] Przychodzę na przystanek.
+[17:35:12] [Pasażer 323 (Zwykły)] Idę do kasy (PID: 331074).
+[17:35:12] [KASA] Obsługuję pasażera PID 331074...
+[17:35:12] [Pasażer 323 (Zwykły)] Przychodzę na przystanek.
+[17:35:12] [Pasażer 324 (Zwykły)] Idę do kasy (PID: 331075).
+[17:35:12] [KASA] Obsługuję pasażera PID 331075...
+[17:35:12] [Pasażer 324 (Zwykły)] Przychodzę na przystanek.
+[17:35:12] [Pasażer 325 (Opiekun)] Idę do kasy (PID: 331123).
+[17:35:12] [Dziecko 325] Czekam na rodzica...
+[17:35:12] [KASA] Obsługuję pasażera PID 331123...
+[17:35:12] [KASA] Obsługuję pasażera PID 331123...
+[17:35:12] [Pasażer 325 (Opiekun)] Przychodzę na przystanek.
+[17:35:12] [Pasażer 325 (Dziecko)] Przychodzę na przystanek.
+[17:35:13] [Pasażer 327 (Rower)] Idę do kasy (PID: 331240).
+[17:35:13] [KASA] Obsługuję pasażera PID 331240...
+[17:35:13] [Pasażer 327 (Rower)] Przychodzę na przystanek.
+[17:35:13] [Pasażer 328 (Zwykły)] Idę do kasy (PID: 331415).
+[17:35:13] [KASA] Obsługuję pasażera PID 331415...
+[17:35:13] [Pasażer 328 (Zwykły)] Przychodzę na przystanek.
+[17:35:13] [Pasażer 329 (Zwykły)] Idę do kasy (PID: 331574).
+[17:35:13] [KASA] Obsługuję pasażera PID 331574...
+[17:35:13] [Pasażer 329 (Zwykły)] Przychodzę na przystanek.
+[17:35:14] [Pasażer 330 (Zwykły)] Idę do kasy (PID: 331729).
+[17:35:14] [KASA] Obsługuję pasażera PID 331729...
+[17:35:14] [Pasażer 330 (Zwykły)] Przychodzę na przystanek.
+[17:35:14] [Pasażer 331 (Zwykły)] Idę do kasy (PID: 331735).
+[17:35:14] [KASA] Obsługuję pasażera PID 331735...
+[17:35:14] [Pasażer 331 (Zwykły)] Przychodzę na przystanek.
+[17:35:14] [Pasażer 332 (Rower)] Idę do kasy (PID: 331736).
+[17:35:14] [KASA] Obsługuję pasażera PID 331736...
+[17:35:14] [Pasażer 332 (Rower)] Przychodzę na przystanek.
+[17:35:15] [Pasażer 333 (Zwykły)] Idę do kasy (PID: 331737).
+[17:35:15] [KASA] Obsługuję pasażera PID 331737...
+[17:35:15] [Pasażer 333 (Zwykły)] Przychodzę na przystanek.
+[17:35:15] [Pasażer 334 (Zwykły)] Idę do kasy (PID: 331738).
+[17:35:15] [KASA] Obsługuję pasażera PID 331738...
+[17:35:15] [Pasażer 334 (Zwykły)] Przychodzę na przystanek.
+[17:35:15] [Dziecko 335] Czekam na rodzica...
+[17:35:15] [Pasażer 335 (Opiekun)] Idę do kasy (PID: 331740).
+[17:35:15] [KASA] Obsługuję pasażera PID 331740...
+[17:35:15] [KASA] Obsługuję pasażera PID 331740...
+[17:35:15] [Pasażer 335 (Dziecko)] Przychodzę na przystanek.
+[17:35:15] [Pasażer 335 (Opiekun)] Przychodzę na przystanek.
+[17:35:15] [Pasażer 337 (Zwykły)] Idę do kasy (PID: 331775).
+[17:35:15] [KASA] Obsługuję pasażera PID 331775...
+[17:35:15] [Pasażer 337 (Zwykły)] Przychodzę na przystanek.
+[17:35:16] [Pasażer 338 (Zwykły)] Idę do kasy (PID: 331873).
+[17:35:16] [KASA] Obsługuję pasażera PID 331873...
+[17:35:16] [Pasażer 338 (Zwykły)] Przychodzę na przystanek.
+[17:35:16] [Pasażer 339 (Rower)] Idę do kasy (PID: 331945).
+[17:35:16] [KASA] Obsługuję pasażera PID 331945...
+[17:35:16] [Pasażer 339 (Rower)] Przychodzę na przystanek.
+[17:35:16] [Pasażer 340 (Rower)] Idę do kasy (PID: 332079).
+[17:35:16] [KASA] Obsługuję pasażera PID 332079...
+[17:35:16] [Pasażer 340 (Rower)] Przychodzę na przystanek.
+[17:35:17] [Dziecko 341] Czekam na rodzica...
+[17:35:17] [Pasażer 341 (Opiekun)] Idę do kasy (PID: 332099).
+[17:35:17] [KASA] Obsługuję pasażera PID 332099...
+[17:35:17] [KASA] Obsługuję pasażera PID 332099...
+[17:35:17] [Pasażer 341 (Opiekun)] Przychodzę na przystanek.
+[17:35:17] [Pasażer 341 (Dziecko)] Przychodzę na przystanek.
+[17:35:17] [Pasażer 343 (Zwykły)] Idę do kasy (PID: 332100).
+[17:35:17] [KASA] Obsługuję pasażera PID 332100...
+[17:35:17] [Pasażer 343 (Zwykły)] Przychodzę na przystanek.
+[17:35:17] [Pasażer 344 (Zwykły)] Idę do kasy (PID: 332101).
+[17:35:17] [KASA] Obsługuję pasażera PID 332101...
+[17:35:17] [Pasażer 344 (Zwykły)] Przychodzę na przystanek.
+[17:35:18] [Pasażer 345 (Zwykły)] Idę do kasy (PID: 332190).
+[17:35:18] [KASA] Obsługuję pasażera PID 332190...
+[17:35:18] [Pasażer 345 (Zwykły)] Przychodzę na przystanek.
+[17:35:18] [Pasażer 346 (Rower)] Idę do kasy (PID: 332284).
+[17:35:18] [KASA] Obsługuję pasażera PID 332284...
+[17:35:18] [Pasażer 346 (Rower)] Przychodzę na przystanek.
+[17:35:18] [Pasażer 347 (Zwykły)] Idę do kasy (PID: 332338).
+[17:35:18] [KASA] Obsługuję pasażera PID 332338...
+[17:35:18] [Pasażer 347 (Zwykły)] Przychodzę na przystanek.
+[17:35:19] [Pasażer 348 (Zwykły)] Idę do kasy (PID: 332457).
+[17:35:19] [KASA] Obsługuję pasażera PID 332457...
+[17:35:19] [Pasażer 348 (Zwykły)] Przychodzę na przystanek.
+[17:35:19] [Pasażer 349 (Zwykły)] Idę do kasy (PID: 332624).
+[17:35:19] [KASA] Obsługuję pasażera PID 332624...
+[17:35:19] [Pasażer 349 (Zwykły)] Przychodzę na przystanek.
+[17:35:19] [Pasażer 350 (Zwykły)] Idę do kasy (PID: 332762).
+[17:35:19] [KASA] Obsługuję pasażera PID 332762...
+[17:35:19] [Pasażer 350 (Zwykły)] Przychodzę na przystanek.
+[17:35:20] [Pasażer 351 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:35:20] [Pasażer 351 (VIP)] Przychodzę na przystanek.
+[17:35:20] [Pasażer 352 (Rower)] Idę do kasy (PID: 332808).
+[17:35:20] [KASA] Obsługuję pasażera PID 332808...
+[17:35:20] [Pasażer 352 (Rower)] Przychodzę na przystanek.
+[17:35:20] [Pasażer 353 (Rower)] Idę do kasy (PID: 332810).
+[17:35:20] [KASA] Obsługuję pasażera PID 332810...
+[17:35:20] [Pasażer 353 (Rower)] Przychodzę na przystanek.
+[17:35:20] [Pasażer 354 (Rower)] Idę do kasy (PID: 332866).
+[17:35:20] [KASA] Obsługuję pasażera PID 332866...
+[17:35:20] [Pasażer 354 (Rower)] Przychodzę na przystanek.
+[17:35:21] [Pasażer 355 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:35:21] [Pasażer 355 (VIP)] Przychodzę na przystanek.
+[17:35:21] [Pasażer 356 (Zwykły)] Idę do kasy (PID: 333015).
+[17:35:21] [KASA] Obsługuję pasażera PID 333015...
+[17:35:21] [Pasażer 356 (Zwykły)] Przychodzę na przystanek.
+[17:35:21] [Pasażer 357 (Zwykły)] Idę do kasy (PID: 333076).
+[17:35:21] [KASA] Obsługuję pasażera PID 333076...
+[17:35:21] [Pasażer 357 (Zwykły)] Przychodzę na przystanek.
+[17:35:22] [Pasażer 358 (Zwykły)] Idę do kasy (PID: 333150).
+[17:35:22] [KASA] Obsługuję pasażera PID 333150...
+[17:35:22] [Pasażer 358 (Zwykły)] Przychodzę na przystanek.
+[17:35:22] [Pasażer 359 (Zwykły)] Idę do kasy (PID: 333196).
+[17:35:22] [KASA] Obsługuję pasażera PID 333196...
+[17:35:22] [Pasażer 359 (Zwykły)] Przychodzę na przystanek.
+[17:35:22] [Pasażer 360 (Zwykły)] Idę do kasy (PID: 333197).
+[17:35:22] [KASA] Obsługuję pasażera PID 333197...
+[17:35:22] [Pasażer 360 (Zwykły)] Przychodzę na przystanek.
+[17:35:22] [Pasażer 361 (Zwykły)] Idę do kasy (PID: 333198).
+[17:35:22] [KASA] Obsługuję pasażera PID 333198...
+[17:35:22] [Pasażer 361 (Zwykły)] Przychodzę na przystanek.
+[17:35:23] [Autobus 2] ODJAZD z 10 pasażerami (4 rowerów).
+[17:35:23] [Autobus 2] WRÓCIŁ Z TRASY po 15 s.
+[17:35:23] [Autobus 1] Podstawiłem się. SPRAWDZAM BILETY!
+[17:35:23] [Pasażer 355 (VIP)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 0/4)
+[17:35:23] [Pasażer 351 (VIP)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 0/4)
+[17:35:23] [Pasażer 362 (Zwykły)] Idę do kasy (PID: 333199).
+[17:35:23] [KASA] Obsługuję pasażera PID 333199...
+[17:35:23] [Pasażer 362 (Zwykły)] Przychodzę na przystanek.
+[17:35:23] [Pasażer 33 (Rower)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 1/4)
+[17:35:23] [Pasażer 301 (Opiekun)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 3/10 (Rowerów: 0/4)
+[17:35:23] [Pasażer 76 (Rower)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 2/4)
+[17:35:23] [Pasażer 301 (Dziecko)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 2/4)
+[17:35:23] [Pasażer 352 (Rower)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 3/4)
+[17:35:23] [Pasażer 241 (Rower)] Wszedłem do autobusu!
+[17:35:23]    -> [Stan Autobusu] Pasażerów: 8/10 (Rowerów: 4/4)
+[17:35:23] [Pasażer 363 (Zwykły)] Idę do kasy (PID: 333372).
+[17:35:23] [KASA] Obsługuję pasażera PID 333372...
+[17:35:23] [Pasażer 363 (Zwykły)] Przychodzę na przystanek.
+[17:35:23] [Dziecko 364] Czekam na rodzica...
+[17:35:23] [Pasażer 364 (Opiekun)] Idę do kasy (PID: 333483).
+[17:35:23] [KASA] Obsługuję pasażera PID 333483...
+[17:35:23] [KASA] Obsługuję pasażera PID 333483...
+[17:35:23] [Pasażer 364 (Opiekun)] Przychodzę na przystanek.
+[17:35:23] [Pasażer 364 (Dziecko)] Przychodzę na przystanek.
+[17:35:24] [Pasażer 366 (Zwykły)] Idę do kasy (PID: 333628).
+[17:35:24] [KASA] Obsługuję pasażera PID 333628...
+[17:35:24] [Pasażer 366 (Zwykły)] Przychodzę na przystanek.
+[17:35:24] [Pasażer 367 (Zwykły)] Idę do kasy (PID: 333725).
+[17:35:24] [KASA] Obsługuję pasażera PID 333725...
+[17:35:24] [Pasażer 367 (Zwykły)] Przychodzę na przystanek.
+[17:35:24] [Pasażer 368 (Zwykły)] Idę do kasy (PID: 333864).
+[17:35:24] [KASA] Obsługuję pasażera PID 333864...
+[17:35:24] [Pasażer 368 (Zwykły)] Przychodzę na przystanek.
+[17:35:25] [Pasażer 369 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:35:25] [Pasażer 369 (VIP)] Przychodzę na przystanek.
+[17:35:25] [Pasażer 369 (VIP)] Wszedłem do autobusu!
+[17:35:25]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:35:25] [Dziecko 370] Czekam na rodzica...
+[17:35:25] [Pasażer 370 (Opiekun)] Idę do kasy (PID: 333933).
+[17:35:25] [KASA] Obsługuję pasażera PID 333933...
+[17:35:25] [KASA] Obsługuję pasażera PID 333933...
+[17:35:25] [Pasażer 370 (Opiekun)] Przychodzę na przystanek.
+[17:35:25] [Pasażer 370 (Dziecko)] Przychodzę na przystanek.
+[17:35:25] [Pasażer 372 (Zwykły)] Idę do kasy (PID: 333934).
+[17:35:25] [KASA] Obsługuję pasażera PID 333934...
+[17:35:25] [Pasażer 372 (Zwykły)] Przychodzę na przystanek.
+[17:35:26] [Pasażer 373 (Rower)] Idę do kasy (PID: 334004).
+[17:35:26] [KASA] Obsługuję pasażera PID 334004...
+[17:35:26] [Pasażer 373 (Rower)] Przychodzę na przystanek.
+[17:35:26] [Dziecko 374] Czekam na rodzica...
+[17:35:26] [Pasażer 374 (Opiekun)] Idę do kasy (PID: 334135).
+[17:35:26] [KASA] Obsługuję pasażera PID 334135...
+[17:35:26] [KASA] Obsługuję pasażera PID 334135...
+[17:35:26] [Pasażer 374 (Opiekun)] Przychodzę na przystanek.
+[17:35:26] [Pasażer 374 (Dziecko)] Przychodzę na przystanek.
+[17:35:26] [Pasażer 376 (Zwykły)] Idę do kasy (PID: 334249).
+[17:35:26] [KASA] Obsługuję pasażera PID 334249...
+[17:35:26] [Pasażer 376 (Zwykły)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 377 (Zwykły)] Idę do kasy (PID: 334306).
+[17:35:27] [KASA] Obsługuję pasażera PID 334306...
+[17:35:27] [Pasażer 377 (Zwykły)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 378 (Opiekun)] Idę do kasy (PID: 334330).
+[17:35:27] [Dziecko 378] Czekam na rodzica...
+[17:35:27] [KASA] Obsługuję pasażera PID 334330...
+[17:35:27] [KASA] Obsługuję pasażera PID 334330...
+[17:35:27] [Pasażer 378 (Opiekun)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 378 (Dziecko)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 380 (Opiekun)] Idę do kasy (PID: 334332).
+[17:35:27] [KASA] Obsługuję pasażera PID 334332...
+[17:35:27] [Dziecko 380] Czekam na rodzica...
+[17:35:27] [KASA] Obsługuję pasażera PID 334332...
+[17:35:27] [Pasażer 380 (Dziecko)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 380 (Opiekun)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 382 (Zwykły)] Idę do kasy (PID: 334333).
+[17:35:27] [KASA] Obsługuję pasażera PID 334333...
+[17:35:27] [Pasażer 382 (Zwykły)] Przychodzę na przystanek.
+[17:35:27] [Pasażer 383 (Zwykły)] Idę do kasy (PID: 334334).
+[17:35:27] [KASA] Obsługuję pasażera PID 334334...
+[17:35:27] [Pasażer 383 (Zwykły)] Przychodzę na przystanek.
+[17:35:28] [Pasażer 384 (Zwykły)] Idę do kasy (PID: 334363).
+[17:35:28] [KASA] Obsługuję pasażera PID 334363...
+[17:35:28] [Pasażer 384 (Zwykły)] Przychodzę na przystanek.
+[17:35:28] [Pasażer 385 (Rower)] Idę do kasy (PID: 334472).
+[17:35:28] [KASA] Obsługuję pasażera PID 334472...
+[17:35:28] [Pasażer 385 (Rower)] Przychodzę na przystanek.
+[17:35:28] [Pasażer 350 (Zwykły)] Wszedłem do autobusu!
+[17:35:28]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:35:28] [Pasażer 386 (Rower)] Idę do kasy (PID: 334595).
+[17:35:28] [KASA] Obsługuję pasażera PID 334595...
+[17:35:28] [Pasażer 386 (Rower)] Przychodzę na przystanek.
+[17:35:28] [Pasażer 387 (Rower)] Idę do kasy (PID: 334699).
+[17:35:28] [KASA] Obsługuję pasażera PID 334699...
+[17:35:28] [Pasażer 387 (Rower)] Przychodzę na przystanek.
+[17:35:29] [Pasażer 388 (Zwykły)] Idę do kasy (PID: 334765).
+[17:35:29] [KASA] Obsługuję pasażera PID 334765...
+[17:35:29] [Pasażer 388 (Zwykły)] Przychodzę na przystanek.
+[17:35:29] [Pasażer 389 (Zwykły)] Idę do kasy (PID: 334886).
+[17:35:29] [KASA] Obsługuję pasażera PID 334886...
+[17:35:29] [Pasażer 389 (Zwykły)] Przychodzę na przystanek.
+[17:35:29] [Pasażer 390 (Zwykły)] Idę do kasy (PID: 335010).
+[17:35:29] [KASA] Obsługuję pasażera PID 335010...
+[17:35:29] [Pasażer 390 (Zwykły)] Przychodzę na przystanek.
+[17:35:30] [Pasażer 391 (Rower)] Idę do kasy (PID: 335093).
+[17:35:30] [KASA] Obsługuję pasażera PID 335093...
+[17:35:30] [Pasażer 391 (Rower)] Przychodzę na przystanek.
+[17:35:30] [Pasażer 392 (Rower)] Idę do kasy (PID: 335107).
+[17:35:30] [KASA] Obsługuję pasażera PID 335107...
+[17:35:30] [Pasażer 392 (Rower)] Przychodzę na przystanek.
+[17:35:30] [Pasażer 393 (Zwykły)] Idę do kasy (PID: 335108).
+[17:35:30] [KASA] Obsługuję pasażera PID 335108...
+[17:35:30] [Pasażer 393 (Zwykły)] Przychodzę na przystanek.
+[17:35:31] [Dziecko 394] Czekam na rodzica...
+[17:35:31] [Pasażer 394 (Opiekun)] Idę do kasy (PID: 335175).
+[17:35:31] [KASA] Obsługuję pasażera PID 335175...
+[17:35:31] [KASA] Obsługuję pasażera PID 335175...
+[17:35:31] [Pasażer 394 (Dziecko)] Przychodzę na przystanek.
+[17:35:31] [Pasażer 394 (Opiekun)] Przychodzę na przystanek.
+[17:35:31] [Pasażer 396 (Zwykły)] Idę do kasy (PID: 335244).
+[17:35:31] [KASA] Obsługuję pasażera PID 335244...
+[17:35:31] [Pasażer 396 (Zwykły)] Przychodzę na przystanek.
+[17:35:31] [Pasażer 397 (Zwykły)] Idę do kasy (PID: 335305).
+[17:35:31] [KASA] Obsługuję pasażera PID 335305...
+[17:35:31] [Pasażer 397 (Zwykły)] Przychodzę na przystanek.
+[17:35:31] [Pasażer 398 (Zwykły)] Idę do kasy (PID: 335350).
+[17:35:31] [KASA] Obsługuję pasażera PID 335350...
+[17:35:31] [Pasażer 398 (Zwykły)] Przychodzę na przystanek.
+[17:35:32] [Pasażer 399 (Rower)] Idę do kasy (PID: 335431).
+[17:35:32] [KASA] Obsługuję pasażera PID 335431...
+[17:35:32] [Pasażer 399 (Rower)] Przychodzę na przystanek.
+[17:35:32] [Dziecko 400] Czekam na rodzica...
+[17:35:32] [Pasażer 400 (Opiekun)] Idę do kasy (PID: 335526).
+[17:35:32] [KASA] Obsługuję pasażera PID 335526...
+[17:35:32] [KASA] Obsługuję pasażera PID 335526...
+[17:35:32] [Pasażer 400 (Opiekun)] Przychodzę na przystanek.
+[17:35:32] [Pasażer 400 (Dziecko)] Przychodzę na przystanek.
+[17:35:32] [Pasażer 402 (Zwykły)] Idę do kasy (PID: 335527).
+[17:35:32] [KASA] Obsługuję pasażera PID 335527...
+[17:35:32] [Pasażer 402 (Zwykły)] Przychodzę na przystanek.
+[17:35:32] [Pasażer 403 (Zwykły)] Idę do kasy (PID: 335528).
+[17:35:32] [KASA] Obsługuję pasażera PID 335528...
+[17:35:32] [Pasażer 403 (Zwykły)] Przychodzę na przystanek.
+[17:35:33] [Pasażer 404 (Zwykły)] Idę do kasy (PID: 335551).
+[17:35:33] [KASA] Obsługuję pasażera PID 335551...
+[17:35:33] [Pasażer 404 (Zwykły)] Przychodzę na przystanek.
+[17:35:33] [Pasażer 405 (Zwykły)] Idę do kasy (PID: 335621).
+[17:35:33] [KASA] Obsługuję pasażera PID 335621...
+[17:35:33] [Pasażer 405 (Zwykły)] Przychodzę na przystanek.
+[17:35:33] [Pasażer 406 (Zwykły)] Idę do kasy (PID: 335676).
+[17:35:33] [KASA] Obsługuję pasażera PID 335676...
+[17:35:33] [Pasażer 406 (Zwykły)] Przychodzę na przystanek.
+[17:35:34] [Pasażer 407 (Zwykły)] Idę do kasy (PID: 335782).
+[17:35:34] [KASA] Obsługuję pasażera PID 335782...
+[17:35:34] [Pasażer 407 (Zwykły)] Przychodzę na przystanek.
+[17:35:34] [Dziecko 408] Czekam na rodzica...
+[17:35:34] [Pasażer 408 (Opiekun)] Idę do kasy (PID: 335918).
+[17:35:34] [KASA] Obsługuję pasażera PID 335918...
+[17:35:34] [KASA] Obsługuję pasażera PID 335918...
+[17:35:34] [Pasażer 408 (Opiekun)] Przychodzę na przystanek.
+[17:35:34] [Pasażer 408 (Dziecko)] Przychodzę na przystanek.
+[17:35:34] [Pasażer 410 (Rower)] Idę do kasy (PID: 336031).
+[17:35:34] [KASA] Obsługuję pasażera PID 336031...
+[17:35:34] [Pasażer 410 (Rower)] Przychodzę na przystanek.
+[17:35:35] [Pasażer 411 (Zwykły)] Idę do kasy (PID: 336125).
+[17:35:35] [KASA] Obsługuję pasażera PID 336125...
+[17:35:35] [Pasażer 411 (Zwykły)] Przychodzę na przystanek.
+[17:35:35] [Pasażer 412 (Rower)] Idę do kasy (PID: 336281).
+[17:35:35] [KASA] Obsługuję pasażera PID 336281...
+[17:35:35] [Pasażer 412 (Rower)] Przychodzę na przystanek.
+[17:35:35] [Pasażer 413 (Rower)] Idę do kasy (PID: 336343).
+[17:35:35] [KASA] Obsługuję pasażera PID 336343...
+[17:35:35] [Pasażer 413 (Rower)] Przychodzę na przystanek.
+[17:35:35] [Pasażer 414 (Rower)] Idę do kasy (PID: 336380).
+[17:35:35] [KASA] Obsługuję pasażera PID 336380...
+[17:35:35] [Pasażer 414 (Rower)] Przychodzę na przystanek.
+[17:35:36] [Pasażer 415 (Rower)] Idę do kasy (PID: 336493).
+[17:35:36] [KASA] Obsługuję pasażera PID 336493...
+[17:35:36] [Pasażer 415 (Rower)] Przychodzę na przystanek.
+[17:35:36] [Pasażer 416 (Zwykły)] Idę do kasy (PID: 336612).
+[17:35:36] [KASA] Obsługuję pasażera PID 336612...
+[17:35:36] [Pasażer 416 (Zwykły)] Przychodzę na przystanek.
+[17:35:36] [Pasażer 417 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:35:36] [Pasażer 417 (VIP)] Przychodzę na przystanek.
+[17:35:37] [Pasażer 418 (Zwykły)] Idę do kasy (PID: 336778).
+[17:35:37] [KASA] Obsługuję pasażera PID 336778...
+[17:35:37] [Pasażer 418 (Zwykły)] Przychodzę na przystanek.
+[17:35:37] [Pasażer 419 (Opiekun)] Idę do kasy (PID: 336780).
+[17:35:37] [Dziecko 419] Czekam na rodzica...
+[17:35:37] [KASA] Obsługuję pasażera PID 336780...
+[17:35:37] [KASA] Obsługuję pasażera PID 336780...
+[17:35:37] [Pasażer 419 (Opiekun)] Przychodzę na przystanek.
+[17:35:37] [Pasażer 419 (Dziecko)] Przychodzę na przystanek.
+[17:35:37] [Pasażer 421 (Zwykły)] Idę do kasy (PID: 336781).
+[17:35:37] [KASA] Obsługuję pasażera PID 336781...
+[17:35:37] [Pasażer 421 (Zwykły)] Przychodzę na przystanek.
+[17:35:38] [Pasażer 422 (Zwykły)] Idę do kasy (PID: 336812).
+[17:35:38] [KASA] Obsługuję pasażera PID 336812...
+[17:35:38] [Pasażer 422 (Zwykły)] Przychodzę na przystanek.
+[17:35:38] [Pasażer 423 (Zwykły)] Idę do kasy (PID: 336887).
+[17:35:38] [KASA] Obsługuję pasażera PID 336887...
+[17:35:38] [Pasażer 423 (Zwykły)] Przychodzę na przystanek.
+[17:35:38] [Pasażer 424 (Zwykły)] Idę do kasy (PID: 336964).
+[17:35:38] [KASA] Obsługuję pasażera PID 336964...
+[17:35:38] [Pasażer 424 (Zwykły)] Przychodzę na przystanek.
+[17:35:38] [Dziecko 425] Czekam na rodzica...
+[17:35:38] [Pasażer 425 (Opiekun)] Idę do kasy (PID: 337098).
+[17:35:38] [KASA] Obsługuję pasażera PID 337098...
+[17:35:38] [KASA] Obsługuję pasażera PID 337098...
+[17:35:38] [Pasażer 425 (Opiekun)] Przychodzę na przystanek.
+[17:35:38] [Pasażer 425 (Dziecko)] Przychodzę na przystanek.
+[17:35:39] [Pasażer 427 (Rower)] Idę do kasy (PID: 337268).
+[17:35:39] [KASA] Obsługuję pasażera PID 337268...
+[17:35:39] [Pasażer 427 (Rower)] Przychodzę na przystanek.
+[17:35:39] [Pasażer 428 (Zwykły)] Idę do kasy (PID: 337428).
+[17:35:39] [KASA] Obsługuję pasażera PID 337428...
+[17:35:39] [Pasażer 428 (Zwykły)] Przychodzę na przystanek.
+[17:35:39] [Pasażer 429 (Zwykły)] Idę do kasy (PID: 337514).
+[17:35:39] [KASA] Obsługuję pasażera PID 337514...
+[17:35:39] [Pasażer 429 (Zwykły)] Przychodzę na przystanek.
+[17:35:40] [Dziecko 430] Czekam na rodzica...
+[17:35:40] [Pasażer 430 (Opiekun)] Idę do kasy (PID: 337604).
+[17:35:40] [KASA] Obsługuję pasażera PID 337604...
+[17:35:40] [KASA] Obsługuję pasażera PID 337604...
+[17:35:40] [Pasażer 430 (Opiekun)] Przychodzę na przystanek.
+[17:35:40] [Pasażer 430 (Dziecko)] Przychodzę na przystanek.
+[17:35:40] [Pasażer 432 (Rower)] Idę do kasy (PID: 337637).
+[17:35:40] [KASA] Obsługuję pasażera PID 337637...
+[17:35:40] [Pasażer 432 (Rower)] Przychodzę na przystanek.
+[17:35:40] [Pasażer 433 (Zwykły)] Idę do kasy (PID: 337638).
+[17:35:40] [KASA] Obsługuję pasażera PID 337638...
+[17:35:40] [Pasażer 433 (Zwykły)] Przychodzę na przystanek.
+[17:35:41] [Pasażer 434 (Rower)] Idę do kasy (PID: 337713).
+[17:35:41] [KASA] Obsługuję pasażera PID 337713...
+[17:35:41] [Pasażer 434 (Rower)] Przychodzę na przystanek.
+[17:35:41] [Dziecko 435] Czekam na rodzica...
+[17:35:41] [Pasażer 435 (Opiekun)] Idę do kasy (PID: 337799).
+[17:35:41] [KASA] Obsługuję pasażera PID 337799...
+[17:35:41] [KASA] Obsługuję pasażera PID 337799...
+[17:35:41] [Pasażer 435 (Opiekun)] Przychodzę na przystanek.
+[17:35:41] [Pasażer 435 (Dziecko)] Przychodzę na przystanek.
+[17:35:41] [Pasażer 437 (Rower)] Idę do kasy (PID: 337905).
+[17:35:41] [KASA] Obsługuję pasażera PID 337905...
+[17:35:41] [Pasażer 437 (Rower)] Przychodzę na przystanek.
+[17:35:42] [Dziecko 438] Czekam na rodzica...
+[17:35:42] [Pasażer 438 (Opiekun)] Idę do kasy (PID: 338003).
+[17:35:42] [KASA] Obsługuję pasażera PID 338003...
+[17:35:42] [KASA] Obsługuję pasażera PID 338003...
+[17:35:42] [Pasażer 438 (Dziecko)] Przychodzę na przystanek.
+[17:35:42] [Pasażer 438 (Opiekun)] Przychodzę na przystanek.
+[17:35:42] [Pasażer 440 (Zwykły)] Idę do kasy (PID: 338095).
+[17:35:42] [KASA] Obsługuję pasażera PID 338095...
+[17:35:42] [Pasażer 440 (Zwykły)] Przychodzę na przystanek.
+[17:35:42] [Pasażer 441 (Opiekun)] Idę do kasy (PID: 338097).
+[17:35:42] [KASA] Obsługuję pasażera PID 338097...
+[17:35:42] [KASA] Obsługuję pasażera PID 338097...
+[17:35:42] [Dziecko 441] Czekam na rodzica...
+[17:35:42] [Pasażer 441 (Dziecko)] Przychodzę na przystanek.
+[17:35:42] [Pasażer 441 (Opiekun)] Przychodzę na przystanek.
+[17:35:43] [Pasażer 443 (Zwykły)] Idę do kasy (PID: 338098).
+[17:35:43] [KASA] Obsługuję pasażera PID 338098...
+[17:35:43] [Pasażer 443 (Zwykły)] Przychodzę na przystanek.
+[17:35:43] [Dziecko 444] Czekam na rodzica...
+[17:35:43] [Pasażer 444 (Opiekun)] Idę do kasy (PID: 338100).
+[17:35:43] [KASA] Obsługuję pasażera PID 338100...
+[17:35:43] [KASA] Obsługuję pasażera PID 338100...
+[17:35:43] [Pasażer 444 (Opiekun)] Przychodzę na przystanek.
+[17:35:43] [Pasażer 444 (Dziecko)] Przychodzę na przystanek.
+[17:35:43] [Dziecko 446] Czekam na rodzica...
+[17:35:43] [Pasażer 446 (Opiekun)] Idę do kasy (PID: 338109).
+[17:35:43] [KASA] Obsługuję pasażera PID 338109...
+[17:35:43] [KASA] Obsługuję pasażera PID 338109...
+[17:35:43] [Pasażer 446 (Opiekun)] Przychodzę na przystanek.
+[17:35:43] [Pasażer 446 (Dziecko)] Przychodzę na przystanek.
+[17:35:43] [Pasażer 448 (Rower)] Idę do kasy (PID: 338334).
+[17:35:43] [KASA] Obsługuję pasażera PID 338334...
+[17:35:43] [Pasażer 448 (Rower)] Przychodzę na przystanek.
+[17:35:44] [Dziecko 449] Czekam na rodzica...
+[17:35:44] [Pasażer 449 (Opiekun)] Idę do kasy (PID: 338457).
+[17:35:44] [KASA] Obsługuję pasażera PID 338457...
+[17:35:44] [KASA] Obsługuję pasażera PID 338457...
+[17:35:44] [Pasażer 449 (Opiekun)] Przychodzę na przystanek.
+[17:35:44] [Pasażer 449 (Dziecko)] Przychodzę na przystanek.
+[17:35:44] [Pasażer 451 (Zwykły)] Idę do kasy (PID: 338601).
+[17:35:44] [KASA] Obsługuję pasażera PID 338601...
+[17:35:44] [Pasażer 451 (Zwykły)] Przychodzę na przystanek.
+[17:35:44] [Pasażer 452 (Zwykły)] Idę do kasy (PID: 338714).
+[17:35:44] [KASA] Obsługuję pasażera PID 338714...
+[17:35:44] [Pasażer 452 (Zwykły)] Przychodzę na przystanek.
+[17:35:45] [Pasażer 453 (Zwykły)] Idę do kasy (PID: 338874).
+[17:35:45] [KASA] Obsługuję pasażera PID 338874...
+[17:35:45] [Pasażer 453 (Zwykły)] Przychodzę na przystanek.
+[17:35:45] [Pasażer 454 (Zwykły)] Idę do kasy (PID: 338991).
+[17:35:45] [KASA] Obsługuję pasażera PID 338991...
+[17:35:45] [Pasażer 454 (Zwykły)] Przychodzę na przystanek.
+[17:35:45] [Pasażer 455 (Rower)] Idę do kasy (PID: 338995).
+[17:35:45] [KASA] Obsługuję pasażera PID 338995...
+[17:35:45] [Pasażer 455 (Rower)] Przychodzę na przystanek.
+[17:35:46] [Pasażer 456 (Rower)] Idę do kasy (PID: 339084).
+[17:35:46] [KASA] Obsługuję pasażera PID 339084...
+[17:35:46] [Pasażer 456 (Rower)] Przychodzę na przystanek.
+[17:35:46] [Pasażer 457 (Opiekun)] Idę do kasy (PID: 339168).
+[17:35:46] [KASA] Obsługuję pasażera PID 339168...
+[17:35:46] [Dziecko 457] Czekam na rodzica...
+[17:35:46] [KASA] Obsługuję pasażera PID 339168...
+[17:35:46] [Pasażer 457 (Opiekun)] Przychodzę na przystanek.
+[17:35:46] [Pasażer 457 (Dziecko)] Przychodzę na przystanek.
+[17:35:46] [Pasażer 459 (Zwykły)] Idę do kasy (PID: 339291).
+[17:35:46] [KASA] Obsługuję pasażera PID 339291...
+[17:35:46] [Pasażer 459 (Zwykły)] Przychodzę na przystanek.
+[17:35:46] [Dziecko 460] Czekam na rodzica...
+[17:35:46] [Pasażer 460 (Opiekun)] Idę do kasy (PID: 339407).
+[17:35:46] [KASA] Obsługuję pasażera PID 339407...
+[17:35:46] [KASA] Obsługuję pasażera PID 339407...
+[17:35:46] [Pasażer 460 (Opiekun)] Przychodzę na przystanek.
+[17:35:46] [Pasażer 460 (Dziecko)] Przychodzę na przystanek.
+[17:35:47] [Dziecko 462] Czekam na rodzica...
+[17:35:47] [Pasażer 462 (Opiekun)] Idę do kasy (PID: 339475).
+[17:35:47] [KASA] Obsługuję pasażera PID 339475...
+[17:35:47] [KASA] Obsługuję pasażera PID 339475...
+[17:35:47] [Pasażer 462 (Opiekun)] Przychodzę na przystanek.
+[17:35:47] [Pasażer 462 (Dziecko)] Przychodzę na przystanek.
+[17:35:47] [Pasażer 464 (Zwykły)] Idę do kasy (PID: 339476).
+[17:35:47] [KASA] Obsługuję pasażera PID 339476...
+[17:35:47] [Pasażer 464 (Zwykły)] Przychodzę na przystanek.
+[17:35:47] [Pasażer 465 (Rower)] Idę do kasy (PID: 339477).
+[17:35:47] [KASA] Obsługuję pasażera PID 339477...
+[17:35:47] [Pasażer 465 (Rower)] Przychodzę na przystanek.
+[17:35:48] [Pasażer 466 (Rower)] Idę do kasy (PID: 339478).
+[17:35:48] [KASA] Obsługuję pasażera PID 339478...
+[17:35:48] [Pasażer 466 (Rower)] Przychodzę na przystanek.
+[17:35:48] [Pasażer 467 (Zwykły)] Idę do kasy (PID: 339563).
+[17:35:48] [KASA] Obsługuję pasażera PID 339563...
+[17:35:48] [Pasażer 467 (Zwykły)] Przychodzę na przystanek.
+[17:35:48] [Pasażer 468 (Zwykły)] Idę do kasy (PID: 339672).
+[17:35:48] [KASA] Obsługuję pasażera PID 339672...
+[17:35:48] [Pasażer 468 (Zwykły)] Przychodzę na przystanek.
+[17:35:48] [Pasażer 469 (Rower)] Idę do kasy (PID: 339805).
+[17:35:48] [KASA] Obsługuję pasażera PID 339805...
+[17:35:48] [Pasażer 469 (Rower)] Przychodzę na przystanek.
+[17:35:49] [Pasażer 470 (Zwykły)] Idę do kasy (PID: 339948).
+[17:35:49] [KASA] Obsługuję pasażera PID 339948...
+[17:35:49] [Pasażer 470 (Zwykły)] Przychodzę na przystanek.
+[17:35:49] [Pasażer 471 (Zwykły)] Idę do kasy (PID: 340079).
+[17:35:49] [KASA] Obsługuję pasażera PID 340079...
+[17:35:49] [Pasażer 471 (Zwykły)] Przychodzę na przystanek.
+[17:35:49] [Pasażer 472 (Zwykły)] Idę do kasy (PID: 340242).
+[17:35:49] [KASA] Obsługuję pasażera PID 340242...
+[17:35:49] [Pasażer 472 (Zwykły)] Przychodzę na przystanek.
+[17:35:50] [Pasażer 473 (Zwykły)] Idę do kasy (PID: 340414).
+[17:35:50] [KASA] Obsługuję pasażera PID 340414...
+[17:35:50] [Pasażer 473 (Zwykły)] Przychodzę na przystanek.
+[17:35:50] [Dziecko 474] Czekam na rodzica...
+[17:35:50] [Pasażer 474 (Opiekun)] Idę do kasy (PID: 340416).
+[17:35:50] [KASA] Obsługuję pasażera PID 340416...
+[17:35:50] [KASA] Obsługuję pasażera PID 340416...
+[17:35:50] [Pasażer 474 (Opiekun)] Przychodzę na przystanek.
+[17:35:50] [Pasażer 474 (Dziecko)] Przychodzę na przystanek.
+[17:35:50] [Pasażer 476 (Rower)] Idę do kasy (PID: 340417).
+[17:35:50] [KASA] Obsługuję pasażera PID 340417...
+[17:35:50] [Pasażer 476 (Rower)] Przychodzę na przystanek.
+[17:35:51] [Pasażer 477 (Zwykły)] Idę do kasy (PID: 340474).
+[17:35:51] [KASA] Obsługuję pasażera PID 340474...
+[17:35:51] [Pasażer 477 (Zwykły)] Przychodzę na przystanek.
+[17:35:51] [Pasażer 478 (Opiekun)] Idę do kasy (PID: 340551).
+[17:35:51] [KASA] Obsługuję pasażera PID 340551...
+[17:35:51] [KASA] Obsługuję pasażera PID 340551...
+[17:35:51] [Pasażer 478 (Opiekun)] Przychodzę na przystanek.
+[17:35:51] [Dziecko 478] Czekam na rodzica...
+[17:35:51] [Pasażer 478 (Dziecko)] Przychodzę na przystanek.
+[17:35:51] [Dziecko 480] Czekam na rodzica...
+[17:35:51] [Pasażer 480 (Opiekun)] Idę do kasy (PID: 340640).
+[17:35:51] [KASA] Obsługuję pasażera PID 340640...
+[17:35:51] [KASA] Obsługuję pasażera PID 340640...
+[17:35:51] [Pasażer 480 (Opiekun)] Przychodzę na przystanek.
+[17:35:51] [Pasażer 480 (Dziecko)] Przychodzę na przystanek.
+[17:35:51] [Pasażer 482 (Zwykły)] Idę do kasy (PID: 340770).
+[17:35:51] [KASA] Obsługuję pasażera PID 340770...
+[17:35:51] [Pasażer 482 (Zwykły)] Przychodzę na przystanek.
+[17:35:52] [Pasażer 483 (Rower)] Idę do kasy (PID: 340856).
+[17:35:52] [KASA] Obsługuję pasażera PID 340856...
+[17:35:52] [Pasażer 483 (Rower)] Przychodzę na przystanek.
+[17:35:52] [Pasażer 484 (Zwykły)] Idę do kasy (PID: 340918).
+[17:35:52] [KASA] Obsługuję pasażera PID 340918...
+[17:35:52] [Pasażer 484 (Zwykły)] Przychodzę na przystanek.
+[17:35:52] [Pasażer 485 (Zwykły)] Idę do kasy (PID: 340919).
+[17:35:52] [KASA] Obsługuję pasażera PID 340919...
+[17:35:52] [Pasażer 485 (Zwykły)] Przychodzę na przystanek.
+[17:35:53] [Autobus 1] ODJAZD z 10 pasażerami (4 rowerów).
+[17:35:53] [Autobus 1] WRÓCIŁ Z TRASY po 6 s.
+[17:35:53] [Autobus 2] Podstawiłem się. SPRAWDZAM BILETY!
+[17:35:53] [Pasażer 417 (VIP)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 0/4)
+[17:35:53] [Pasażer 90 (Zwykły)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 0/4)
+[17:35:53] [Pasażer 40 (Rower)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 3/10 (Rowerów: 1/4)
+[17:35:53] [Pasażer 486 (Zwykły)] Idę do kasy (PID: 340920).
+[17:35:53] [KASA] Obsługuję pasażera PID 340920...
+[17:35:53] [Pasażer 486 (Zwykły)] Przychodzę na przystanek.
+[17:35:53] [Pasażer 440 (Zwykły)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 5/10 (Rowerów: 2/4)
+[17:35:53] [Pasażer 414 (Rower)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 2/4)
+[17:35:53] [Pasażer 115 (Zwykły)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 2/4)
+[17:35:53] [Pasażer 392 (Rower)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 3/4)
+[17:35:53] [Pasażer 487 (Zwykły)] Idę do kasy (PID: 340961).
+[17:35:53] [Pasażer 100 (Rower)] Wszedłem do autobusu!
+[17:35:53] [KASA] Obsługuję pasażera PID 340961...
+[17:35:53] [Pasażer 487 (Zwykły)] Przychodzę na przystanek.
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 8/10 (Rowerów: 4/4)
+[17:35:53] [Pasażer 348 (Zwykły)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:35:53] [Pasażer 102 (Zwykły)] Wszedłem do autobusu!
+[17:35:53]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:35:53] [Dziecko 488] Czekam na rodzica...
+[17:35:53] [Pasażer 488 (Opiekun)] Idę do kasy (PID: 341079).
+[17:35:53] [KASA] Obsługuję pasażera PID 341079...
+[17:35:53] [KASA] Obsługuję pasażera PID 341079...
+[17:35:53] [Pasażer 488 (Opiekun)] Przychodzę na przystanek.
+[17:35:53] [Pasażer 488 (Dziecko)] Przychodzę na przystanek.
+[17:35:54] [Pasażer 490 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:35:54] [Pasażer 490 (VIP)] Przychodzę na przystanek.
+[17:35:54] [Dziecko 491] Czekam na rodzica...
+[17:35:54] [Pasażer 491 (Opiekun)] Idę do kasy (PID: 341337).
+[17:35:54] [KASA] Obsługuję pasażera PID 341337...
+[17:35:54] [KASA] Obsługuję pasażera PID 341337...
+[17:35:54] [Pasażer 491 (Opiekun)] Przychodzę na przystanek.
+[17:35:54] [Pasażer 491 (Dziecko)] Przychodzę na przystanek.
+[17:35:54] [Pasażer 493 (Rower)] Idę do kasy (PID: 341485).
+[17:35:54] [KASA] Obsługuję pasażera PID 341485...
+[17:35:54] [Pasażer 493 (Rower)] Przychodzę na przystanek.
+[17:35:55] [Pasażer 494 (Zwykły)] Idę do kasy (PID: 341583).
+[17:35:55] [KASA] Obsługuję pasażera PID 341583...
+[17:35:55] [Pasażer 494 (Zwykły)] Przychodzę na przystanek.
+[17:35:55] [Pasażer 495 (Rower)] Idę do kasy (PID: 341673).
+[17:35:55] [KASA] Obsługuję pasażera PID 341673...
+[17:35:55] [Pasażer 495 (Rower)] Przychodzę na przystanek.
+[17:35:55] [Pasażer 496 (Rower)] Idę do kasy (PID: 341819).
+[17:35:55] [KASA] Obsługuję pasażera PID 341819...
+[17:35:55] [Pasażer 496 (Rower)] Przychodzę na przystanek.
+[17:35:56] [Dziecko 497] Czekam na rodzica...
+[17:35:56] [Pasażer 497 (Opiekun)] Idę do kasy (PID: 341952).
+[17:35:56] [KASA] Obsługuję pasażera PID 341952...
+[17:35:56] [KASA] Obsługuję pasażera PID 341952...
+[17:35:56] [Pasażer 497 (Opiekun)] Przychodzę na przystanek.
+[17:35:56] [Pasażer 497 (Dziecko)] Przychodzę na przystanek.
+[17:35:56] [Pasażer 499 (Rower)] Idę do kasy (PID: 342030).
+[17:35:56] [KASA] Obsługuję pasażera PID 342030...
+[17:35:56] [Pasażer 499 (Rower)] Przychodzę na przystanek.
+[17:35:56] [Pasażer 500 (Zwykły)] Idę do kasy (PID: 342077).
+[17:35:56] [KASA] Obsługuję pasażera PID 342077...
+[17:35:56] [Pasażer 500 (Zwykły)] Przychodzę na przystanek.
+[17:35:56] [Pasażer 501 (Rower)] Idę do kasy (PID: 342141).
+[17:35:56] [KASA] Obsługuję pasażera PID 342141...
+[17:35:56] [Pasażer 501 (Rower)] Przychodzę na przystanek.
+[17:35:57] [Pasażer 502 (Zwykły)] Idę do kasy (PID: 342210).
+[17:35:57] [KASA] Obsługuję pasażera PID 342210...
+[17:35:57] [Pasażer 502 (Zwykły)] Przychodzę na przystanek.
+[17:35:57] [Pasażer 503 (Zwykły)] Idę do kasy (PID: 342274).
+[17:35:57] [KASA] Obsługuję pasażera PID 342274...
+[17:35:57] [Pasażer 503 (Zwykły)] Przychodzę na przystanek.
+[17:35:57] [Pasażer 504 (Rower)] Idę do kasy (PID: 342365).
+[17:35:57] [KASA] Obsługuję pasażera PID 342365...
+[17:35:57] [Pasażer 504 (Rower)] Przychodzę na przystanek.
+[17:35:58] [Pasażer 505 (Zwykły)] Idę do kasy (PID: 342422).
+[17:35:58] [KASA] Obsługuję pasażera PID 342422...
+[17:35:58] [Pasażer 505 (Zwykły)] Przychodzę na przystanek.
+[17:35:58] [Pasażer 506 (Opiekun)] Idę do kasy (PID: 342424).
+[17:35:58] [Dziecko 506] Czekam na rodzica...
+[17:35:58] [KASA] Obsługuję pasażera PID 342424...
+[17:35:58] [KASA] Obsługuję pasażera PID 342424...
+[17:35:58] [Pasażer 506 (Opiekun)] Przychodzę na przystanek.
+[17:35:58] [Pasażer 506 (Dziecko)] Przychodzę na przystanek.
+[17:35:58] [Dziecko 508] Czekam na rodzica...
+[17:35:58] [Pasażer 508 (Opiekun)] Idę do kasy (PID: 342426).
+[17:35:58] [KASA] Obsługuję pasażera PID 342426...
+[17:35:58] [KASA] Obsługuję pasażera PID 342426...
+[17:35:58] [Pasażer 508 (Opiekun)] Przychodzę na przystanek.
+[17:35:58] [Pasażer 508 (Dziecko)] Przychodzę na przystanek.
+[17:35:59] [Pasażer 510 (Zwykły)] Idę do kasy (PID: 342445).
+[17:35:59] [KASA] Obsługuję pasażera PID 342445...
+[17:35:59] [Pasażer 510 (Zwykły)] Przychodzę na przystanek.
+[17:35:59] [Pasażer 511 (Zwykły)] Idę do kasy (PID: 342598).
+[17:35:59] [KASA] Obsługuję pasażera PID 342598...
+[17:35:59] [Pasażer 511 (Zwykły)] Przychodzę na przystanek.
+[17:35:59] [Dziecko 512] Czekam na rodzica...
+[17:35:59] [Pasażer 512 (Opiekun)] Idę do kasy (PID: 342783).
+[17:35:59] [KASA] Obsługuję pasażera PID 342783...
+[17:35:59] [KASA] Obsługuję pasażera PID 342783...
+[17:35:59] [Pasażer 512 (Opiekun)] Przychodzę na przystanek.
+[17:35:59] [Pasażer 512 (Dziecko)] Przychodzę na przystanek.
+[17:36:00] [Pasażer 514 (Zwykły)] Idę do kasy (PID: 343025).
+[17:36:00] [KASA] Obsługuję pasażera PID 343025...
+[17:36:00] [Pasażer 514 (Zwykły)] Przychodzę na przystanek.
+[17:36:00] [Pasażer 515 (Zwykły)] Idę do kasy (PID: 343182).
+[17:36:00] [KASA] Obsługuję pasażera PID 343182...
+[17:36:00] [Pasażer 515 (Zwykły)] Przychodzę na przystanek.
+[17:36:00] [Pasażer 516 (Zwykły)] Idę do kasy (PID: 343356).
+[17:36:00] [KASA] Obsługuję pasażera PID 343356...
+[17:36:00] [Pasażer 516 (Zwykły)] Przychodzę na przystanek.
+[17:36:01] [Pasażer 517 (Zwykły)] Idę do kasy (PID: 343544).
+[17:36:01] [KASA] Obsługuję pasażera PID 343544...
+[17:36:01] [Pasażer 517 (Zwykły)] Przychodzę na przystanek.
+[17:36:01] [Pasażer 518 (Zwykły)] Idę do kasy (PID: 343645).
+[17:36:01] [KASA] Obsługuję pasażera PID 343645...
+[17:36:01] [Pasażer 518 (Zwykły)] Przychodzę na przystanek.
+[17:36:01] [Pasażer 519 (Rower)] Idę do kasy (PID: 343737).
+[17:36:01] [KASA] Obsługuję pasażera PID 343737...
+[17:36:01] [Pasażer 519 (Rower)] Przychodzę na przystanek.
+[17:36:02] [Pasażer 520 (Zwykły)] Idę do kasy (PID: 343806).
+[17:36:02] [KASA] Obsługuję pasażera PID 343806...
+[17:36:02] [Pasażer 520 (Zwykły)] Przychodzę na przystanek.
+[17:36:02] [Pasażer 521 (Rower)] Idę do kasy (PID: 343880).
+[17:36:02] [KASA] Obsługuję pasażera PID 343880...
+[17:36:02] [Pasażer 521 (Rower)] Przychodzę na przystanek.
+[17:36:02] [Pasażer 522 (Zwykły)] Idę do kasy (PID: 343945).
+[17:36:02] [KASA] Obsługuję pasażera PID 343945...
+[17:36:02] [Pasażer 522 (Zwykły)] Przychodzę na przystanek.
+[17:36:02] [Pasażer 523 (Rower)] Idę do kasy (PID: 343981).
+[17:36:02] [KASA] Obsługuję pasażera PID 343981...
+[17:36:02] [Pasażer 523 (Rower)] Przychodzę na przystanek.
+[17:36:03] [Pasażer 524 (Zwykły)] Idę do kasy (PID: 343982).
+[17:36:03] [KASA] Obsługuję pasażera PID 343982...
+[17:36:03] [Pasażer 524 (Zwykły)] Przychodzę na przystanek.
+[17:36:03] [Pasażer 525 (Rower)] Idę do kasy (PID: 343983).
+[17:36:03] [KASA] Obsługuję pasażera PID 343983...
+[17:36:03] [Pasażer 525 (Rower)] Przychodzę na przystanek.
+[17:36:03] [Pasażer 526 (Zwykły)] Idę do kasy (PID: 344056).
+[17:36:03] [KASA] Obsługuję pasażera PID 344056...
+[17:36:03] [Pasażer 526 (Zwykły)] Przychodzę na przystanek.
+[17:36:04] [Pasażer 527 (Zwykły)] Idę do kasy (PID: 344169).
+[17:36:04] [KASA] Obsługuję pasażera PID 344169...
+[17:36:04] [Pasażer 527 (Zwykły)] Przychodzę na przystanek.
+[17:36:04] [Pasażer 528 (Zwykły)] Idę do kasy (PID: 344311).
+[17:36:04] [KASA] Obsługuję pasażera PID 344311...
+[17:36:04] [Pasażer 528 (Zwykły)] Przychodzę na przystanek.
+[17:36:04] [Pasażer 529 (Zwykły)] Idę do kasy (PID: 344405).
+[17:36:04] [KASA] Obsługuję pasażera PID 344405...
+[17:36:04] [Pasażer 529 (Zwykły)] Przychodzę na przystanek.
+[17:36:04] [Pasażer 530 (Zwykły)] Idę do kasy (PID: 344530).
+[17:36:04] [KASA] Obsługuję pasażera PID 344530...
+[17:36:04] [Pasażer 530 (Zwykły)] Przychodzę na przystanek.
+[17:36:05] [Pasażer 531 (Zwykły)] Idę do kasy (PID: 344689).
+[17:36:05] [KASA] Obsługuję pasażera PID 344689...
+[17:36:05] [Pasażer 531 (Zwykły)] Przychodzę na przystanek.
+[17:36:05] [Dziecko 532] Czekam na rodzica...
+[17:36:05] [Pasażer 532 (Opiekun)] Idę do kasy (PID: 344809).
+[17:36:05] [KASA] Obsługuję pasażera PID 344809...
+[17:36:05] [KASA] Obsługuję pasażera PID 344809...
+[17:36:05] [Pasażer 532 (Opiekun)] Przychodzę na przystanek.
+[17:36:05] [Pasażer 532 (Dziecko)] Przychodzę na przystanek.
+[17:36:05] [Pasażer 534 (Zwykły)] Idę do kasy (PID: 344958).
+[17:36:05] [KASA] Obsługuję pasażera PID 344958...
+[17:36:05] [Pasażer 534 (Zwykły)] Przychodzę na przystanek.
+[17:36:06] [Pasażer 535 (Rower)] Idę do kasy (PID: 345118).
+[17:36:06] [KASA] Obsługuję pasażera PID 345118...
+[17:36:06] [Pasażer 535 (Rower)] Przychodzę na przystanek.
+[17:36:06] [Pasażer 536 (Zwykły)] Idę do kasy (PID: 345206).
+[17:36:06] [KASA] Obsługuję pasażera PID 345206...
+[17:36:06] [Pasażer 536 (Zwykły)] Przychodzę na przystanek.
+[17:36:06] [Pasażer 537 (Zwykły)] Idę do kasy (PID: 345287).
+[17:36:06] [KASA] Obsługuję pasażera PID 345287...
+[17:36:06] [Pasażer 537 (Zwykły)] Przychodzę na przystanek.
+[17:36:06] [Pasażer 538 (Opiekun)] Idę do kasy (PID: 345362).
+[17:36:06] [Dziecko 538] Czekam na rodzica...
+[17:36:06] [KASA] Obsługuję pasażera PID 345362...
+[17:36:06] [KASA] Obsługuję pasażera PID 345362...
+[17:36:06] [Pasażer 538 (Opiekun)] Przychodzę na przystanek.
+[17:36:06] [Pasażer 538 (Dziecko)] Przychodzę na przystanek.
+[17:36:07] [Pasażer 540 (Rower)] Idę do kasy (PID: 345482).
+[17:36:07] [KASA] Obsługuję pasażera PID 345482...
+[17:36:07] [Pasażer 540 (Rower)] Przychodzę na przystanek.
+[17:36:07] [Pasażer 541 (Zwykły)] Idę do kasy (PID: 345592).
+[17:36:07] [KASA] Obsługuję pasażera PID 345592...
+[17:36:07] [Pasażer 541 (Zwykły)] Przychodzę na przystanek.
+[17:36:07] [Pasażer 542 (Rower)] Idę do kasy (PID: 345599).
+[17:36:07] [KASA] Obsługuję pasażera PID 345599...
+[17:36:07] [Pasażer 542 (Rower)] Przychodzę na przystanek.
+[17:36:08] [Dziecko 543] Czekam na rodzica...
+[17:36:08] [Pasażer 543 (Opiekun)] Idę do kasy (PID: 345601).
+[17:36:08] [KASA] Obsługuję pasażera PID 345601...
+[17:36:08] [KASA] Obsługuję pasażera PID 345601...
+[17:36:08] [Pasażer 543 (Opiekun)] Przychodzę na przystanek.
+[17:36:08] [Pasażer 543 (Dziecko)] Przychodzę na przystanek.
+[17:36:08] [Dziecko 545] Czekam na rodzica...
+[17:36:08] [Pasażer 545 (Opiekun)] Idę do kasy (PID: 345603).
+[17:36:08] [KASA] Obsługuję pasażera PID 345603...
+[17:36:08] [KASA] Obsługuję pasażera PID 345603...
+[17:36:08] [Pasażer 545 (Opiekun)] Przychodzę na przystanek.
+[17:36:08] [Pasażer 545 (Dziecko)] Przychodzę na przystanek.
+[17:36:08] [Pasażer 547 (Rower)] Idę do kasy (PID: 345742).
+[17:36:08] [KASA] Obsługuję pasażera PID 345742...
+[17:36:08] [Pasażer 547 (Rower)] Przychodzę na przystanek.
+[17:36:09] [Pasażer 548 (Zwykły)] Idę do kasy (PID: 345869).
+[17:36:09] [KASA] Obsługuję pasażera PID 345869...
+[17:36:09] [Pasażer 548 (Zwykły)] Przychodzę na przystanek.
+[17:36:09] [Pasażer 549 (Zwykły)] Idę do kasy (PID: 345982).
+[17:36:09] [KASA] Obsługuję pasażera PID 345982...
+[17:36:09] [Pasażer 549 (Zwykły)] Przychodzę na przystanek.
+[17:36:09] [Pasażer 550 (Rower)] Idę do kasy (PID: 346156).
+[17:36:09] [KASA] Obsługuję pasażera PID 346156...
+[17:36:09] [Pasażer 550 (Rower)] Przychodzę na przystanek.
+[17:36:10] [Pasażer 551 (Rower)] Idę do kasy (PID: 346318).
+[17:36:10] [KASA] Obsługuję pasażera PID 346318...
+[17:36:10] [Pasażer 551 (Rower)] Przychodzę na przystanek.
+[17:36:10] [Pasażer 552 (Zwykły)] Idę do kasy (PID: 346435).
+[17:36:10] [KASA] Obsługuję pasażera PID 346435...
+[17:36:10] [Pasażer 552 (Zwykły)] Przychodzę na przystanek.
+[17:36:10] [Pasażer 553 (Zwykły)] Idę do kasy (PID: 346602).
+[17:36:10] [KASA] Obsługuję pasażera PID 346602...
+[17:36:10] [Pasażer 553 (Zwykły)] Przychodzę na przystanek.
+[17:36:11] [Pasażer 554 (Zwykły)] Idę do kasy (PID: 346751).
+[17:36:11] [KASA] Obsługuję pasażera PID 346751...
+[17:36:11] [Pasażer 554 (Zwykły)] Przychodzę na przystanek.
+[17:36:11] [Pasażer 555 (Zwykły)] Idę do kasy (PID: 346820).
+[17:36:11] [KASA] Obsługuję pasażera PID 346820...
+[17:36:11] [Pasażer 555 (Zwykły)] Przychodzę na przystanek.
+[17:36:11] [Pasażer 556 (Zwykły)] Idę do kasy (PID: 346929).
+[17:36:11] [KASA] Obsługuję pasażera PID 346929...
+[17:36:11] [Pasażer 556 (Zwykły)] Przychodzę na przystanek.
+[17:36:11] [Pasażer 557 (Rower)] Idę do kasy (PID: 346990).
+[17:36:11] [KASA] Obsługuję pasażera PID 346990...
+[17:36:11] [Pasażer 557 (Rower)] Przychodzę na przystanek.
+[17:36:12] [Pasażer 558 (Rower)] Idę do kasy (PID: 347080).
+[17:36:12] [KASA] Obsługuję pasażera PID 347080...
+[17:36:12] [Pasażer 558 (Rower)] Przychodzę na przystanek.
+[17:36:12] [Pasażer 559 (Rower)] Idę do kasy (PID: 347216).
+[17:36:12] [KASA] Obsługuję pasażera PID 347216...
+[17:36:12] [Pasażer 559 (Rower)] Przychodzę na przystanek.
+[17:36:12] [Pasażer 560 (Rower)] Idę do kasy (PID: 347272).
+[17:36:12] [KASA] Obsługuję pasażera PID 347272...
+[17:36:12] [Pasażer 560 (Rower)] Przychodzę na przystanek.
+[17:36:13] [Pasażer 561 (Rower)] Idę do kasy (PID: 347273).
+[17:36:13] [KASA] Obsługuję pasażera PID 347273...
+[17:36:13] [Pasażer 561 (Rower)] Przychodzę na przystanek.
+[17:36:13] [Dziecko 562] Czekam na rodzica...
+[17:36:13] [Pasażer 562 (Opiekun)] Idę do kasy (PID: 347275).
+[17:36:13] [KASA] Obsługuję pasażera PID 347275...
+[17:36:13] [KASA] Obsługuję pasażera PID 347275...
+[17:36:13] [Pasażer 562 (Opiekun)] Przychodzę na przystanek.
+[17:36:13] [Pasażer 562 (Dziecko)] Przychodzę na przystanek.
+[17:36:13] [Pasażer 564 (Rower)] Idę do kasy (PID: 347276).
+[17:36:13] [KASA] Obsługuję pasażera PID 347276...
+[17:36:13] [Pasażer 564 (Rower)] Przychodzę na przystanek.
+[17:36:13] [Dziecko 565] Czekam na rodzica...
+[17:36:13] [Pasażer 565 (Opiekun)] Idę do kasy (PID: 347362).
+[17:36:13] [KASA] Obsługuję pasażera PID 347362...
+[17:36:13] [KASA] Obsługuję pasażera PID 347362...
+[17:36:13] [Pasażer 565 (Opiekun)] Przychodzę na przystanek.
+[17:36:13] [Pasażer 565 (Dziecko)] Przychodzę na przystanek.
+[17:36:14] [Pasażer 567 (Zwykły)] Idę do kasy (PID: 347445).
+[17:36:14] [KASA] Obsługuję pasażera PID 347445...
+[17:36:14] [Pasażer 567 (Zwykły)] Przychodzę na przystanek.
+[17:36:14] [Pasażer 568 (Rower)] Idę do kasy (PID: 347566).
+[17:36:14] [KASA] Obsługuję pasażera PID 347566...
+[17:36:14] [Pasażer 568 (Rower)] Przychodzę na przystanek.
+[17:36:14] [Pasażer 569 (Rower)] Idę do kasy (PID: 347693).
+[17:36:14] [KASA] Obsługuję pasażera PID 347693...
+[17:36:14] [Pasażer 569 (Rower)] Przychodzę na przystanek.
+[17:36:14] [Pasażer 570 (Rower)] Idę do kasy (PID: 347834).
+[17:36:14] [KASA] Obsługuję pasażera PID 347834...
+[17:36:14] [Pasażer 570 (Rower)] Przychodzę na przystanek.
+[17:36:15] [Dziecko 571] Czekam na rodzica...
+[17:36:15] [Pasażer 571 (Opiekun)] Idę do kasy (PID: 347952).
+[17:36:15] [KASA] Obsługuję pasażera PID 347952...
+[17:36:15] [KASA] Obsługuję pasażera PID 347952...
+[17:36:15] [Pasażer 571 (Opiekun)] Przychodzę na przystanek.
+[17:36:15] [Pasażer 571 (Dziecko)] Przychodzę na przystanek.
+[17:36:15] [Pasażer 573 (Rower)] Idę do kasy (PID: 348117).
+[17:36:15] [KASA] Obsługuję pasażera PID 348117...
+[17:36:15] [Pasażer 573 (Rower)] Przychodzę na przystanek.
+[17:36:15] [Pasażer 574 (Zwykły)] Idę do kasy (PID: 348300).
+[17:36:15] [KASA] Obsługuję pasażera PID 348300...
+[17:36:15] [Pasażer 574 (Zwykły)] Przychodzę na przystanek.
+[17:36:16] [Pasażer 575 (Rower)] Idę do kasy (PID: 348533).
+[17:36:16] [KASA] Obsługuję pasażera PID 348533...
+[17:36:16] [Pasażer 575 (Rower)] Przychodzę na przystanek.
+[17:36:16] [Pasażer 576 (Rower)] Idę do kasy (PID: 348628).
+[17:36:16] [KASA] Obsługuję pasażera PID 348628...
+[17:36:16] [Pasażer 576 (Rower)] Przychodzę na przystanek.
+[17:36:16] [Pasażer 577 (Opiekun)] Idę do kasy (PID: 348738).
+[17:36:16] [KASA] Obsługuję pasażera PID 348738...
+[17:36:16] [KASA] Obsługuję pasażera PID 348738...
+[17:36:16] [Pasażer 577 (Opiekun)] Przychodzę na przystanek.
+[17:36:16] [Dziecko 577] Czekam na rodzica...
+[17:36:16] [Pasażer 577 (Dziecko)] Przychodzę na przystanek.
+[17:36:17] [Dziecko 579] Czekam na rodzica...
+[17:36:17] [Pasażer 579 (Opiekun)] Idę do kasy (PID: 348878).
+[17:36:17] [KASA] Obsługuję pasażera PID 348878...
+[17:36:17] [KASA] Obsługuję pasażera PID 348878...
+[17:36:17] [Pasażer 579 (Opiekun)] Przychodzę na przystanek.
+[17:36:17] [Pasażer 579 (Dziecko)] Przychodzę na przystanek.
+[17:36:17] [Pasażer 581 (Rower)] Idę do kasy (PID: 349008).
+[17:36:17] [KASA] Obsługuję pasażera PID 349008...
+[17:36:17] [Pasażer 581 (Rower)] Przychodzę na przystanek.
+[17:36:18] [Pasażer 582 (Zwykły)] Idę do kasy (PID: 349009).
+[17:36:18] [KASA] Obsługuję pasażera PID 349009...
+[17:36:18] [Pasażer 582 (Zwykły)] Przychodzę na przystanek.
+[17:36:18] [Pasażer 583 (Rower)] Idę do kasy (PID: 349010).
+[17:36:18] [KASA] Obsługuję pasażera PID 349010...
+[17:36:18] [Pasażer 583 (Rower)] Przychodzę na przystanek.
+[17:36:18] [Pasażer 584 (Rower)] Idę do kasy (PID: 349025).
+[17:36:18] [KASA] Obsługuję pasażera PID 349025...
+[17:36:18] [Pasażer 584 (Rower)] Przychodzę na przystanek.
+[17:36:19] [Dziecko 585] Czekam na rodzica...
+[17:36:19] [Pasażer 585 (Opiekun)] Idę do kasy (PID: 349188).
+[17:36:19] [KASA] Obsługuję pasażera PID 349188...
+[17:36:19] [KASA] Obsługuję pasażera PID 349188...
+[17:36:19] [Pasażer 585 (Opiekun)] Przychodzę na przystanek.
+[17:36:19] [Pasażer 585 (Dziecko)] Przychodzę na przystanek.
+[17:36:19] [Pasażer 587 (Rower)] Idę do kasy (PID: 349384).
+[17:36:19] [KASA] Obsługuję pasażera PID 349384...
+[17:36:19] [Pasażer 587 (Rower)] Przychodzę na przystanek.
+[17:36:19] [Dziecko 588] Czekam na rodzica...
+[17:36:19] [Pasażer 588 (Opiekun)] Idę do kasy (PID: 349536).
+[17:36:19] [KASA] Obsługuję pasażera PID 349536...
+[17:36:19] [KASA] Obsługuję pasażera PID 349536...
+[17:36:19] [Pasażer 588 (Opiekun)] Przychodzę na przystanek.
+[17:36:19] [Pasażer 588 (Dziecko)] Przychodzę na przystanek.
+[17:36:20] [Pasażer 590 (Zwykły)] Idę do kasy (PID: 349656).
+[17:36:20] [KASA] Obsługuję pasażera PID 349656...
+[17:36:20] [Pasażer 590 (Zwykły)] Przychodzę na przystanek.
+[17:36:20] [Pasażer 591 (Zwykły)] Idę do kasy (PID: 349754).
+[17:36:20] [KASA] Obsługuję pasażera PID 349754...
+[17:36:20] [Pasażer 591 (Zwykły)] Przychodzę na przystanek.
+[17:36:20] [Pasażer 592 (Zwykły)] Idę do kasy (PID: 349887).
+[17:36:20] [KASA] Obsługuję pasażera PID 349887...
+[17:36:20] [Pasażer 592 (Zwykły)] Przychodzę na przystanek.
+[17:36:20] [Pasażer 593 (Zwykły)] Idę do kasy (PID: 350027).
+[17:36:20] [KASA] Obsługuję pasażera PID 350027...
+[17:36:20] [Pasażer 593 (Zwykły)] Przychodzę na przystanek.
+[17:36:21] [Pasażer 594 (Zwykły)] Idę do kasy (PID: 350274).
+[17:36:21] [KASA] Obsługuję pasażera PID 350274...
+[17:36:21] [Pasażer 594 (Zwykły)] Przychodzę na przystanek.
+[17:36:21] [Pasażer 595 (Zwykły)] Idę do kasy (PID: 350373).
+[17:36:21] [KASA] Obsługuję pasażera PID 350373...
+[17:36:21] [Pasażer 595 (Zwykły)] Przychodzę na przystanek.
+[17:36:21] [Pasażer 596 (Zwykły)] Idę do kasy (PID: 350436).
+[17:36:21] [KASA] Obsługuję pasażera PID 350436...
+[17:36:21] [Pasażer 596 (Zwykły)] Przychodzę na przystanek.
+[17:36:21] [Pasażer 597 (Rower)] Idę do kasy (PID: 350529).
+[17:36:21] [KASA] Obsługuję pasażera PID 350529...
+[17:36:21] [Pasażer 597 (Rower)] Przychodzę na przystanek.
+[17:36:22] [Pasażer 598 (Zwykły)] Idę do kasy (PID: 350641).
+[17:36:22] [KASA] Obsługuję pasażera PID 350641...
+[17:36:22] [Pasażer 598 (Zwykły)] Przychodzę na przystanek.
+[17:36:22] [Pasażer 599 (Rower)] Idę do kasy (PID: 350730).
+[17:36:22] [KASA] Obsługuję pasażera PID 350730...
+[17:36:22] [Pasażer 599 (Rower)] Przychodzę na przystanek.
+[17:36:23] [Autobus 2] ODJAZD z 10 pasażerami (4 rowerów).
+[17:36:23] [Autobus 2] WRÓCIŁ Z TRASY po 9 s.
+[17:36:23] [Autobus 1] Podstawiłem się. SPRAWDZAM BILETY!
+[17:36:23] [Pasażer 600 (Rower)] Idę do kasy (PID: 350801).
+[17:36:23] [KASA] Obsługuję pasażera PID 350801...
+[17:36:23] [Pasażer 600 (Rower)] Przychodzę na przystanek.
+[17:36:23] [Pasażer 490 (VIP)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 0/4)
+[17:36:23] [Pasażer 226 (Zwykły)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 0/4)
+[17:36:23] [Pasażer 253 (Rower)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 3/10 (Rowerów: 1/4)
+[17:36:23] [Pasażer 601 (Zwykły)] Idę do kasy (PID: 350802).
+[17:36:23] [KASA] Obsługuję pasażera PID 350802...
+[17:36:23] [Pasażer 601 (Zwykły)] Przychodzę na przystanek.
+[17:36:23] [Pasażer 287 (Zwykły)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 5/10 (Rowerów: 2/4)
+[17:36:23] [Pasażer 185 (Rower)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 2/4)
+[17:36:23] [Pasażer 288 (Rower)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 3/4)
+[17:36:23] [Pasażer 562 (Opiekun)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 2/4)
+[17:36:23] [Pasażer 286 (Rower)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 8/10 (Rowerów: 4/4)
+[17:36:23] [Pasażer 562 (Dziecko)] Wszedłem do autobusu!
+[17:36:23]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:36:23] [Dziecko 602] Czekam na rodzica...
+[17:36:23] [Pasażer 602 (Opiekun)] Idę do kasy (PID: 350804).
+[17:36:23] [KASA] Obsługuję pasażera PID 350804...
+[17:36:23] [KASA] Obsługuję pasażera PID 350804...
+[17:36:23] [Pasażer 602 (Opiekun)] Przychodzę na przystanek.
+[17:36:23] [Pasażer 602 (Dziecko)] Przychodzę na przystanek.
+[17:36:23] [Pasażer 604 (Zwykły)] Idę do kasy (PID: 350867).
+[17:36:23] [KASA] Obsługuję pasażera PID 350867...
+[17:36:23] [Pasażer 604 (Zwykły)] Przychodzę na przystanek.
+[17:36:24] [Pasażer 605 (Zwykły)] Idę do kasy (PID: 350964).
+[17:36:24] [KASA] Obsługuję pasażera PID 350964...
+[17:36:24] [Pasażer 605 (Zwykły)] Przychodzę na przystanek.
+[17:36:24] [Pasażer 606 (Zwykły)] Idę do kasy (PID: 351099).
+[17:36:24] [KASA] Obsługuję pasażera PID 351099...
+[17:36:24] [Pasażer 606 (Zwykły)] Przychodzę na przystanek.
+[17:36:24] [Pasażer 607 (Zwykły)] Idę do kasy (PID: 351196).
+[17:36:24] [KASA] Obsługuję pasażera PID 351196...
+[17:36:24] [Pasażer 607 (Zwykły)] Przychodzę na przystanek.
+[17:36:25] [Pasażer 608 (Opiekun)] Idę do kasy (PID: 351342).
+[17:36:25] [KASA] Obsługuję pasażera PID 351342...
+[17:36:25] [Dziecko 608] Czekam na rodzica...
+[17:36:25] [KASA] Obsługuję pasażera PID 351342...
+[17:36:25] [Pasażer 608 (Opiekun)] Przychodzę na przystanek.
+[17:36:25] [Pasażer 608 (Dziecko)] Przychodzę na przystanek.
+[17:36:25] [Pasażer 610 (Rower)] Idę do kasy (PID: 351465).
+[17:36:25] [KASA] Obsługuję pasażera PID 351465...
+[17:36:25] [Pasażer 610 (Rower)] Przychodzę na przystanek.
+[17:36:25] [Pasażer 611 (Zwykły)] Idę do kasy (PID: 351580).
+[17:36:25] [KASA] Obsługuję pasażera PID 351580...
+[17:36:25] [Pasażer 611 (Zwykły)] Przychodzę na przystanek.
+[17:36:25] [Pasażer 612 (Zwykły)] Idę do kasy (PID: 351717).
+[17:36:25] [KASA] Obsługuję pasażera PID 351717...
+[17:36:25] [Pasażer 612 (Zwykły)] Przychodzę na przystanek.
+[17:36:26] [Pasażer 613 (Zwykły)] Idę do kasy (PID: 351908).
+[17:36:26] [KASA] Obsługuję pasażera PID 351908...
+[17:36:26] [Pasażer 613 (Zwykły)] Przychodzę na przystanek.
+[17:36:26] [Pasażer 614 (Zwykły)] Idę do kasy (PID: 352123).
+[17:36:26] [KASA] Obsługuję pasażera PID 352123...
+[17:36:26] [Pasażer 614 (Zwykły)] Przychodzę na przystanek.
+[17:36:26] [Pasażer 615 (Zwykły)] Idę do kasy (PID: 352291).
+[17:36:26] [KASA] Obsługuję pasażera PID 352291...
+[17:36:26] [Pasażer 615 (Zwykły)] Przychodzę na przystanek.
+[17:36:27] [Pasażer 616 (Zwykły)] Idę do kasy (PID: 352403).
+[17:36:27] [KASA] Obsługuję pasażera PID 352403...
+[17:36:27] [Pasażer 616 (Zwykły)] Przychodzę na przystanek.
+[17:36:27] [Pasażer 617 (Rower)] Idę do kasy (PID: 352561).
+[17:36:27] [KASA] Obsługuję pasażera PID 352561...
+[17:36:27] [Pasażer 617 (Rower)] Przychodzę na przystanek.
+[17:36:27] [Pasażer 618 (Zwykły)] Idę do kasy (PID: 352650).
+[17:36:27] [KASA] Obsługuję pasażera PID 352650...
+[17:36:27] [Pasażer 618 (Zwykły)] Przychodzę na przystanek.
+[17:36:28] [Pasażer 619 (Zwykły)] Idę do kasy (PID: 352651).
+[17:36:28] [KASA] Obsługuję pasażera PID 352651...
+[17:36:28] [Pasażer 619 (Zwykły)] Przychodzę na przystanek.
+[17:36:28] [Pasażer 620 (Zwykły)] Idę do kasy (PID: 352652).
+[17:36:28] [KASA] Obsługuję pasażera PID 352652...
+[17:36:28] [Pasażer 620 (Zwykły)] Przychodzę na przystanek.
+[17:36:28] [Dziecko 621] Czekam na rodzica...
+[17:36:28] [Pasażer 621 (Opiekun)] Idę do kasy (PID: 352654).
+[17:36:28] [KASA] Obsługuję pasażera PID 352654...
+[17:36:28] [KASA] Obsługuję pasażera PID 352654...
+[17:36:28] [Pasażer 621 (Opiekun)] Przychodzę na przystanek.
+[17:36:28] [Pasażer 621 (Dziecko)] Przychodzę na przystanek.
+[17:36:28] [Pasażer 361 (Zwykły)] Wszedłem do autobusu!
+[17:36:28]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:36:28] [Pasażer 623 (Zwykły)] Idę do kasy (PID: 352655).
+[17:36:28] [KASA] Obsługuję pasażera PID 352655...
+[17:36:28] [Pasażer 623 (Zwykły)] Przychodzę na przystanek.
+[17:36:29] [Dziecko 624] Czekam na rodzica...
+[17:36:29] [Pasażer 624 (Opiekun)] Idę do kasy (PID: 352807).
+[17:36:29] [KASA] Obsługuję pasażera PID 352807...
+[17:36:29] [KASA] Obsługuję pasażera PID 352807...
+[17:36:29] [Pasażer 624 (Opiekun)] Przychodzę na przystanek.
+[17:36:29] [Pasażer 624 (Dziecko)] Przychodzę na przystanek.
+[17:36:29] [Pasażer 626 (Rower)] Idę do kasy (PID: 352881).
+[17:36:29] [KASA] Obsługuję pasażera PID 352881...
+[17:36:29] [Pasażer 626 (Rower)] Przychodzę na przystanek.
+[17:36:29] [Pasażer 627 (Zwykły)] Idę do kasy (PID: 352987).
+[17:36:29] [KASA] Obsługuję pasażera PID 352987...
+[17:36:29] [Pasażer 627 (Zwykły)] Przychodzę na przystanek.
+[17:36:29] [Dziecko 628] Czekam na rodzica...
+[17:36:29] [Pasażer 628 (Opiekun)] Idę do kasy (PID: 353106).
+[17:36:29] [KASA] Obsługuję pasażera PID 353106...
+[17:36:29] [KASA] Obsługuję pasażera PID 353106...
+[17:36:29] [Pasażer 628 (Opiekun)] Przychodzę na przystanek.
+[17:36:29] [Pasażer 628 (Dziecko)] Przychodzę na przystanek.
+[17:36:30] [Pasażer 630 (Zwykły)] Idę do kasy (PID: 353151).
+[17:36:30] [KASA] Obsługuję pasażera PID 353151...
+[17:36:30] [Pasażer 630 (Zwykły)] Przychodzę na przystanek.
+[17:36:30] [Pasażer 631 (Zwykły)] Idę do kasy (PID: 353303).
+[17:36:30] [KASA] Obsługuję pasażera PID 353303...
+[17:36:30] [Pasażer 631 (Zwykły)] Przychodzę na przystanek.
+[17:36:30] [Dziecko 632] Czekam na rodzica...
+[17:36:30] [Pasażer 632 (Opiekun)] Idę do kasy (PID: 353436).
+[17:36:30] [KASA] Obsługuję pasażera PID 353436...
+[17:36:30] [KASA] Obsługuję pasażera PID 353436...
+[17:36:30] [Pasażer 632 (Opiekun)] Przychodzę na przystanek.
+[17:36:30] [Pasażer 632 (Dziecko)] Przychodzę na przystanek.
+[17:36:30] [Pasażer 634 (Zwykły)] Idę do kasy (PID: 353531).
+[17:36:30] [KASA] Obsługuję pasażera PID 353531...
+[17:36:30] [Pasażer 634 (Zwykły)] Przychodzę na przystanek.
+[17:36:31] [Pasażer 635 (Zwykły)] Idę do kasy (PID: 353639).
+[17:36:31] [KASA] Obsługuję pasażera PID 353639...
+[17:36:31] [Pasażer 635 (Zwykły)] Przychodzę na przystanek.
+[17:36:31] [Pasażer 636 (Rower)] Idę do kasy (PID: 353769).
+[17:36:31] [KASA] Obsługuję pasażera PID 353769...
+[17:36:31] [Pasażer 636 (Rower)] Przychodzę na przystanek.
+[17:36:31] [Pasażer 637 (Rower)] Idę do kasy (PID: 354004).
+[17:36:31] [KASA] Obsługuję pasażera PID 354004...
+[17:36:31] [Pasażer 637 (Rower)] Przychodzę na przystanek.
+[17:36:32] [Pasażer 638 (Rower)] Idę do kasy (PID: 354228).
+[17:36:32] [KASA] Obsługuję pasażera PID 354228...
+[17:36:32] [Pasażer 638 (Rower)] Przychodzę na przystanek.
+[17:36:32] [Pasażer 639 (Zwykły)] Idę do kasy (PID: 354410).
+[17:36:32] [KASA] Obsługuję pasażera PID 354410...
+[17:36:32] [Pasażer 639 (Zwykły)] Przychodzę na przystanek.
+[17:36:32] [Pasażer 640 (Zwykły)] Idę do kasy (PID: 354510).
+[17:36:32] [KASA] Obsługuję pasażera PID 354510...
+[17:36:32] [Pasażer 640 (Zwykły)] Przychodzę na przystanek.
+[17:36:33] [Pasażer 641 (Rower)] Idę do kasy (PID: 354564).
+[17:36:33] [KASA] Obsługuję pasażera PID 354564...
+[17:36:33] [Pasażer 641 (Rower)] Przychodzę na przystanek.
+[17:36:33] [Pasażer 642 (Rower)] Idę do kasy (PID: 354565).
+[17:36:33] [KASA] Obsługuję pasażera PID 354565...
+[17:36:33] [Pasażer 642 (Rower)] Przychodzę na przystanek.
+[17:36:33] [Pasażer 643 (Zwykły)] Idę do kasy (PID: 354566).
+[17:36:33] [KASA] Obsługuję pasażera PID 354566...
+[17:36:33] [Pasażer 643 (Zwykły)] Przychodzę na przystanek.
+[17:36:33] [Pasażer 644 (Zwykły)] Idę do kasy (PID: 354609).
+[17:36:33] [KASA] Obsługuję pasażera PID 354609...
+[17:36:33] [Pasażer 644 (Zwykły)] Przychodzę na przystanek.
+[17:36:34] [Pasażer 645 (Zwykły)] Idę do kasy (PID: 354734).
+[17:36:34] [KASA] Obsługuję pasażera PID 354734...
+[17:36:34] [Pasażer 645 (Zwykły)] Przychodzę na przystanek.
+[17:36:34] [Pasażer 646 (Zwykły)] Idę do kasy (PID: 354844).
+[17:36:34] [KASA] Obsługuję pasażera PID 354844...
+[17:36:34] [Pasażer 646 (Zwykły)] Przychodzę na przystanek.
+[17:36:34] [Dziecko 647] Czekam na rodzica...
+[17:36:34] [Pasażer 647 (Opiekun)] Idę do kasy (PID: 354989).
+[17:36:34] [KASA] Obsługuję pasażera PID 354989...
+[17:36:34] [KASA] Obsługuję pasażera PID 354989...
+[17:36:34] [Pasażer 647 (Opiekun)] Przychodzę na przystanek.
+[17:36:34] [Pasażer 647 (Dziecko)] Przychodzę na przystanek.
+[17:36:35] [Dziecko 649] Czekam na rodzica...
+[17:36:35] [Pasażer 649 (Opiekun)] Idę do kasy (PID: 355223).
+[17:36:35] [KASA] Obsługuję pasażera PID 355223...
+[17:36:35] [KASA] Obsługuję pasażera PID 355223...
+[17:36:35] [Pasażer 649 (Opiekun)] Przychodzę na przystanek.
+[17:36:35] [Pasażer 649 (Dziecko)] Przychodzę na przystanek.
+[17:36:35] [Pasażer 651 (Rower)] Idę do kasy (PID: 355364).
+[17:36:35] [KASA] Obsługuję pasażera PID 355364...
+[17:36:35] [Pasażer 651 (Rower)] Przychodzę na przystanek.
+[17:36:35] [Pasażer 652 (Zwykły)] Idę do kasy (PID: 355465).
+[17:36:35] [KASA] Obsługuję pasażera PID 355465...
+[17:36:35] [Pasażer 652 (Zwykły)] Przychodzę na przystanek.
+[17:36:35] [Dziecko 653] Czekam na rodzica...
+[17:36:35] [Pasażer 653 (Opiekun)] Idę do kasy (PID: 355571).
+[17:36:35] [KASA] Obsługuję pasażera PID 355571...
+[17:36:35] [KASA] Obsługuję pasażera PID 355571...
+[17:36:35] [Pasażer 653 (Opiekun)] Przychodzę na przystanek.
+[17:36:35] [Pasażer 653 (Dziecko)] Przychodzę na przystanek.
+[17:36:36] [Pasażer 655 (Rower)] Idę do kasy (PID: 355771).
+[17:36:36] [KASA] Obsługuję pasażera PID 355771...
+[17:36:36] [Pasażer 655 (Rower)] Przychodzę na przystanek.
+[17:36:36] [Pasażer 656 (Zwykły)] Idę do kasy (PID: 355934).
+[17:36:36] [KASA] Obsługuję pasażera PID 355934...
+[17:36:36] [Pasażer 656 (Zwykły)] Przychodzę na przystanek.
+[17:36:36] [Pasażer 657 (Zwykły)] Idę do kasy (PID: 356105).
+[17:36:36] [KASA] Obsługuję pasażera PID 356105...
+[17:36:36] [Pasażer 657 (Zwykły)] Przychodzę na przystanek.
+[17:36:37] [Pasażer 658 (Zwykły)] Idę do kasy (PID: 356182).
+[17:36:37] [KASA] Obsługuję pasażera PID 356182...
+[17:36:37] [Pasażer 658 (Zwykły)] Przychodzę na przystanek.
+[17:36:37] [Dziecko 659] Czekam na rodzica...
+[17:36:37] [Pasażer 659 (Opiekun)] Idę do kasy (PID: 356279).
+[17:36:37] [KASA] Obsługuję pasażera PID 356279...
+[17:36:37] [KASA] Obsługuję pasażera PID 356279...
+[17:36:37] [Pasażer 659 (Opiekun)] Przychodzę na przystanek.
+[17:36:37] [Pasażer 659 (Dziecko)] Przychodzę na przystanek.
+[17:36:37] [Pasażer 661 (Zwykły)] Idę do kasy (PID: 356408).
+[17:36:37] [KASA] Obsługuję pasażera PID 356408...
+[17:36:37] [Pasażer 661 (Zwykły)] Przychodzę na przystanek.
+[17:36:38] [Pasażer 662 (Zwykły)] Idę do kasy (PID: 356469).
+[17:36:38] [KASA] Obsługuję pasażera PID 356469...
+[17:36:38] [Pasażer 662 (Zwykły)] Przychodzę na przystanek.
+[17:36:38] [Pasażer 663 (Rower)] Idę do kasy (PID: 356540).
+[17:36:38] [KASA] Obsługuję pasażera PID 356540...
+[17:36:38] [Pasażer 663 (Rower)] Przychodzę na przystanek.
+[17:36:38] [Dziecko 664] Czekam na rodzica...
+[17:36:38] [Pasażer 664 (Opiekun)] Idę do kasy (PID: 356542).
+[17:36:38] [KASA] Obsługuję pasażera PID 356542...
+[17:36:38] [KASA] Obsługuję pasażera PID 356542...
+[17:36:38] [Pasażer 664 (Opiekun)] Przychodzę na przystanek.
+[17:36:38] [Pasażer 664 (Dziecko)] Przychodzę na przystanek.
+[17:36:39] [Pasażer 666 (Rower)] Idę do kasy (PID: 356543).
+[17:36:39] [KASA] Obsługuję pasażera PID 356543...
+[17:36:39] [Pasażer 666 (Rower)] Przychodzę na przystanek.
+[17:36:39] [Pasażer 667 (Rower)] Idę do kasy (PID: 356651).
+[17:36:39] [KASA] Obsługuję pasażera PID 356651...
+[17:36:39] [Pasażer 667 (Rower)] Przychodzę na przystanek.
+[17:36:39] [Pasażer 668 (Zwykły)] Idę do kasy (PID: 356762).
+[17:36:39] [KASA] Obsługuję pasażera PID 356762...
+[17:36:39] [Pasażer 668 (Zwykły)] Przychodzę na przystanek.
+[17:36:40] [Dziecko 669] Czekam na rodzica...
+[17:36:40] [Pasażer 669 (Opiekun)] Idę do kasy (PID: 356886).
+[17:36:40] [KASA] Obsługuję pasażera PID 356886...
+[17:36:40] [KASA] Obsługuję pasażera PID 356886...
+[17:36:40] [Pasażer 669 (Opiekun)] Przychodzę na przystanek.
+[17:36:40] [Pasażer 669 (Dziecko)] Przychodzę na przystanek.
+[17:36:40] [Pasażer 671 (Zwykły)] Idę do kasy (PID: 356945).
+[17:36:40] [KASA] Obsługuję pasażera PID 356945...
+[17:36:40] [Pasażer 671 (Zwykły)] Przychodzę na przystanek.
+[17:36:40] [Pasażer 672 (Zwykły)] Idę do kasy (PID: 357103).
+[17:36:40] [KASA] Obsługuję pasażera PID 357103...
+[17:36:40] [Pasażer 672 (Zwykły)] Przychodzę na przystanek.
+[17:36:41] [Pasażer 673 (Zwykły)] Idę do kasy (PID: 357315).
+[17:36:41] [KASA] Obsługuję pasażera PID 357315...
+[17:36:41] [Pasażer 673 (Zwykły)] Przychodzę na przystanek.
+[17:36:41] [Pasażer 674 (Rower)] Idę do kasy (PID: 357542).
+[17:36:41] [KASA] Obsługuję pasażera PID 357542...
+[17:36:41] [Pasażer 674 (Rower)] Przychodzę na przystanek.
+[17:36:41] [Pasażer 675 (Zwykły)] Idę do kasy (PID: 357638).
+[17:36:41] [KASA] Obsługuję pasażera PID 357638...
+[17:36:41] [Pasażer 675 (Zwykły)] Przychodzę na przystanek.
+[17:36:42] [Dziecko 676] Czekam na rodzica...
+[17:36:42] [Pasażer 676 (Opiekun)] Idę do kasy (PID: 357775).
+[17:36:42] [KASA] Obsługuję pasażera PID 357775...
+[17:36:42] [KASA] Obsługuję pasażera PID 357775...
+[17:36:42] [Pasażer 676 (Dziecko)] Przychodzę na przystanek.
+[17:36:42] [Pasażer 676 (Opiekun)] Przychodzę na przystanek.
+[17:36:42] [Pasażer 678 (Zwykły)] Idę do kasy (PID: 357928).
+[17:36:42] [KASA] Obsługuję pasażera PID 357928...
+[17:36:42] [Pasażer 678 (Zwykły)] Przychodzę na przystanek.
+[17:36:42] [Pasażer 679 (Rower)] Idę do kasy (PID: 358118).
+[17:36:42] [KASA] Obsługuję pasażera PID 358118...
+[17:36:42] [Pasażer 679 (Rower)] Przychodzę na przystanek.
+[17:36:43] [Pasażer 680 (Rower)] Idę do kasy (PID: 358330).
+[17:36:43] [KASA] Obsługuję pasażera PID 358330...
+[17:36:43] [Pasażer 680 (Rower)] Przychodzę na przystanek.
+[17:36:43] [Pasażer 681 (Zwykły)] Idę do kasy (PID: 358365).
+[17:36:43] [KASA] Obsługuję pasażera PID 358365...
+[17:36:43] [Pasażer 681 (Zwykły)] Przychodzę na przystanek.
+[17:36:43] [Pasażer 682 (Rower)] Idę do kasy (PID: 358429).
+[17:36:43] [KASA] Obsługuję pasażera PID 358429...
+[17:36:43] [Pasażer 682 (Rower)] Przychodzę na przystanek.
+[17:36:43] [Pasażer 683 (Zwykły)] Idę do kasy (PID: 358476).
+[17:36:43] [KASA] Obsługuję pasażera PID 358476...
+[17:36:43] [Pasażer 683 (Zwykły)] Przychodzę na przystanek.
+[17:36:44] [Pasażer 684 (Rower)] Idę do kasy (PID: 358502).
+[17:36:44] [KASA] Obsługuję pasażera PID 358502...
+[17:36:44] [Pasażer 684 (Rower)] Przychodzę na przystanek.
+[17:36:44] [Dziecko 685] Czekam na rodzica...
+[17:36:44] [Pasażer 685 (Opiekun)] Idę do kasy (PID: 358547).
+[17:36:44] [KASA] Obsługuję pasażera PID 358547...
+[17:36:44] [KASA] Obsługuję pasażera PID 358547...
+[17:36:44] [Pasażer 685 (Opiekun)] Przychodzę na przystanek.
+[17:36:44] [Pasażer 685 (Dziecko)] Przychodzę na przystanek.
+[17:36:44] [Pasażer 687 (Zwykły)] Idę do kasy (PID: 358576).
+[17:36:44] [KASA] Obsługuję pasażera PID 358576...
+[17:36:44] [Pasażer 687 (Zwykły)] Przychodzę na przystanek.
+[17:36:44] [Pasażer 688 (Zwykły)] Idę do kasy (PID: 358577).
+[17:36:44] [KASA] Obsługuję pasażera PID 358577...
+[17:36:44] [Pasażer 688 (Zwykły)] Przychodzę na przystanek.
+[17:36:45] [Pasażer 689 (Zwykły)] Idę do kasy (PID: 358578).
+[17:36:45] [KASA] Obsługuję pasażera PID 358578...
+[17:36:45] [Pasażer 689 (Zwykły)] Przychodzę na przystanek.
+[17:36:45] [Pasażer 690 (Zwykły)] Idę do kasy (PID: 358615).
+[17:36:45] [KASA] Obsługuję pasażera PID 358615...
+[17:36:45] [Pasażer 690 (Zwykły)] Przychodzę na przystanek.
+[17:36:45] [Pasażer 691 (Rower)] Idę do kasy (PID: 358790).
+[17:36:45] [KASA] Obsługuję pasażera PID 358790...
+[17:36:45] [Pasażer 691 (Rower)] Przychodzę na przystanek.
+[17:36:46] [Pasażer 692 (Zwykły)] Idę do kasy (PID: 359015).
+[17:36:46] [KASA] Obsługuję pasażera PID 359015...
+[17:36:46] [Pasażer 692 (Zwykły)] Przychodzę na przystanek.
+[17:36:46] [Pasażer 693 (Zwykły)] Idę do kasy (PID: 359226).
+[17:36:46] [KASA] Obsługuję pasażera PID 359226...
+[17:36:46] [Pasażer 693 (Zwykły)] Przychodzę na przystanek.
+[17:36:46] [Pasażer 694 (Zwykły)] Idę do kasy (PID: 359432).
+[17:36:46] [KASA] Obsługuję pasażera PID 359432...
+[17:36:46] [Pasażer 694 (Zwykły)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 695 (Opiekun)] Idę do kasy (PID: 359721).
+[17:36:47] [KASA] Obsługuję pasażera PID 359721...
+[17:36:47] [Dziecko 695] Czekam na rodzica...
+[17:36:47] [KASA] Obsługuję pasażera PID 359721...
+[17:36:47] [Pasażer 695 (Opiekun)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 695 (Dziecko)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 697 (Zwykły)] Idę do kasy (PID: 359892).
+[17:36:47] [KASA] Obsługuję pasażera PID 359892...
+[17:36:47] [Pasażer 697 (Zwykły)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 698 (Opiekun)] Idę do kasy (PID: 360085).
+[17:36:47] [Dziecko 698] Czekam na rodzica...
+[17:36:47] [KASA] Obsługuję pasażera PID 360085...
+[17:36:47] [KASA] Obsługuję pasażera PID 360085...
+[17:36:47] [Pasażer 698 (Dziecko)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 698 (Opiekun)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 700 (Opiekun)] Idę do kasy (PID: 360297).
+[17:36:47] [Dziecko 700] Czekam na rodzica...
+[17:36:47] [KASA] Obsługuję pasażera PID 360297...
+[17:36:47] [KASA] Obsługuję pasażera PID 360297...
+[17:36:47] [Pasażer 700 (Dziecko)] Przychodzę na przystanek.
+[17:36:47] [Pasażer 700 (Opiekun)] Przychodzę na przystanek.
+[17:36:48] [Pasażer 702 (Opiekun)] Idę do kasy (PID: 360460).
+[17:36:48] [KASA] Obsługuję pasażera PID 360460...
+[17:36:48] [Dziecko 702] Czekam na rodzica...
+[17:36:48] [KASA] Obsługuję pasażera PID 360460...
+[17:36:48] [Pasażer 702 (Opiekun)] Przychodzę na przystanek.
+[17:36:48] [Pasażer 702 (Dziecko)] Przychodzę na przystanek.
+[17:36:48] [Pasażer 704 (Rower)] Idę do kasy (PID: 360616).
+[17:36:48] [KASA] Obsługuję pasażera PID 360616...
+[17:36:48] [Pasażer 704 (Rower)] Przychodzę na przystanek.
+[17:36:48] [Pasażer 705 (Zwykły)] Idę do kasy (PID: 360666).
+[17:36:48] [KASA] Obsługuję pasażera PID 360666...
+[17:36:48] [Pasażer 705 (Zwykły)] Przychodzę na przystanek.
+[17:36:49] [Pasażer 706 (VIP)] Mam karnet, omijam kolejkę do kasy.
+[17:36:49] [Pasażer 706 (VIP)] Przychodzę na przystanek.
+[17:36:49] [Pasażer 707 (Zwykły)] Idę do kasy (PID: 360791).
+[17:36:49] [KASA] Obsługuję pasażera PID 360791...
+[17:36:49] [Pasażer 707 (Zwykły)] Przychodzę na przystanek.
+[17:36:49] [Pasażer 708 (Zwykły)] Idę do kasy (PID: 360914).
+[17:36:49] [KASA] Obsługuję pasażera PID 360914...
+[17:36:49] [Pasażer 708 (Zwykły)] Przychodzę na przystanek.
+[17:36:49] [Pasażer 709 (Rower)] Idę do kasy (PID: 361012).
+[17:36:49] [KASA] Obsługuję pasażera PID 361012...
+[17:36:49] [Pasażer 709 (Rower)] Przychodzę na przystanek.
+[17:36:50] [Pasażer 710 (Zwykły)] Idę do kasy (PID: 361145).
+[17:36:50] [KASA] Obsługuję pasażera PID 361145...
+[17:36:50] [Pasażer 710 (Zwykły)] Przychodzę na przystanek.
+[17:36:50] [Pasażer 711 (Zwykły)] Idę do kasy (PID: 361314).
+[17:36:50] [KASA] Obsługuję pasażera PID 361314...
+[17:36:50] [Pasażer 711 (Zwykły)] Przychodzę na przystanek.
+[17:36:50] [Pasażer 712 (Zwykły)] Idę do kasy (PID: 361451).
+[17:36:50] [KASA] Obsługuję pasażera PID 361451...
+[17:36:50] [Pasażer 712 (Zwykły)] Przychodzę na przystanek.
+[17:36:51] [Pasażer 713 (Rower)] Idę do kasy (PID: 361661).
+[17:36:51] [KASA] Obsługuję pasażera PID 361661...
+[17:36:51] [Pasażer 713 (Rower)] Przychodzę na przystanek.
+[17:36:51] [Pasażer 714 (Zwykły)] Idę do kasy (PID: 361871).
+[17:36:51] [KASA] Obsługuję pasażera PID 361871...
+[17:36:51] [Pasażer 714 (Zwykły)] Przychodzę na przystanek.
+[17:36:51] [Dziecko 715] Czekam na rodzica...
+[17:36:51] [Pasażer 715 (Opiekun)] Idę do kasy (PID: 362102).
+[17:36:51] [KASA] Obsługuję pasażera PID 362102...
+[17:36:51] [KASA] Obsługuję pasażera PID 362102...
+[17:36:51] [Pasażer 715 (Opiekun)] Przychodzę na przystanek.
+[17:36:51] [Pasażer 715 (Dziecko)] Przychodzę na przystanek.
+[17:36:52] [Pasażer 717 (Zwykły)] Idę do kasy (PID: 362400).
+[17:36:52] [KASA] Obsługuję pasażera PID 362400...
+[17:36:52] [Pasażer 717 (Zwykły)] Przychodzę na przystanek.
+[17:36:52] [Pasażer 718 (Rower)] Idę do kasy (PID: 362477).
+[17:36:52] [KASA] Obsługuję pasażera PID 362477...
+[17:36:52] [Pasażer 718 (Rower)] Przychodzę na przystanek.
+[17:36:52] [Pasażer 719 (Zwykły)] Idę do kasy (PID: 362545).
+[17:36:52] [KASA] Obsługuję pasażera PID 362545...
+[17:36:52] [Pasażer 719 (Zwykły)] Przychodzę na przystanek.
+[17:36:52] [Pasażer 720 (Zwykły)] Idę do kasy (PID: 362682).
+[17:36:52] [KASA] Obsługuję pasażera PID 362682...
+[17:36:52] [Pasażer 720 (Zwykły)] Przychodzę na przystanek.
+[17:36:53] [Autobus 1] ODJAZD z 10 pasażerami (4 rowerów).
+[17:36:53] [Autobus 1] WRÓCIŁ Z TRASY po 8 s.
+[17:36:53] [Autobus 2] Podstawiłem się. SPRAWDZAM BILETY!
+[17:36:53] [Pasażer 706 (VIP)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 1/10 (Rowerów: 0/4)
+[17:36:53] [Pasażer 721 (Rower)] Idę do kasy (PID: 362791).
+[17:36:53] [KASA] Obsługuję pasażera PID 362791...
+[17:36:53] [Pasażer 721 (Rower)] Przychodzę na przystanek.
+[17:36:53] [Pasażer 487 (Zwykły)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 2/10 (Rowerów: 0/4)
+[17:36:53] [Pasażer 626 (Rower)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 3/10 (Rowerów: 1/4)
+[17:36:53] [Pasażer 298 (Zwykły)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 4/10 (Rowerów: 1/4)
+[17:36:53] [Pasażer 246 (Rower)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 5/10 (Rowerów: 2/4)
+[17:36:53] [Pasażer 299 (Opiekun)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 6/10 (Rowerów: 2/4)
+[17:36:53] [Pasażer 597 (Rower)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 7/10 (Rowerów: 3/4)
+[17:36:53] [Pasażer 722 (Zwykły)] Idę do kasy (PID: 362933).
+[17:36:53] [KASA] Obsługuję pasażera PID 362933...
+[17:36:53] [Pasażer 722 (Zwykły)] Przychodzę na przystanek.
+[17:36:53] [Pasażer 299 (Dziecko)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:36:53] [Pasażer 551 (Rower)] Wszedłem do autobusu!
+[17:36:53]    -> [Stan Autobusu] Pasażerów: 9/10 (Rowerów: 4/4)
+[17:36:53] [Dziecko 723] Czekam na rodzica...
+[17:36:53] [Pasażer 723 (Opiekun)] Idę do kasy (PID: 363076).
+[17:36:53] [KASA] Obsługuję pasażera PID 363076...
+[17:36:53] [KASA] Obsługuję pasażera PID 363076...
+[17:36:53] [Pasażer 723 (Dziecko)] Przychodzę na przystanek.
+[17:36:53] [Pasażer 723 (Opiekun)] Przychodzę na przystanek.
+[17:36:54] [Pasażer 725 (Zwykły)] Idę do kasy (PID: 363168).
+[17:36:54] [KASA] Obsługuję pasażera PID 363168...
+[17:36:54] [Pasażer 725 (Zwykły)] Przychodzę na przystanek.
+[17:36:54] [Dziecko 726] Czekam na rodzica...
+[17:36:54] [Pasażer 726 (Opiekun)] Idę do kasy (PID: 363251).
+[17:36:54] [KASA] Obsługuję pasażera PID 363251...
+[17:36:54] [KASA] Obsługuję pasażera PID 363251...
+[17:36:54] [Pasażer 726 (Opiekun)] Przychodzę na przystanek.
+[17:36:54] [Pasażer 726 (Dziecko)] Przychodzę na przystanek.
+[17:36:54] [Pasażer 728 (Zwykły)] Idę do kasy (PID: 363343).
+[17:36:54] [KASA] Obsługuję pasażera PID 363343...
+[17:36:54] [Pasażer 728 (Zwykły)] Przychodzę na przystanek.
+[17:36:54] [Pasażer 729 (Rower)] Idę do kasy (PID: 363414).
+[17:36:54] [KASA] Obsługuję pasażera PID 363414...
+[17:36:54] [Pasażer 729 (Rower)] Przychodzę na przystanek.
+[17:36:55] [Pasażer 730 (Rower)] Idę do kasy (PID: 363731).
+[17:36:55] [KASA] Obsługuję pasażera PID 363731...
+[17:36:55] [Pasażer 730 (Rower)] Przychodzę na przystanek.
+[17:36:55] [Pasażer 731 (Rower)] Idę do kasy (PID: 363956).
+[17:36:55] [KASA] Obsługuję pasażera PID 363956...
+[17:36:55] [Pasażer 731 (Rower)] Przychodzę na przystanek.
+[17:36:55] [Pasażer 732 (Zwykły)] Idę do kasy (PID: 364115).
+[17:36:55] [KASA] Obsługuję pasażera PID 364115...
+[17:36:55] [Pasażer 732 (Zwykły)] Przychodzę na przystanek.
+[17:36:56] [Pasażer 733 (Rower)] Idę do kasy (PID: 364222).
+[17:36:56] [KASA] Obsługuję pasażera PID 364222...
+[17:36:56] [Pasażer 733 (Rower)] Przychodzę na przystanek.
+[17:36:56] [Pasażer 734 (Rower)] Idę do kasy (PID: 364408).
+[17:36:56] [KASA] Obsługuję pasażera PID 364408...
+[17:36:56] [Pasażer 734 (Rower)] Przychodzę na przystanek.
+[17:36:56] [Pasażer 735 (Rower)] Idę do kasy (PID: 364745).
+[17:36:56] [KASA] Obsługuję pasażera PID 364745...
+[17:36:56] [Pasażer 735 (Rower)] Przychodzę na przystanek.
+[17:36:57] [Pasażer 736 (Rower)] Idę do kasy (PID: 364937).
+[17:36:57] [KASA] Obsługuję pasażera PID 364937...
+[17:36:57] [Pasażer 736 (Rower)] Przychodzę na przystanek.
+[17:36:57] [Pasażer 737 (Zwykły)] Idę do kasy (PID: 365192).
+[17:36:57] [KASA] Obsługuję pasażera PID 365192...
+[17:36:57] [Pasażer 737 (Zwykły)] Przychodzę na przystanek.
+[17:36:57] [Dziecko 738] Czekam na rodzica...
+[17:36:57] [Pasażer 738 (Opiekun)] Idę do kasy (PID: 365568).
+[17:36:57] [KASA] Obsługuję pasażera PID 365568...
+[17:36:57] [KASA] Obsługuję pasażera PID 365568...
+[17:36:57] [Pasażer 738 (Opiekun)] Przychodzę na przystanek.
+[17:36:57] [Pasażer 738 (Dziecko)] Przychodzę na przystanek.
+[17:36:58] [Pasażer 740 (Rower)] Idę do kasy (PID: 365815).
+[17:36:58] [KASA] Obsługuję pasażera PID 365815...
+[17:36:58] [Pasażer 740 (Rower)] Przychodzę na przystanek.
+[17:36:58] [Pasażer 741 (Zwykły)] Idę do kasy (PID: 366223).
+[17:36:58] [KASA] Obsługuję pasażera PID 366223...
+[17:36:58] [Pasażer 741 (Zwykły)] Przychodzę na przystanek.
+[17:36:58] [Pasażer 742 (Zwykły)] Idę do kasy (PID: 366492).
+[17:36:58] [KASA] Obsługuję pasażera PID 366492...
+[17:36:58] [Pasażer 742 (Zwykły)] Przychodzę na przystanek.
+[17:36:58] [Pasażer 645 (Zwykły)] Wszedłem do autobusu!
+[17:36:58]    -> [Stan Autobusu] Pasażerów: 10/10 (Rowerów: 4/4)
+[17:36:58] [Dziecko 743] Czekam na rodzica...
+[17:36:58] [Pasażer 743 (Opiekun)] Idę do kasy (PID: 366681).
+[17:36:58] [KASA] Obsługuję pasażera PID 366681...
+[17:36:58] [KASA] Obsługuję pasażera PID 366681...
+[17:36:58] [Pasażer 743 (Opiekun)] Przychodzę na przystanek.
+[17:36:58] [Pasażer 743 (Dziecko)] Przychodzę na przystanek.
+[17:36:59] [Pasażer 745 (Rower)] Idę do kasy (PID: 366939).
+[17:36:59] [KASA] Obsługuję pasażera PID 366939...
+[17:36:59] [Pasażer 745 (Rower)] Przychodzę na przystanek.
+[17:36:59] [Dziecko 746] Czekam na rodzica...
+[17:36:59] [Pasażer 746 (Opiekun)] Idę do kasy (PID: 367134).
+[17:36:59] [KASA] Obsługuję pasażera PID 367134...
+[17:36:59] [KASA] Obsługuję pasażera PID 367134...
+[17:36:59] [Pasażer 746 (Opiekun)] Przychodzę na przystanek.
+[17:36:59] [Pasażer 746 (Dziecko)] Przychodzę na przystanek.
+[17:36:59] [Pasażer 748 (Zwykły)] Idę do kasy (PID: 367330).
+[17:36:59] [KASA] Obsługuję pasażera PID 367330...
+[17:36:59] [Pasażer 748 (Zwykły)] Przychodzę na przystanek.
+[17:37:00] [Pasażer 749 (Rower)] Idę do kasy (PID: 367547).
+[17:37:00] [KASA] Obsługuję pasażera PID 367547...
+[17:37:00] [Pasażer 749 (Rower)] Przychodzę na przystanek.
+[17:37:00] [Pasażer 750 (Zwykły)] Idę do kasy (PID: 367743).
+[17:37:00] [KASA] Obsługuję pasażera PID 367743...
+[17:37:00] [Pasażer 750 (Zwykły)] Przychodzę na przystanek.
+[17:37:00] [Dziecko 751] Czekam na rodzica...
+[17:37:00] [Pasażer 751 (Opiekun)] Idę do kasy (PID: 367878).
+[17:37:00] [KASA] Obsługuję pasażera PID 367878...
+[17:37:00] [KASA] Obsługuję pasażera PID 367878...
+[17:37:00] [Pasażer 751 (Opiekun)] Przychodzę na przystanek.
+[17:37:00] [Pasażer 751 (Dziecko)] Przychodzę na przystanek.
+[17:37:00] [Pasażer 753 (Opiekun)] Idę do kasy (PID: 367997).
+[17:37:00] [Dziecko 753] Czekam na rodzica...
+[17:37:00] [KASA] Obsługuję pasażera PID 367997...
+[17:37:00] [KASA] Obsługuję pasażera PID 367997...
+[17:37:00] [Pasażer 753 (Dziecko)] Przychodzę na przystanek.
+[17:37:00] [Pasażer 753 (Opiekun)] Przychodzę na przystanek.
+[17:37:01] [Pasażer 755 (Zwykły)] Idę do kasy (PID: 368016).
+[17:37:01] [KASA] Obsługuję pasażera PID 368016...
+[17:37:01] [Pasażer 755 (Zwykły)] Przychodzę na przystanek.
+[17:37:01] [Pasażer 756 (Zwykły)] Idę do kasy (PID: 368159).
+[17:37:01] [KASA] Obsługuję pasażera PID 368159...
+[17:37:01] [Pasażer 756 (Zwykły)] Przychodzę na przystanek.
+[17:37:01] [Pasażer 757 (Rower)] Idę do kasy (PID: 368270).
+[17:37:01] [KASA] Obsługuję pasażera PID 368270...
+[17:37:01] [Pasażer 757 (Rower)] Przychodzę na przystanek.
+[17:37:02] [Pasażer 758 (Rower)] Idę do kasy (PID: 368471).
+[17:37:02] [KASA] Obsługuję pasażera PID 368471...
+[17:37:02] [Pasażer 758 (Rower)] Przychodzę na przystanek.
+[17:37:02] [Pasażer 759 (Rower)] Idę do kasy (PID: 368744).
+[17:37:02] [KASA] Obsługuję pasażera PID 368744...
+[17:37:02] [Pasażer 759 (Rower)] Przychodzę na przystanek.
+[17:37:02] [Pasażer 760 (Rower)] Idę do kasy (PID: 368990).
+[17:37:02] [KASA] Obsługuję pasażera PID 368990...
+[17:37:02] [Pasażer 760 (Rower)] Przychodzę na przystanek.
+[17:37:03] [Pasażer 761 (Zwykły)] Idę do kasy (PID: 369327).
+[17:37:03] [KASA] Obsługuję pasażera PID 369327...
+[17:37:03] [Pasażer 761 (Zwykły)] Przychodzę na przystanek.
+[17:37:03] [Pasażer 762 (Zwykły)] Idę do kasy (PID: 369606).
+[17:37:03] [KASA] Obsługuję pasażera PID 369606...
+[17:37:03] [Pasażer 762 (Zwykły)] Przychodzę na przystanek.
+[17:37:03] [Dziecko 763] Czekam na rodzica...
+[17:37:03] [Pasażer 763 (Opiekun)] Idę do kasy (PID: 369839).
+[17:37:03] [KASA] Obsługuję pasażera PID 369839...
+[17:37:03] [KASA] Obsługuję pasażera PID 369839...
+[17:37:03] [Pasażer 763 (Opiekun)] Przychodzę na przystanek.
+[17:37:03] [Pasażer 763 (Dziecko)] Przychodzę na przystanek.
+[17:37:03] [Pasażer 765 (Zwykły)] Idę do kasy (PID: 370087).
+[17:37:03] [KASA] Obsługuję pasażera PID 370087...
+[17:37:03] [Pasażer 765 (Zwykły)] Przychodzę na przystanek.
+[17:37:04] [Pasażer 766 (Rower)] Idę do kasy (PID: 370381).
+[17:37:04] [KASA] Obsługuję pasażera PID 370381...
+[17:37:04] [Pasażer 766 (Rower)] Przychodzę na przystanek.
+[17:37:04] [Pasażer 767 (Zwykły)] Idę do kasy (PID: 370676).
+[17:37:04] [KASA] Obsługuję pasażera PID 370676...
+[17:37:04] [Pasażer 767 (Zwykły)] Przychodzę na przystanek.
+[17:37:05] [Dziecko 768] Czekam na rodzica...
+[17:37:05] [Pasażer 768 (Opiekun)] Idę do kasy (PID: 370910).
+[17:37:05] [KASA] Obsługuję pasażera PID 370910...
+[17:37:05] [KASA] Obsługuję pasażera PID 370910...
+[17:37:05] [Pasażer 768 (Opiekun)] Przychodzę na przystanek.
+[17:37:05] [Pasażer 768 (Dziecko)] Przychodzę na przystanek.
+[17:37:05] [Pasażer 770 (Rower)] Idę do kasy (PID: 371036).
+[17:37:05] [KASA] Obsługuję pasażera PID 371036...
+[17:37:05] [Pasażer 770 (Rower)] Przychodzę na przystanek.
+[17:37:05] [Pasażer 771 (Zwykły)] Idę do kasy (PID: 371287).
+[17:37:05] [KASA] Obsługuję pasażera PID 371287...
+[17:37:05] [Pasażer 771 (Zwykły)] Przychodzę na przystanek.
+[17:37:05] [Pasażer 772 (Rower)] Idę do kasy (PID: 371501).
+[17:37:05] [KASA] Obsługuję pasażera PID 371501...
+[17:37:05] [Pasażer 772 (Rower)] Przychodzę na przystanek.
+[17:37:06] [Dziecko 773] Czekam na rodzica...
+[17:37:06] [Pasażer 773 (Opiekun)] Idę do kasy (PID: 371790).
+[17:37:06] [KASA] Obsługuję pasażera PID 371790...
+[17:37:06] [KASA] Obsługuję pasażera PID 371790...
+[17:37:06] [Pasażer 773 (Opiekun)] Przychodzę na przystanek.
+[17:37:06] [Pasażer 773 (Dziecko)] Przychodzę na przystanek.
+[17:37:06] [Pasażer 775 (Zwykły)] Idę do kasy (PID: 371880).
+[17:37:06] [KASA] Obsługuję pasażera PID 371880...
+[17:37:06] [Pasażer 775 (Zwykły)] Przychodzę na przystanek.
+[17:37:06] [Dziecko 776] Czekam na rodzica...
+[17:37:06] [Pasażer 776 (Opiekun)] Idę do kasy (PID: 371915).
+[17:37:06] [KASA] Obsługuję pasażera PID 371915...
+[17:37:06] [KASA] Obsługuję pasażera PID 371915...
+[17:37:06] [Pasażer 776 (Opiekun)] Przychodzę na przystanek.
+[17:37:06] [Pasażer 776 (Dziecko)] Przychodzę na przystanek.
+[17:37:06] [Dziecko 778] Czekam na rodzica...
+[17:37:06] [Pasażer 778 (Opiekun)] Idę do kasy (PID: 371991).
+[17:37:06] [KASA] Obsługuję pasażera PID 371991...
+[17:37:06] [KASA] Obsługuję pasażera PID 371991...
+[17:37:06] [Pasażer 778 (Opiekun)] Przychodzę na przystanek.
+[17:37:06] [Pasażer 778 (Dziecko)] Przychodzę na przystanek.
+[17:37:07] [Pasażer 780 (Zwykły)] Idę do kasy (PID: 372040).
+[17:37:07] [KASA] Obsługuję pasażera PID 372040...
+[17:37:07] [Pasażer 780 (Zwykły)] Przychodzę na przystanek.
+[17:37:07] [Pasażer 781 (Zwykły)] Idę do kasy (PID: 372234).
+[17:37:07] [KASA] Obsługuję pasażera PID 372234...
+[17:37:07] [Pasażer 781 (Zwykły)] Przychodzę na przystanek.
+[17:37:07] 
+[DYSPOZYTOR ZEWN.] Otrzymano SIGUSR2 -> Zamykanie dworca!
+[17:37:07] Bramy zamknięte.
+[17:37:07] Wymuszam odjazd obecnego autobusu (PID 323028)
+[17:37:07] Czekam na zjazd pozostałych autobusów...
+[17:37:07] [Autobus 1] Zjazd do zajezdni (Koniec pracy).
+[17:37:07] [Autobus 3] Zjazd do zajezdni (Koniec pracy).
+[17:37:07] [Autobus 2] DYSPOZYTOR KAŻE JECHAĆ!
+[17:37:07] [Autobus 2] ODJAZD z 10 pasażerami (4 rowerów).
+[17:37:07] [Autobus 2] WRÓCIŁ Z TRASY po 6 s.
+[17:37:07] [Autobus 2] Zjazd do zajezdni (Koniec pracy).
+[17:37:07] [Pasażer 126] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 675] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 517] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 128] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 430] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 545] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 711] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 315] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 398] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 511] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 130] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 131] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 676] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 213] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 595] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 678] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 133] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 579] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 270] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 135] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 400] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 317] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 215] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 712] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 136] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 729] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 399] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 425] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 432] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 402] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 559] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 139] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 529] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 681] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 318] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 571] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 730] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 469] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 542] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 137] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 520] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 717] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 474] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 482] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 140] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 403] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 272] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 683] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 186] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 636] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 216] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 141] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 217] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 575] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 404] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 320] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 685] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 142] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 452] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 598] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 470] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 687] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 731] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 144] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 424] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 146] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 688] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 187] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 446] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 594] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 689] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 148] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 274] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 516] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 527] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 405] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 690] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 147] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 600] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 406] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 679] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 493] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 202] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 373] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 504] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 733] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 680] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 637] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 501] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 734] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 638] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 581] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 271] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 682] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 735] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 44] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 108] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 525] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 736] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 557] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 69] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 560] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 684] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 587] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 191] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 465] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 641] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 150] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 218] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 536] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 462] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 152] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 407] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 245] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 471] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 506] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 740] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 713] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 642] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 29] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 692] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 188] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 154] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 149] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 408] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 693] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 305] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 485] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 346] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 707] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 158] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 160] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 694] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 85] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 159] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 110] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 181] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 691] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 182] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 437] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 745] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 353] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 80] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 120] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 386] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 573] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 538] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 323] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 324] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 472] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 534] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 695] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 584] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 156] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 242] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 553] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 547] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 749] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 456] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 651] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 95] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 292] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 550] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 222] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 276] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 174] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 434] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 332] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 568] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 610] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 32] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 570] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 718] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 145] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 655] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 757] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 496] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 387] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 599] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 758] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 704] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 43] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 495] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 759] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 124] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 540] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 760] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 709] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 410] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 523] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 412] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 385] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 277] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 212] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 455] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 189] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 519] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 576] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 91] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 123] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 663] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 499] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 296] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 161] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 766] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 163] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 617] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 77] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 339] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 319] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 697] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 666] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 155] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 453] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 698] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 278] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 441] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 411] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 720] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 500] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 700] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 360] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 428] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 358] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 702] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 220] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 354] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 569] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 583] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 483] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 770] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 476] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 667] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 564] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 535] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 448] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 413] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 772] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 340] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 497] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 92] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 391] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 480] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 164] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 521] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 415] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 721] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 466] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 561] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 266] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 558] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 674] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 35] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 327] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 59] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 179] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 230] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 322] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 427] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 219] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 421] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 279] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 325] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 530] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 359] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 705] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 281] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 478] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 22] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 590] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 459] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 71] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 221] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 190] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 503] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 328] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 48] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 418] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 165] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 107] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 166] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 282] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 329] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 82] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 416] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 433] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 37] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 438] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 435] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 467] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 330] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 61] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 24] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 484] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 72] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 96] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 331] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 515] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 30] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 552] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 537] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 167] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 223] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 54] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 284] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 512] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 84] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 283] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 192] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 419] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 169] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 25] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 422] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 109] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 62] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 333] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 193] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 225] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 171] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 98] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 334] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 194] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 502] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 55] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 335] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 74] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 50] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 601] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 227] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 602] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 604] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 605] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 606] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 607] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 608] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 611] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 612] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 613] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 615] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 614] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 618] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 616] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 619] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 620] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 621] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 289] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 337] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 623] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 39] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 196] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 99] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 624] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 228] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 582] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 338] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 172] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 111] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 291] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 627] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 473] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 554] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 197] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 628] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 86] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 64] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 630] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 229] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 293] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 198] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 631] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 294] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 87] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 173] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 8] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 632] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 457] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 343] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 295] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 634] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 27] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 635] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 26] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 518] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 65] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 341] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 113] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 231] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 344] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 567] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 56] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 45] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 11] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 526] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 468] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 175] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 345] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 639] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 199] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 88] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 176] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 232] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 541] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 234] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 114] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 640] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 347] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 67] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 297] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 101] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 356] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 200] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 708] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 236] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 13] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 522] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 203] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 528] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 486] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 556] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 643] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 12] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 349] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 488] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 514] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 644] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 722] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 723] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 725] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 726] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 728] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 732] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 737] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 738] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 741] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 742] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 14] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 178] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 743] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 116] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 57] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 532] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 205] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 646] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 443] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 364] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 505] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 362] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 237] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 647] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 366] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 574] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 746] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 464] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 367] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 649] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 748] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 368] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 372] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 596] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 370] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 715] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 449] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 374] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 508] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 16] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 376] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 652] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 750] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 593] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 548] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 653] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 751] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 377] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 363] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 380] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 383] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 714] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 378] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 753] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 454] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 591] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 36] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 755] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 384] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 382] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 656] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 423] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 239] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 78] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 756] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 52] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 577] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 657] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 180] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 118] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 388] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 658] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 303] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 444] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 58] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 207] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 659] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 429] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 243] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 244] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 389] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 661] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 761] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 477] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 247] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 662] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 762] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 306] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 248] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 249] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 549] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 763] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 251] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 390] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 765] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 357] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 592] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 664] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 252] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 254] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 585] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 710] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 531] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 19] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 565] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 588] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 719] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 307] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 767] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 259] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 510] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 255] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 260] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 262] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 494] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 768] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 257] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 209] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 543] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 668] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 451] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 393] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 524] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 771] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 310] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 669] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 309] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 264] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 53] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 671] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 265] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 773] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 70] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 491] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 121] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 183] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 460] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 775] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 555] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 672] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 776] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 396] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 125] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 81] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 778] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 312] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 673] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 780] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 397] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 210] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 313] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 311] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 394] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 267] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 127] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 781] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 269] Dworzec zamknięty! Wychodzę.
+[17:37:07] [Pasażer 184] Dworzec zamknięty! Wychodzę.
+[17:37:08] [MAIN] Wszystkie autobusy zjechały.
+[17:37:08] --- RAPORT KOŃCOWY ---
+[17:37:08] Łącznie obsłużono pasażerów: 70
+[17:37:08] 
+
+[SYSTEM] Otrzymano sygnał kończący (0). Rozpoczynam procedurę stop.
+[17:37:08] [SYSTEM] Zasoby zwolnione. Koniec.
