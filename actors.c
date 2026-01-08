@@ -176,6 +176,9 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dzi
         int stan_ludzi = 0;
         int stan_rowerow = 0;
 
+        int P = data->cfg_P;
+        int R = data->cfg_R;
+
         if (data->autobus_obecny == 1) {
             int zgoda = 0;
             int czy_probowac = 1;
@@ -282,6 +285,12 @@ void autobus_run(int id, int shmid, int semid, int msgid) {
     signal(SIGUSR1, sygnal_odjazd);
     
     SharedData* data;
+
+    data = dolacz_pamiec(shmid);
+    int P = data->cfg_P;
+    int R = data->cfg_R;
+    int T_ODJAZD = data->cfg_TP;
+    odlacz_pamiec(data);
     
     srand(time(NULL) ^ (getpid() << 16));
 
@@ -352,7 +361,6 @@ void autobus_run(int id, int shmid, int semid, int msgid) {
                     data->liczba_pasazerow++;
                     if (bilet.typ_pasazera == TYP_ROWER) data->liczba_rowerow++;
                     
-                    data->pasazerowie_obsluzeni++;
                     data->calkowita_liczba_pasazerow++;
 
                     odp.typ_pasazera = data->liczba_pasazerow;
@@ -408,8 +416,7 @@ void autobus_run(int id, int shmid, int semid, int msgid) {
                     zablokuj_semafor(semid, SEM_MUTEX);
                     data = dolacz_pamiec(shmid);
                     
-                    data->liczba_pasazerow++;
-                    data->pasazerowie_obsluzeni++; 
+                    data->liczba_pasazerow++; 
                     data->calkowita_liczba_pasazerow++;
 
                     odp.typ_pasazera = data->liczba_pasazerow;

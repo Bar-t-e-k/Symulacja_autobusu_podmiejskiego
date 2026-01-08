@@ -7,6 +7,7 @@
 #include <errno.h>
 #include "ipc_utils.h"
 #include "logs.h"
+#include "common.h"
 
 // PAMIĘĆ DZIELONA
 
@@ -35,6 +36,7 @@ void odlacz_pamiec(SharedData* data) {
     if (shmdt(data) == -1) {
         if (errno == EINVAL) return; // Już odłączona
         loguj_blad("Błąd odlacznia pamieci");
+        exit(1);
     }
 }
 
@@ -42,6 +44,7 @@ void usun_pamiec(int shmid) {
     if (shmctl(shmid, IPC_RMID, NULL) == -1) {
         if (errno == EINVAL) return; // Już usunięta
         loguj_blad("Błąd usuwania pamieci");
+        exit(1);
     }
 }
 
@@ -98,6 +101,7 @@ void odblokuj_semafor(int semid, int sem_num) {
 void usun_semafor(int semid) {
     if (semctl(semid, 0, IPC_RMID) == -1) {
         loguj_blad("Błąd usuwania semafora");
+        exit(1);
     }
 }
 
@@ -136,6 +140,7 @@ void usun_kolejke(int msgid) {
     if (msgctl(msgid, IPC_RMID, NULL) == -1) {
         if (errno == EINVAL) return; // Już usunięta
         loguj_blad("Błąd usuwania kolejki komunikatów");
+        exit(1);
     }
 }
 

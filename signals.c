@@ -13,25 +13,14 @@ extern int g_shmid;
 extern int g_semid;
 extern int g_msgid;
 
+// Obsługa sygnału kończącego (SIGINT, SIGTERM)
 void obsluga_koniec(int sig) {
-    signal(SIGTERM, SIG_IGN); // Ignoruje kolejne sygnały, żeby nie przerwać sprzątania
-    signal(SIGINT, SIG_IGN);
-
     loguj(NULL,"\n\n[SYSTEM] Otrzymano sygnał kończący (%d). Rozpoczynam procedurę stop.\n", sig);
 
-    if (g_shmid != -1) usun_pamiec(g_shmid);
-    if (g_semid != -1) usun_semafor(g_semid);
-    if (g_msgid != -1) usun_kolejke(g_msgid);
-
-    // Zabijanie podprocesy
-    kill(0, SIGTERM);
-
-    while(wait(NULL) > 0);
-
-    loguj(NULL,"[SYSTEM] Zasoby zwolnione. Koniec.\n");
     exit(0);
 }
 
+// Obsługa sygnału 1 - rozkaz odjazdu
 void obsluga_odjazdu(int sig) {
     (void)sig;
 
@@ -49,6 +38,7 @@ void obsluga_odjazdu(int sig) {
     odlacz_pamiec(d);
 }
 
+// Obsługa sygnału 2 - zamknięcie dworca
 void obsluga_zamkniecia(int sig) {
     (void)sig;
     SharedData* d = dolacz_pamiec(g_shmid);

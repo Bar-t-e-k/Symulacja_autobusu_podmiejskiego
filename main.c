@@ -10,10 +10,41 @@
 #include "actors.h"
 #include "signals.h"
 #include "logs.h"
+#include "config.h"
 
-int g_shmid, g_semid, g_msgid;
+pid_t g_main_pid;
+int g_shmid = -1, g_semid = -1, g_msgid = -1;
+
+// Funkcja sprzątająca zasoby przed zakończeniem programu
+void sprzatanie() {
+    if (getpid() != g_main_pid) return; // Tylko główny proces sprząta
+    // Zabicie dzieci
+    signal(SIGTERM, SIG_IGN); 
+    kill(0, SIGTERM); 
+    
+    while(wait(NULL) > 0);
+
+    // Usunięcie zasobów IPC
+    if (g_shmid != -1) {
+        usun_pamiec(g_shmid);
+        g_shmid = -1; 
+    }
+    if (g_semid != -1) {
+        usun_semafor(g_semid);
+        g_semid = -1;
+    }
+    if (g_msgid != -1) {
+        usun_kolejke(g_msgid);
+        g_msgid = -1;
+    }
+    
+    loguj(NULL, "[SYSTEM] Zasoby posprzątane. Koniec.\n");
+}
 
 int main() {
+    g_main_pid = getpid();
+    atexit(sprzatanie);
+
     FILE* f = fopen("symulacja.log", "w");
     if (f) fclose(f);
 
@@ -40,20 +71,22 @@ int main() {
 
     // 2. Inicjalizacja
     SharedData* data = dolacz_pamiec(g_shmid);
-    if (data == NULL) {
-        loguj_blad("[BŁAD] Dołączanie pamięci");
-        obsluga_koniec(0);
-    }
+
+    wczytaj_konfiguracje("config.txt", data);
+    waliduj_konfiguracje(data);    
 
     data->liczba_pasazerow = 0;
     data->liczba_rowerow = 0;
     data->autobus_obecny = 0;
     data->calkowita_liczba_pasazerow = 0;
-    data->pasazerowie_obsluzeni = 0;
-    data->aktywne_autobusy = N;
-    data->limit_pasazerow = LICZBA_PASAZEROW;
+    data->aktywne_autobusy = data->cfg_N;
     data->dworzec_otwarty = 1;
     data->pid_obecnego_autobusu = 0;
+    data->liczba_oczekujacych = 0;
+    data->liczba_vip_oczekujacych = 0;
+
+    int N = data->cfg_N;
+    int P = data->cfg_LiczbaPas;
     odlacz_pamiec(data);
 
     ustaw_semafor(g_semid, SEM_MUTEX, 1); // MUTEX otwarty
@@ -97,7 +130,7 @@ int main() {
         srand(time(NULL));
         int id_gen = 1;
 
-        for (int i = 0; i < LICZBA_PASAZEROW; i++) {
+        for (int i = 0; i < P; i++) {
             SharedData* d = dolacz_pamiec(g_shmid);
             if (d->dworzec_otwarty == 0) {
                 odlacz_pamiec(d);
@@ -107,7 +140,7 @@ int main() {
 
             int los = rand() % 100;
 
-            if (i == LICZBA_PASAZEROW - 1 && los < 20) {
+            if (i == P - 1 && los < 20) {
                 los = 50; // Ostatni pasażer niech nie będzie opiekunem
             }
                  
@@ -190,7 +223,7 @@ int main() {
         data = dolacz_pamiec(g_shmid);
         if (data == NULL) break;
 
-        if (data->calkowita_liczba_pasazerow >= LICZBA_PASAZEROW && data->liczba_oczekujacych == 0) {
+        if (data->calkowita_liczba_pasazerow >= P && data->liczba_oczekujacych == 0) {
             if (data->dworzec_otwarty == 1) {
                 loguj(NULL,"[MAIN] Wszyscy pasażerowie obsłużeni (%d). Zamykam dworzec!\n", data->calkowita_liczba_pasazerow);
                 data->dworzec_otwarty = 0;
@@ -213,9 +246,6 @@ int main() {
         loguj(NULL,"Łącznie obsłużono pasażerów: %d\n", data->calkowita_liczba_pasazerow);
         odlacz_pamiec(data);
     }
-
-    // 8. Sprzątanie
-    obsluga_koniec(0);
 
     return 0;
 }
