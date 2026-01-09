@@ -65,7 +65,7 @@ int main() {
     g_msgid = stworz_kolejke();
 
     if (g_shmid == -1 || g_semid == -1 || g_msgid == -1) {
-        loguj_blad("[BŁAD] Nie udało sie utworzyć zasobów IPC!");
+        loguj_blad("Nie udało sie utworzyć zasobów IPC!");
         exit(1);
     }
 
@@ -93,6 +93,12 @@ int main() {
     ustaw_semafor(g_semid, SEM_DRZWI_PAS, 1);  // Drzwi pasażerów
     ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1);  // Drzwi rowerów
 
+    // Zmienne pomocnicze do exec
+    char s_shm[16], s_sem[16], s_msg[16];
+    sprintf(s_shm, "%d", g_shmid);
+    sprintf(s_sem, "%d", g_semid);
+    sprintf(s_msg, "%d", g_msgid);
+
     // 3. Kasjer
     pid_t pid_kasjer = fork();
     if (pid_kasjer == 0) {
@@ -101,10 +107,12 @@ int main() {
         signal(SIGUSR1, SIG_IGN); 
         signal(SIGUSR2, SIG_IGN);
 
-        kasjer_run(g_msgid);
-        exit(0);
+        execlp("./exe_cashier", "exe_cashier", s_msg, NULL);
+
+        loguj_blad("Exec Kasjer");
+        exit(1);
     } else if (pid_kasjer < 0) {
-        loguj_blad("[BŁAD] Fork Kasjer");
+        loguj_blad("Fork Kasjer");
     }
 
     // 4. Autobusy
@@ -115,10 +123,15 @@ int main() {
             signal(SIGTERM, SIG_DFL);
             signal(SIGUSR2, SIG_IGN);
 
-            autobus_run(b, g_shmid, g_semid, g_msgid);
-            exit(0);
+            char s_id[16];
+            sprintf(s_id, "%d", b);
+
+            execlp("./exe_bus", "exe_bus", s_id, s_shm, s_sem, s_msg, NULL);
+
+            loguj_blad("Exec Autobus");
+            exit(1);
         } else if (pid_autobus < 0) {
-            loguj_blad("[BŁAD] Fork Autobus");
+            loguj_blad("Fork Autobus");
         }
     }
 
@@ -129,6 +142,8 @@ int main() {
         signal(SIGTERM, SIG_DFL);
         srand(time(NULL));
         int id_gen = 1;
+
+        char s_id[16], s_typ[16], s_pid_dziecka[16];
 
         for (int i = 0; i < P; i++) {
             SharedData* d = dolacz_pamiec(g_shmid);
@@ -148,26 +163,45 @@ int main() {
                 pid_t pid_dziecka = fork();
                 if (pid_dziecka == 0) {
                     signal(SIGINT, SIG_IGN);
-                    pasazer_run(id_gen++, g_shmid, g_semid, g_msgid, TYP_DZIECKO, pid_dziecka);
-                    exit(0);
+
+                    sprintf(s_id, "%d", id_gen++);
+                    sprintf(s_typ, "%d", TYP_DZIECKO);
+
+                    execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, "0", NULL);
+
+                    loguj_blad("Exec Dziecko");
+                    exit(1);
                 }
 
                 if (fork() == 0) {
                     signal(SIGINT, SIG_IGN);
-                    pasazer_run(id_gen++, g_shmid, g_semid, g_msgid, TYP_OPIEKUN, pid_dziecka);
-                    exit(0);
+
+                    sprintf(s_id, "%d", id_gen++);
+                    sprintf(s_pid_dziecka, "%d", pid_dziecka);
+                    sprintf(s_typ, "%d", TYP_OPIEKUN);
+
+                    execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, s_pid_dziecka, NULL);
+                    
+                    loguj_blad("Exec Opiekun");
+                    exit(1);
                 }
                 id_gen += 2;
                 i++; // Dwa miejsca zajęte
             } else {
                 if (fork() == 0) {
                     signal(SIGINT, SIG_IGN);
+
                     int typ = TYP_ZWYKLY;
                     if (los < 45) typ = TYP_ROWER;  // 45% Rower
                     else if (los >= 99) typ = TYP_VIP; // 1% VIP
 
-                    pasazer_run(id_gen++, g_shmid, g_semid, g_msgid, typ, 0);
-                    exit(0);
+                    sprintf(s_id, "%d", id_gen++);
+                    sprintf(s_typ, "%d", typ);
+
+                    execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, "0", NULL);
+
+                    loguj_blad("Exec Pasażer");
+                    exit(1);
                 }
                 id_gen++;
             }
@@ -175,7 +209,7 @@ int main() {
         }
         exit(0);
     } else if (pid_pasazerowie < 0) {
-        loguj_blad("[BŁAD] Fork Pasażerowie");
+        loguj_blad("Fork Pasażerowie");
     }
 
     // 6. Dyspozytor
@@ -215,7 +249,7 @@ int main() {
         }
         exit(0);
     } else if (pid_dyspozytor < 0) {
-        loguj_blad("[BŁAD] Fork Dyspozytor");
+        loguj_blad("Fork Dyspozytor");
     }
 
     // Oczekiwanie na zakończenie wszystkich autobusów i pasażerów

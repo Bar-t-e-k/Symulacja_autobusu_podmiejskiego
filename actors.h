@@ -1,6 +1,8 @@
 #ifndef ACTORS_H
 #define ACTORS_H
 
+#include <sys/types.h>
+
 void sygnal_odjazd(int sig);
 void kasjer_run(int msgid);
 void pasazer_run(int id, int shmid, int semid, int msgid, int typ, pid_t pid_dziecka);
