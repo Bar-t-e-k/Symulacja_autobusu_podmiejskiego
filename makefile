@@ -1,16 +1,24 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=gnu99
-TARGET = autobus_symulacja
-SRCS = main.c ipc_utils.c actors.c signals.c logs.c config.c
-OBJS = $(SRCS:.c=.o)
+CFLAGS = -Wall -Wextra -std=gnu99 -D_GNU_SOURCE
 
-all: $(TARGET)
+COMMON_OBJS = ipc_utils.o actors.o logs.o signals.o config.o
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+all: symulacja exe_bus exe_passenger exe_cashier
+
+symulacja: main.o $(COMMON_OBJS)
+	$(CC) $(CFLAGS) -o symulacja main.o $(COMMON_OBJS)
+
+exe_bus: exe_bus.o $(COMMON_OBJS)
+	$(CC) $(CFLAGS) -o exe_bus exe_bus.o $(COMMON_OBJS)
+
+exe_passenger: exe_passenger.o $(COMMON_OBJS)
+	$(CC) $(CFLAGS) -o exe_passenger exe_passenger.o $(COMMON_OBJS)
+
+exe_cashier: exe_cashier.o $(COMMON_OBJS)
+	$(CC) $(CFLAGS) -o exe_cashier exe_cashier.o $(COMMON_OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET) *.o
+	rm -f symulacja exe_bus exe_passenger exe_cashier *.o symulacja.log

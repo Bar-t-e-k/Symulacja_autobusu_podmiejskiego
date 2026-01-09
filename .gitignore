@@ -35,7 +35,10 @@
 *.i*86
 *.x86_64
 *.hex
-autobus_symulacja
+symulacja
+exe_cashier
+exe_bus
+exe_passenger
 
 # Debug files
 *.dSYM/
