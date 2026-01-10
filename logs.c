@@ -7,10 +7,11 @@
 
 #define LOG_FILE "symulacja.log"
 
+// Funkcja logująca komunikaty do pliku i na ekran
 void loguj(const char* kolor, const char* format, ...) {
     va_list args;
     
-    // WYPISANIE NA EKRAN (Z KOLOREM)
+    // Wypisanie na ekran (z kolorem, jeśli podano)
     if (kolor) printf("%s", kolor);
     
     va_start(args, format);
@@ -19,17 +20,15 @@ void loguj(const char* kolor, const char* format, ...) {
 
     if (kolor) printf("\033[0m"); // Reset koloru
 
-    // ZAPIS DO PLIKU (BEZ KOLORU, Z DATĄ)
+    // Zapis do pliku
     FILE* f = fopen(LOG_FILE, "a");
     if (f) {
-        // Pobranie czasu
         time_t now = time(NULL);
         struct tm* t = localtime(&now);
         
         // Zapis znacznika czasu [HH:MM:SS]
         fprintf(f, "[%02d:%02d:%02d] ", t->tm_hour, t->tm_min, t->tm_sec);
 
-        // Zapis treści
         va_start(args, format);
         vfprintf(f, format, args);
         va_end(args);
@@ -38,6 +37,7 @@ void loguj(const char* kolor, const char* format, ...) {
     }
 }
 
+// Funkcja logująca błędy z errno
 void loguj_blad(const char* prefix) {
     char* komunikat_bledu = strerror(errno);
     

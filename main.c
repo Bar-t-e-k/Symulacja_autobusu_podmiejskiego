@@ -15,16 +15,16 @@
 pid_t g_main_pid;
 int g_shmid = -1, g_semid = -1, g_msgid = -1;
 
-// Funkcja sprzątająca zasoby przed zakończeniem programu
+// Funkcja sprzątająca zasoby przed zakończeniem programu (wywoływana przez atexit)
 void sprzatanie() {
-    if (getpid() != g_main_pid) return; // Tylko główny proces sprząta
-    // Zabicie dzieci
+    if (getpid() != g_main_pid) return;
+    
+    // Zabicie procesów potomnych
     signal(SIGTERM, SIG_IGN); 
     kill(0, SIGTERM); 
     
     while(wait(NULL) > 0);
 
-    // Usunięcie zasobów IPC
     if (g_shmid != -1) {
         usun_pamiec(g_shmid);
         g_shmid = -1; 
@@ -59,7 +59,7 @@ int main() {
     signal(SIGINT, obsluga_koniec);  
     signal(SIGTERM, obsluga_koniec);
 
-    // 1. Tworzenie zasobów
+    // 1. Tworzenie zasobów IPC
     g_shmid = stworz_pamiec(sizeof(SharedData));
     g_semid = stworz_semafor(LICZBA_SEMAFOROW);
     g_msgid = stworz_kolejke();
@@ -69,7 +69,7 @@ int main() {
         exit(1);
     }
 
-    // 2. Inicjalizacja
+    // 2. Inicjalizacja i konfiguracja pamięci współdzielonej
     SharedData* data = dolacz_pamiec(g_shmid);
 
     wczytaj_konfiguracje("config.txt", data);
@@ -89,11 +89,11 @@ int main() {
     int P = data->cfg_LiczbaPas;
     odlacz_pamiec(data);
 
-    ustaw_semafor(g_semid, SEM_MUTEX, 1); // MUTEX otwarty
-    ustaw_semafor(g_semid, SEM_DRZWI_PAS, 1);  // Drzwi pasażerów
-    ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1);  // Drzwi rowerów
+    ustaw_semafor(g_semid, SEM_MUTEX, 1); 
+    ustaw_semafor(g_semid, SEM_DRZWI_PAS, 1);  
+    ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1); 
 
-    // Zmienne pomocnicze do exec
+    // Konwersja ID na stringi dla exec
     char s_shm[16], s_sem[16], s_msg[16];
     sprintf(s_shm, "%d", g_shmid);
     sprintf(s_sem, "%d", g_semid);
@@ -102,6 +102,7 @@ int main() {
     // 3. Kasjer
     pid_t pid_kasjer = fork();
     if (pid_kasjer == 0) {
+        // Ignorowanie sygnałów terminala, aby nie przerywać pracy
         signal(SIGINT, SIG_IGN); 
         signal(SIGTERM, SIG_DFL);
         signal(SIGUSR1, SIG_IGN); 
@@ -156,7 +157,7 @@ int main() {
             int los = rand() % 100;
 
             if (i == P - 1 && los < 20) {
-                los = 50; // Ostatni pasażer niech nie będzie opiekunem
+                los = 50; // Ostatni pasażer niech nie będzie opiekunem (brak miejsca dla dwóch)
             }
                  
             if (los < 20) {
@@ -252,11 +253,12 @@ int main() {
         loguj_blad("Fork Dyspozytor");
     }
 
-    // Oczekiwanie na zakończenie wszystkich autobusów i pasażerów
+    // 7. Pętla główna - monitorowanie stanu
     while(1) {
         data = dolacz_pamiec(g_shmid);
         if (data == NULL) break;
-
+        
+        // Zamknięcie dworca po obsłużeniu limitu pasażerów
         if (data->calkowita_liczba_pasazerow >= P && data->liczba_oczekujacych == 0) {
             if (data->dworzec_otwarty == 1) {
                 loguj(NULL,"[MAIN] Wszyscy pasażerowie obsłużeni (%d). Zamykam dworzec!\n", data->calkowita_liczba_pasazerow);
@@ -273,7 +275,7 @@ int main() {
         sleep(1);
     }
 
-    // 7. Raport końcowy
+    // Raport końcowy
     data = dolacz_pamiec(g_shmid);
     if (data != NULL) {
         loguj(NULL,"--- RAPORT KOŃCOWY ---\n");

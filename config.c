@@ -4,6 +4,7 @@
 #include "common.h"
 #include "logs.h"
 
+// Funkcja wczytująca konfigurację z pliku config.txt
 void wczytaj_konfiguracje(const char* sciezka, SharedData* data) {
     FILE* f = fopen(sciezka, "r");
     if (!f) {
@@ -35,6 +36,7 @@ void wczytaj_konfiguracje(const char* sciezka, SharedData* data) {
     fclose(f);
 }
 
+// Funkcja walidująca konfigurację
 void waliduj_konfiguracje(SharedData* data) {
     int bledy = 0;
 
