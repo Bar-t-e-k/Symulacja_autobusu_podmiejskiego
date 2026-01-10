@@ -10,7 +10,7 @@
 #define MSG_KEY_ID 'C'
 
 // SEMAFORY
-#define SEM_MUTEX 0  // Chroni dostęp do pamięci dzielonej
+#define SEM_MUTEX 0  // Semafor binarny - chroni dostęp do pamięci dzielonej
 #define SEM_DRZWI_PAS  1  // drzwi dla pasażerów
 #define SEM_DRZWI_ROW  2  // drzwi dla rowerów 
 #define LICZBA_SEMAFOROW 3
@@ -52,7 +52,7 @@ typedef struct {
 
 // KOLEJKA KOMUNIKATÓW
 typedef struct {
-    long mtype;
+    long mtype; // typ komunikatu
     int pid_nadawcy;
     int typ_pasazera;
 } BiletMsg;

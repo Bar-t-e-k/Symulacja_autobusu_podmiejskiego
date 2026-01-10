@@ -13,7 +13,8 @@ extern int g_shmid;
 extern int g_semid;
 extern int g_msgid;
 
-// Obsługa sygnału kończącego (SIGINT, SIGTERM)
+// Obsługa sygnału kończącego Ctrl+C
+// Wywołuje exit, co uruchamia sprzątanie zasobów w main.c
 void obsluga_koniec(int sig) {
     loguj(NULL,"\n\n[SYSTEM] Otrzymano sygnał kończący (%d). Rozpoczynam procedurę stop.\n", sig);
 
@@ -21,6 +22,7 @@ void obsluga_koniec(int sig) {
 }
 
 // Obsługa sygnału 1 - rozkaz odjazdu
+// Wysyła sygnał do obecnego autobusu na peronie
 void obsluga_odjazdu(int sig) {
     (void)sig;
 
@@ -39,6 +41,7 @@ void obsluga_odjazdu(int sig) {
 }
 
 // Obsługa sygnału 2 - zamknięcie dworca
+// Ustawia flagę zamknięcia i wymusza odjazd obecnego autobusu
 void obsluga_zamkniecia(int sig) {
     (void)sig;
     SharedData* d = dolacz_pamiec(g_shmid);

@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include "actors.h"
 
+// Zmienne globalne wymagane przez signals.o
 int g_shmid = -1, g_semid = -1, g_msgid = -1;
 
 int main(int argc, char* argv[]) {
