@@ -146,5 +146,35 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 * **Logi w tle**: Jeśli uruchomisz program w tle (`./symulacja &`), komunikaty nadal będą wypisywane na terminal. Aby temu zapobiec, użyj przekierowania: `./symulacja > /dev/null &` i śledź logi przez `tail -f symulacja.log`.
 
 ---
+## Testy
 
+### Test A: Standardowy cykl przewozu
+* **Scenariusz:** Pasażerowie przychodzą, kupują bilety, zapełniają autobus. Po upływie czasu `T_POSTOJ` autobus odjeżdża.
+* **Weryfikacja techniczna:** Pasażer wysyła zapytanie do Kasjera na `KANAL_ZAPYTAN`. Autobus w pętli sprawdza czas systemowy `time()`. Po przekroczeniu limitu czasu pętla załadunku zostaje przerwana.
+* **Rezultat:** ✅ Pozytywny. Logi potwierdzają sekwencję: Zakup -> Wejście -> Odjazd po czasie.
+
+### Test B: Przepełnienie i limit rowerów
+* **Scenariusz:** Liczba chętnych przekracza limit `P`, a liczba rowerzystów przekracza limit `R`.
+* **Weryfikacja techniczna:** Przed wejściem sprawdzany jest warunek w Pamięci Dzielonej: `if (liczba_pasazerow >= P)` oraz `if (typ == ROWER && liczba_rowerow >= R)`. Dostęp do liczników chroni semafor `MUTEX`. Jeśli warunek jest niespełniony, Kierowca odsyła komunikat odmowny (`-1`).
+* **Rezultat:** ✅ Pozytywny. Pasażerowie nadmiarowi otrzymują odmowę i czekają na kolejny autobus.
+
+### Test C: Obsługa priorytetów (VIP)
+* **Scenariusz:** W kolejce czekają pasażerowie Zwykli. Pojawia się VIP.
+* **Weryfikacja techniczna:** VIP inkrementuje licznik `liczba_vip_oczekujacych` w pamięci dzielonej. Pasażerowie zwykli w pętli oczekiwania sprawdzają ten licznik. Jeśli jest `> 0`, wykonują `usleep` i zwalniają semafor drzwi, przepuszczając VIP-a.
+* **Rezultat:** ✅ Pozytywny. VIP wchodzi do autobusu natychmiast, z pominięciem kolejki.
+
+### Test D: Zależność Dziecko-Opiekun
+* **Scenariusz:** Do wejścia podchodzi Opiekun z Dzieckiem.
+* **Weryfikacja techniczna:**
+    1. Opiekun sprawdza dostępność `P-2` miejsc.
+    2. Po wejściu Opiekun wysyła wiadomość IPC do Dziecka.
+    3. Autobus ustawia flagę `oczekuje_na_dziecko` i blokuje odjazd (nawet po upływie czasu) do momentu otrzymania potwierdzenia wejścia Dziecka.
+* **Rezultat:** ✅ Pozytywny. Autobus zaczekał na dziecko mimo upływu czasu postoju.
+
+### Test E: Interwencja Dyspozytora (Sygnały)
+* **Scenariusz:** Użytkownik naciska klawisz `1` podczas załadunku.
+* **Weryfikacja techniczna:** Proces `main` wysyła sygnał `SIGUSR1` do procesu autobusu. Handler sygnału w autobusie ustawia zmienną `volatile sig_atomic_t wymuszony_odjazd = 1`, co natychmiast przerywa pętlę załadunku instrukcją `break`.
+* **Rezultat:** ✅ Pozytywny. Autobus odjechał natychmiast, nie czekając na pełny załadunek ani upływ czasu.
+
+---
 **Autor:** Bartłomiej Zięcina
