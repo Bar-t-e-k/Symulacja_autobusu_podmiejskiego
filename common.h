@@ -20,11 +20,9 @@
 #define TYP_VIP    1
 #define TYP_ROWER  2
 #define TYP_OPIEKUN 3
-#define TYP_DZIECKO 4
 
 // KANAŁY KOMUNIKATÓW
 #define KANAL_ZAPYTAN 1 // Kanał dla pasażerów pytających o bilet
-#define KANAL_KONTROLA 2 // Kanał dla sprawdzania biletów u kierowcy
 
 // PAMIEĆ DZIELONA
 typedef struct {

@@ -1,24 +1,33 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=gnu99 -D_GNU_SOURCE
+CFLAGS = -Wall -pthread
 
-COMMON_OBJS = ipc_utils.o actors.o logs.o signals.o config.o
+OBJS_COMMON = ipc_utils.o logs.o
 
 all: symulacja exe_bus exe_passenger exe_cashier
 
-symulacja: main.o $(COMMON_OBJS)
-	$(CC) $(CFLAGS) -o symulacja main.o $(COMMON_OBJS)
+ipc_utils.o: ipc_utils.c ipc_utils.h common.h
+	$(CC) $(CFLAGS) -c ipc_utils.c
 
-exe_bus: exe_bus.o $(COMMON_OBJS)
-	$(CC) $(CFLAGS) -o exe_bus exe_bus.o $(COMMON_OBJS)
+logs.o: logs.c logs.h
+	$(CC) $(CFLAGS) -c logs.c
 
-exe_passenger: exe_passenger.o $(COMMON_OBJS)
-	$(CC) $(CFLAGS) -o exe_passenger exe_passenger.o $(COMMON_OBJS)
+config.o: config.c config.h
+	$(CC) $(CFLAGS) -c config.c
 
-exe_cashier: exe_cashier.o $(COMMON_OBJS)
-	$(CC) $(CFLAGS) -o exe_cashier exe_cashier.o $(COMMON_OBJS)
+signals.o: signals.c signals.h common.h
+	$(CC) $(CFLAGS) -c signals.c
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+symulacja: main.c signals.o config.o $(OBJS_COMMON)
+	$(CC) $(CFLAGS) main.c signals.o config.o $(OBJS_COMMON) -o symulacja
+
+exe_bus: exe_bus.c $(OBJS_COMMON)
+	$(CC) $(CFLAGS) exe_bus.c $(OBJS_COMMON) -o exe_bus
+
+exe_passenger: exe_passenger.c $(OBJS_COMMON)
+	$(CC) $(CFLAGS) exe_passenger.c $(OBJS_COMMON) -o exe_passenger
+
+exe_cashier: exe_cashier.c $(OBJS_COMMON)
+	$(CC) $(CFLAGS) exe_cashier.c $(OBJS_COMMON) -o exe_cashier
 
 clean:
-	rm -f symulacja exe_bus exe_passenger exe_cashier *.o symulacja.log
+	rm -f *.o symulacja exe_bus exe_passenger exe_cashier symulacja.log

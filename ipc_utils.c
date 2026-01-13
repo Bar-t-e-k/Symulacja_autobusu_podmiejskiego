@@ -14,8 +14,7 @@
 int stworz_pamiec(int size) {
     key_t key = ftok(SHM_KEY_PATH, SHM_KEY_ID);
     
-    // 0666 = odczyt/zapis dla wszystkich
-    int shmid = shmget(key, size, 0666 | IPC_CREAT);
+    int shmid = shmget(key, size, 0600 | IPC_CREAT);
     if (shmid == -1) {
         loguj_blad("Błąd tworzenia pamieci dzielonej");
         exit(1);
@@ -57,7 +56,7 @@ void usun_pamiec(int shmid) {
 int stworz_semafor(int n_sems) {
     key_t key = ftok(SHM_KEY_PATH, SEM_KEY_ID);
     
-    int semid = semget(key, n_sems, 0666 | IPC_CREAT);
+    int semid = semget(key, n_sems, 0600 | IPC_CREAT);
     if (semid == -1) {
         loguj_blad("Błąd tworzenia semafora");
         exit(1);
@@ -79,9 +78,12 @@ void zablokuj_semafor(int semid, int sem_num) {
     operacja.sem_op = -1;
     operacja.sem_flg = 0;
     
-    if (semop(semid, &operacja, 1) == -1) {
-        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
-            exit(0); // Ignoruwanie błędów wynikających z zamknięcia systemu
+    while (semop(semid, &operacja, 1) == -1) {
+        if (errno == EINTR) {
+            continue; // To tylko sygnał, próbujemy dalej
+        }
+        if (errno == EIDRM || errno == EINVAL) {
+            exit(0); // Semafor usunięty - koniec symulacji
         }
         loguj_blad("Błąd blokowania semafora (P)");
         exit(1);
@@ -115,7 +117,7 @@ void usun_semafor(int semid) {
 int stworz_kolejke() {
     key_t key = ftok(SHM_KEY_PATH, MSG_KEY_ID);
     
-    int msgid = msgget(key, 0666 | IPC_CREAT);
+    int msgid = msgget(key, 0600 | IPC_CREAT);
     if (msgid == -1) {
         loguj_blad("Błąd tworzenia kolejki komunikatów");
         exit(1);
@@ -151,16 +153,4 @@ void usun_kolejke(int msgid) {
         loguj_blad("Błąd usuwania kolejki komunikatów");
         exit(1);
     }
-}
-
-int odbierz_komunikat_bez_blokowania(int msgid, void* msg, int rozmiar, long typ) {
-    if (msgrcv(msgid, msg, rozmiar, typ, IPC_NOWAIT) == -1) {
-        if (errno == ENOMSG) {
-            return 0; // Brak komunikatu
-        }
-        if (errno == EIDRM || errno == EINVAL || errno == EINTR) exit(0);
-        loguj_blad("msgrcv nieblokujący");
-        exit(1);
-    }
-    return 1;
 }

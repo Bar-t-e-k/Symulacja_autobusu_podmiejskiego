@@ -7,7 +7,6 @@
 #include <string.h>
 #include "common.h"
 #include "ipc_utils.h"
-#include "actors.h"
 #include "signals.h"
 #include "logs.h"
 #include "config.h"
@@ -18,12 +17,13 @@ int g_shmid = -1, g_semid = -1, g_msgid = -1;
 // Funkcja sprzątająca zasoby przed zakończeniem programu (wywoływana przez atexit)
 void sprzatanie() {
     if (getpid() != g_main_pid) return;
-    
-    // Zabicie procesów potomnych
-    signal(SIGTERM, SIG_IGN); 
+
+    signal(SIGTERM, SIG_IGN);
     kill(0, SIGTERM); 
-    
-    while(wait(NULL) > 0);
+
+    pid_t wpid;
+    int status;
+    while ((wpid = waitpid(-1, &status, WNOHANG)) > 0);
 
     if (g_shmid != -1) {
         usun_pamiec(g_shmid);
@@ -127,7 +127,7 @@ int main() {
             char s_id[16];
             sprintf(s_id, "%d", b);
 
-            execlp("./exe_bus", "exe_bus", s_id, s_shm, s_sem, s_msg, NULL);
+            execlp("./exe_bus", "exe_bus", s_id, s_shm, s_sem, NULL);
 
             loguj_blad("Exec Autobus");
             exit(1);
@@ -144,7 +144,7 @@ int main() {
         srand(time(NULL));
         int id_gen = 1;
 
-        char s_id[16], s_typ[16], s_pid_dziecka[16];
+        char s_id[16], s_typ[16];
 
         for (int i = 0; i < P; i++) {
             SharedData* d = dolacz_pamiec(g_shmid);
@@ -155,60 +155,31 @@ int main() {
             odlacz_pamiec(d);
 
             int los = rand() % 100;
-
-            if (i == P - 1 && los < 20) {
-                los = 50; // Ostatni pasażer niech nie będzie opiekunem (brak miejsca dla dwóch)
-            }
+            int typ = TYP_ZWYKLY;
                  
-            if (los < 20) {
-                pid_t pid_dziecka = fork();
-                if (pid_dziecka == 0) {
-                    signal(SIGINT, SIG_IGN);
-
-                    sprintf(s_id, "%d", id_gen++);
-                    sprintf(s_typ, "%d", TYP_DZIECKO);
-
-                    execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, "0", NULL);
-
-                    loguj_blad("Exec Dziecko");
-                    exit(1);
-                }
-
-                if (fork() == 0) {
-                    signal(SIGINT, SIG_IGN);
-
-                    sprintf(s_id, "%d", id_gen++);
-                    sprintf(s_pid_dziecka, "%d", pid_dziecka);
-                    sprintf(s_typ, "%d", TYP_OPIEKUN);
-
-                    execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, s_pid_dziecka, NULL);
-                    
-                    loguj_blad("Exec Opiekun");
-                    exit(1);
-                }
-                id_gen += 2;
-                i++; // Dwa miejsca zajęte
-            } else {
-                if (fork() == 0) {
-                    signal(SIGINT, SIG_IGN);
-
-                    int typ = TYP_ZWYKLY;
-                    if (los < 45) typ = TYP_ROWER;  // 45% Rower
-                    else if (los >= 99) typ = TYP_VIP; // 1% VIP
-
-                    sprintf(s_id, "%d", id_gen++);
-                    sprintf(s_typ, "%d", typ);
-
-                    execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, "0", NULL);
-
-                    loguj_blad("Exec Pasażer");
-                    exit(1);
-                }
-                id_gen++;
+            if (los < 20 && i < P - 1) { 
+                typ = TYP_OPIEKUN;
+                i++; // Zliczanie dwóch miejsc (Opiekun + Dziecko)
+            } else if (los < 45) {
+                typ = TYP_ROWER;
+            } else if (los >= 99) { // 1% szans na VIP
+                typ = TYP_VIP;
             }
+
+            pid_t pid_pas = fork();
+            if (pid_pas == 0) {
+                sprintf(s_id, "%d", id_gen);
+                sprintf(s_typ, "%d", typ);
+                execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, NULL);
+                loguj_blad("Exec Pasażer"); 
+                exit(1);
+            }
+
+            id_gen++;
             usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
-        }
-        exit(0);
+            }
+            while(wait(NULL) > 0);
+            exit(0);   
     } else if (pid_pasazerowie < 0) {
         loguj_blad("Fork Pasażerowie");
     }
@@ -220,7 +191,6 @@ int main() {
         signal(SIGTERM, SIG_DFL);
         signal(SIGUSR1, SIG_IGN); 
         signal(SIGUSR2, SIG_IGN);
-
         signal(SIGTTIN, SIG_IGN);
 
         char bufor[32];
