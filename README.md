@@ -1,16 +1,16 @@
 # 🚌 Symulator Dworca Autobusowego
 
-Projekt realizuje zaawansowaną symulację dworca autobusowego w środowisku Linux, wykorzystując mechanizmy wieloprocesowości oraz komunikacji międzyprocesowej.
+Projekt realizuje zaawansowaną symulację dworca autobusowego w środowisku Linux, wykorzystując mechanizmy wieloprocesowości, wielowątkowości oraz synchronizacji zasobów.
 
-Głównym celem projektu jest demonstracja synchronizacji procesów, zarządzania zasobami dzielonymi oraz obsługi sygnałów w systemie operacyjnym.
+Głównym celem projektu jest demonstracja problemów współbieżności: wykluczania wzajemnego, synchronizacji procesów, obsługi sygnałów oraz zapobiegania zakleszczeniom.
 
 ---
 
 ## 🚀 Funkcjonalności
 
 ### 1. Architektura Wieloprocesowa
-Symulacja wykorzystuje funkcje `fork()` oraz rodzinę funkcji `exec()` do tworzenia niezależnych procesów dla każdego aktora systemu:
-* **Główny Zarządca (`main`)**: Inicjuje zasoby, tworzy procesy potomne i sprząta po zakończeniu oraz **pełni rolę Dyspozytora** (obsługuje sterowanie z klawiatury).
+Symulacja wykorzystuje funkcje `fork()` oraz rodzinę funkcji `execlp()` do tworzenia niezależnych procesów dla każdego aktora systemu:
+* **Główny Zarządca (`main`)**: Inicjuje zasoby, tworzy procesy potomne, monitoruje stan symulacji, sprząta po zakończeniu oraz **pełni rolę Dyspozytora** (obsługuje sterowanie z klawiatury).
 * **Autobusy**: Niezależne procesy realizujące kursy, zabierające pasażerów i obsługujące limity miejsc.
 * **Pasażerowie**: Procesy symulujące zachowanie ludzi (kupno biletu, oczekiwanie, wejście).
 * **Kasjer**: Proces obsługujący kolejkę komunikatów z zapytaniami o bilety.
@@ -19,22 +19,21 @@ Symulacja wykorzystuje funkcje `fork()` oraz rodzinę funkcji `exec()` do tworze
 System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
 * **🟢 Pasażer Zwykły**: Musi kupić bilet w kasie, a następnie czeka w kolejce do autobusu.
 * **🟣 VIP**: Posiada priorytet – omija kolejkę do kasy oraz ma pierwszeństwo wejścia do autobusu przed zwykłymi pasażerami.
-* **🔵 Rodzina (Opiekun + Dziecko)**: Zaawansowany mechanizm synchronizacji. Opiekun wchodzi tylko wtedy, gdy są **dwa** wolne miejsca. Dziecko czeka na sygnał od opiekuna. Autobus nie odjeżdża, jeśli opiekun wszedł, a dziecko jeszcze nie.
-* **🚲 Rowerzysta**: Zajmuje miejsce pasażerskie ORAZ limitowane miejsce na rower.
+* **🔵 Rodzina (Opiekun + Dziecko)**: Zaimplementowana jako jeden proces z wątkiem. Proces Opiekuna sprawdza dostępność dwóch miejsc. Dziecko jest realizowane jako wątek `pthread`, który towarzyszy procesowi rodzica.
+* **🚲 Rowerzysta**: Zajmuje miejsce pasażerskie ORAZ limitowane miejsce na rower. Używa osobnego wejścia.
 
 ### 3. Mechanizmy IPC
 * **Pamięć Dzielona (Shared Memory)**: Przechowuje globalny stan dworca (m.in. liczniki pasażerów, flagi otwarcia, PID obecnego autobusu).
 * **Semafory (Semaphores)**:
     * `SEM_MUTEX`: Gwarantuje wyłączny dostęp do pamięci dzielonej (sekcja krytyczna).
-    * `SEM_DRZWI`: Ograniczają przepustowość wejścia do autobusu.
+    * `SEM_DRZWI_PAS`: Ogranicza przepustowość wejścia pasażerskiego.
+    * `SEM_DRZWI_ROW`: Ogranicza przepustowość wejścia dla rowerów.
 * **Kolejki Komunikatów (Message Queues)**:
     * Komunikacja `Pasażer -> Kasjer` (symulacja zakupu biletu).
-    * Komunikacja `Pasażer -> Kierowca` (kontrola biletów przy wejściu).
-    * Synchronizacja `Opiekun <-> Dziecko`.
 
 ### 4. Bezpieczeństwo i Logowanie
 * **Graceful Shutdown**: System gwarantuje usunięcie zasobów IPC (pamięć, semafory) niezależnie od sposobu zakończenia programu (sygnał `SIGINT`, błąd, czy normalne zakończenie) dzięki `atexit()`.
-* **Deadlock Prevention**: Zastosowanie timeoutów w oczekiwaniu na komunikaty zapobiega zakleszczeniom (np. gdy kierowca odrzuci opiekuna, dziecko nie czeka w nieskończoność).
+* **Deadlock Prevention**: Autobus nie blokuje semaforów drzwi, a pasażerowie sprawdzają stan autobusu w bezpiecznej sekcji krytycznej.
 * **Logowanie**: Kolorowe logi w terminalu oraz trwały zapis do pliku `symulacja.log` ze znacznikami czasu.
 
 ---
@@ -45,7 +44,7 @@ Projekt korzysta z narzędzia `make` do automatyzacji procesu budowania.
 
 ### Wymagania
 * System operacyjny: Linux
-* Kompilator: GCC
+* Kompilator: GCC (z obsługą `pthread`)
 * Biblioteki standardowe C
 
 ### Instrukcja
@@ -117,24 +116,23 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 ## 📂 Struktura Plików
 
 **Logika Główna:**
-* `main.c` – Inicjalizacja, pętle generujące procesy, obsługa `atexit`, logika **Dyspozytora**.
-* `actors.c` – Implementacja funkcji aktorów (`kasjer_run`, `pasazer_run`, `autobus_run`).
+* `main.c` – Inicjalizacja, pętle generujące procesy, obsługa `atexit`, logika **Dyspozytora**, monitorowanie.
 * `signals.c` – Obsługa sygnałów systemowych.
 
+**Aktorzy:**
+* `exe_bus.c` – Logika autobusu (wjazd, postój, odjazd).
+* `exe_passenger.c` – Logika pasażera (kasa, wsiadanie, obsługa wątku dziecka).
+* `exe_cashier.c` – Logika kasjera (pętla obsługi komunikatów).
 
 **Narzędzia:**
 * `ipc_utils.c` – Wrappery na funkcje systemowe IPC (tworzenie/usuwanie zasobów).
 * `config.c` – Parser pliku konfiguracyjnego.
 * `logs.c` – Moduł logowania (plik + stdout).
 
-
 **Nagłówki:**
 * `common.h` – Wspólne definicje, stałe i struktury danych (`SharedData`, `BiletMsg`).
-* `actors.h`, `config.h`, `ipc_utils.h`, `logs.h`, `signals.h` – pliki nagłówkowe zawierające deklaracje funkcji w analogicznych plikach źródłowych.
+* `config.h`, `ipc_utils.h`, `logs.h`, `signals.h` – pliki nagłówkowe zawierające deklaracje funkcji w analogicznych plikach źródłowych.
 
-
-**Wrappery Exec:**
-* `exe_bus.c`, `exe_passenger.c`, `exe_cashier.c` – Programy uruchamiane przez `exec()`, które wywołują właściwą logikę z pliku `actors`.
 
 
 
@@ -144,6 +142,7 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 
 * **Procesy Zombie**: Podczas działania symulacji na liście procesów mogą pojawiać się procesy **Zombie**. Jest to normalne zachowanie przy intensywnym tworzeniu procesów potomnych, które nie są natychmiast zbierane przez `wait()`. Są one automatycznie sprzątane przez system przy zamknięciu programu.
 * **Logi w tle**: Jeśli uruchomisz program w tle (`./symulacja &`), komunikaty nadal będą wypisywane na terminal. Aby temu zapobiec, użyj przekierowania: `./symulacja > /dev/null &` i śledź logi przez `tail -f symulacja.log`.
+* **Natychmiastowy odjazd po wznowieniu (Ctrl+Z)**: Symulacja korzysta z zegara czasu rzeczywistego. Jeśli zatrzymasz symulację kombinacją Ctrl+Z, a następnie wznowisz ją komendą fg po czasie dłuższym niż T_POSTOJ, autobus odjedzie natychmiast.
 
 ---
 ## Testy
@@ -155,7 +154,7 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 
 ### Test B: Przepełnienie i limit rowerów
 * **Scenariusz:** Liczba chętnych przekracza limit `P`, a liczba rowerzystów przekracza limit `R`.
-* **Weryfikacja techniczna:** Przed wejściem sprawdzany jest warunek w Pamięci Dzielonej: `if (liczba_pasazerow >= P)` oraz `if (typ == ROWER && liczba_rowerow >= R)`. Dostęp do liczników chroni semafor `MUTEX`. Jeśli warunek jest niespełniony, Kierowca odsyła komunikat odmowny (`-1`).
+* **Weryfikacja techniczna:** Przed wejściem sprawdzany jest warunek w Pamięci Dzielonej: `liczba_pasazerow + miejsce_potrzebne <= P` oraz `liczba_rowerow + rower_potrzebny <= R`. Dostęp do liczników chroni semafor `MUTEX`.
 * **Rezultat:** ✅ Pozytywny. Pasażerowie nadmiarowi otrzymują odmowę i czekają na kolejny autobus.
 
 ### Test C: Obsługa priorytetów (VIP)
@@ -167,9 +166,9 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 * **Scenariusz:** Do wejścia podchodzi Opiekun z Dzieckiem.
 * **Weryfikacja techniczna:**
     1. Opiekun sprawdza dostępność `P-2` miejsc.
-    2. Po wejściu Opiekun wysyła wiadomość IPC do Dziecka.
-    3. Autobus ustawia flagę `oczekuje_na_dziecko` i blokuje odjazd (nawet po upływie czasu) do momentu otrzymania potwierdzenia wejścia Dziecka.
-* **Rezultat:** ✅ Pozytywny. Autobus zaczekał na dziecko mimo upływu czasu postoju.
+    2. Jeśli są wolne, inkrementuje licznik pasażerów o 2 (za siebie i dziecko) w jednej transakcji atomowej.
+    3. Wątek dziecka (wewnątrz procesu Opiekuna) jest synchronizowany za pomocą pthread_cond i kończy podróż razem z rodzicem.
+* **Rezultat:** ✅ Pozytywny. Opiekun zajmuje poprawną liczbę miejsc, a dziecko "podróżuje" razem z nim bez blokowania zasobów zewnętrznych.
 
 ### Test E: Interwencja Dyspozytora (Sygnały)
 * **Scenariusz:** Użytkownik naciska klawisz `1` podczas załadunku.
