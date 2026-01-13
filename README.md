@@ -176,4 +176,73 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 * **Rezultat:** ✅ Pozytywny. Autobus odjechał natychmiast, nie czekając na pełny załadunek ani upływ czasu.
 
 ---
+## Linki do kluczowych fragmentów
+
+### a. Tworzenie i obsługa plików
+Wykorzystano bibliotekę standardową (nakładka na syscall open/write) do logowania zdarzeń.
+   
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/logs.c#L24-L37
+
+### b. Tworzenie procesów
+Podstawa architektury. Proces główny tworzy procesy potomne, które zmieniają swój obraz pamięci (exec).
+ 
+Kasjer: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L103-L117
+Autobusy: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L120-L137
+Pasażerowie: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L140-L185
+
+### c. Obsługa sygnałów
+Reakcja na interwencję Dyspozytora oraz bezpieczne zamykanie.
+
+Dyspozytor: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L188-L224
+Ctrl + C: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L18-L22
+Sygnał 1: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L26-L41
+Sygnał 2: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L45-L65
+
+### e. Synchronizacja procesów
+Wykorzystano semafory do ochrony zasobów i blokowania wejścia do drzwi.
+
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/ipc_utils.c#L56-L113
+
+### g. Segmenty pamięci dzielonej
+Współdzielenie stanu dworca między procesami.
+
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/ipc_utils.c#L14-L52
+
+### h. Kolejki komunikatów
+Komunikacja między Kasjerem a Pasażerami
+
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/ipc_utils.c#L117-L156
+
+### i. Konfiguracja i walidacja
+Dane wczytywane z pliku config.txt.
+
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/config.c#L8-L75
+
+### j. Wykorzystanie wątków
+Dziecko jest tworzone jako wątek wewnątrz opiekuna.
+
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_passenger.c#L24-L38
+
+### k. Funkcje aktorów
+
+Kasjer: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_cashier.c#L14-L32
+Autobus: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_bus.c#L22-L145
+Pasażer: 
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_passenger.c#L41-L202
+
+### l. Obsługa błędów i logi
+Wykorzystano własne funkcje do zapisywania logów i obsługi błędów
+
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/logs.c#L11-L45
+
+---
 **Autor:** Bartłomiej Zięcina
