@@ -38,7 +38,7 @@ void* watek_dziecka_fun(void* arg) {
 }
 
 // Logika pasażera
-void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
+void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int typ) {
     SharedData* data = dolacz_pamiec(shmid);
     srand(time(NULL) ^ (getpid()<<16)); 
 
@@ -89,22 +89,32 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
     odblokuj_semafor(semid, SEM_MUTEX);
 
     // 2. Kasa
+    int rozmiar = sizeof(BiletMsg) - sizeof(long);
+
     if (typ != TYP_VIP) {
         loguj(kolor, "[Pasażer %d (%s)] Idę do kasy (PID: %d).\n", id, nazwa, getpid());
-        int ile_biletow = (typ == TYP_OPIEKUN) ? 2 : 1;
         
-        for (int i = 0; i < ile_biletow; i++) {
-            BiletMsg bilet;
-            bilet.mtype = KANAL_ZAPYTAN;
-            bilet.pid_nadawcy = getpid();
-            bilet.typ_pasazera = typ;
-            int rozmiar = sizeof(BiletMsg) - sizeof(long);
+        BiletMsg bilet;
+        bilet.mtype = KANAL_KASA;
+        bilet.pid_nadawcy = getpid();
+        bilet.typ_pasazera = typ;
 
-            wyslij_komunikat(msgid, &bilet, rozmiar);
-            odbierz_komunikat(msgid, &bilet, rozmiar, getpid());
-        } 
+        if (typ == TYP_OPIEKUN) {
+            bilet.tid_dziecka = (unsigned long)thread_dziecko;
+        } else {
+            bilet.tid_dziecka = 0;
+        }
+
+        wyslij_komunikat(msgid_req, &bilet, rozmiar);
+        odbierz_komunikat(msgid_res, &bilet, rozmiar, getpid());
     } else {
-        loguj(kolor, "[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy.\n", id);
+        BiletMsg bilet;
+        bilet.mtype = KANAL_KASA;
+        bilet.pid_nadawcy = getpid();
+        bilet.typ_pasazera = typ;
+
+        wyslij_komunikat(msgid_req, &bilet, rozmiar);
+        loguj(kolor, "[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: %d)\n", id, getpid());
     }
 
     loguj(kolor, "[Pasażer %d (%s)] Przychodzę na przystanek.\n", id, nazwa);
@@ -202,7 +212,7 @@ void pasazer_run(int id, int shmid, int semid, int msgid, int typ) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc < 6) return 1;
-    pasazer_run(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), atoi(argv[5]));
+    if (argc < 7) return 1;
+    pasazer_run(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), atoi(argv[5]), atoi(argv[6]));
     return 0;
 }

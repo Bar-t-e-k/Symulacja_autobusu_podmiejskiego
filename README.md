@@ -13,7 +13,7 @@ Symulacja wykorzystuje funkcje `fork()` oraz rodzinę funkcji `execlp()` do twor
 * **Główny Zarządca (`main`)**: Inicjuje zasoby, tworzy procesy potomne, monitoruje stan symulacji, sprząta po zakończeniu oraz **pełni rolę Dyspozytora** (obsługuje sterowanie z klawiatury).
 * **Autobusy**: Niezależne procesy realizujące kursy, zabierające pasażerów i obsługujące limity miejsc.
 * **Pasażerowie**: Procesy symulujące zachowanie ludzi (kupno biletu, oczekiwanie, wejście).
-* **Kasjer**: Proces obsługujący kolejkę komunikatów z zapytaniami o bilety.
+* **Kasjer**: Proces obsługujący kolejki komunikatów z zapytaniami o bilety.
 
 ### 2. Typy Pasażerów i Logika Biznesowa
 System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
@@ -29,7 +29,7 @@ System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
     * `SEM_DRZWI_PAS`: Ogranicza przepustowość wejścia pasażerskiego.
     * `SEM_DRZWI_ROW`: Ogranicza przepustowość wejścia dla rowerów.
 * **Kolejki Komunikatów (Message Queues)**:
-    * Komunikacja `Pasażer -> Kasjer` (symulacja zakupu biletu).
+    * Komunikacja `Pasażer <-> Kasjer` (symulacja zakupu biletu) (2 kolejki do obsługi w dwie strony).
 
 ### 4. Bezpieczeństwo i Logowanie
 * **Graceful Shutdown**: System gwarantuje usunięcie zasobów IPC (pamięć, semafory) niezależnie od sposobu zakończenia programu (sygnał `SIGINT`, błąd, czy normalne zakończenie) dzięki `atexit()`.
@@ -149,7 +149,7 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 
 ### Test A: Standardowy cykl przewozu
 * **Scenariusz:** Pasażerowie przychodzą, kupują bilety, zapełniają autobus. Po upływie czasu `T_POSTOJ` autobus odjeżdża.
-* **Weryfikacja techniczna:** Pasażer wysyła zapytanie do Kasjera na `KANAL_ZAPYTAN`. Autobus w pętli sprawdza czas systemowy `time()`. Po przekroczeniu limitu czasu pętla załadunku zostaje przerwana.
+* **Weryfikacja techniczna:** Pasażer wysyła zapytanie do Kasjera na `KANAL_KASA`. Autobus w pętli sprawdza czas systemowy `time()`. Po przekroczeniu limitu czasu pętla załadunku zostaje przerwana.
 * **Rezultat:** ✅ Pozytywny. Logi potwierdzają sekwencję: Zakup -> Wejście -> Odjazd po czasie.
 
 ### Test B: Przepełnienie i limit rowerów

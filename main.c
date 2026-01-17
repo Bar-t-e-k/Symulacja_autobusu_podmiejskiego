@@ -12,7 +12,7 @@
 #include "config.h"
 
 pid_t g_main_pid;
-int g_shmid = -1, g_semid = -1, g_msgid = -1;
+int g_shmid = -1, g_semid = -1, g_msgid_req = -1, g_msgid_res = -1;
 
 // Funkcja sprzątająca zasoby przed zakończeniem programu (wywoływana przez atexit)
 void sprzatanie() {
@@ -33,9 +33,13 @@ void sprzatanie() {
         usun_semafor(g_semid);
         g_semid = -1;
     }
-    if (g_msgid != -1) {
-        usun_kolejke(g_msgid);
-        g_msgid = -1;
+    if (g_msgid_req != -1) {
+        usun_kolejke(g_msgid_req);
+        g_msgid_req = -1;
+    }
+    if (g_msgid_res != -1) {
+        usun_kolejke(g_msgid_res);
+        g_msgid_res = -1;
     }
     
     loguj(NULL, "[SYSTEM] Zasoby posprzątane. Koniec.\n");
@@ -62,9 +66,10 @@ int main() {
     // 1. Tworzenie zasobów IPC
     g_shmid = stworz_pamiec(sizeof(SharedData));
     g_semid = stworz_semafor(LICZBA_SEMAFOROW);
-    g_msgid = stworz_kolejke();
+    g_msgid_req = stworz_kolejke(MSG_KEY_ID_REQ);
+    g_msgid_res = stworz_kolejke(MSG_KEY_ID_RES);
 
-    if (g_shmid == -1 || g_semid == -1 || g_msgid == -1) {
+    if (g_shmid == -1 || g_semid == -1 || g_msgid_req == -1 || g_msgid_res == -1) {
         loguj_blad("Nie udało sie utworzyć zasobów IPC!");
         exit(1);
     }
@@ -94,10 +99,11 @@ int main() {
     ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1); 
 
     // Konwersja ID na stringi dla exec
-    char s_shm[16], s_sem[16], s_msg[16];
+    char s_shm[16], s_sem[16], s_msg_req[16], s_msg_res[16];
     sprintf(s_shm, "%d", g_shmid);
     sprintf(s_sem, "%d", g_semid);
-    sprintf(s_msg, "%d", g_msgid);
+    sprintf(s_msg_req, "%d", g_msgid_req);
+    sprintf(s_msg_res, "%d", g_msgid_res);
 
     // 3. Kasjer
     pid_t pid_kasjer = fork();
@@ -108,7 +114,7 @@ int main() {
         signal(SIGUSR1, SIG_IGN); 
         signal(SIGUSR2, SIG_IGN);
 
-        execlp("./exe_cashier", "exe_cashier", s_msg, NULL);
+        execlp("./exe_cashier", "exe_cashier", s_msg_req, s_msg_res, NULL);
 
         loguj_blad("Exec Kasjer");
         exit(1);
@@ -141,6 +147,7 @@ int main() {
     if (pid_pasazerowie == 0) {
         signal(SIGINT, SIG_IGN); 
         signal(SIGTERM, SIG_DFL);
+        signal(SIGCHLD, SIG_IGN);
         srand(time(NULL));
         int id_gen = 1;
 
@@ -170,7 +177,7 @@ int main() {
             if (pid_pas == 0) {
                 sprintf(s_id, "%d", id_gen);
                 sprintf(s_typ, "%d", typ);
-                execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg, s_typ, NULL);
+                execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg_req, s_msg_res, s_typ, NULL);
                 loguj_blad("Exec Pasażer"); 
                 exit(1);
             }
