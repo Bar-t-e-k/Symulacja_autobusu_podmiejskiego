@@ -187,17 +187,17 @@ https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c
 Podstawa architektury. Proces główny tworzy procesy potomne, które zmieniają swój obraz pamięci (exec).
  
 Kasjer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L103-L117
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L109-L123
 Autobusy: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L120-L137
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L126-L143
 Pasażerowie: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L140-L185
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L146-L192
 
 ### c. Obsługa sygnałów
 Reakcja na interwencję Dyspozytora oraz bezpieczne zamykanie.
 
 Dyspozytor: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/main.c#L188-L224
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L195-L231
 Ctrl + C: 
 https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L18-L22
 Sygnał 1: 
@@ -208,17 +208,17 @@ https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c
 ### e. Synchronizacja procesów
 Wykorzystano semafory do ochrony zasobów i blokowania wejścia do drzwi.
 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/ipc_utils.c#L56-L113
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/ipc_utils.c#L61-L124
 
 ### g. Segmenty pamięci dzielonej
 Współdzielenie stanu dworca między procesami.
 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/ipc_utils.c#L14-L52
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/ipc_utils.c#L14-L57
 
 ### h. Kolejki komunikatów
 Komunikacja między Kasjerem a Pasażerami
 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/ipc_utils.c#L117-L156
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/ipc_utils.c#L128-L174
 
 ### i. Konfiguracja i walidacja
 Dane wczytywane z pliku config.txt.
@@ -228,16 +228,16 @@ https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c
 ### j. Wykorzystanie wątków
 Dziecko jest tworzone jako wątek wewnątrz opiekuna.
 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_passenger.c#L24-L38
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_passenger.c#L24-L38
 
 ### k. Funkcje aktorów
 
 Kasjer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_cashier.c#L14-L32
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_cashier.c#L14-L39
 Autobus: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_bus.c#L22-L145
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_bus.c#L22-L145
 Pasażer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/exe_passenger.c#L41-L202
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_passenger.c#L41-L212
 
 ### l. Obsługa błędów i logi
 Wykorzystano własne funkcje do zapisywania logów i obsługi błędów
