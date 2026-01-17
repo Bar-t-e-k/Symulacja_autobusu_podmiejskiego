@@ -7,7 +7,8 @@
 #define SHM_KEY_PATH "."
 #define SHM_KEY_ID 'A'
 #define SEM_KEY_ID 'B'
-#define MSG_KEY_ID 'C'
+#define MSG_KEY_ID_REQ 'C'
+#define MSG_KEY_ID_RES 'D'
 
 // SEMAFORY
 #define SEM_MUTEX 0  // Semafor binarny - chroni dostęp do pamięci dzielonej
@@ -21,8 +22,8 @@
 #define TYP_ROWER  2
 #define TYP_OPIEKUN 3
 
-// KANAŁY KOMUNIKATÓW
-#define KANAL_ZAPYTAN 1 // Kanał dla pasażerów pytających o bilet
+// KANAŁ KOMUNIKATÓW
+#define KANAL_KASA 1 // Kanał dla pasażerów pytających o bilet
 
 // PAMIEĆ DZIELONA
 typedef struct {
@@ -53,6 +54,7 @@ typedef struct {
     long mtype; // typ komunikatu
     int pid_nadawcy;
     int typ_pasazera;
+    unsigned long tid_dziecka; // 0 jeśli pasażer jest sam
 } BiletMsg;
 
 #endif

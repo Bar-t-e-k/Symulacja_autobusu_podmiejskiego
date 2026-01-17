@@ -11,7 +11,7 @@
 #define C_KASA  "\033[1;31m"
 
 //Logika kasjera
-void kasjer_run(int msgid) {
+void kasjer_run(int msgid_req, int msgid_res) {
     BiletMsg msg;
     int rozmiar_danych = sizeof(BiletMsg) - sizeof(long);
 
@@ -19,22 +19,29 @@ void kasjer_run(int msgid) {
 
     while(1) {
         // Odebranie zapytania o bilet
-        odbierz_komunikat(msgid, &msg, rozmiar_danych, KANAL_ZAPYTAN);
+        odbierz_komunikat(msgid_req, &msg, rozmiar_danych, KANAL_KASA);
 
-        loguj(C_KASA, "[KASA] Obsługuję pasażera PID %d...\n", msg.pid_nadawcy);
+        if (msg.typ_pasazera == TYP_OPIEKUN) {
+            loguj(C_KASA, "[KASA] Opsługuję opiekuna (PID: %d) i dziecko (TID: %lu)\n", 
+            msg.pid_nadawcy, msg.tid_dziecka);
+        } else {
+            loguj(C_KASA, "[KASA] Obsługuję pasażera PID %d...\n", msg.pid_nadawcy);
+        }
         
         usleep(50000); 
 
         // Odesłanie biletu
-        msg.mtype = msg.pid_nadawcy; 
-        wyslij_komunikat(msgid, &msg, rozmiar_danych);
+        if (msg.typ_pasazera != TYP_VIP) {
+            msg.mtype = msg.pid_nadawcy; 
+            wyslij_komunikat(msgid_res, &msg, rozmiar_danych);
+        }
     }
 }
 
 int main(int argc, char* argv[]) {
-    if (argc < 2) return 1;
-    int msgid = atoi(argv[1]);
-    
-    kasjer_run(msgid);
+    if (argc < 3) return 1;
+    int msgid_req = atoi(argv[1]);
+    int msgid_res = atoi(argv[2]);
+    kasjer_run(msgid_req, msgid_res);
     return 0;
 }

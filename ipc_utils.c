@@ -13,10 +13,15 @@
 
 int stworz_pamiec(int size) {
     key_t key = ftok(SHM_KEY_PATH, SHM_KEY_ID);
+
+    if (key == -1) {
+        loguj_blad("Błąd ftok dla pamięci dzielonej");
+        exit(1);
+    }
     
     int shmid = shmget(key, size, 0600 | IPC_CREAT);
     if (shmid == -1) {
-        loguj_blad("Błąd tworzenia pamieci dzielonej");
+        loguj_blad("Błąd tworzenia pamięci dzielonej");
         exit(1);
     }
     
@@ -28,7 +33,7 @@ SharedData* dolacz_pamiec(int shmid) {
     
     if (data == (void*)-1) {
         if (errno == EINVAL || errno == EIDRM) exit(0); // Pamięć już została usunięta
-        loguj_blad("Błąd dolaczania pamieci");
+        loguj_blad("Błąd dołączania pamięci");
         exit(1);
     }
     
@@ -38,7 +43,7 @@ SharedData* dolacz_pamiec(int shmid) {
 void odlacz_pamiec(SharedData* data) {
     if (shmdt(data) == -1) {
         if (errno == EINVAL) return; // Już odłączona
-        loguj_blad("Błąd odlacznia pamieci");
+        loguj_blad("Błąd odłącznia pamięci");
         exit(1);
     }
 }
@@ -46,7 +51,7 @@ void odlacz_pamiec(SharedData* data) {
 void usun_pamiec(int shmid) {
     if (shmctl(shmid, IPC_RMID, NULL) == -1) {
         if (errno == EINVAL) return;
-        loguj_blad("Błąd usuwania pamieci");
+        loguj_blad("Błąd usuwania pamięci");
         exit(1);
     }
 }
@@ -55,6 +60,11 @@ void usun_pamiec(int shmid) {
 
 int stworz_semafor(int n_sems) {
     key_t key = ftok(SHM_KEY_PATH, SEM_KEY_ID);
+
+    if (key == -1) {
+        loguj_blad("Błąd ftok dla semafa");
+        exit(1);
+    }
     
     int semid = semget(key, n_sems, 0600 | IPC_CREAT);
     if (semid == -1) {
@@ -76,7 +86,7 @@ void zablokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
     operacja.sem_op = -1;
-    operacja.sem_flg = 0;
+    operacja.sem_flg = SEM_UNDO;
     
     while (semop(semid, &operacja, 1) == -1) {
         if (errno == EINTR) {
@@ -94,12 +104,13 @@ void odblokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
     operacja.sem_op = 1;
-    operacja.sem_flg = 0;
+    operacja.sem_flg = SEM_UNDO;
     
-    if (semop(semid, &operacja, 1) == -1) {
-        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+    while (semop(semid, &operacja, 1) == -1) {
+        if (errno == EIDRM || errno == EINVAL) {
             exit(0);
         }
+        if (errno == EINTR) continue;
         loguj_blad("Błąd odblokowania semafora (V)");
         exit(1);
     }
@@ -114,8 +125,13 @@ void usun_semafor(int semid) {
 
 // KOLEJKA KOMUNIKATÓW
 
-int stworz_kolejke() {
-    key_t key = ftok(SHM_KEY_PATH, MSG_KEY_ID);
+int stworz_kolejke(int id) {
+    key_t key = ftok(SHM_KEY_PATH, id);
+
+    if (key == -1) {
+        loguj_blad("Błąd ftok dla kolejki");
+        exit(1);
+    }
     
     int msgid = msgget(key, 0600 | IPC_CREAT);
     if (msgid == -1) {
@@ -128,20 +144,22 @@ int stworz_kolejke() {
 
 void wyslij_komunikat(int msgid, void* msg, int rozmiar) {
     // 0 = tryb blokujący
-    if (msgsnd(msgid, msg, rozmiar, 0) == -1) {
-        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+    while (msgsnd(msgid, msg, rozmiar, 0) == -1) {
+        if (errno == EIDRM || errno == EINVAL) {
             exit(0); 
         }
+        if (errno == EINTR) continue;
         loguj_blad("msgsnd"); 
         exit(1);
     }
 }
 
 void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
-    if (msgrcv(msgid, msg, rozmiar, typ, 0) == -1) {
-        if (errno == EIDRM || errno == EINVAL || errno == EINTR) {
+    while (msgrcv(msgid, msg, rozmiar, typ, 0) == -1) {
+        if (errno == EIDRM || errno == EINVAL) {
             exit(0); 
         }
+        if (errno == EINTR) continue;
         loguj_blad("msgrcv"); 
         exit(1);
     }
