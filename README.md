@@ -28,6 +28,7 @@ System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
     * `SEM_MUTEX`: Gwarantuje wyłączny dostęp do pamięci dzielonej (sekcja krytyczna).
     * `SEM_DRZWI_PAS`: Ogranicza przepustowość wejścia pasażerskiego.
     * `SEM_DRZWI_ROW`: Ogranicza przepustowość wejścia dla rowerów.
+    * `SEM_PRZYSTANEK`: Synchronizuje dostęp autobusów do przystanku.
 * **Kolejki Komunikatów (Message Queues)**:
     * Komunikacja `Pasażer <-> Kasjer` (symulacja zakupu biletu) (2 kolejki do obsługi w dwie strony).
 
@@ -116,8 +117,7 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 ## 📂 Struktura Plików
 
 **Logika Główna:**
-* `main.c` – Inicjalizacja, pętle generujące procesy, obsługa `atexit`, logika **Dyspozytora**, monitorowanie.
-* `signals.c` – Obsługa sygnałów systemowych.
+* `main.c` – Inicjalizacja, pętle generujące procesy, obsługa `atexit`, logika **Dyspozytora**, monitorowanie, obsługa sygnałów systemowych.
 
 **Aktorzy:**
 * `exe_bus.c` – Logika autobusu (wjazd, postój, odjazd).
@@ -131,7 +131,7 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 
 **Nagłówki:**
 * `common.h` – Wspólne definicje, stałe i struktury danych (`SharedData`, `BiletMsg`).
-* `config.h`, `ipc_utils.h`, `logs.h`, `signals.h` – pliki nagłówkowe zawierające deklaracje funkcji w analogicznych plikach źródłowych.
+* `config.h`, `ipc_utils.h`, `logs.h` – pliki nagłówkowe zawierające deklaracje funkcji w analogicznych plikach źródłowych.
 
 
 

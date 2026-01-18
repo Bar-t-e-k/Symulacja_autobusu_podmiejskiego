@@ -14,7 +14,8 @@
 #define SEM_MUTEX 0  // Semafor binarny - chroni dostęp do pamięci dzielonej
 #define SEM_DRZWI_PAS  1  // drzwi dla pasażerów
 #define SEM_DRZWI_ROW  2  // drzwi dla rowerów 
-#define LICZBA_SEMAFOROW 3
+#define SEM_PRZYSTANEK  3  // wjazd na przystanek
+#define LICZBA_SEMAFOROW 4
 
 // TYPY PASAŻERÓW
 #define TYP_ZWYKLY 0
