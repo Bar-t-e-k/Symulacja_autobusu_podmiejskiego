@@ -7,12 +7,29 @@
 #include <string.h>
 #include "common.h"
 #include "ipc_utils.h"
-#include "signals.h"
 #include "logs.h"
 #include "config.h"
 
 pid_t g_main_pid;
 int g_shmid = -1, g_semid = -1, g_msgid_req = -1, g_msgid_res = -1;
+volatile sig_atomic_t flaga_odjazd = 0;
+volatile sig_atomic_t flaga_zamkniecie = 0;
+volatile sig_atomic_t flaga_koniec = 0;
+
+// Handlery sygnałów
+void handler_sygnalow(int sig) {
+    // Obsługa sygnału kończącego Ctrl+C
+    // Wywołuje exit, co uruchamia sprzątanie zasobów w main.c
+    if (sig == SIGINT || sig == SIGTERM)  flaga_koniec = 1;
+
+    // Obsługa sygnału 1 - rozkaz odjazdu
+    // Wysyła sygnał do obecnego autobusu na peronie
+    if (sig == SIGUSR1) flaga_odjazd = 1;
+
+    // Obsługa sygnału 2 - zamknięcie dworca
+    // Ustawia flagę zamknięcia i wymusza odjazd obecnego autobusu
+    if (sig == SIGUSR2) flaga_zamkniecie = 1;
+}
 
 // Funkcja sprzątająca zasoby przed zakończeniem programu (wywoływana przez atexit)
 void sprzatanie() {
@@ -58,10 +75,10 @@ int main() {
     strftime(datetime, sizeof(datetime), "%Y-%m-%d %H:%M:%S", timeinfo);
     loguj(NULL,"Symulacja dworca - %s\n", datetime);
 
-    signal(SIGUSR1, obsluga_odjazdu);
-    signal(SIGUSR2, obsluga_zamkniecia);
-    signal(SIGINT, obsluga_koniec);  
-    signal(SIGTERM, obsluga_koniec);
+    signal(SIGUSR1, handler_sygnalow);
+    signal(SIGUSR2, handler_sygnalow);
+    signal(SIGINT, handler_sygnalow);  
+    signal(SIGTERM, handler_sygnalow);
 
     // 1. Tworzenie zasobów IPC
     g_shmid = stworz_pamiec(sizeof(SharedData));
@@ -96,7 +113,8 @@ int main() {
 
     ustaw_semafor(g_semid, SEM_MUTEX, 1); 
     ustaw_semafor(g_semid, SEM_DRZWI_PAS, 1);  
-    ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1); 
+    ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1);
+    ustaw_semafor(g_semid, SEM_PRZYSTANEK, 1);
 
     // Konwersja ID na stringi dla exec
     char s_shm[16], s_sem[16], s_msg_req[16], s_msg_res[16];
@@ -120,6 +138,7 @@ int main() {
         exit(1);
     } else if (pid_kasjer < 0) {
         loguj_blad("Fork Kasjer");
+        exit(1);
     }
 
     // 4. Autobusy
@@ -139,6 +158,7 @@ int main() {
             exit(1);
         } else if (pid_autobus < 0) {
             loguj_blad("Fork Autobus");
+            exit(1);
         }
     }
 
@@ -180,15 +200,19 @@ int main() {
                 execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg_req, s_msg_res, s_typ, NULL);
                 loguj_blad("Exec Pasażer"); 
                 exit(1);
+            } else if (pid_pas < 0) {
+                loguj_blad("Fork Pasażer");
+                kill(getppid(), SIGINT);
+                exit(1);
             }
 
             id_gen++;
             usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
             }
-            while(wait(NULL) > 0);
             exit(0);   
     } else if (pid_pasazerowie < 0) {
-        loguj_blad("Fork Pasażerowie");
+        loguj_blad("Fork Generator pasażerów");
+        exit(1);
     }
 
     // 6. Dyspozytor
@@ -228,12 +252,54 @@ int main() {
         exit(0);
     } else if (pid_dyspozytor < 0) {
         loguj_blad("Fork Dyspozytor");
+        kill(getppid(), SIGINT);
+        exit(1);
     }
 
     // 7. Pętla główna - monitorowanie stanu
     while(1) {
+        // Obsługa sygnałów
+        if (flaga_koniec) {
+            loguj(NULL,"\n\n[SYSTEM] Otrzymano sygnał kończący (Ctrl + C). Rozpoczynam procedurę stop.\n");
+            exit(0); 
+        }
+        
+        zablokuj_semafor(g_semid, SEM_MUTEX);
         data = dolacz_pamiec(g_shmid);
         if (data == NULL) break;
+
+        if (flaga_odjazd) {
+            loguj(NULL,"\n[DYSPOZYTOR ZEWN.] Otrzymano SIGUSR1 -> Rozkaz odjazdu!\n");
+        
+            if (data->pid_obecnego_autobusu > 0) {
+                loguj(NULL,"Wysyłam sygnał do autobusu PID %d\n", data->pid_obecnego_autobusu);
+                kill(data->pid_obecnego_autobusu, SIGUSR1);
+            } else {
+                loguj(NULL,"Brak autobusu na peronie. Rozkaz zignorowany.\n");
+            }
+
+            flaga_odjazd = 0;
+        }
+
+        if (flaga_zamkniecie) {
+            if (data->dworzec_otwarty == 1) {
+                data->dworzec_otwarty = 0;
+                loguj(NULL,"Bramy zamknięte.\n");
+
+                for(int i = 0; i < data->cfg_N; i++) {
+                    odblokuj_semafor(g_semid, SEM_PRZYSTANEK); 
+                }
+                
+                if (data->pid_obecnego_autobusu > 0) {
+                    loguj(NULL,"Wymuszam odjazd obecnego autobusu (PID %d)\n", data->pid_obecnego_autobusu);
+                    kill(data->pid_obecnego_autobusu, SIGUSR1);
+                }
+                loguj(NULL,"Czekam na zjazd pozostałych autobusów...\n");
+            } else {
+                loguj(NULL,"Dworzec już jest zamknięty.\n");
+            }
+            flaga_zamkniecie = 0;
+        }
         
         // Zamknięcie dworca po obsłużeniu limitu pasażerów
         if (data->calkowita_liczba_pasazerow >= P && data->liczba_oczekujacych == 0) {
@@ -249,6 +315,7 @@ int main() {
             break; 
         }
         odlacz_pamiec(data);
+        odblokuj_semafor(g_semid, SEM_MUTEX);
         sleep(1);
     }
 

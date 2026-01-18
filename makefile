@@ -14,11 +14,8 @@ logs.o: logs.c logs.h
 config.o: config.c config.h
 	$(CC) $(CFLAGS) -c config.c
 
-signals.o: signals.c signals.h common.h
-	$(CC) $(CFLAGS) -c signals.c
-
-symulacja: main.c signals.o config.o $(OBJS_COMMON)
-	$(CC) $(CFLAGS) main.c signals.o config.o $(OBJS_COMMON) -o symulacja
+symulacja: main.c config.o $(OBJS_COMMON)
+	$(CC) $(CFLAGS) main.c config.o $(OBJS_COMMON) -o symulacja
 
 exe_bus: exe_bus.c $(OBJS_COMMON)
 	$(CC) $(CFLAGS) exe_bus.c $(OBJS_COMMON) -o exe_bus

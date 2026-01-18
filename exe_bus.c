@@ -33,41 +33,31 @@ void autobus_run(int id, int shmid, int semid) {
     loguj(C_BUS, "[Autobus %d] Zgłasza gotowość na dworcu. Czekam na wjazd...\n", id);
 
     while (1) {
-        int czy_koniec_pracy = 0;
-
         // 1. Czekanie na wolne stanowisko
-        while(1) {
-             zablokuj_semafor(semid, SEM_MUTEX);
-             data = dolacz_pamiec(shmid);
-             
-             if (data->dworzec_otwarty == 0) { 
-                 odlacz_pamiec(data); 
-                 odblokuj_semafor(semid, SEM_MUTEX); 
-                 czy_koniec_pracy = 1; 
-                 break; 
-             }
-             
-             if (data->autobus_obecny == 0) {
-                 data->autobus_obecny = 1; 
-                 data->pid_obecnego_autobusu = getpid();
-                 data->liczba_pasazerow = 0; 
-                 data->liczba_rowerow = 0;
-                 
-                 odlacz_pamiec(data);
-                 odblokuj_semafor(semid, SEM_MUTEX); 
-                 break;
-             }
-             
-             odlacz_pamiec(data);
-             odblokuj_semafor(semid, SEM_MUTEX); 
-             usleep(200000); 
-        }
+        zablokuj_semafor(semid, SEM_PRZYSTANEK);
 
-        if (czy_koniec_pracy) break;
+        zablokuj_semafor(semid, SEM_MUTEX);
+        data = dolacz_pamiec(shmid);
+        
+        if (data->dworzec_otwarty == 0) { 
+            odlacz_pamiec(data); 
+            odblokuj_semafor(semid, SEM_MUTEX);
+            odblokuj_semafor(semid, SEM_PRZYSTANEK);
+            break; 
+        }
+        
+        // 2. Zajęcie wolnego stanowiska
+        data->autobus_obecny = 1; 
+        data->pid_obecnego_autobusu = getpid();
+        data->liczba_pasazerow = 0; 
+        data->liczba_rowerow = 0;
+        
+        odlacz_pamiec(data);
+        odblokuj_semafor(semid, SEM_MUTEX); 
 
         loguj(C_BUS, "[Autobus %d] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: %ds)!\n", id, T_ODJAZD);
 
-        // 2. Załadunek pasażerów
+        // 3. Załadunek pasażerów
         time_t start = time(NULL);
         wymuszony_odjazd = 0;
         int byl_komunikat_pelny = 0;
@@ -102,7 +92,7 @@ void autobus_run(int id, int shmid, int semid) {
             usleep(100000); // 0.1s
         }
 
-        // 3. Odjazd
+        // 4. Odjazd
         zablokuj_semafor(semid, SEM_MUTEX);
         data = dolacz_pamiec(shmid);
         
@@ -116,7 +106,9 @@ void autobus_run(int id, int shmid, int semid) {
 
         loguj(C_BUS, "[Autobus %d] ODJAZD z %d pasażerami (%d rowerów).\n", id, p, r);
 
-        // 4. Trasa
+        odblokuj_semafor(semid, SEM_PRZYSTANEK);
+
+        // 5. Trasa
         int czas_trasy = 5 + (rand() % 11); 
         sleep(czas_trasy);
         loguj(C_BUS, "[Autobus %d] WRÓCIŁ Z TRASY po %d s.\n", id, czas_trasy);
