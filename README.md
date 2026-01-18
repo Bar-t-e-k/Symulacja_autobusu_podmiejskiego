@@ -187,23 +187,23 @@ https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c
 Podstawa architektury. Proces główny tworzy procesy potomne, które zmieniają swój obraz pamięci (exec).
  
 Kasjer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L109-L123
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L127-L142
 Autobusy: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L126-L143
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L145-L163
 Pasażerowie: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L146-L192
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L166-L216
 
 ### c. Obsługa sygnałów
 Reakcja na interwencję Dyspozytora oraz bezpieczne zamykanie.
 
 Dyspozytor: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/main.c#L195-L231
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L219-L257
 Ctrl + C: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L18-L22
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L262-L265
 Sygnał 1: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L26-L41
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L271-L282
 Sygnał 2: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/signals.c#L45-L65
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/main.c#L284-L302
 
 ### e. Synchronizacja procesów
 Wykorzystano semafory do ochrony zasobów i blokowania wejścia do drzwi.
@@ -235,7 +235,7 @@ https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af60
 Kasjer: 
 https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_cashier.c#L14-L39
 Autobus: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_bus.c#L22-L145
+https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/50dbfbbdcceaa187836ebf3f4435f6461eb8facf/exe_bus.c#L22-L137
 Pasażer: 
 https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/54a08ec16af602a515bf1a322da68d768b53f861/exe_passenger.c#L41-L212
 
