@@ -5,6 +5,8 @@
 #include "logs.h"
 
 // Funkcja wczytująca konfigurację z pliku config.txt
+// Odpowiada za pobranie parametrów startowych z pliku tekstowego.
+// Jeśli plik jest niekompletny, zostaną użyte wartości domyślne.
 void wczytaj_konfiguracje(const char* sciezka, SharedData* data) {
     FILE* f = fopen(sciezka, "r");
     if (!f) {
@@ -17,7 +19,6 @@ void wczytaj_konfiguracje(const char* sciezka, SharedData* data) {
     data->cfg_R = 0;
     data->cfg_N = 1;
     data->cfg_TP = 10;
-    data->cfg_LiczbaPas = 20;
 
     char bufor[128];
     while (fgets(bufor, sizeof(bufor), f)) {
@@ -30,13 +31,14 @@ void wczytaj_konfiguracje(const char* sciezka, SharedData* data) {
             else if (strcmp(klucz, "R") == 0) data->cfg_R = wartosc;
             else if (strcmp(klucz, "N") == 0) data->cfg_N = wartosc;
             else if (strcmp(klucz, "T_POSTOJ") == 0) data->cfg_TP = wartosc;
-            else if (strcmp(klucz, "L_PASAZEROW") == 0) data->cfg_LiczbaPas = wartosc;
         }
     }
     fclose(f);
 }
 
 // Funkcja walidująca konfigurację
+// Sprawdza, czy wczytane dane mają sens logiczny i fizyczny.
+// Zapobiega uruchomieniu symulacji z błędnymi parametrami.
 void waliduj_konfiguracje(SharedData* data) {
     int bledy = 0;
 
@@ -59,17 +61,12 @@ void waliduj_konfiguracje(SharedData* data) {
         loguj(NULL, "[BŁĄD KONFIGURACJI] Liczba autobusów N musi być > 0\n");
         bledy++;
     }
-    
-    if (data->cfg_LiczbaPas <= 0) {
-        loguj(NULL, "[BŁĄD KONFIGURACJI] Liczba pasażerów musi być > 0\n");
-        bledy++;
-    }
 
     if (bledy > 0) {
         loguj(NULL, "[FATAL] Znaleziono %d błędów w konfiguracji. Popraw konfigurację i spróbuj ponownie.\n", bledy);
         exit(1);
     }
     
-    loguj(NULL, "Konfiguracja: P=%d, R=%d, N=%d, Pasażerów=%d\n", 
-          data->cfg_P, data->cfg_R, data->cfg_N, data->cfg_LiczbaPas);
+    loguj(NULL, "Konfiguracja: P=%d, R=%d, N=%d\n", 
+          data->cfg_P, data->cfg_R, data->cfg_N);
 }

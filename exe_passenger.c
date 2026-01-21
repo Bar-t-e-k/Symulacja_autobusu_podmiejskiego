@@ -8,7 +8,7 @@
 #include "ipc_utils.h"
 #include "logs.h"
 
-// Kolory
+// Kolory logów
 #define C_PAS   "\033[1;32m"
 #define C_OPIE  "\033[1;34m"
 #define C_VIP   "\033[1;35m"
@@ -21,13 +21,14 @@ pthread_cond_t cond_dziecka = PTHREAD_COND_INITIALIZER;
 int koniec_podrozy = 0;
 
 // Funkcja wątku dziecka
+// Symuluje obecność dziecka towarzyszącego opiekunowi.
+// Wątek jest pasywny - po utworzeniu natychmiast zasypia na zmiennej warunkowej
+// i budzi się dopiero, gdy Opeikun zasygnalizuje koniec.
 void* watek_dziecka_fun(void* arg) {
     (void)arg;
 
     pthread_mutex_lock(&lock_dziecka);
     
-    // Dziecko czeka na sygnał
-    // Wątek budzi się dopiero, gdy otrzyma sygnał i warunek pętli będzie fałszywy
     while (koniec_podrozy == 0) {
         pthread_cond_wait(&cond_dziecka, &lock_dziecka);
     }
@@ -37,28 +38,30 @@ void* watek_dziecka_fun(void* arg) {
     return NULL;
 }
 
-// Logika pasażera
+// Główna logika procesu pasażera.
+// Realizuje cykl: Wejście -> Kasa -> Przystanek -> Wsiadanie -> Koniec
 void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int typ) {
     SharedData* data = dolacz_pamiec(shmid);
     srand(time(NULL) ^ (getpid()<<16)); 
 
+    // Konfiguracja typu pasażera
     char* kolor = C_PAS;
     char* nazwa = "Zwykły";
-    int moje_drzwi = SEM_DRZWI_PAS;
+    int moja_kolejka = SEM_DRZWI_PAS;
 
     pthread_t thread_dziecko;
     int id_dla_watku = id;
 
     if (typ == TYP_VIP) { 
-        kolor = C_VIP; nazwa = "VIP"; moje_drzwi = SEM_DRZWI_PAS;
+        kolor = C_VIP; nazwa = "VIP"; moja_kolejka = SEM_KOLEJKA_VIP;
     }
 
     if (typ == TYP_ROWER) { 
-        kolor = C_ROW; nazwa = "Rower"; moje_drzwi = SEM_DRZWI_ROW;
+        kolor = C_ROW; nazwa = "Rower"; moja_kolejka = SEM_DRZWI_ROW;
     }
 
     if (typ == TYP_OPIEKUN) { 
-        kolor = C_OPIE; nazwa = "Opiekun"; moje_drzwi = SEM_DRZWI_PAS;
+        kolor = C_OPIE; nazwa = "Opiekun"; moja_kolejka = SEM_DRZWI_PAS;
         if (pthread_create(&thread_dziecko, NULL, watek_dziecka_fun, &id_dla_watku) != 0) {
             loguj(kolor, "[Opiekun %d] Błąd tworzenia wątku dziecka!\n", id);
             exit(1);
@@ -67,11 +70,13 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
     }
 
     // 1. Wejście na dworzec
+    // Sprawdzenie, czy dworzec jest otwarty. Jeśli nie - kończenie procesu.
+    // Jeśli tak - pokazanie autobusowi, że ktoś czeka.
     zablokuj_semafor(semid, SEM_MUTEX);
     if (data->dworzec_otwarty == 0) {
         loguj(kolor, "[Pasażer %d] Dworzec zamknięty! Nie wchodzę.\n", id);
-        odblokuj_semafor(semid, SEM_MUTEX);
         odlacz_pamiec(data);
+        odblokuj_semafor(semid, SEM_MUTEX);
         
         if (typ == TYP_OPIEKUN) {
             pthread_mutex_lock(&lock_dziecka);
@@ -85,122 +90,103 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
     }
     data->liczba_oczekujacych++;
     if (typ == TYP_VIP) data->liczba_vip_oczekujacych++;
+    if (typ == TYP_ROWER) data->liczba_rowerow_oczekujacych++;
     if (typ == TYP_OPIEKUN) data->liczba_oczekujacych++; // Dziecko
+    odlacz_pamiec(data);
     odblokuj_semafor(semid, SEM_MUTEX);
 
     // 2. Kasa
+    // Wysłanie zapytania do procesu Kasy i czekanie na odpowiedź.
+    // VIP posiada bilet "stały", więc wysyła tylko informację (nie czeka w kolejce).
     int rozmiar = sizeof(BiletMsg) - sizeof(long);
+    BiletMsg bilet;
+    bilet.mtype = (typ == TYP_VIP) ? KANAL_KASA_VIP : KANAL_KASA;
+    bilet.pid_nadawcy = getpid();
+    bilet.typ_pasazera = typ;
+    bilet.tid_dziecka = (typ == TYP_OPIEKUN) ? (unsigned long)thread_dziecko : 0;
 
     if (typ != TYP_VIP) {
         loguj(kolor, "[Pasażer %d (%s)] Idę do kasy (PID: %d).\n", id, nazwa, getpid());
-        
-        BiletMsg bilet;
-        bilet.mtype = KANAL_KASA;
-        bilet.pid_nadawcy = getpid();
-        bilet.typ_pasazera = typ;
-
-        if (typ == TYP_OPIEKUN) {
-            bilet.tid_dziecka = (unsigned long)thread_dziecko;
-        } else {
-            bilet.tid_dziecka = 0;
-        }
 
         wyslij_komunikat(msgid_req, &bilet, rozmiar);
         odbierz_komunikat(msgid_res, &bilet, rozmiar, getpid());
     } else {
-        BiletMsg bilet;
-        bilet.mtype = KANAL_KASA;
-        bilet.pid_nadawcy = getpid();
-        bilet.typ_pasazera = typ;
-
         wyslij_komunikat(msgid_req, &bilet, rozmiar);
+
         loguj(kolor, "[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: %d)\n", id, getpid());
     }
 
     loguj(kolor, "[Pasażer %d (%s)] Przychodzę na przystanek.\n", id, nazwa);
 
+    odblokuj_semafor_bez_undo(semid, SEM_KTOS_CZEKA);
+
     // 3. Wsiadanie
+    // Pasażer zasypia na semaforze. Budzi go kierowca.
+    // Po obudzeniu pasażer sprawdza, czy na pewno się zmieści.
+    // Jeśli nie (np. Opiekun potrzebuje 2 miejsc, a jest 1) - wraca spać.
     int wszedlem = 0;
+
     while (!wszedlem) {
-        // Blokada drzwi (VIP omija kolejkę)
-        if (typ != TYP_VIP) zablokuj_semafor(semid, moje_drzwi);
+        zablokuj_semafor_bez_undo(semid, moja_kolejka);
         
         zablokuj_semafor(semid, SEM_MUTEX);
         data = dolacz_pamiec(shmid);
 
+        // Sprawdzenie stanu dworca
         if (data->dworzec_otwarty == 0) {
             loguj(kolor, "[Pasażer %d] Dworzec zamknięty! Wychodzę.\n", id);
+            
             data->liczba_oczekujacych--;
-            if (typ == TYP_OPIEKUN) data->liczba_oczekujacych--;
             if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
+            if (typ == TYP_ROWER) data->liczba_rowerow_oczekujacych--;
+            if (typ == TYP_OPIEKUN) data->liczba_oczekujacych--;
 
             odlacz_pamiec(data);
             odblokuj_semafor(semid, SEM_MUTEX);
-            if (typ != TYP_VIP) odblokuj_semafor(semid, moje_drzwi);
 
             if (typ == TYP_OPIEKUN) {
                 pthread_mutex_lock(&lock_dziecka);
                 koniec_podrozy = 1;
-                pthread_cond_signal(&cond_dziecka);
+                pthread_cond_signal(&cond_dziecka); 
                 pthread_mutex_unlock(&lock_dziecka);
                 pthread_join(thread_dziecko, NULL);
             }
+
             exit(0);
         }
 
-        // Sprawdzanie priorytetu VIPA
-        if (typ != TYP_VIP && data->liczba_vip_oczekujacych > 0) {
-            odlacz_pamiec(data); 
-            odblokuj_semafor(semid, SEM_MUTEX);
-            if (typ != TYP_VIP) odblokuj_semafor(semid, moje_drzwi);
-            usleep(100000); 
-            continue;
-        }
+        // Sprawdzenie czy jest odpowiednia ilość miejsc
+        int miejsca_potrzebne = (typ == TYP_OPIEKUN) ? 2 : 1;
+        int wolne = data->cfg_P - data->liczba_pasazerow;
+        int wolne_rowery = data->cfg_R - data->liczba_rowerow;
 
-        int stan_ludzi = 0;
-        int stan_rowerow = 0;
-        int P = data->cfg_P;
-        int R = data->cfg_R;
-
-        if (data->autobus_obecny == 1) {
-            int miejsca_potrzebne = (typ == TYP_OPIEKUN) ? 2 : 1;
+        if (miejsca_potrzebne <= wolne && (typ != TYP_ROWER || wolne_rowery > 0)) {
             int rower_potrzebny = (typ == TYP_ROWER) ? 1 : 0;
+
+            data->liczba_pasazerow += miejsca_potrzebne;
+            data->liczba_rowerow += rower_potrzebny;
+
+            data->calkowita_liczba_pasazerow += miejsca_potrzebne;
             
-            int czy_zmieszcze_sie = 1;
-            if (data->liczba_pasazerow + miejsca_potrzebne > P) czy_zmieszcze_sie = 0;
-            if (data->liczba_rowerow + rower_potrzebny > R) czy_zmieszcze_sie = 0;
+            data->liczba_oczekujacych -= miejsca_potrzebne;
+            if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
+            if (typ == TYP_ROWER) data->liczba_rowerow_oczekujacych--;
 
-            if (czy_zmieszcze_sie) {
-                data->liczba_pasazerow += miejsca_potrzebne;
-                data->liczba_rowerow += rower_potrzebny;
+            loguj(kolor, "[Pasażer %d (%s)] Okazuję bilet i wsiadam! (Stan: %d/%d, Rowery: %d/%d)\n", id, nazwa, data->liczba_pasazerow, data->cfg_P,
+            data->liczba_rowerow, data->cfg_R);
+            if (typ == TYP_OPIEKUN) loguj(kolor, "[Opiekun %d] Wprowadzam dziecko do autobusu.\n", id);
 
-                data->calkowita_liczba_pasazerow += miejsca_potrzebne;
-                
-                data->liczba_oczekujacych -= miejsca_potrzebne;
-                if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
-
-                stan_ludzi = data->liczba_pasazerow;
-                stan_rowerow = data->liczba_rowerow;
-
-                loguj(kolor, "[Pasażer %d (%s)] Okazuję bilet i wsiadam!\n", id, nazwa);
-                if (typ == TYP_OPIEKUN) loguj(kolor, "[Opiekun %d] Wprowadzam dziecko do autobusu.\n", id);
-                loguj(C_BUS, "   -> [Stan Autobusu] Pasażerów: %d/%d (Rowerów: %d/%d)\n", stan_ludzi, P, stan_rowerow, R);
-                
-                wszedlem = 1;
-            }
+            wszedlem = 1;
         }
         
         odlacz_pamiec(data); 
         odblokuj_semafor(semid, SEM_MUTEX);
 
-        if (!wszedlem) {
-            if (typ != TYP_VIP) odblokuj_semafor(semid, moje_drzwi); // Zwolnienie drzwi dla innych
-            usleep(500000);
-        } else {
-            if (typ != TYP_VIP) odblokuj_semafor(semid, moje_drzwi); // Zwolnienie drzwi dla innych, bo już jest w środku
-        }
+        // Poinformawanie kierowcy, że decyzja podjęta
+        odblokuj_semafor_bez_undo(semid, SEM_WSIADL);
     }
 
+    // Koniec podróży
     if (typ == TYP_OPIEKUN) {
         pthread_mutex_lock(&lock_dziecka);
         koniec_podrozy = 1;
@@ -208,6 +194,8 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
         pthread_mutex_unlock(&lock_dziecka);
         pthread_join(thread_dziecko, NULL);
     }
+
+    odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
     exit(0);
 }
 

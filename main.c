@@ -16,7 +16,9 @@ volatile sig_atomic_t flaga_odjazd = 0;
 volatile sig_atomic_t flaga_zamkniecie = 0;
 volatile sig_atomic_t flaga_koniec = 0;
 
-// Handlery sygnałów
+// Handler sygnałów
+// Przechwytuje sygnały systemowe.
+// Ustawia flagi, aby główna pętla programu odczytała je i podjęła akcję.
 void handler_sygnalow(int sig) {
     // Obsługa sygnału kończącego Ctrl+C
     // Wywołuje exit, co uruchamia sprzątanie zasobów w main.c
@@ -79,6 +81,7 @@ int main() {
     signal(SIGUSR2, handler_sygnalow);
     signal(SIGINT, handler_sygnalow);  
     signal(SIGTERM, handler_sygnalow);
+    signal(SIGCHLD, handler_sygnalow);
 
     // 1. Tworzenie zasobów IPC
     g_shmid = stworz_pamiec(sizeof(SharedData));
@@ -106,15 +109,20 @@ int main() {
     data->pid_obecnego_autobusu = 0;
     data->liczba_oczekujacych = 0;
     data->liczba_vip_oczekujacych = 0;
+    data->liczba_rowerow_oczekujacych = 0;
 
     int N = data->cfg_N;
-    int P = data->cfg_LiczbaPas;
     odlacz_pamiec(data);
 
+    // Ustawienia semaforów
     ustaw_semafor(g_semid, SEM_MUTEX, 1); 
-    ustaw_semafor(g_semid, SEM_DRZWI_PAS, 1);  
-    ustaw_semafor(g_semid, SEM_DRZWI_ROW, 1);
+    ustaw_semafor(g_semid, SEM_DRZWI_PAS, 0);  
+    ustaw_semafor(g_semid, SEM_DRZWI_ROW, 0);
+    ustaw_semafor(g_semid, SEM_KOLEJKA_VIP, 0);
+    ustaw_semafor(g_semid, SEM_WSIADL, 0);
     ustaw_semafor(g_semid, SEM_PRZYSTANEK, 1);
+    ustaw_semafor(g_semid, SEM_KTOS_CZEKA, 0);
+    ustaw_semafor(g_semid, SEM_LIMIT, 3000);
 
     // Konwersja ID na stringi dla exec
     char s_shm[16], s_sem[16], s_msg_req[16], s_msg_res[16];
@@ -163,6 +171,7 @@ int main() {
     }
 
     // 5. Pasażerowie
+    // Najpierw towrzony generator, który potem tworzy pasażerów
     pid_t pid_pasazerowie = fork();
     if (pid_pasazerowie == 0) {
         signal(SIGINT, SIG_IGN); 
@@ -173,7 +182,7 @@ int main() {
 
         char s_id[16], s_typ[16];
 
-        for (int i = 0; i < P; i++) {
+        while (1) {
             SharedData* d = dolacz_pamiec(g_shmid);
             if (d->dworzec_otwarty == 0) {
                 odlacz_pamiec(d);
@@ -184,24 +193,31 @@ int main() {
             int los = rand() % 100;
             int typ = TYP_ZWYKLY;
                  
-            if (los < 20 && i < P - 1) { 
+            if (los < 20) { 
                 typ = TYP_OPIEKUN;
-                i++; // Zliczanie dwóch miejsc (Opiekun + Dziecko)
             } else if (los < 45) {
                 typ = TYP_ROWER;
             } else if (los >= 99) { // 1% szans na VIP
                 typ = TYP_VIP;
             }
 
+            zablokuj_semafor_bez_undo(g_semid, SEM_LIMIT);
+
             pid_t pid_pas = fork();
             if (pid_pas == 0) {
                 sprintf(s_id, "%d", id_gen);
                 sprintf(s_typ, "%d", typ);
+
                 execlp("./exe_passenger", "exe_passenger", s_id, s_shm, s_sem, s_msg_req, s_msg_res, s_typ, NULL);
+
                 loguj_blad("Exec Pasażer"); 
+                odblokuj_semafor_bez_undo(g_semid, SEM_LIMIT);
                 exit(1);
             } else if (pid_pas < 0) {
                 loguj_blad("Fork Pasażer");
+
+                odblokuj_semafor_bez_undo(g_semid, SEM_LIMIT);
+                
                 kill(getppid(), SIGINT);
                 exit(1);
             }
@@ -212,10 +228,12 @@ int main() {
             exit(0);   
     } else if (pid_pasazerowie < 0) {
         loguj_blad("Fork Generator pasażerów");
+        loguj_blad("Spróbuj zmniejszyć liczbę autobusów");
         exit(1);
     }
 
     // 6. Dyspozytor
+    // Czyta dane z klawiatury
     pid_t pid_dyspozytor = fork();
     if (pid_dyspozytor == 0) {
         signal(SIGINT, SIG_IGN); 
@@ -252,11 +270,10 @@ int main() {
         exit(0);
     } else if (pid_dyspozytor < 0) {
         loguj_blad("Fork Dyspozytor");
-        kill(getppid(), SIGINT);
         exit(1);
     }
 
-    // 7. Pętla główna - monitorowanie stanu
+    // 7. Pętla główna - monitorowanie stanu i obsługa sygnałów
     while(1) {
         // Obsługa sygnałów
         if (flaga_koniec) {
@@ -288,6 +305,7 @@ int main() {
 
                 for(int i = 0; i < data->cfg_N; i++) {
                     odblokuj_semafor(g_semid, SEM_PRZYSTANEK); 
+                    odblokuj_semafor(g_semid, SEM_KTOS_CZEKA);
                 }
                 
                 if (data->pid_obecnego_autobusu > 0) {
@@ -300,23 +318,18 @@ int main() {
             }
             flaga_zamkniecie = 0;
         }
-        
-        // Zamknięcie dworca po obsłużeniu limitu pasażerów
-        if (data->calkowita_liczba_pasazerow >= P && data->liczba_oczekujacych == 0) {
-            if (data->dworzec_otwarty == 1) {
-                loguj(NULL,"[MAIN] Wszyscy pasażerowie obsłużeni (%d). Zamykam dworzec!\n", data->calkowita_liczba_pasazerow);
-                data->dworzec_otwarty = 0;
-            }
-        }
 
+        // Sprawdzenie czy wszystkie autobusy zakończyły pracę
         if (data->aktywne_autobusy == 0) {
             odlacz_pamiec(data);
+            odblokuj_semafor(g_semid, SEM_MUTEX);
             loguj(NULL,"[MAIN] Wszystkie autobusy zjechały.\n");
             break; 
         }
         odlacz_pamiec(data);
         odblokuj_semafor(g_semid, SEM_MUTEX);
-        sleep(1);
+        
+        pause();
     }
 
     // Raport końcowy

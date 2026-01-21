@@ -25,10 +25,14 @@ System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
 ### 3. Mechanizmy IPC
 * **Pamięć Dzielona (Shared Memory)**: Przechowuje globalny stan dworca (m.in. liczniki pasażerów, flagi otwarcia, PID obecnego autobusu).
 * **Semafory (Semaphores)**:
-    * `SEM_MUTEX`: Gwarantuje wyłączny dostęp do pamięci dzielonej (sekcja krytyczna).
+    * `SEM_MUTEX` - z flagą `SEM_UNDO`: Gwarantuje wyłączny dostęp do pamięci dzielonej (sekcja krytyczna).
     * `SEM_DRZWI_PAS`: Ogranicza przepustowość wejścia pasażerskiego.
     * `SEM_DRZWI_ROW`: Ogranicza przepustowość wejścia dla rowerów.
-    * `SEM_PRZYSTANEK`: Synchronizuje dostęp autobusów do przystanku.
+    * `SEM_KOLEJKA_VIP`: Realizuje priorytetowe wejście dla pasażerów VIP, wybudzając ich przed pozostałymi grupami.
+    * `SEM_PRZYSTANEK` - z flagą `SEM_UNDO`: Gwarantuje, że na peronie znajduje się tylko jeden autobus (synchronizacja wjazdu na stanowisko).
+    * `SEM_KTOS_CZEKA`: Działa jako "dzwonek" – pasażerowie informują nim autobus o swojej obecności na przystanku.
+    * `SEM_LIMIT`: Ogranicza maksymalną liczbę pasażerów przebywających jednocześnie na dworcu (zapobiega przepełnieniu systemu).
+    * `SEM_WSIADL`: Sygnał zwrotny od pasażera do autobusu, potwierdzający zakończenie procedury wsiadania.
 * **Kolejki Komunikatów (Message Queues)**:
     * Komunikacja `Pasażer <-> Kasjer` (symulacja zakupu biletu) (2 kolejki do obsługi w dwie strony).
 
@@ -109,7 +113,6 @@ P=15            # Pojemność autobusu (liczba miejsc dla ludzi)
 R=3             # Liczba miejsc na rowery
 N=2             # Liczba autobusów krążących w systemie
 T_POSTOJ=10     # Maksymalny czas postoju na przystanku (w sekundach)
-L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (warunek zakończenia symulacji)
 ```
 
 ---
@@ -149,31 +152,152 @@ L_PASAZEROW=30  # Limit pasażerów do obsłużenia podczas trwania symulacji (w
 
 ### Test A: Standardowy cykl przewozu
 * **Scenariusz:** Pasażerowie przychodzą, kupują bilety, zapełniają autobus. Po upływie czasu `T_POSTOJ` autobus odjeżdża.
-* **Weryfikacja techniczna:** Pasażer wysyła zapytanie do Kasjera na `KANAL_KASA`. Autobus w pętli sprawdza czas systemowy `time()`. Po przekroczeniu limitu czasu pętla załadunku zostaje przerwana.
+* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5
+* **Przebieg:**
+1. Autobus zgłasza gotowość i zajmuje przystanek (semafor `SEM_PRZYSTANEK`) i nastawia budzik systemowy.
+2. Proces autobusu przechodzi w stan uśpienia na semaforze  `SEM_KTOS_CZEKA`.  
+3. Każdy pasażer po zakupie biletu podnosi semafor dzwonka, wybudzając autobus do obsługi wejścia.
+4. Autobus wpuszcza pasażera, aktualizuje liczniki i ponownie zasypia, czekając na kolejnych chętnych.
+5. Po upływie 5 sekund sygnał `SIGALRM` przerywa oczekiwanie na semaforze, co kończy fazę załadunku.
+6. Autobus zwalnia przystanek i odjeżdża w trasę.
 * **Rezultat:** ✅ Pozytywny. Logi potwierdzają sekwencję: Zakup -> Wejście -> Odjazd po czasie.
+
+Przykładowe fragmenty logów:
+```text
+...
+[21:18:16] [Autobus 1] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[21:18:16] [Autobus 1] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 5s)!
+...
+[21:18:16] [Pasażer 11 (Zwykły)] Idę do kasy (PID: 1234192).
+[21:18:16] [Pasażer 1 (Rower)] Idę do kasy (PID: 1234182).
+[21:18:16] [Pasażer 3 (Zwykły)] Idę do kasy (PID: 1234184).
+...
+[21:18:16] [Pasażer 13 (Zwykły)] Przychodzę na przystanek.
+[21:18:16] [Pasażer 11 (Zwykły)] Przychodzę na przystanek.
+[21:18:16] [Pasażer 1 (Rower)] Przychodzę na przystanek.
+...
+[21:18:16] [Pasażer 8 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5)
+[21:18:16] [Pasażer 1 (Rower)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 1/5)
+...
+[21:18:21] [Autobus 1] Czas postoju minął.
+[21:18:21] [Autobus 1] ODJAZD z 20 pasażerami (5 rowerów).
+[21:18:34] [Autobus 1] WRÓCIŁ Z TRASY po 13 s.
+```
 
 ### Test B: Przepełnienie i limit rowerów
 * **Scenariusz:** Liczba chętnych przekracza limit `P`, a liczba rowerzystów przekracza limit `R`.
-* **Weryfikacja techniczna:** Przed wejściem sprawdzany jest warunek w Pamięci Dzielonej: `liczba_pasazerow + miejsce_potrzebne <= P` oraz `liczba_rowerow + rower_potrzebny <= R`. Dostęp do liczników chroni semafor `MUTEX`.
+* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5
+* **Przebieg:**
+1. Następuje zapełnienie limitu rowerów: licznik rowerów osiąga 5/5. Kolejni pasażerowie wsiadają już bez rowerów, mimo że wciąż są wolne miejsca ogólne.
+2. Zapełnienie limitu miejsc: licznik osiąga stan 20/20. Od tego momentu proces autobusu ignoruje dzwonki pasażerów i czeka na sygnał odjazdu.
+3. Po powrocie autobus zaczyna wpuszczać kolejnych pasażerów.
 * **Rezultat:** ✅ Pozytywny. Pasażerowie nadmiarowi otrzymują odmowę i czekają na kolejny autobus.
+
+Przykładowe fragmenty logów:
+```text
+...
+[21:25:55] [Pasażer 30 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5) 
+[21:25:55] [Pasażer 43 (Rower)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 1/5) 
+[21:25:55] [Pasażer 32 (Rower)] Okazuję bilet i wsiadam! (Stan: 3/20, Rowery: 2/5) 
+[21:25:55] [Pasażer 27 (Rower)] Okazuję bilet i wsiadam! (Stan: 4/20, Rowery: 3/5) 
+[21:25:55] [Pasażer 42 (Rower)] Okazuję bilet i wsiadam! (Stan: 5/20, Rowery: 4/5) 
+[21:25:55] [Pasażer 12 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 6/20, Rowery: 4/5)
+[21:25:55] [Pasażer 47 (Rower)] Okazuję bilet i wsiadam! (Stan: 7/20, Rowery: 5/5)
+[21:25:55] [Pasażer 4 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 8/20, Rowery: 5/5)
+...
+[21:25:55] [Pasażer 19 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 18/20, Rowery: 5/5)
+[21:25:55] [Pasażer 15 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 19/20, Rowery: 5/5) 
+[21:25:55] [Pasażer 46 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 20/20, Rowery: 5/5)
+...
+[21:26:00] [Autobus 1] Czas postoju minął.
+[21:26:00] [Autobus 1] ODJAZD z 20 pasażerami (5 rowerów).
+[21:26:08] [Autobus 1] WRÓCIŁ Z TRASY po 8 s.
+[21:26:08] [Autobus 1] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 5s)!
+...
+[21:26:08] [Pasażer 36 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5) 
+[21:26:08] [Pasażer 24 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 0/5) 
+[21:26:08] [Pasażer 18 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 3/20, Rowery: 0/5) 
+...
+```
 
 ### Test C: Obsługa priorytetów (VIP)
 * **Scenariusz:** W kolejce czekają pasażerowie Zwykli. Pojawia się VIP.
-* **Weryfikacja techniczna:** VIP inkrementuje licznik `liczba_vip_oczekujacych` w pamięci dzielonej. Pasażerowie zwykli w pętli oczekiwania sprawdzają ten licznik. Jeśli jest `> 0`, wykonują `usleep` i zwalniają semafor drzwi, przepuszczając VIP-a.
+* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5 (test ze zwiększoną szansą na VIP-a)
+* **Przebieg:**
+1. Omijanie kolejki (Kasa): VIP wysyła komunikat na dedykowany kanał `KANAL_KASA_VIP`. Kasa błyskawicznie potwierdza obsługę, dzięki czemu VIP natychmiast trafia na przystanek.
+2. Gromadzenie na peronie: Na przystanku znajdują się już inni pasażerowie VIP oraz pasażerowie z rowerami.
+3. Selektywne wybudzanie: Każdy z tych pasażerów "dzwoni" dzwonkiem `SEM_KTOS_CZEKA`. Autobus po każdym dzwonku skanuje pamięć współdzieloną.
+4. Bezwzględny priorytet: Mimo obecności rowerzysty, pętla decyzyjna autobusu wykonuje serię otwarć semafora `SEM_KOLEJKA_VIP`. W efekcie pasażerowie VIP wsiadają jeden po drugim.
+5. Obsługa reszty: Dopiero gdy `liczba_vip_oczekujacych` wynosi 0, autobus otwiera drzwi dla rowerzysty, co widać w ostatniej linii logów.
 * **Rezultat:** ✅ Pozytywny. VIP wchodzi do autobusu natychmiast, z pominięciem kolejki.
 
-### Test D: Zależność Dziecko-Opiekun
-* **Scenariusz:** Do wejścia podchodzi Opiekun z Dzieckiem.
-* **Weryfikacja techniczna:**
-    1. Opiekun sprawdza dostępność `P-2` miejsc.
-    2. Jeśli są wolne, inkrementuje licznik pasażerów o 2 (za siebie i dziecko) w jednej transakcji atomowej.
-    3. Wątek dziecka (wewnątrz procesu Opiekuna) jest synchronizowany za pomocą pthread_cond i kończy podróż razem z rodzicem.
-* **Rezultat:** ✅ Pozytywny. Opiekun zajmuje poprawną liczbę miejsc, a dziecko "podróżuje" razem z nim bez blokowania zasobów zewnętrznych.
+Przykładowe fragmenty logów:
+```text
+...
+[23:09:58] [Pasażer 84 (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: 1256612)
+[23:09:58] [KASA] VIP (PID: 1256612) - Obsługa poza kolejnością.
+[23:09:58] [Pasażer 84 (VIP)] Przychodzę na przystanek.
+...
+[23:09:58] [Pasażer 57 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5)
+[23:09:58] [Pasażer 54 (VIP)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 0/5)
+[23:09:58] [Pasażer 91 (VIP)] Okazuję bilet i wsiadam! (Stan: 3/20, Rowery: 0/5)
+[23:09:58] [Pasażer 84 (VIP)] Okazuję bilet i wsiadam! (Stan: 4/20, Rowery: 0/5) 
+[23:09:58] [Pasażer 11 (Rower)] Okazuję bilet i wsiadam! (Stan: 5/20, Rowery: 1/5)
+...
+```
 
-### Test E: Interwencja Dyspozytora (Sygnały)
+### Test D: Zależność Dziecko-Opiekun
+* **Scenariusz:** Weryfikacja atomowego wejścia pary Opiekun + Dziecko.
+* **Dane wejściowe:** P=21, R=5, N=1, T_POSTOJ=5
+* **Przebieg:**
+1. Proces Opiekuna tworzy wątek Dziecka `pthread_create`, który zasypia na zmiennej warunkowej.
+2. Autobus sprawdza warunek wolne >= 2. Jeśli dostępne jest tylko 1 miejsce, para nie zostaje wpuszczona (brak rozdzielenia).
+3. Wsiadanie: Opiekun inkrementuje licznik pasażerów o 2 w jednej sekcji krytycznej.
+* **Rezultat:** ✅ Pozytywny. Dziecko podróżuje jako pasywny wątek wewnątrz procesu Opiekuna, poprawnie rezerwując zasoby autobusu.
+
+Przykładowe fragmenty logów:
+```text
+[00:18:23] [Opiekun 67] Idę z dzieckiem (wątek utworzony).
+[00:18:23] [Opiekun 69] Idę z dzieckiem (wątek utworzony).
+[00:18:23] [Opiekun 68] Idę z dzieckiem (wątek utworzony).
+[00:18:23] [Opiekun 70] Idę z dzieckiem (wątek utworzony).
+...
+[00:18:23] [Pasażer 65 (Opiekun)] Idę do kasy (PID: 1267828).
+[00:18:23] [Pasażer 63 (Opiekun)] Idę do kasy (PID: 1267826).
+[00:18:23] [KASA] Obsługuję opiekuna (PID: 1267824) i dziecko (TID: 140206211913408)
+[00:18:23] [Pasażer 61 (Opiekun)] Przychodzę na przystanek.
+[00:18:23] [KASA] Obsługuję opiekuna (PID: 1267822) i dziecko (TID: 140569384646336)
+[00:18:23] [Pasażer 59 (Opiekun)] Przychodzę na przystanek.
+...
+[00:18:23] [Pasażer 9 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 12/21, Rowery: 0/5)
+[00:18:23] [Opiekun 9] Wprowadzam dziecko do autobusu.
+[00:18:23] [Pasażer 5 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 14/21, Rowery: 0/5)
+[00:18:23] [Opiekun 5] Wprowadzam dziecko do autobusu.
+[00:18:23] [Pasażer 10 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 16/21, Rowery: 0/5)
+[00:18:23] [Opiekun 10] Wprowadzam dziecko do autobusu.
+[00:18:23] [Pasażer 12 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 18/21, Rowery: 0/5)
+[00:18:23] [Opiekun 12] Wprowadzam dziecko do autobusu.
+[00:18:23] [Pasażer 39 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 20/21, Rowery: 0/5)
+[00:18:23] [Opiekun 39] Wprowadzam dziecko do autobusu.
+```
+
+### Test E: Interwencja Dyspozytora (Sygnał)
 * **Scenariusz:** Użytkownik naciska klawisz `1` podczas załadunku.
-* **Weryfikacja techniczna:** Proces `main` wysyła sygnał `SIGUSR1` do procesu autobusu. Handler sygnału w autobusie ustawia zmienną `volatile sig_atomic_t wymuszony_odjazd = 1`, co natychmiast przerywa pętlę załadunku instrukcją `break`.
+* **Dane wejściowe:** P=21, R=5, N=1, T_POSTOJ=5
+* **Przebieg:**
+1. Dyspozytor: Odczytuje komendę i wysyła `SIGUSR1` do procesu nadrzędnego.
+2. Main: Handler ustawia `flaga_odjazd = 1`. Proces główny identyfikuje `pid_obecnego_autobusu` i przekazuje sygnał `SIGUSR1` bezpośrednio do procesu autobusu na peronie.
+3. Autobus: Sygnał przerywa blokujące oczekiwanie na semaforze.
+4. Reakcja: Pętla załadunku zostaje przerwana przez warunek `if (wymuszony_odjazd) break;`.
 * **Rezultat:** ✅ Pozytywny. Autobus odjechał natychmiast, nie czekając na pełny załadunek ani upływ czasu.
+
+Przykładowe fragmenty logów:
+```text
+[DYSPOZYTOR ZEWN.] Otrzymano SIGUSR1 -> Rozkaz odjazdu!
+[00:35:57] Wysyłam sygnał do autobusu PID 1270447
+[00:35:57] [Autobus 1] Otrzymano nakaz natychmiastowego odjazdu!
+[00:35:57] [Autobus 1] ODJAZD z 4 pasażerami (0 rowerów).
+```
 
 ---
 ## Linki do kluczowych fragmentów
