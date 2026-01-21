@@ -13,7 +13,10 @@ void usun_pamiec(int shmid);
 int stworz_semafor(int n_sems);
 void ustaw_semafor(int semid, int sem_num, int wartosc);
 void zablokuj_semafor(int semid, int sem_num);
+void zablokuj_semafor_bez_undo(int semid, int sem_num);
 void odblokuj_semafor(int semid, int sem_num); 
+void odblokuj_semafor_bez_undo(int semid, int sem_num);
+int zablokuj_semafor_czekaj(int semid, int sem_num); 
 void usun_semafor(int semid);
 
 // Funkcje Kolejki Komunikatów

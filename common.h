@@ -14,8 +14,12 @@
 #define SEM_MUTEX 0  // Semafor binarny - chroni dostęp do pamięci dzielonej
 #define SEM_DRZWI_PAS  1  // drzwi dla pasażerów
 #define SEM_DRZWI_ROW  2  // drzwi dla rowerów 
-#define SEM_PRZYSTANEK  3  // wjazd na przystanek
-#define LICZBA_SEMAFOROW 4
+#define SEM_KOLEJKA_VIP 3 // kolejka priorytetowa dla VIPA 
+#define SEM_WSIADL  4 // synchronizacja decyzji pasażera
+#define SEM_PRZYSTANEK  5  // wjazd na przystanek
+#define SEM_LIMIT  6  // ograniczenie generowania pasażerów 
+#define SEM_KTOS_CZEKA 7 // budzenie kierowcy
+#define LICZBA_SEMAFOROW 8
 
 // TYPY PASAŻERÓW
 #define TYP_ZWYKLY 0
@@ -23,8 +27,9 @@
 #define TYP_ROWER  2
 #define TYP_OPIEKUN 3
 
-// KANAŁ KOMUNIKATÓW
-#define KANAL_KASA 1 // Kanał dla pasażerów pytających o bilet
+// TYPY KOMUNIKATÓW
+#define KANAL_KASA_VIP 1 // Typ komunikatu priorytetowego
+#define KANAL_KASA 2 // Typ komunikatu zwykłego
 
 // PAMIEĆ DZIELONA
 typedef struct {
@@ -33,7 +38,6 @@ typedef struct {
     int cfg_R; // Miejsca na rowery
     int cfg_N; // Liczba autobusów
     int cfg_TP; // Czas postoju
-    int cfg_LiczbaPas; // Łączna liczba pasażerów do obsłużenia
     
     // Stan symulacji
     int liczba_pasazerow;   // Ile osób jest w środku
@@ -42,12 +46,12 @@ typedef struct {
     pid_t pid_obecnego_autobusu;
 
     int calkowita_liczba_pasazerow; // Ile osób obsłużono łącznie
-    
     int aktywne_autobusy;
     int dworzec_otwarty;   // Flaga: 1 = Otwarte, 0 = Zamknięte
 
     int liczba_oczekujacych;
     int liczba_vip_oczekujacych;
+    int liczba_rowerow_oczekujacych;
 } SharedData;
 
 // KOLEJKA KOMUNIKATÓW

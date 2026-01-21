@@ -7,10 +7,12 @@
 #include "ipc_utils.h"
 #include "logs.h"
 
-// Kolor
+// Kolor logów
 #define C_KASA  "\033[1;31m"
 
-//Logika kasjera
+// Logika kasjera
+// Symuluje pracę okienka kasowego.
+// Pasażerowie wysyłają żądania, a Kasa odsyła bilety.
 void kasjer_run(int msgid_req, int msgid_res) {
     BiletMsg msg;
     int rozmiar_danych = sizeof(BiletMsg) - sizeof(long);
@@ -18,23 +20,30 @@ void kasjer_run(int msgid_req, int msgid_res) {
     loguj(C_KASA, "[KASA] Otwieram okienko (PID: %d)...\n", getpid());
 
     while(1) {
-        // Odebranie zapytania o bilet
-        odbierz_komunikat(msgid_req, &msg, rozmiar_danych, KANAL_KASA);
+        // Odbieranie żądań z priorytetem
+        // Używana ujemna wartość typu wiadomości (-KANAL_KASA).
+        // Funkcja najpierw sprawdzi, czy są wiadomości typu 1 (VIP).
+        // Dopiero gdy ich nie ma, pobierze wiadomość typu 2 (Reszta).
+        odbierz_komunikat(msgid_req, &msg, rozmiar_danych, -KANAL_KASA);
 
+        // VIP tylko "rejestruje" swoją obecność w systemie (logi).
+        // Nie czeka na odpowiedź
+        if (msg.mtype == KANAL_KASA_VIP) {
+             loguj(C_KASA, "[KASA] VIP (PID: %d) - Obsługa poza kolejnością.\n", msg.pid_nadawcy);
+             continue;
+        }
+
+        // Logowanie sprzedaży biletu. Rozróżnienie Opiekuna, aby odnotować w logach obecność dziecka.
         if (msg.typ_pasazera == TYP_OPIEKUN) {
-            loguj(C_KASA, "[KASA] Opsługuję opiekuna (PID: %d) i dziecko (TID: %lu)\n", 
+            loguj(C_KASA, "[KASA] Obsługuję opiekuna (PID: %d) i dziecko (TID: %lu)\n", 
             msg.pid_nadawcy, msg.tid_dziecka);
         } else {
             loguj(C_KASA, "[KASA] Obsługuję pasażera PID %d...\n", msg.pid_nadawcy);
         }
-        
-        usleep(50000); 
 
-        // Odesłanie biletu
-        if (msg.typ_pasazera != TYP_VIP) {
-            msg.mtype = msg.pid_nadawcy; 
-            wyslij_komunikat(msgid_res, &msg, rozmiar_danych);
-        }
+        // Odesłanie biletu do nadawcy
+        msg.mtype = msg.pid_nadawcy; 
+        wyslij_komunikat(msgid_res, &msg, rozmiar_danych);
     }
 }
 

@@ -86,7 +86,25 @@ void zablokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
     operacja.sem_op = -1;
-    operacja.sem_flg = SEM_UNDO;
+    operacja.sem_flg = SEM_UNDO; // Cofnięcie semafora w razie awarii procesu
+    
+    while (semop(semid, &operacja, 1) == -1) {
+        if (errno == EINTR) {
+            continue; // To tylko sygnał, próbujemy dalej
+        }
+        if (errno == EIDRM || errno == EINVAL) {
+            exit(0); // Semafor usunięty - koniec symulacji
+        }
+        loguj_blad("Błąd blokowania semafora (P)");
+        exit(1);
+    }
+}
+
+void zablokuj_semafor_bez_undo(int semid, int sem_num) {
+    struct sembuf operacja;
+    operacja.sem_num = sem_num;
+    operacja.sem_op = -1;
+    operacja.sem_flg = 0;
     
     while (semop(semid, &operacja, 1) == -1) {
         if (errno == EINTR) {
@@ -114,6 +132,42 @@ void odblokuj_semafor(int semid, int sem_num) {
         loguj_blad("Błąd odblokowania semafora (V)");
         exit(1);
     }
+}
+
+void odblokuj_semafor_bez_undo(int semid, int sem_num) {
+    struct sembuf operacja;
+    operacja.sem_num = sem_num;
+    operacja.sem_op = 1;
+    operacja.sem_flg = 0;
+    
+    while (semop(semid, &operacja, 1) == -1) {
+        if (errno == EIDRM || errno == EINVAL) {
+            exit(0);
+        }
+        if (errno == EINTR) continue;
+        loguj_blad("Błąd odblokowania semafora (V)");
+        exit(1);
+    }
+}
+
+// czekanie na semafor, ale z przerwaniem w przypadku sygnału
+int zablokuj_semafor_czekaj(int semid, int sem_num) {
+    struct sembuf operacja;
+    operacja.sem_num = sem_num;
+    operacja.sem_op = -1;
+    operacja.sem_flg = 0; 
+
+    if (semop(semid, &operacja, 1) == -1) {
+        if (errno == EINTR) {
+            return -1; // To jest sygnał 
+        }
+        if (errno == EIDRM || errno == EINVAL) {
+            exit(0); // Semafor usunięty
+        }
+        loguj_blad("Błąd blokowania semafora (P)");
+        exit(1);
+    }
+    return 0;
 }
 
 void usun_semafor(int semid) {
