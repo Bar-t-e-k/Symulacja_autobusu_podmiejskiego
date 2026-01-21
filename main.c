@@ -37,7 +37,7 @@ void handler_sygnalow(int sig) {
 void sprzatanie() {
     if (getpid() != g_main_pid) return;
 
-    signal(SIGTERM, SIG_IGN);
+    ustaw_sygnal(SIGTERM, SIG_IGN, 1);
     kill(0, SIGTERM); 
 
     pid_t wpid;
@@ -77,11 +77,11 @@ int main() {
     strftime(datetime, sizeof(datetime), "%Y-%m-%d %H:%M:%S", timeinfo);
     loguj(NULL,"Symulacja dworca - %s\n", datetime);
 
-    signal(SIGUSR1, handler_sygnalow);
-    signal(SIGUSR2, handler_sygnalow);
-    signal(SIGINT, handler_sygnalow);  
-    signal(SIGTERM, handler_sygnalow);
-    signal(SIGCHLD, handler_sygnalow);
+    ustaw_sygnal(SIGUSR1, handler_sygnalow, 0);
+    ustaw_sygnal(SIGUSR2, handler_sygnalow, 0);
+    ustaw_sygnal(SIGINT, handler_sygnalow, 0);
+    ustaw_sygnal(SIGCHLD, handler_sygnalow, 0);
+    ustaw_sygnal(SIGTERM, handler_sygnalow, 0);
 
     // 1. Tworzenie zasobów IPC
     g_shmid = stworz_pamiec(sizeof(SharedData));
@@ -135,10 +135,10 @@ int main() {
     pid_t pid_kasjer = fork();
     if (pid_kasjer == 0) {
         // Ignorowanie sygnałów terminala, aby nie przerywać pracy
-        signal(SIGINT, SIG_IGN); 
-        signal(SIGTERM, SIG_DFL);
-        signal(SIGUSR1, SIG_IGN); 
-        signal(SIGUSR2, SIG_IGN);
+        ustaw_sygnal(SIGINT, SIG_IGN, 1);
+        ustaw_sygnal(SIGTERM, SIG_DFL, 1);
+        ustaw_sygnal(SIGUSR1, SIG_IGN, 1);
+        ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
 
         execlp("./exe_cashier", "exe_cashier", s_msg_req, s_msg_res, NULL);
 
@@ -153,9 +153,9 @@ int main() {
     for (int b = 1; b <= N; b++) {
         pid_t pid_autobus = fork();
         if (pid_autobus == 0) {
-            signal(SIGINT, SIG_IGN); 
-            signal(SIGTERM, SIG_DFL);
-            signal(SIGUSR2, SIG_IGN);
+            ustaw_sygnal(SIGINT, SIG_IGN, 1);
+            ustaw_sygnal(SIGTERM, SIG_DFL, 1);
+            ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
 
             char s_id[16];
             sprintf(s_id, "%d", b);
@@ -174,9 +174,9 @@ int main() {
     // Najpierw towrzony generator, który potem tworzy pasażerów
     pid_t pid_pasazerowie = fork();
     if (pid_pasazerowie == 0) {
-        signal(SIGINT, SIG_IGN); 
-        signal(SIGTERM, SIG_DFL);
-        signal(SIGCHLD, SIG_IGN);
+        ustaw_sygnal(SIGINT, SIG_IGN, 1);
+        ustaw_sygnal(SIGTERM, SIG_DFL, 1);
+        ustaw_sygnal(SIGCHLD, SIG_IGN, 1);
         srand(time(NULL));
         int id_gen = 1;
 
@@ -223,7 +223,7 @@ int main() {
             }
 
             id_gen++;
-            usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
+            //usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
             }
             exit(0);   
     } else if (pid_pasazerowie < 0) {
@@ -236,11 +236,11 @@ int main() {
     // Czyta dane z klawiatury
     pid_t pid_dyspozytor = fork();
     if (pid_dyspozytor == 0) {
-        signal(SIGINT, SIG_IGN); 
-        signal(SIGTERM, SIG_DFL);
-        signal(SIGUSR1, SIG_IGN); 
-        signal(SIGUSR2, SIG_IGN);
-        signal(SIGTTIN, SIG_IGN);
+        ustaw_sygnal(SIGINT, SIG_IGN, 1);
+        ustaw_sygnal(SIGTERM, SIG_DFL, 1);
+        ustaw_sygnal(SIGUSR1, SIG_IGN, 1);
+        ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
+        ustaw_sygnal(SIGTTIN, SIG_IGN, 1);
 
         char bufor[32];
 
@@ -329,7 +329,7 @@ int main() {
         odlacz_pamiec(data);
         odblokuj_semafor(g_semid, SEM_MUTEX);
         
-        pause();
+        //pause();
     }
 
     // Raport końcowy

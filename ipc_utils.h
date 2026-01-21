@@ -25,4 +25,7 @@ void wyslij_komunikat(int msgid, void* msg, int rozmiar);
 void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ);
 void usun_kolejke(int msgid);
 
+// Sigaction
+void ustaw_sygnal(int sig, void (*handler)(int), int restart);
+
 #endif
