@@ -31,8 +31,8 @@ void handler_alarm(int sig) {
 // Główna pętla życia procesu autobusu.
 // Realizuje cykl: Czekanie na wjazd -> Załadunek -> Trasa -> Powrót.
 void autobus_run(int id, int shmid, int semid) {
-    signal(SIGUSR1, sygnal_odjazd);
-    signal(SIGINT, SIG_IGN);
+    ustaw_sygnal(SIGUSR1, sygnal_odjazd, 0);
+    ustaw_sygnal(SIGINT, SIG_IGN, 1);
     
     SharedData* data = dolacz_pamiec(shmid);
     int P = data->cfg_P;
@@ -75,7 +75,7 @@ void autobus_run(int id, int shmid, int semid) {
 
         // 3. Załadunek pasażerów
         // Autobus będzie spał, dopóki nie obudzi go pasażer lub minie czas
-        signal(SIGALRM, handler_alarm);
+        ustaw_sygnal(SIGALRM, handler_alarm, 0);
         time_t czas_start = time(NULL);
         wymuszony_odjazd = 0;
         
@@ -157,7 +157,11 @@ void autobus_run(int id, int shmid, int semid) {
             }
 
             // Czekanie, aż pasażer podejmie decyzję (wsiądzie lub zrezygnuje).
-            zablokuj_semafor_bez_undo(semid, SEM_WSIADL);
+            alarm(2); // Dajemy pasażerowi 2 sekundy na "fizyczne" wejście
+            if (zablokuj_semafor_czekaj(semid, SEM_WSIADL) == -1) {
+                // Jeśli wejdzie tu przez timeout (SIGALRM) lub SIGUSR1 od dyspozytora
+            }
+            alarm(0);
         }
 
         alarm(0);

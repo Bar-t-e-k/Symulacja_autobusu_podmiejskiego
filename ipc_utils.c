@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ipc.h>
@@ -5,6 +6,8 @@
 #include <sys/sem.h>
 #include <sys/msg.h>
 #include <errno.h>
+#include <signal.h>
+#include <string.h>
 #include "ipc_utils.h"
 #include "logs.h"
 #include "common.h"
@@ -225,4 +228,21 @@ void usun_kolejke(int msgid) {
         loguj_blad("Błąd usuwania kolejki komunikatów");
         exit(1);
     }
+}
+
+// Wrapper do sigaction
+void ustaw_sygnal(int sig, void (*handler)(int), int restart) {
+    struct sigaction sa;
+    sa.sa_handler = handler;
+    sigemptyset(&sa.sa_mask);
+    
+    // Jeśli restart == 1, system call zostanie wznowiony (jak w signal())
+    // Jeśli restart == 0, system call zostanie przerwany z błędem EINTR
+    if (restart) {
+        sa.sa_flags = SA_RESTART;
+    } else {
+        sa.sa_flags = 0; 
+    }
+    
+    sigaction(sig, &sa, NULL);
 }
