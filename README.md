@@ -332,70 +332,47 @@ ipcs -q | grep 1000
 ## Linki do kluczowych fragmentów
 
 ### a. Tworzenie i obsługa plików
-Wykorzystano bibliotekę standardową (nakładka na syscall open/write) do logowania zdarzeń.
-   
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/2c46a2e24341c8337f216a7229a4ffc224fc4dc0/logs.c#L24-L37
+open(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/logs.c#L53
+close(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/logs.c#L58
+write(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/logs.c#L56
 
 ### b. Tworzenie procesów
-Podstawa architektury. Proces główny tworzy procesy potomne, które zmieniają swój obraz pamięci (exec).
- 
-Kasjer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L135-L150
-Autobusy: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L153-L171
-Pasażerowie: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L175-L233
+fork(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/main.c#L279
+exec(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/main.c#L332
+exit(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_cashier.c#L64
+waitpid(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/main.c#L84
 
-### c. Obsługa sygnałów
-Reakcja na interwencję Dyspozytora oraz bezpieczne zamykanie.
+### c. Tworzenie i obsługa wątków
+pthread_create(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_passenger.c#L105
+pthread_join(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_passenger.c#L57
+pthread_mutex_lock(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_passenger.c#L39
+pthread_mutex_unlock(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_passenger.c#L45
+pthread_cond_wait(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_passenger.c#L42
+pthread_cond_signal(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/exe_passenger.c#L55
 
-Dyspozytor: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L237-L274
-Ctrl + C: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L279-L282
-Sygnał 1: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L288-L299
-Sygnał 2: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/main.c#L301-L320
+### d. Obsługa sygnałów
+kill(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/main.c#L342
+sigaction(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L257
 
-### e. Synchronizacja procesów
-Wykorzystano semafory do ochrony zasobów i blokowania wejścia do drzwi.
-
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/ipc_utils.c#L61-L178
+### e. Synchronizacja procesów(wątków)
+ftok(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L65
+semget(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L72
+semctl(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L179
+semop(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L95
 
 ### g. Segmenty pamięci dzielonej
-Współdzielenie stanu dworca między procesami.
-
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/ipc_utils.c#L14-L57
+ftok(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L18
+shmget(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L25
+shmat(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L35
+shmdt(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L47
+shmctl(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L55
 
 ### h. Kolejki komunikatów
-Komunikacja między Kasjerem a Pasażerami
-
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/ipc_utils.c#L182-L228
-
-### i. Konfiguracja i walidacja
-Dane wczytywane z pliku config.txt.
-
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/config.c#L7-L72
-
-### j. Wykorzystanie wątków
-Dziecko jest tworzone jako wątek wewnątrz opiekuna.
-
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/exe_passenger.c#L23-L39
-
-### k. Funkcje aktorów
-
-Kasjer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/exe_cashier.c#L13-L48
-Autobus: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/exe_bus.c#L30-L214
-Pasażer: 
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/3aae22b09b5f9201e8cdca44207118b0a8ed0167/exe_passenger.c#L41-L200
-
-### l. Obsługa błędów i logi
-Wykorzystano własne funkcje do zapisywania logów i obsługi błędów
-
-https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/86c3ae1d4f3778efd698ad36cdce002232e9db5e/logs.c#L11-L45
+ftok(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L188
+msgget(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L195
+msgsnd(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L206
+msgrcv(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L220
+msgctl(): https://github.com/Bar-t-e-k/Symulacja_autobusu_podmiejskiego/blob/809d284deb738c1e6bb799f3bf5de1b0d9f4ffc5/ipc_utils.c#L234
 
 ---
 **Autor:** Bartłomiej Zięcina
