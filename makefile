@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -pthread
+CFLAGS = -Wall -pthread -D_POSIX_C_SOURCE=200809L
 
 OBJS_COMMON = ipc_utils.o logs.o
 

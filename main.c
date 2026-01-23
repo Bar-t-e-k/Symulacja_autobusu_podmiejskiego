@@ -1,3 +1,5 @@
+#define _POSIX_C_SOURCE 200809L
+#define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,20 +7,44 @@
 #include <time.h>
 #include <signal.h>
 #include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <errno.h>
 #include "common.h"
 #include "ipc_utils.h"
 #include "logs.h"
 #include "config.h"
 
-pid_t g_main_pid;
-int g_shmid = -1, g_semid = -1, g_msgid_req = -1, g_msgid_res = -1;
+// ZARZĄDZANIE PROCESAMI I FLAGI
+
+// Zmienne na PID-y, aby móc precyzyjnie wysyłać sygnały sterujące
+// do konkretnych komponentów.
+pid_t g_pid_kasjer = 0;
+pid_t g_pid_generator = 0;
+pid_t g_pid_dyspozytor = 0;
+pid_t* g_pids_autobusy = NULL; 
+int g_liczba_autobusow_cfg = 0;
+
+// Flagi stanów używane m.in. w handlerach
+volatile int g_sprzatacz_pracuje = 1;
+volatile sig_atomic_t generator_uruchomiony = 1;
 volatile sig_atomic_t flaga_odjazd = 0;
 volatile sig_atomic_t flaga_zamkniecie = 0;
 volatile sig_atomic_t flaga_koniec = 0;
+volatile sig_atomic_t flaga_awaria = 0;
 
-// Handler sygnałów
-// Przechwytuje sygnały systemowe.
-// Ustawia flagi, aby główna pętla programu odczytała je i podjęła akcję.
+// Flaga blokująca raportowanie awarii podczas planowanego wyłączania systemu
+volatile int g_system_zamykany = 0;
+
+pid_t g_main_pid;
+int g_shmid = -1, g_semid = -1, g_msgid_req = -1, g_msgid_res = -1;
+
+pthread_mutex_t log_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_t g_thread_sprzatacz;
+
+// Obsługa sygnałów: tylko ustawianie flag
 void handler_sygnalow(int sig) {
     // Obsługa sygnału kończącego Ctrl+C
     // Wywołuje exit, co uruchamia sprzątanie zasobów w main.c
@@ -33,16 +59,79 @@ void handler_sygnalow(int sig) {
     if (sig == SIGUSR2) flaga_zamkniecie = 1;
 }
 
+void stop_generator(int sig) {
+    generator_uruchomiony = 0;
+}
+
+int czy_to_autobus(pid_t pid) {
+    if (g_pids_autobusy == NULL) return 0;
+    for(int i=0; i < g_liczba_autobusow_cfg; i++) {
+        if (g_pids_autobusy[i] == pid) return 1;
+    }
+    return 0;
+}
+
+// WĄTEK CZYSZCZĄCY
+// Natychmiastowo usuwa procesy Zombie po dzieciach głównego procesu.
+// Monitoruje również 'zdrowie' symulacji - jeśli procesy krytyczne padną
+// bez wezwania, wątek zgłasza awarię do pętli głównej.
+void* watek_czyszczacy_fun(void* arg) {
+    (void)arg;
+    int status;
+    pid_t pid;
+
+    while (1) {
+        pid = waitpid(-1, &status, 0); // Blokuje wątek do czasu zakończenia dowolnego dziecka
+
+        if (pid <= 0) {
+            if (errno == ECHILD) {
+                if (g_sprzatacz_pracuje == 1) {
+                    continue; 
+                } else {
+                    return NULL;
+                }
+            }
+            continue;
+        }
+
+        // Sprawdzenie, czy zakończony proces był krytyczny dla działania dworca
+        int krytyczny = 0;
+        char* kto = ""; 
+
+        if (pid == g_pid_kasjer) { kto = "KASJER"; krytyczny = 1; }
+        else if (pid == g_pid_generator) { kto = "GENERATOR"; krytyczny = 1; }
+        else if (pid == g_pid_dyspozytor) { kto = "DYSPOZYTOR"; krytyczny = 1; }
+        else if (czy_to_autobus(pid)) { kto = "AUTOBUS"; krytyczny = 1; }
+
+        int kod_wyjscia = -1;
+        if (WIFEXITED(status)) kod_wyjscia = WEXITSTATUS(status);
+
+        // Logika awarii (jeśli padł ważny proces w trakcie pracy)
+        if (krytyczny && !g_system_zamykany) {
+            pthread_mutex_lock(&log_mutex);
+            loguj_blad("Proces krytyczny zakończony niespodziewanie");
+            if (WIFSIGNALED(status)) {
+                loguj(NULL, "Proces %s (PID: %d) został zabity sygnałem %d\n", kto, pid, WTERMSIG(status));
+            } else {
+                loguj(NULL, "Proces %s (PID: %d) zakończył się błędem (Kod: %d)\n", kto, pid, kod_wyjscia);
+            }
+            pthread_mutex_unlock(&log_mutex);
+            flaga_awaria = 1; 
+        }
+    }
+    return NULL;
+}
+
 // Funkcja sprzątająca zasoby przed zakończeniem programu (wywoływana przez atexit)
 void sprzatanie() {
     if (getpid() != g_main_pid) return;
 
     ustaw_sygnal(SIGTERM, SIG_IGN, 1);
-    kill(0, SIGTERM); 
 
-    pid_t wpid;
+    kill(0, SIGTERM);
+
     int status;
-    while ((wpid = waitpid(-1, &status, WNOHANG)) > 0);
+    while (waitpid(-1, &status, 0) > 0);
 
     if (g_shmid != -1) {
         usun_pamiec(g_shmid);
@@ -60,6 +149,10 @@ void sprzatanie() {
         usun_kolejke(g_msgid_res);
         g_msgid_res = -1;
     }
+
+    if (g_pids_autobusy != NULL) { 
+        free(g_pids_autobusy); g_pids_autobusy = NULL; 
+    }
     
     loguj(NULL, "[SYSTEM] Zasoby posprzątane. Koniec.\n");
 }
@@ -68,8 +161,10 @@ int main() {
     g_main_pid = getpid();
     atexit(sprzatanie);
 
-    FILE* f = fopen("symulacja.log", "w");
-    if (f) fclose(f);
+    int fd = open("symulacja.log", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd != -1) {
+        close(fd);
+    }
 
     time_t now = time(NULL);
     struct tm* timeinfo = localtime(&now);
@@ -104,7 +199,12 @@ int main() {
     data->liczba_rowerow = 0;
     data->autobus_obecny = 0;
     data->calkowita_liczba_pasazerow = 0;
-    data->aktywne_autobusy = data->cfg_N;
+    data->aktywne_autobusy = g_liczba_autobusow_cfg = data->cfg_N;
+    g_pids_autobusy = malloc(sizeof(pid_t) * g_liczba_autobusow_cfg);
+    if (g_pids_autobusy == NULL) {
+         loguj_blad("Błąd malloc pids");
+         exit(1);
+    }
     data->dworzec_otwarty = 1;
     data->pid_obecnego_autobusu = 0;
     data->liczba_oczekujacych = 0;
@@ -131,12 +231,17 @@ int main() {
     sprintf(s_msg_req, "%d", g_msgid_req);
     sprintf(s_msg_res, "%d", g_msgid_res);
 
+    // Tworzenie wątku sprzątającego
+    if (pthread_create(&g_thread_sprzatacz, NULL, watek_czyszczacy_fun, NULL) != 0) {
+        loguj_blad("Błąd tworzenia wątku Reapera");
+        exit(1);
+    }
+
     // 3. Kasjer
-    pid_t pid_kasjer = fork();
-    if (pid_kasjer == 0) {
+    g_pid_kasjer = fork();
+    if (g_pid_kasjer == 0) {
         // Ignorowanie sygnałów terminala, aby nie przerywać pracy
         ustaw_sygnal(SIGINT, SIG_IGN, 1);
-        ustaw_sygnal(SIGTERM, SIG_DFL, 1);
         ustaw_sygnal(SIGUSR1, SIG_IGN, 1);
         ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
 
@@ -144,17 +249,16 @@ int main() {
 
         loguj_blad("Exec Kasjer");
         exit(1);
-    } else if (pid_kasjer < 0) {
+    } else if (g_pid_kasjer < 0) {
         loguj_blad("Fork Kasjer");
         exit(1);
     }
 
     // 4. Autobusy
     for (int b = 1; b <= N; b++) {
-        pid_t pid_autobus = fork();
-        if (pid_autobus == 0) {
+        g_pids_autobusy[b-1] = fork();
+        if (g_pids_autobusy[b-1] == 0) {
             ustaw_sygnal(SIGINT, SIG_IGN, 1);
-            ustaw_sygnal(SIGTERM, SIG_DFL, 1);
             ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
 
             char s_id[16];
@@ -164,31 +268,40 @@ int main() {
 
             loguj_blad("Exec Autobus");
             exit(1);
-        } else if (pid_autobus < 0) {
+        } else if (g_pids_autobusy[b-1] < 0) {
             loguj_blad("Fork Autobus");
             exit(1);
         }
     }
 
     // 5. Pasażerowie
-    // Najpierw towrzony generator, który potem tworzy pasażerów
-    pid_t pid_pasazerowie = fork();
-    if (pid_pasazerowie == 0) {
+    // Najpierw tworzony generator, który potem tworzy pasażerów
+    g_pid_generator = fork();
+    if (g_pid_generator == 0) {
         ustaw_sygnal(SIGINT, SIG_IGN, 1);
-        ustaw_sygnal(SIGTERM, SIG_DFL, 1);
-        ustaw_sygnal(SIGCHLD, SIG_IGN, 1);
+        ustaw_sygnal(SIGTERM, stop_generator, 0);
+        ustaw_sygnal(SIGUSR1, SIG_IGN, 1);
+        ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
+
+        // Ze względu na to, że wątek sprzątający nie ma możliwości
+        // czyszczenia Zombie pasażerów, a procesy tego typu
+        // nie są krytyczne do działania symulacji, są one sprzątane przez system automatycznie
+        ustaw_sygnal(SIGCHLD, SIG_IGN, 1); 
         srand(time(NULL));
         int id_gen = 1;
 
         char s_id[16], s_typ[16];
 
-        while (1) {
+        // Pętla generująca pasażerów
+        while (generator_uruchomiony) {
+            zablokuj_semafor(g_semid, SEM_MUTEX);
             SharedData* d = dolacz_pamiec(g_shmid);
             if (d->dworzec_otwarty == 0) {
                 odlacz_pamiec(d);
                 break;
             }
             odlacz_pamiec(d);
+            odblokuj_semafor(g_semid, SEM_MUTEX);
 
             int los = rand() % 100;
             int typ = TYP_ZWYKLY;
@@ -201,7 +314,15 @@ int main() {
                 typ = TYP_VIP;
             }
 
-            zablokuj_semafor_bez_undo(g_semid, SEM_LIMIT);
+            // Czekanie na wolne miejsce na semaforze
+            if (zablokuj_semafor_czekaj(g_semid, SEM_LIMIT) == -1) {
+                if (errno == EINTR && !generator_uruchomiony) {
+                    break;
+                }
+                continue;
+            }
+
+            if (!generator_uruchomiony) break;
 
             pid_t pid_pas = fork();
             if (pid_pas == 0) {
@@ -216,28 +337,28 @@ int main() {
             } else if (pid_pas < 0) {
                 loguj_blad("Fork Pasażer");
 
-                odblokuj_semafor_bez_undo(g_semid, SEM_LIMIT);
+                odblokuj_semafor(g_semid, SEM_LIMIT);
                 
                 kill(getppid(), SIGINT);
                 exit(1);
             }
 
             id_gen++;
-            //usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
+            usleep(200000 + (rand()%200000)); // Nowy pasażer co losowy odstęp
             }
             exit(0);   
-    } else if (pid_pasazerowie < 0) {
+    } else if (g_pid_generator < 0) {
         loguj_blad("Fork Generator pasażerów");
         loguj_blad("Spróbuj zmniejszyć liczbę autobusów");
         exit(1);
     }
 
     // 6. Dyspozytor
-    // Czyta dane z klawiatury
-    pid_t pid_dyspozytor = fork();
-    if (pid_dyspozytor == 0) {
+    // Czyta sygnały z klawiatury
+    g_pid_dyspozytor = fork();
+    if (g_pid_dyspozytor == 0) {
         ustaw_sygnal(SIGINT, SIG_IGN, 1);
-        ustaw_sygnal(SIGTERM, SIG_DFL, 1);
+        ustaw_sygnal(SIGTERM, handler_sygnalow, 0);
         ustaw_sygnal(SIGUSR1, SIG_IGN, 1);
         ustaw_sygnal(SIGUSR2, SIG_IGN, 1);
         ustaw_sygnal(SIGTTIN, SIG_IGN, 1);
@@ -245,6 +366,8 @@ int main() {
         char bufor[32];
 
         while(1) {
+            if (flaga_koniec) break;
+
             if (fgets(bufor, sizeof(bufor), stdin) == NULL) {
                 break;
             }
@@ -268,7 +391,7 @@ int main() {
             }
         }
         exit(0);
-    } else if (pid_dyspozytor < 0) {
+    } else if (g_pid_dyspozytor < 0) {
         loguj_blad("Fork Dyspozytor");
         exit(1);
     }
@@ -276,15 +399,32 @@ int main() {
     // 7. Pętla główna - monitorowanie stanu i obsługa sygnałów
     while(1) {
         // Obsługa sygnałów
+
+        // Reakcja na problem wykryty przez wątek sprzątający
+        if (flaga_awaria && !flaga_koniec) {
+            loguj(NULL, "[MAIN] Wykryto usunięcie krytycznego procesu. Procedura stop\n");
+            flaga_koniec = 1; 
+        }
+
+        // Obsługa Ctrl + C
         if (flaga_koniec) {
+            g_system_zamykany = 1;
+
             loguj(NULL,"\n\n[SYSTEM] Otrzymano sygnał kończący (Ctrl + C). Rozpoczynam procedurę stop.\n");
-            exit(0); 
+
+            g_sprzatacz_pracuje = 0;
+            ustaw_sygnal(SIGTERM, SIG_IGN, 1);
+            kill(0, SIGTERM);
+
+            pthread_join(g_thread_sprzatacz, NULL);
+            break;
         }
         
         zablokuj_semafor(g_semid, SEM_MUTEX);
         data = dolacz_pamiec(g_shmid);
         if (data == NULL) break;
 
+        // Obsługa SIGUSR1
         if (flaga_odjazd) {
             loguj(NULL,"\n[DYSPOZYTOR ZEWN.] Otrzymano SIGUSR1 -> Rozkaz odjazdu!\n");
         
@@ -298,20 +438,26 @@ int main() {
             flaga_odjazd = 0;
         }
 
+        // Logika podstawowego zamykania dworca (SIGUSR2)
+        // 1. Ustawienie flagi 'dworzec_otwarty' na 0 (blokada wejść).
+        // 2. Budzenie uśpionych procesów przez 'V' na semaforach.
+        // 3. Wysłanie sygnału wyjścia do wszystkich procesów pasażerów.
         if (flaga_zamkniecie) {
             if (data->dworzec_otwarty == 1) {
+                g_system_zamykany = 1;
                 data->dworzec_otwarty = 0;
                 loguj(NULL,"Bramy zamknięte.\n");
 
                 for(int i = 0; i < data->cfg_N; i++) {
                     odblokuj_semafor(g_semid, SEM_PRZYSTANEK); 
-                    odblokuj_semafor(g_semid, SEM_KTOS_CZEKA);
+                    odblokuj_semafor_bez_undo(g_semid, SEM_KTOS_CZEKA);
                 }
                 
                 if (data->pid_obecnego_autobusu > 0) {
                     loguj(NULL,"Wymuszam odjazd obecnego autobusu (PID %d)\n", data->pid_obecnego_autobusu);
                     kill(data->pid_obecnego_autobusu, SIGUSR1);
                 }
+                kill(0, SIGUSR2);
                 loguj(NULL,"Czekam na zjazd pozostałych autobusów...\n");
             } else {
                 loguj(NULL,"Dworzec już jest zamknięty.\n");
@@ -319,17 +465,23 @@ int main() {
             flaga_zamkniecie = 0;
         }
 
-        // Sprawdzenie czy wszystkie autobusy zakończyły pracę
-        if (data->aktywne_autobusy == 0) {
+        // Warunek wyjścia: Dworzec zamknięty i flota autobusowa wróciła do zajezdni (aktywne == 0)
+        if (data->aktywne_autobusy == 0 && data->dworzec_otwarty == 0) {
             odlacz_pamiec(data);
             odblokuj_semafor(g_semid, SEM_MUTEX);
             loguj(NULL,"[MAIN] Wszystkie autobusy zjechały.\n");
+
+            g_sprzatacz_pracuje = 0;
+            ustaw_sygnal(SIGTERM, SIG_IGN, 1);
+            kill(0, SIGTERM);
+
+            pthread_join(g_thread_sprzatacz, NULL);
             break; 
         }
         odlacz_pamiec(data);
         odblokuj_semafor(g_semid, SEM_MUTEX);
         
-        //pause();
+        pause();
     }
 
     // Raport końcowy
@@ -337,6 +489,7 @@ int main() {
     if (data != NULL) {
         loguj(NULL,"--- RAPORT KOŃCOWY ---\n");
         loguj(NULL,"Łącznie obsłużono pasażerów: %d\n", data->calkowita_liczba_pasazerow);
+        loguj(NULL,"Wyszlo: %d\n", data->liczba_wyjsc);
         odlacz_pamiec(data);
     }
 
