@@ -21,11 +21,11 @@ void usun_semafor(int semid);
 
 // Funkcje Kolejki Komunikatów
 int stworz_kolejke();
-void wyslij_komunikat(int msgid, void* msg, int rozmiar);
-void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ);
+int wyslij_komunikat(int msgid, void* msg, int rozmiar);
+int odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ);
 void usun_kolejke(int msgid);
 
-// Sigaction
+// Konfiguracja sygnałów
 void ustaw_sygnal(int sig, void (*handler)(int), int restart);
 
 #endif

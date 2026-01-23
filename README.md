@@ -1,8 +1,8 @@
 # 🚌 Symulator Dworca Autobusowego
 
-Projekt realizuje zaawansowaną symulację dworca autobusowego w środowisku Linux, wykorzystując mechanizmy wieloprocesowości, wielowątkowości oraz synchronizacji zasobów.
+Projekt realizuje zaawansowaną symulację dworca autobusowego, demonstrując praktyczne zastosowanie mechanizmów Inter-Process Communication (IPC).
 
-Głównym celem projektu jest demonstracja problemów współbieżności: wykluczania wzajemnego, synchronizacji procesów, obsługi sygnałów oraz zapobiegania zakleszczeniom.
+Projekt kładzie nacisk na synchronizację zasobów, obsługę sygnałów asynchronicznych oraz odporność na błędy.
 
 ---
 
@@ -10,7 +10,7 @@ Głównym celem projektu jest demonstracja problemów współbieżności: wykluc
 
 ### 1. Architektura Wieloprocesowa
 Symulacja wykorzystuje funkcje `fork()` oraz rodzinę funkcji `execlp()` do tworzenia niezależnych procesów dla każdego aktora systemu:
-* **Główny Zarządca (`main`)**: Inicjuje zasoby, tworzy procesy potomne, monitoruje stan symulacji, sprząta po zakończeniu oraz **pełni rolę Dyspozytora** (obsługuje sterowanie z klawiatury).
+* **Główny Zarządca (`main`)**: Inicjuje zasoby, tworzy procesy potomne, monitoruje stan symulacji, sprząta na bieżąco i po zakończeniu oraz **pełni rolę Dyspozytora** (obsługuje sterowanie z klawiatury).
 * **Autobusy**: Niezależne procesy realizujące kursy, zabierające pasażerów i obsługujące limity miejsc.
 * **Pasażerowie**: Procesy symulujące zachowanie ludzi (kupno biletu, oczekiwanie, wejście).
 * **Kasjer**: Proces obsługujący kolejki komunikatów z zapytaniami o bilety.
@@ -31,12 +31,18 @@ System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
     * `SEM_KOLEJKA_VIP`: Realizuje priorytetowe wejście dla pasażerów VIP, wybudzając ich przed pozostałymi grupami.
     * `SEM_PRZYSTANEK` - z flagą `SEM_UNDO`: Gwarantuje, że na peronie znajduje się tylko jeden autobus (synchronizacja wjazdu na stanowisko).
     * `SEM_KTOS_CZEKA`: Działa jako "dzwonek" – pasażerowie informują nim autobus o swojej obecności na przystanku.
-    * `SEM_LIMIT`: Ogranicza maksymalną liczbę pasażerów przebywających jednocześnie na dworcu (zapobiega przepełnieniu systemu).
+    * `SEM_LIMIT`: Ogranicza maksymalną liczbę procesów przebywających jednocześnie na dworcu (zapobiega przepełnieniu systemu).
     * `SEM_WSIADL`: Sygnał zwrotny od pasażera do autobusu, potwierdzający zakończenie procedury wsiadania.
 * **Kolejki Komunikatów (Message Queues)**:
-    * Komunikacja `Pasażer <-> Kasjer` (symulacja zakupu biletu) (2 kolejki do obsługi w dwie strony).
+    * Komunikacja `Pasażer <-> Kasjer` (symulacja zakupu biletu) (2 kolejki do obsługi w dwie strony); dodatkowo priorytetowa obsługa pasażerów VIP.
 
-### 4. Bezpieczeństwo i Logowanie
+### 4. Sygnały (Signals)
+* `SIGALRM`: Przerywa blokujące operacje w autobusie (Timeout).
+* `SIGUSR1`: Wymuszony odjazd autobusu (Obsługa w `exe_bus`).
+* `SIGUSR2`: Ewakuacja dworca (Obsługa we wszystkich procesach).
+* `SIGINT`: Bezpieczne zakończenie (przechwytywanie Ctrl+C).
+
+### 5. Bezpieczeństwo i Logowanie
 * **Graceful Shutdown**: System gwarantuje usunięcie zasobów IPC (pamięć, semafory) niezależnie od sposobu zakończenia programu (sygnał `SIGINT`, błąd, czy normalne zakończenie) dzięki `atexit()`.
 * **Deadlock Prevention**: Autobus nie blokuje semaforów drzwi, a pasażerowie sprawdzają stan autobusu w bezpiecznej sekcji krytycznej.
 * **Logowanie**: Kolorowe logi w terminalu oraz trwały zapis do pliku `symulacja.log` ze znacznikami czasu.
@@ -47,10 +53,12 @@ System obsługuje różne typy pasażerów ze specyficznymi zachowaniami:
 
 Projekt korzysta z narzędzia `make` do automatyzacji procesu budowania.
 
-### Wymagania
-* System operacyjny: Linux
-* Kompilator: GCC (z obsługą `pthread`)
-* Biblioteki standardowe C
+### Specyfikacja środowiska
+* **System operacyjny:** Debian GNU/Linux 13 (trixie)
+* **Jądro:** 6.12.63+deb13-amd64
+* **Kompilator:** GCC 14.2.0
+    * Flagi: `-Wall -pthread -D_POSIX_C_SOURCE=200809L`
+* **Narzędzia:** `make`, `ipcs`, `ipcrm`
 
 ### Instrukcja
 
@@ -120,7 +128,7 @@ T_POSTOJ=10     # Maksymalny czas postoju na przystanku (w sekundach)
 ## 📂 Struktura Plików
 
 **Logika Główna:**
-* `main.c` – Inicjalizacja, pętle generujące procesy, obsługa `atexit`, logika **Dyspozytora**, monitorowanie, obsługa sygnałów systemowych.
+* `main.c` – Inicjalizacja, pętle generujące procesy, wątek sprzątający, obsługa `atexit`, logika **Dyspozytora**, monitorowanie, obsługa sygnałów systemowych.
 
 **Aktorzy:**
 * `exe_bus.c` – Logika autobusu (wjazd, postój, odjazd).
@@ -143,160 +151,181 @@ T_POSTOJ=10     # Maksymalny czas postoju na przystanku (w sekundach)
 
 ## ⚠️ Znane zachowania
 
-* **Procesy Zombie**: Podczas działania symulacji na liście procesów mogą pojawiać się procesy **Zombie**. Jest to normalne zachowanie przy intensywnym tworzeniu procesów potomnych, które nie są natychmiast zbierane przez `wait()`. Są one automatycznie sprzątane przez system przy zamknięciu programu.
 * **Logi w tle**: Jeśli uruchomisz program w tle (`./symulacja &`), komunikaty nadal będą wypisywane na terminal. Aby temu zapobiec, użyj przekierowania: `./symulacja > /dev/null &` i śledź logi przez `tail -f symulacja.log`.
 * **Natychmiastowy odjazd po wznowieniu (Ctrl+Z)**: Symulacja korzysta z zegara czasu rzeczywistego. Jeśli zatrzymasz symulację kombinacją Ctrl+Z, a następnie wznowisz ją komendą fg po czasie dłuższym niż T_POSTOJ, autobus odjedzie natychmiast.
 
 ---
 ## Testy
-
-### Test A: Standardowy cykl przewozu
-* **Scenariusz:** Pasażerowie przychodzą, kupują bilety, zapełniają autobus. Po upływie czasu `T_POSTOJ` autobus odjeżdża.
-* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5
+Wszelkie testy zostały przeprowadzone z zakomentowanymi funkcjami `sleep()` i `pause()`, chyba że podano inaczej.
+### Test A: Rywalizacja o wjazd na przystanek
+* **Cel:** Weryfikacja synchronizacji przy dostępie do zasobu rzadkiego `SEM_PRZYSTANEK` przez wiele procesów konkurujących.
+* **Dane wejściowe:** P=20, R=5, N=50, T_POSTOJ=1
 * **Przebieg:**
-1. Autobus zgłasza gotowość i zajmuje przystanek (semafor `SEM_PRZYSTANEK`) i nastawia budzik systemowy.
-2. Proces autobusu przechodzi w stan uśpienia na semaforze  `SEM_KTOS_CZEKA`.  
-3. Każdy pasażer po zakupie biletu podnosi semafor dzwonka, wybudzając autobus do obsługi wejścia.
-4. Autobus wpuszcza pasażera, aktualizuje liczniki i ponownie zasypia, czekając na kolejnych chętnych.
-5. Po upływie 5 sekund sygnał `SIGALRM` przerywa oczekiwanie na semaforze, co kończy fazę załadunku.
-6. Autobus zwalnia przystanek i odjeżdża w trasę.
-* **Rezultat:** ✅ Pozytywny. Logi potwierdzają sekwencję: Zakup -> Wejście -> Odjazd po czasie.
+1. Uruchomienie symulacji z ogromną flotą autobusów.
+2. Obserwacja logów pod kątem "nakładania się" autobusów.
+* **Rezultat:** ✅ Pozytywny. Mimo ogromnego tłoku, w żadnym momencie w pamięci współdzielonej flaga autobus_obecny nie może zostać ustawiona przez dwa procesy jednocześnie. Każdy autobus musi stać w kolejce systemowej.
 
 Przykładowe fragmenty logów:
 ```text
 ...
-[21:18:16] [Autobus 1] Zgłasza gotowość na dworcu. Czekam na wjazd...
-[21:18:16] [Autobus 1] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 5s)!
+[23:15:29] [Autobus 1] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[23:15:29] [Autobus 14] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[23:15:29] [Autobus 36] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[23:15:29] [Autobus 13] Zgłasza gotowość na dworcu. Czekam na wjazd...
+[23:15:29] [Autobus 23] Zgłasza gotowość na dworcu. Czekam na wjazd...
 ...
-[21:18:16] [Pasażer 11 (Zwykły)] Idę do kasy (PID: 1234192).
-[21:18:16] [Pasażer 1 (Rower)] Idę do kasy (PID: 1234182).
-[21:18:16] [Pasażer 3 (Zwykły)] Idę do kasy (PID: 1234184).
+[23:15:29] [Autobus 1] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 1s)!
 ...
-[21:18:16] [Pasażer 13 (Zwykły)] Przychodzę na przystanek.
-[21:18:16] [Pasażer 11 (Zwykły)] Przychodzę na przystanek.
-[21:18:16] [Pasażer 1 (Rower)] Przychodzę na przystanek.
+[23:15:30] [Autobus 1] Czas postoju minął.
+[23:15:30] [Autobus 1] ODJAZD z 20 pasażerami (5 rowerów).
 ...
-[21:18:16] [Pasażer 8 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5)
-[21:18:16] [Pasażer 1 (Rower)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 1/5)
+[23:15:30] [Autobus 2] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 1s)!
 ...
-[21:18:21] [Autobus 1] Czas postoju minął.
-[21:18:21] [Autobus 1] ODJAZD z 20 pasażerami (5 rowerów).
-[21:18:34] [Autobus 1] WRÓCIŁ Z TRASY po 13 s.
-```
-
-### Test B: Przepełnienie i limit rowerów
-* **Scenariusz:** Liczba chętnych przekracza limit `P`, a liczba rowerzystów przekracza limit `R`.
-* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5
-* **Przebieg:**
-1. Następuje zapełnienie limitu rowerów: licznik rowerów osiąga 5/5. Kolejni pasażerowie wsiadają już bez rowerów, mimo że wciąż są wolne miejsca ogólne.
-2. Zapełnienie limitu miejsc: licznik osiąga stan 20/20. Od tego momentu proces autobusu ignoruje dzwonki pasażerów i czeka na sygnał odjazdu.
-3. Po powrocie autobus zaczyna wpuszczać kolejnych pasażerów.
-* **Rezultat:** ✅ Pozytywny. Pasażerowie nadmiarowi otrzymują odmowę i czekają na kolejny autobus.
-
-Przykładowe fragmenty logów:
-```text
+[23:17:32] [Autobus 2] Czas postoju minął.
 ...
-[21:25:55] [Pasażer 30 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5) 
-[21:25:55] [Pasażer 43 (Rower)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 1/5) 
-[21:25:55] [Pasażer 32 (Rower)] Okazuję bilet i wsiadam! (Stan: 3/20, Rowery: 2/5) 
-[21:25:55] [Pasażer 27 (Rower)] Okazuję bilet i wsiadam! (Stan: 4/20, Rowery: 3/5) 
-[21:25:55] [Pasażer 42 (Rower)] Okazuję bilet i wsiadam! (Stan: 5/20, Rowery: 4/5) 
-[21:25:55] [Pasażer 12 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 6/20, Rowery: 4/5)
-[21:25:55] [Pasażer 47 (Rower)] Okazuję bilet i wsiadam! (Stan: 7/20, Rowery: 5/5)
-[21:25:55] [Pasażer 4 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 8/20, Rowery: 5/5)
-...
-[21:25:55] [Pasażer 19 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 18/20, Rowery: 5/5)
-[21:25:55] [Pasażer 15 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 19/20, Rowery: 5/5) 
-[21:25:55] [Pasażer 46 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 20/20, Rowery: 5/5)
-...
-[21:26:00] [Autobus 1] Czas postoju minął.
-[21:26:00] [Autobus 1] ODJAZD z 20 pasażerami (5 rowerów).
-[21:26:08] [Autobus 1] WRÓCIŁ Z TRASY po 8 s.
-[21:26:08] [Autobus 1] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 5s)!
-...
-[21:26:08] [Pasażer 36 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5) 
-[21:26:08] [Pasażer 24 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 0/5) 
-[21:26:08] [Pasażer 18 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 3/20, Rowery: 0/5) 
+[23:17:32] [Autobus 2] ODJAZD z 20 pasażerami (5 rowerów).
 ...
 ```
 
-### Test C: Obsługa priorytetów (VIP)
-* **Scenariusz:** W kolejce czekają pasażerowie Zwykli. Pojawia się VIP.
-* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5 (test ze zwiększoną szansą na VIP-a)
+### Test B: Przepełnienie kolejki komunikatów
+* **Cel:** Sprawdzenie stabilności kolejki komunikatów i mechanizmu priorytetów pod ekstremalnym obciążeniem.
+* **Dane wejściowe:** P=20, R=5, N=10, T_POSTOJ=1; dodano sleep w procesie kasjera, aby kolejka mogła się przepełnić
 * **Przebieg:**
-1. Omijanie kolejki (Kasa): VIP wysyła komunikat na dedykowany kanał `KANAL_KASA_VIP`. Kasa błyskawicznie potwierdza obsługę, dzięki czemu VIP natychmiast trafia na przystanek.
-2. Gromadzenie na peronie: Na przystanku znajdują się już inni pasażerowie VIP oraz pasażerowie z rowerami.
-3. Selektywne wybudzanie: Każdy z tych pasażerów "dzwoni" dzwonkiem `SEM_KTOS_CZEKA`. Autobus po każdym dzwonku skanuje pamięć współdzieloną.
-4. Bezwzględny priorytet: Mimo obecności rowerzysty, pętla decyzyjna autobusu wykonuje serię otwarć semafora `SEM_KOLEJKA_VIP`. W efekcie pasażerowie VIP wsiadają jeden po drugim.
-5. Obsługa reszty: Dopiero gdy `liczba_vip_oczekujacych` wynosi 0, autobus otwiera drzwi dla rowerzysty, co widać w ostatniej linii logów.
-* **Rezultat:** ✅ Pozytywny. VIP wchodzi do autobusu natychmiast, z pominięciem kolejki.
+1. Generator zalewa kolejkę żądań `msgid_req` setkami komunikatów.
+2. W połowie zalewania seria pasażerów VIP zostaje wygenerowana.
+* **Rezultat:** ✅ Pozytywny. Kasjer nie może się zawiesić. Mimo że w kolejce jest wiele zwykłych osób, Kasjer dzięki priorytetom musi najpierw wyłowić VIP-ów. Test sprawdza, czy bufor jądra dla kolejek nie został przekroczony.
 
 Przykładowe fragmenty logów:
 ```text
 ...
-[23:09:58] [Pasażer 84 (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: 1256612)
-[23:09:58] [KASA] VIP (PID: 1256612) - Obsługa poza kolejnością.
-[23:09:58] [Pasażer 84 (VIP)] Przychodzę na przystanek.
-...
-[23:09:58] [Pasażer 57 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5)
-[23:09:58] [Pasażer 54 (VIP)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 0/5)
-[23:09:58] [Pasażer 91 (VIP)] Okazuję bilet i wsiadam! (Stan: 3/20, Rowery: 0/5)
-[23:09:58] [Pasażer 84 (VIP)] Okazuję bilet i wsiadam! (Stan: 4/20, Rowery: 0/5) 
-[23:09:58] [Pasażer 11 (Rower)] Okazuję bilet i wsiadam! (Stan: 5/20, Rowery: 1/5)
+[00:05:09] [Pasażer 45 (Zwykły)] Idę do kasy (PID: 1466724).
+[00:05:09] [Pasażer 46 (Zwykły)] Idę do kasy (PID: 1466725).
+[00:05:09] [Pasażer 49 (Zwykły)] Idę do kasy (PID: 1466728).
+[00:05:09] [Pasażer 48 (Zwykły)] Idę do kasy (PID: 1466727).
+[00:05:09] [Pasażer 50 (Zwykły)] Idę do kasy (PID: 1466729).
+[00:05:09] [Pasażer 51 (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: 1466730)
+[00:05:09] [Pasażer 51 (VIP)] Przychodzę na przystanek.
+[00:05:09] [Pasażer 51 (VIP)] Okazuję bilet i wsiadam! (Stan: 1/20, Rowery: 0/5)
+[00:05:09] [Pasażer 52 (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: 1466731)
+[00:05:09] [Pasażer 52 (VIP)] Przychodzę na przystanek.
+[00:05:09] [Pasażer 52 (VIP)] Okazuję bilet i wsiadam! (Stan: 2/20, Rowery: 0/5)
 ...
 ```
 
-### Test D: Zależność Dziecko-Opiekun
-* **Scenariusz:** Weryfikacja atomowego wejścia pary Opiekun + Dziecko.
-* **Dane wejściowe:** P=21, R=5, N=1, T_POSTOJ=5
+### Test C: Integralność limitu miejsc bez mechanizmu SEM_UNDO
+* **Cel:** Weryfikacja poprawności manualnego uwalniania zasobów `SEM_LIMIT` podczas masowego wyjścia pasażerów. Test ma wykazać, że brak automatycznego czyszczenia jądra `SEM_UNDO` jest w pełni kompensowany przez poprawną obsługę sygnałów w kodzie pasażera.
+* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=5; ustawienie `SEM_LIMIT` na 100; zablokowanie odjazdu autobusów poprzez zakomentowanie `odblokuj_semafor(semid, SEM_PRZYSTANEK)`, aby dworzec się zapełnił; zakomentowanie czyszczenia semaforów w funkcji `sprzatanie`
 * **Przebieg:**
-1. Proces Opiekuna tworzy wątek Dziecka `pthread_create`, który zasypia na zmiennej warunkowej.
-2. Autobus sprawdza warunek wolne >= 2. Jeśli dostępne jest tylko 1 miejsce, para nie zostaje wpuszczona (brak rozdzielenia).
-3. Wsiadanie: Opiekun inkrementuje licznik pasażerów o 2 w jednej sekcji krytycznej.
-* **Rezultat:** ✅ Pozytywny. Dziecko podróżuje jako pasywny wątek wewnątrz procesu Opiekuna, poprawnie rezerwując zasoby autobusu.
+1. Generator tworzy pasażerów, aż dworzec osiągnie limit (100 osób). Generator zostaje zablokowany na semaforze `SEM_LIMIT`.
+2. Weryfikacja stanu: ipcs -s -i [id_sem] wykazuje, że wartość semafora SEM_LIMIT wynosi 0.
+3. Interwencja: Dyspozytor wysyła sygnał zamknięcia dworca (2 -> SIGUSR2).
+4. Procesy pasażerów odbierają sygnał, wchodzą w handler `g_wyjscie`, wykonują funkcję `raportuj_wyjscie` i – co kluczowe – manualnie wołają `odblokuj_semafor_bez_undo(semid, SEM_LIMIT)`.
+5. Zakończenie symulacji i ponowne sprawdzenie stanu semaforów.
+* **Rezultat:** ✅ Pozytywny. Mimo braku `SEM_UNDO`, po zakończeniu procesów wartość semafora `SEM_LIMIT` wraca do pierwotnego stanu (100).
+
+Przykładowe fragmenty logów i wyniki komend:
+```text
+...
+[00:35:52] [Pasażer 122 (Zwykły)] Przychodzę na przystanek.
+... komenda ipcs -s -i [id_sem]
+n.sem.     wartość  oczek.n.   oczek.z.   pid       
+6          0          1          0        1534430 
+...
+Bramy zamknięte.
+Czekam na zjazd pozostałych autobusów...
+...
+--- RAPORT KOŃCOWY ---
+Łącznie obsłużono pasażerów: 20
+Wyszlo: 122 <- dzieci zwiększają liczbę osób (choć samych procesów jest nadal 100)
+...
+n.sem.     wartość  oczek.n.   oczek.z.   pid       
+6          100          1          0        1534430 
+...
+```
+
+### Test D: Atomowość wejścia i unikanie zakleszczeń
+* **Cel:** Weryfikacja, czy para Opiekun + Dziecko jest traktowana jako niepodzielna jednostka zasobowa. Test ma wykazać, że procesy poprawnie sprawdzają warunki brzegowe w pamięci współdzielonej przed podjęciem próby zajęcia miejsca.
+* **Dane wejściowe:** P=3, R=1, N=1, T_POSTOJ=5; ustawienie generatora, aby wygenerował 6 pasażerów w kombinacji (zwykły, opiekun, zwykły, zwykły, opiekun, zwykły)
+* **Przebieg:**
+1. Wchodzi jeden pasażer. Wolne miejsca: 2.
+2. Na przystanku pierwszy w kolejce stoi Opiekun z dzieckiem (potrzebują 2 miejsc).
+3. Opiekun sprawdza pamięć: (P - liczba_pasazerow) >= 2. Warunek spełniony -> para wsiada. Wolne miejsca: 0.
+4. Autobus odjeżdża, wraca.
+5. Wchodzi dwóch pasażerów Zwykłych. Wolne miejsca: 1.
+6. W kolejce czeka kolejny Opiekun oraz inny pasażer.
+7. Opiekun sprawdza pamięć: 1 < 2. Opiekun rezygnuje z wejścia do tego autobusu i zwalnia miejsce kolejnemu pasażerowi.
+* **Rezultat:** ✅ Pozytywny. Pasażerowie nie rozdzielają się. Opiekunowie potrafią "odpuścić" zbyt pełny autobus, pozwalając na wejście pojedynczym osobom, co zapobiega zakleszczeniu kolejki.
 
 Przykładowe fragmenty logów:
 ```text
-[00:18:23] [Opiekun 67] Idę z dzieckiem (wątek utworzony).
-[00:18:23] [Opiekun 69] Idę z dzieckiem (wątek utworzony).
-[00:18:23] [Opiekun 68] Idę z dzieckiem (wątek utworzony).
-[00:18:23] [Opiekun 70] Idę z dzieckiem (wątek utworzony).
 ...
-[00:18:23] [Pasażer 65 (Opiekun)] Idę do kasy (PID: 1267828).
-[00:18:23] [Pasażer 63 (Opiekun)] Idę do kasy (PID: 1267826).
-[00:18:23] [KASA] Obsługuję opiekuna (PID: 1267824) i dziecko (TID: 140206211913408)
-[00:18:23] [Pasażer 61 (Opiekun)] Przychodzę na przystanek.
-[00:18:23] [KASA] Obsługuję opiekuna (PID: 1267822) i dziecko (TID: 140569384646336)
-[00:18:23] [Pasażer 59 (Opiekun)] Przychodzę na przystanek.
+[01:03:13] [Pasażer 1 (Zwykły)] Przychodzę na przystanek.
+[01:03:13] [Pasażer 1 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 1/3, Rowery: 0/1)
 ...
-[00:18:23] [Pasażer 9 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 12/21, Rowery: 0/5)
-[00:18:23] [Opiekun 9] Wprowadzam dziecko do autobusu.
-[00:18:23] [Pasażer 5 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 14/21, Rowery: 0/5)
-[00:18:23] [Opiekun 5] Wprowadzam dziecko do autobusu.
-[00:18:23] [Pasażer 10 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 16/21, Rowery: 0/5)
-[00:18:23] [Opiekun 10] Wprowadzam dziecko do autobusu.
-[00:18:23] [Pasażer 12 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 18/21, Rowery: 0/5)
-[00:18:23] [Opiekun 12] Wprowadzam dziecko do autobusu.
-[00:18:23] [Pasażer 39 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 20/21, Rowery: 0/5)
-[00:18:23] [Opiekun 39] Wprowadzam dziecko do autobusu.
+[01:03:14] [Pasażer 2 (Opiekun)] Przychodzę na przystanek.
+[01:03:14] [Pasażer 2 (Opiekun)] Okazuję bilet i wsiadam! (Stan: 3/3, Rowery: 0/1)
+[01:03:14] [Opiekun 2] Wprowadzam dziecko do autobusu.
+...
+[01:03:15] [Pasażer 3 (Zwykły)] Przychodzę na przystanek.
+...
+[01:03:16] [Pasażer 4 (Zwykły)] Przychodzę na przystanek.
+...
+[01:03:17] [Pasażer 5 (Opiekun)] Przychodzę na przystanek.
+...
+[01:03:18] [Pasażer 6 (Zwykły)] Przychodzę na przystanek.
+...
+[01:03:17] [Autobus 1] ODJAZD z 3 pasażerami (0 rowerów).
+...
+[01:03:31] [Autobus 1] WRÓCIŁ Z TRASY po 14 s.
+[01:03:31] [Autobus 1] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: 5s)!
+[01:03:31] [Pasażer 3 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 1/3, Rowery: 0/1)
+[01:03:31] [Pasażer 4 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 2/3, Rowery: 0/1)
+[01:03:31] [Pasażer 6 (Zwykły)] Okazuję bilet i wsiadam! (Stan: 3/3, Rowery: 0/1)
+...
 ```
 
 ### Test E: Interwencja Dyspozytora (Sygnał)
-* **Scenariusz:** Użytkownik naciska klawisz `1` podczas załadunku.
-* **Dane wejściowe:** P=21, R=5, N=1, T_POSTOJ=5
+* **Cel:** Weryfikacja mechanizmu kaskadowego kończenia procesów pod dużym obciążeniem. Sprawdzenie, czy sygnał `SIGUSR2` dociera do wszystkich procesów potomnych i czy każdy z nich poprawnie odłącza się od pamięci współdzielonej `shmdt` przed zakończeniem pracy.
+* **Dane wejściowe:** P=20, R=5, N=1, T_POSTOJ=15
 * **Przebieg:**
-1. Dyspozytor: Odczytuje komendę i wysyła `SIGUSR1` do procesu nadrzędnego.
-2. Main: Handler ustawia `flaga_odjazd = 1`. Proces główny identyfikuje `pid_obecnego_autobusu` i przekazuje sygnał `SIGUSR1` bezpośrednio do procesu autobusu na peronie.
-3. Autobus: Sygnał przerywa blokujące oczekiwanie na semaforze.
-4. Reakcja: Pętla załadunku zostaje przerwana przez warunek `if (wymuszony_odjazd) break;`.
-* **Rezultat:** ✅ Pozytywny. Autobus odjechał natychmiast, nie czekając na pełny załadunek ani upływ czasu.
+1. Uruchomienie symulacji i doprowadzenie do stanu, w którym w systemie żyje kilkaset procesów pasażerów.
+2. Wysłanie sygnału ewakuacji przez Dyspozytora (Klawisz 2 -> SIGUSR2).
+3. Obserwacja kaskady: Proces główny (Main) rozsyła sygnał do grup procesów.
+4. Każdy proces musi przerwać aktualną operację i zakończyć działanie.
+5. Weryfikacja końcowa: Użycie komend systemowych do sprawdzenia, czy system "posprzątał".
+* **Rezultat:** ✅ Pozytywny. Wszystkie procesy potomne znikają z listy procesów (ps). Pamięć współdzielona i semafory zostają usunięte przez proces Main. Brak procesów-zombie.
 
-Przykładowe fragmenty logów:
+Przykładowe fragmenty logów i wyniki komend:
 ```text
-[DYSPOZYTOR ZEWN.] Otrzymano SIGUSR1 -> Rozkaz odjazdu!
-[00:35:57] Wysyłam sygnał do autobusu PID 1270447
-[00:35:57] [Autobus 1] Otrzymano nakaz natychmiastowego odjazdu!
-[00:35:57] [Autobus 1] ODJAZD z 4 pasażerami (0 rowerów).
+...
+[01:15:14] [Pasażer 3017 (Rower)] Przychodzę na przystanek.
+...
+[01:15:18] Bramy zamknięte.
+[01:15:18] Wymuszam odjazd obecnego autobusu (PID 1581366)
+[01:15:18] Czekam na zjazd pozostałych autobusów...
+...
+[01:15:18] [Autobus 1] Otrzymano nakaz natychmiastowego odjazdu!
+[01:15:18] [Autobus 1] ODJAZD z 20 pasażerami (5 rowerów).
+[01:15:30] [Autobus 1] WRÓCIŁ Z TRASY po 12 s.
+[01:15:30] [Autobus 1] Zjazd do zajezdni (Koniec pracy).
+[01:15:30] [MAIN] Wszystkie autobusy zjechały.
+[01:15:30] --- RAPORT KOŃCOWY ---
+[01:15:30] Łącznie obsłużono pasażerów: 20
+[01:15:30] Wyszlo: 3545
+[01:15:30] [SYSTEM] Zasoby posprzątane. Koniec.
+...
+ps aux | grep exe_ | wc -l
+1 <- sam grep
+...
+ipcs -s | grep 1000
+(nic) <- wszystkie semafory usunięte
+...
+ipcs -m | grep 1000
+(nic) <- pamięć dzielona zwolniona
+...
+ipcs -q | grep 1000
+(nic) <- wszystkie kolejki komunikatów usunięte
+...
 ```
 
 ---

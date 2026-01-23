@@ -25,7 +25,7 @@ void wczytaj_konfiguracje(const char* sciezka, SharedData* data) {
         char klucz[32];
         int wartosc;
         
-        // KLUCZ=WARTOSC
+        // Parser KLUCZ=WARTOŚĆ
         if (sscanf(bufor, "%31[^=]=%d", klucz, &wartosc) == 2) {
             if (strcmp(klucz, "P") == 0) data->cfg_P = wartosc;
             else if (strcmp(klucz, "R") == 0) data->cfg_R = wartosc;

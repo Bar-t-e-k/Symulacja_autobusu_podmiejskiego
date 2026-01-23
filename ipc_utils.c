@@ -85,6 +85,7 @@ void ustaw_semafor(int semid, int sem_num, int wartosc) {
     }
 }
 
+// Operacja wait na semaforze wraz z ignorowaniem sygnałów
 void zablokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
@@ -96,7 +97,7 @@ void zablokuj_semafor(int semid, int sem_num) {
             continue; // To tylko sygnał, próbujemy dalej
         }
         if (errno == EIDRM || errno == EINVAL) {
-            exit(0); // Semafor usunięty - koniec symulacji
+            exit(0); // Semafor usunięty
         }
         loguj_blad("Błąd blokowania semafora (P)");
         exit(1);
@@ -121,6 +122,7 @@ void zablokuj_semafor_bez_undo(int semid, int sem_num) {
     }
 }
 
+// Operacja signal na semaforze wraz z ignorowaniem sygnałów
 void odblokuj_semafor(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
@@ -153,7 +155,7 @@ void odblokuj_semafor_bez_undo(int semid, int sem_num) {
     }
 }
 
-// czekanie na semafor, ale z przerwaniem w przypadku sygnału
+// Operacja wait, ale bez pętli. Zwraca -1, gdy sygnał przerwie spanie procesu.
 int zablokuj_semafor_czekaj(int semid, int sem_num) {
     struct sembuf operacja;
     operacja.sem_num = sem_num;
@@ -199,27 +201,33 @@ int stworz_kolejke(int id) {
     return msgid;
 }
 
-void wyslij_komunikat(int msgid, void* msg, int rozmiar) {
+int wyslij_komunikat(int msgid, void* msg, int rozmiar) {
     // 0 = tryb blokujący
-    while (msgsnd(msgid, msg, rozmiar, 0) == -1) {
-        if (errno == EIDRM || errno == EINVAL) {
-            exit(0); 
+    if (msgsnd(msgid, msg, rozmiar, 0) == -1) {
+        if (errno == EINTR) {
+            return -1; // Przerwano sygnałem
         }
-        if (errno == EINTR) continue;
-        loguj_blad("msgsnd"); 
+        if (errno == EIDRM || errno == EINVAL) {
+            exit(0); // Kolejka usunięta
+        }
+        loguj_blad("Błąd msgsnd");
         exit(1);
     }
+    return 0;
 }
 
-void odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
-    while (msgrcv(msgid, msg, rozmiar, typ, 0) == -1) {
-        if (errno == EIDRM || errno == EINVAL) {
-            exit(0); 
+int odbierz_komunikat(int msgid, void* msg, int rozmiar, long typ) {
+    if (msgrcv(msgid, msg, rozmiar, typ, 0) == -1) {
+        if (errno == EINTR) {
+            return -1; // Przerwano sygnałem
         }
-        if (errno == EINTR) continue;
-        loguj_blad("msgrcv"); 
+        if (errno == EIDRM || errno == EINVAL) {
+            exit(0); // Kolejka usunięta
+        }
+        loguj_blad("Błąd msgrcv");
         exit(1);
     }
+    return 0;
 }
 
 void usun_kolejke(int msgid) {
@@ -230,14 +238,16 @@ void usun_kolejke(int msgid) {
     }
 }
 
-// Wrapper do sigaction
+// KONFIGURACJA ZACHOWANIA SYGNAŁÓW
+// Flaga SA_RESTART decyduje, czy funkcje takie jak read/msgrcv/semop
+// mają być automatycznie wznawiane przez jądro po obsłużeniu sygnału.
+// restart=1 -> wznowienie
+//  restart=0 -> reakcja na sygnał
 void ustaw_sygnal(int sig, void (*handler)(int), int restart) {
     struct sigaction sa;
     sa.sa_handler = handler;
     sigemptyset(&sa.sa_mask);
-    
-    // Jeśli restart == 1, system call zostanie wznowiony (jak w signal())
-    // Jeśli restart == 0, system call zostanie przerwany z błędem EINTR
+
     if (restart) {
         sa.sa_flags = SA_RESTART;
     } else {

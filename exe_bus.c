@@ -15,6 +15,7 @@
 // Kolor logów
 #define C_BUS  "\033[1;33m"
 
+// Flaga ustawiana przez sygnał SIGUSR1 od Dyspozytora
 volatile sig_atomic_t wymuszony_odjazd = 0;
 
 void sygnal_odjazd(int sig) {
@@ -32,7 +33,7 @@ void handler_alarm(int sig) {
 // Realizuje cykl: Czekanie na wjazd -> Załadunek -> Trasa -> Powrót.
 void autobus_run(int id, int shmid, int semid) {
     ustaw_sygnal(SIGUSR1, sygnal_odjazd, 0);
-    ustaw_sygnal(SIGINT, SIG_IGN, 1);
+    ustaw_sygnal(SIGALRM, handler_alarm, 0);
     
     SharedData* data = dolacz_pamiec(shmid);
     int P = data->cfg_P;
@@ -74,8 +75,6 @@ void autobus_run(int id, int shmid, int semid) {
         loguj(C_BUS, "[Autobus %d] Podstawiłem się. CZEKAM NA PASAŻERÓW (Czas: %ds)!\n", id, T_ODJAZD);
 
         // 3. Załadunek pasażerów
-        // Autobus będzie spał, dopóki nie obudzi go pasażer lub minie czas
-        ustaw_sygnal(SIGALRM, handler_alarm, 0);
         time_t czas_start = time(NULL);
         wymuszony_odjazd = 0;
         
@@ -93,26 +92,28 @@ void autobus_run(int id, int shmid, int semid) {
             odlacz_pamiec(data);
             odblokuj_semafor(semid, SEM_MUTEX);
 
-            // Jeśli brak pasażerów lub miejsc -> uśpienie procesu
+            // MECHANIZM OCZEKIWANIA
+            // Jeśli autobus jest pełny lub nikt nie czeka, proces zasypia na semaforze.
+            // Używawany jest alarm(), aby obudzić autobus dokładnie w momencie planowanego odjazdu.
             if (liczba_oczekujacych == 0 || wolne_ludzie == 0) {
                 int pozostalo = T_ODJAZD - (time(NULL) - czas_start);
                 
                 if (pozostalo <= 0) break;
 
                 alarm(pozostalo);
-
-                if (zablokuj_semafor_czekaj(semid, SEM_KTOS_CZEKA) == -1) break;
-
+                // Ta funkcja wraca z -1 jeśli przyjdzie sygnał (Alarm lub USR1)
+                if (zablokuj_semafor_czekaj(semid, SEM_KTOS_CZEKA) == -1) {
+                    alarm(0);
+                    continue; 
+                }
                 alarm(0);
-                continue;
+            } else {
+                 // Jeśli są ludzie, zmniejszamy licznik semafora
+                 // IPC_NOWAIT sprawia, że się nie zablokujemy jeśli semafor jest 0
+                 struct sembuf sops = {SEM_KTOS_CZEKA, -1, IPC_NOWAIT};
+                 semop(semid, &sops, 1);
             }
 
-            // Konsumpcja sygnału w trybie nieblokującym.
-            // Zapobiega to kumulacji "starych" dzwonków, gdy autobus obsługuje 
-            // wielu pasażerów naraz w jednej pętli.
-            struct sembuf sops = {SEM_KTOS_CZEKA, -1, IPC_NOWAIT};
-            semop(semid, &sops, 1);
-            
             // Analiza kolejek i decyzja kogo wpuścić
             zablokuj_semafor(semid, SEM_MUTEX);
             data = dolacz_pamiec(shmid);
@@ -157,10 +158,11 @@ void autobus_run(int id, int shmid, int semid) {
             }
 
             // Czekanie, aż pasażer podejmie decyzję (wsiądzie lub zrezygnuje).
-            alarm(2); // Dajemy pasażerowi 2 sekundy na "fizyczne" wejście
-            if (zablokuj_semafor_czekaj(semid, SEM_WSIADL) == -1) {
-                // Jeśli wejdzie tu przez timeout (SIGALRM) lub SIGUSR1 od dyspozytora
-            }
+            // Użycie alarm() nie służy tutaj do synchronizacji (tę zapewnia semafor),
+            // ale pełni rolę mechanizmu zapobiegającego zakleszczeniu autobusu na peronie w sytuacji,
+            // gdy proces pasażera ulegnie awarii
+            alarm(2); 
+            zablokuj_semafor_czekaj(semid, SEM_WSIADL);
             alarm(0);
         }
 

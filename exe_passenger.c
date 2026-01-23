@@ -4,6 +4,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <sys/msg.h>
+#include <signal.h>
 #include "common.h"
 #include "ipc_utils.h"
 #include "logs.h"
@@ -15,15 +16,23 @@
 #define C_ROW   "\033[1;36m"
 #define C_BUS   "\033[1;33m"
 
-// Mechanizmy synchronizacji wątku
+// Mechanizmy synchronizacji wątku dziecka
 pthread_mutex_t lock_dziecka = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond_dziecka = PTHREAD_COND_INITIALIZER;
 int koniec_podrozy = 0;
 
+// Flaga wyjścia ustawiana przez SIGUSR2
+volatile sig_atomic_t g_wyjscie = 0;
+
+void handler_wyjscie(int sig) {
+    (void)sig;
+    g_wyjscie = 1;
+}
+
 // Funkcja wątku dziecka
 // Symuluje obecność dziecka towarzyszącego opiekunowi.
 // Wątek jest pasywny - po utworzeniu natychmiast zasypia na zmiennej warunkowej
-// i budzi się dopiero, gdy Opeikun zasygnalizuje koniec.
+// i budzi się dopiero, gdy Opiekun zasygnalizuje koniec.
 void* watek_dziecka_fun(void* arg) {
     (void)arg;
 
@@ -38,9 +47,40 @@ void* watek_dziecka_fun(void* arg) {
     return NULL;
 }
 
+// Bezpieczne wygaszenie wątku dziecka przed zakończeniem procesu
+void zakoncz_watek_dziecka(pthread_t thread, int typ) {
+    if (typ == TYP_OPIEKUN) {
+        pthread_mutex_lock(&lock_dziecka);
+        koniec_podrozy = 1;
+        pthread_cond_signal(&cond_dziecka);
+        pthread_mutex_unlock(&lock_dziecka);
+        pthread_join(thread, NULL);
+    }
+}
+
+// PROCEDURA WYJŚCIA
+// Aktualizuje statystyki w pamięci współdzielonej, gdy pasażer musi wyjść
+// z dworca przed wejściem do autobusu (np. przy zamknięciu dworca).
+void raportuj_wyjscie(int shmid, int semid, int typ) {
+    zablokuj_semafor(semid, SEM_MUTEX);
+    SharedData* data = dolacz_pamiec(shmid);
+
+    int liczba = (typ == TYP_OPIEKUN) ? 2 : 1;
+    data->liczba_wyjsc += liczba;
+
+    data->liczba_oczekujacych -= liczba;
+    if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
+    if (typ == TYP_ROWER) data->liczba_rowerow_oczekujacych--;
+
+    odlacz_pamiec(data);
+    odblokuj_semafor(semid, SEM_MUTEX);
+}
+
 // Główna logika procesu pasażera.
 // Realizuje cykl: Wejście -> Kasa -> Przystanek -> Wsiadanie -> Koniec
 void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int typ) {
+    ustaw_sygnal(SIGUSR2, handler_wyjscie, 0);
+
     SharedData* data = dolacz_pamiec(shmid);
     srand(time(NULL) ^ (getpid()<<16)); 
 
@@ -74,18 +114,12 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
     // Jeśli tak - pokazanie autobusowi, że ktoś czeka.
     zablokuj_semafor(semid, SEM_MUTEX);
     if (data->dworzec_otwarty == 0) {
-        loguj(kolor, "[Pasażer %d] Dworzec zamknięty! Nie wchodzę.\n", id);
         odlacz_pamiec(data);
         odblokuj_semafor(semid, SEM_MUTEX);
         
-        if (typ == TYP_OPIEKUN) {
-            pthread_mutex_lock(&lock_dziecka);
-            koniec_podrozy = 1;
-            pthread_cond_signal(&cond_dziecka); 
-            pthread_mutex_unlock(&lock_dziecka);
-            pthread_join(thread_dziecko, NULL);
-        }
+        zakoncz_watek_dziecka(thread_dziecko, typ);
 
+        odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
         exit(0);
     }
     data->liczba_oczekujacych++;
@@ -108,10 +142,32 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
     if (typ != TYP_VIP) {
         loguj(kolor, "[Pasażer %d (%s)] Idę do kasy (PID: %d).\n", id, nazwa, getpid());
 
-        wyslij_komunikat(msgid_req, &bilet, rozmiar);
-        odbierz_komunikat(msgid_res, &bilet, rozmiar, getpid());
+        while (wyslij_komunikat(msgid_req, &bilet, rozmiar) == -1) {
+            if (g_wyjscie) {
+                raportuj_wyjscie(shmid, semid, typ);
+                zakoncz_watek_dziecka(thread_dziecko, typ);
+                odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
+                exit(0);
+            }
+        }
+
+        while (odbierz_komunikat(msgid_res, &bilet, rozmiar, getpid()) == -1) {
+            if (g_wyjscie) {
+                raportuj_wyjscie(shmid, semid, typ);
+                zakoncz_watek_dziecka(thread_dziecko, typ);
+                odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
+                exit(0);
+            }
+        }
     } else {
-        wyslij_komunikat(msgid_req, &bilet, rozmiar);
+        while (wyslij_komunikat(msgid_req, &bilet, rozmiar) == -1) {
+             if (g_wyjscie) {
+                raportuj_wyjscie(shmid, semid, typ);
+                zakoncz_watek_dziecka(thread_dziecko, typ);
+                odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
+                exit(0);
+            }
+        }
 
         loguj(kolor, "[Pasażer %d (VIP)] Mam karnet, omijam kolejkę do kasy. (PID: %d)\n", id, getpid());
     }
@@ -125,33 +181,28 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
     // Po obudzeniu pasażer sprawdza, czy na pewno się zmieści.
     // Jeśli nie (np. Opiekun potrzebuje 2 miejsc, a jest 1) - wraca spać.
     int wszedlem = 0;
-
     while (!wszedlem) {
-        zablokuj_semafor_bez_undo(semid, moja_kolejka);
+        if (zablokuj_semafor_czekaj(semid, moja_kolejka) == -1) {
+            if (g_wyjscie) {
+                raportuj_wyjscie(shmid, semid, typ);
+                zakoncz_watek_dziecka(thread_dziecko, typ);
+                odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
+                exit(0);
+            }
+            continue; 
+        }
         
         zablokuj_semafor(semid, SEM_MUTEX);
         data = dolacz_pamiec(shmid);
 
         // Sprawdzenie stanu dworca
-        if (data->dworzec_otwarty == 0) {
-            loguj(kolor, "[Pasażer %d] Dworzec zamknięty! Wychodzę.\n", id);
-            
-            data->liczba_oczekujacych--;
-            if (typ == TYP_VIP) data->liczba_vip_oczekujacych--;
-            if (typ == TYP_ROWER) data->liczba_rowerow_oczekujacych--;
-            if (typ == TYP_OPIEKUN) data->liczba_oczekujacych--;
-
+        if (data->dworzec_otwarty == 0 || g_wyjscie) {
             odlacz_pamiec(data);
             odblokuj_semafor(semid, SEM_MUTEX);
-
-            if (typ == TYP_OPIEKUN) {
-                pthread_mutex_lock(&lock_dziecka);
-                koniec_podrozy = 1;
-                pthread_cond_signal(&cond_dziecka); 
-                pthread_mutex_unlock(&lock_dziecka);
-                pthread_join(thread_dziecko, NULL);
-            }
-
+            
+            raportuj_wyjscie(shmid, semid, typ);
+            zakoncz_watek_dziecka(thread_dziecko, typ);
+            odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
             exit(0);
         }
 
@@ -187,13 +238,7 @@ void pasazer_run(int id, int shmid, int semid, int msgid_req, int msgid_res, int
     }
 
     // Koniec podróży
-    if (typ == TYP_OPIEKUN) {
-        pthread_mutex_lock(&lock_dziecka);
-        koniec_podrozy = 1;
-        pthread_cond_signal(&cond_dziecka);
-        pthread_mutex_unlock(&lock_dziecka);
-        pthread_join(thread_dziecko, NULL);
-    }
+    zakoncz_watek_dziecka(thread_dziecko, typ);
 
     odblokuj_semafor_bez_undo(semid, SEM_LIMIT);
     exit(0);
